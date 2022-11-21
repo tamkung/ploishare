@@ -2,8 +2,8 @@
   "name": "ploishare",
   "version": "0.1.0",
   "private": true,
+  
   "scripts": {
-    "start": "node server.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
