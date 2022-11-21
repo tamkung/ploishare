@@ -1,11 +1,7 @@
 import logo from '../img/logo.png';
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
-import { LockClosedIcon, ChevronDownIcon  } from '@heroicons/react/20/solid'
+import { LockClosedIcon  } from '@heroicons/react/20/solid'
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+
 
 const FormLogin = () => {
   return (
@@ -93,4 +89,4 @@ const FormLogin = () => {
 
   );
 };
-export default () => <FormLogin />;
+export default FormLogin;
