@@ -31,7 +31,8 @@
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
     "antd": "^5.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "router-dom": "^2.2.9"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -39,8 +40,8 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "5.0.0",
     "tailwindcss": "^3.2.4",
     "web-vitals": "^2.1.4"
