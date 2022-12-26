@@ -1,16 +1,25 @@
 //import './css/App.css';
-import MainMenu from './components/menu';
-import FormLogin from './components/form';
-
+import HomeLogin from './components/HomeLogin';
+import Vertify from './page/Vertify';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <MainMenu />
-      <header className="App-header">
-        <FormLogin />
-      </header>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <HomeLogin />
+    //   </header>
 
-    </div>
+    // </div>
+    <BrowserRouter>
+      <Routes>
+       
+          <Route index element={<HomeLogin />} />
+          <Route path="/vertify" element={<Vertify />} />
+     
+        
+      </Routes>
+    </BrowserRouter>
   );
 }
 

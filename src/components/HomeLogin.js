@@ -1,9 +1,8 @@
 import logo from '../img/logo.png';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-
-
-
-const FormLogin = () => {
+import '../css/style.css';
+import { Link } from "react-router-dom";
+const HomeLogin = () => {
   return (
 
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -59,17 +58,14 @@ const FormLogin = () => {
               />
             </div>
           </div>
+          <div className="textWarp">
+            <Link to="/vertify">ยืนยันตัวตน</Link>
+          </div>
+          <hr />
 
 
-
-          <div>
-            <button
-              type="submit"
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-yellow-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-
-              </span>
+          <div style={{ textAlign: "center", padding: "5px" }}>
+            <button type="submit" className="buttonNext" >
               Go
             </button>
             <br />
@@ -90,4 +86,4 @@ const FormLogin = () => {
 
   );
 };
-export default FormLogin;
+export default HomeLogin;

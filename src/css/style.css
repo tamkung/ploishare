@@ -1,0 +1,31 @@
+.textWarp {
+   
+    text-align: right;
+    transition: 300ms;
+    font-size: 18px;
+}
+
+.textWarp:hover {
+    color: blue;
+    transition: 300ms;
+
+}
+.buttonNext{
+    font-weight: bold;
+    height: 50px;
+   
+    border-radius: 8px 8px 8px 8px;
+    width: 100%;
+    color: white;
+    background-color: #3590f3;
+
+    transition: 300ms;
+   
+}
+.buttonNext:hover{
+   
+    background-color: #004e89;
+    color: white;
+    transform: scale(1.05);
+    transition: 300ms;
+}
