@@ -31,7 +31,9 @@
     transform: scale(1.02);
     transition: 300ms;
 }
-
+/* .form{
+    margin: 5%;
+} */
 .box {
     margin-left: 30%;
     margin-right: 30%;
