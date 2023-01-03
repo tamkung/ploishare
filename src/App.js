@@ -1,6 +1,7 @@
 //import './css/App.css';
 import HomeLogin from './components/HomeLogin';
 import Vertify from './page/Vertify';
+import Booking from './page/Booking';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -18,7 +19,7 @@ function App() {
        
         <Route index element={<HomeLogin />} />
         <Route path="/vertify" element={<Vertify />} /> 
-        
+        <Route path="/booking" element={<Booking />} /> 
       </Routes>
     </BrowserRouter>
   );

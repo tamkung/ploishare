@@ -1,9 +1,10 @@
 import logo from '../img/logo.png';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
+import { Button, Checkbox, Form, Input, Space } from 'antd';
 import '../css/style.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Swal from 'sweetalert';
+import Swal from "sweetalert2";
 import React, { useState } from "react";
 
 const API_URL = 'https://api-ploishare.cyclic.app/'
@@ -17,6 +18,20 @@ const API_URL = 'https://api-ploishare.cyclic.app/'
 
 
 const HomeLogin = () => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const onChangeEmail = (e) => {
+//     const email = e.target.value;
+//     setEmail(email);
+//     console.log(email);
+//   };
+
+//   const onChangePassword = (e) => {
+//     const password = e.target.value;
+//     setPassword(password);
+//     console.log(password);
+//   };
 
   const [value, setValue] = useState({
     email: "",
@@ -29,8 +44,9 @@ const HomeLogin = () => {
   };
 
   const handleSubmit = (e) => {
+    console.log(value);
     e.preventDefault();
-
+    
     fetch(API_URL + "signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -38,9 +54,35 @@ const HomeLogin = () => {
     }).then((response) => response.json())
       .then((data) => {
         console.log("Success:", data);
-        localStorage.setItem("token", data.token);
-        window.location = "/";
-        // console.log("Success:", data);
+        if (data.status === "OK") {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "SignIn in successfully",
+          }).then(() => {
+            // alert("login sucess");
+            localStorage.setItem("token", data.token);
+            window.location = "/booking";
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: data.message,
+            //footer: '<a href="">Why do I have this issue?</a>'
+          })
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -70,9 +112,6 @@ const HomeLogin = () => {
           <div className="-space-y-px rounded-md shadow-sm">
 
 
-
-
-
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -98,7 +137,7 @@ const HomeLogin = () => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="relative w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Password"
                 onChange={handleChange}
               />
