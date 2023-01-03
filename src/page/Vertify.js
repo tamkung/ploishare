@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as IoIcons from 'react-icons/io5';
+import { Link } from "react-router-dom";
 function Vertify() {
   return (
     <div>
-      <div>
+      <div className='form'>
         <h1>ยืนยันตัวตน</h1>
         <div className='box'>
           <Form>
@@ -33,8 +34,8 @@ function Vertify() {
 
             <button type="button" class="btn btn-outline-primary buttonNext">ยืนยันตัวตน</button>
           </Form>
-          <a href='/'><IoIcons.IoChevronBackCircleOutline/>ย้อนกลับ</a>
         </div>
+        <button><IoIcons.IoChevronBackCircleOutline /></button>
       </div>
     </div>
   )
