@@ -1,20 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Button, Checkbox, Form, Input, Space } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 
 function Vertify() {
   return (
-    <div style={{ position:"absolute",marginTop: "5%" }}>
-      <div style={{ padding: "2%",marginLeft:"10%",marginRight:"10%",borderRadius:"15px 15px 15px 15px" ,border:"1px solid lightgray"}}>
-        <div class="mb-3">
-          <label for="formGroupExampleInput" class="form-label">Email</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="กรอกอีเมล์ของคุณ" />
-        </div>
-        <div class="mb-3">
-          <label for="formGroupExampleInput2" class="form-label">Password</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="กรอกรหัสผ่านของคุณ" />
-        </div>
-        <div class="mb-3">
-          <label for="formGroupExampleInput2" class="form-label">Confirm Password</label>
-          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="ยืนยันรหัสผ่านอีกครั้" />
+    <div>
+      <div>
+        <h1>ยืนยันตัวตน</h1>
+        <div className='box'>
+          <Form>
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[{ required: true, message: 'Please input your username!' }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              label="Confirm Password"
+              name="password"
+              rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+              <Input.Password />
+            </Form.Item>
+            <button type="button" class="btn btn-outline-primary buttonNext">Vertify</button>
+
+          </Form>
         </div>
       </div>
     </div>
@@ -22,3 +42,4 @@ function Vertify() {
 }
 
 export default Vertify
+
