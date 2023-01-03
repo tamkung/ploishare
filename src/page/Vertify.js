@@ -35,7 +35,7 @@ function Vertify() {
             <button type="button" class="btn btn-outline-primary buttonNext">ยืนยันตัวตน</button>
           </Form>
         </div>
-        <button><IoIcons.IoChevronBackCircleOutline /></button>
+        <button ><IoIcons.IoChevronBackCircleOutline /> ย้อนกลับ </button>
       </div>
     </div>
   )
