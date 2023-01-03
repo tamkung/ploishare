@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
-import { PoweroffOutlined } from '@ant-design/icons';
-
+import * as IoIcons from 'react-icons/io5';
 function Vertify() {
   return (
     <div>
@@ -10,8 +9,8 @@ function Vertify() {
         <div className='box'>
           <Form>
             <Form.Item
-              label="Username"
-              name="username"
+              label="Email"
+              name="Email"
               rules={[{ required: true, message: 'Please input your username!' }]}
             >
               <Input />
@@ -22,19 +21,19 @@ function Vertify() {
               name="password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
-              <Input.Password />
+              <Input />
             </Form.Item>
-
             <Form.Item
               label="Confirm Password"
-              name="password"
+              name="confirm-password"
               rules={[{ required: true, message: 'Please input your password!' }]}
             >
-              <Input.Password />
+              <Input />
             </Form.Item>
-            <button type="button" class="btn btn-outline-primary buttonNext">Vertify</button>
 
+            <button type="button" class="btn btn-outline-primary buttonNext">ยืนยันตัวตน</button>
           </Form>
+          <a href='/'><IoIcons.IoChevronBackCircleOutline/>ย้อนกลับ</a>
         </div>
       </div>
     </div>
