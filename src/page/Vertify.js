@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Vertify() {
   return (
     <div>
-      <div className='form'>
+      <div>
         <h1>ยืนยันตัวตน</h1>
         <div className='box'>
           <Form>
