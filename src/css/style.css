@@ -1,5 +1,5 @@
 .textWarp {
-   
+
     text-align: right;
     transition: 300ms;
     font-size: 18px;
@@ -10,22 +10,43 @@
     transition: 300ms;
 
 }
-.buttonNext{
+
+.buttonNext {
     font-weight: bold;
     height: 50px;
-   
+
     border-radius: 8px 8px 8px 8px;
     width: 100%;
     color: white;
     background-color: #3590f3;
 
     transition: 300ms;
-   
+
 }
-.buttonNext:hover{
-   
+
+.buttonNext:hover {
+
     background-color: #004e89;
     color: white;
-    transform: scale(1.05);
+    transform: scale(1.02);
     transition: 300ms;
+}
+
+.box {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10%;
+    background-color: lightgray;
+    padding: 1%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .box {
+        background-color: lightblue;
+    }
+}
+@media only screen and (max-width: 800px) {
+    .box {
+        background-color: yellow;
+    }
 }
