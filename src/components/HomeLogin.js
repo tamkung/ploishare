@@ -7,7 +7,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import React, { useState } from "react";
 
-const API_URL = 'https://api-ploishare.cyclic.app/'
+//const API_URL = 'https://api-ploishare.cyclic.app/'
+const API_URL = 'https://test-w8q8.onrender.com/'
+//const API_URL = 'http://localhost:8080/'
 
 // const signUp = (email, password) => {
 //   return axios.post(API_URL + "signup", {
@@ -18,20 +20,20 @@ const API_URL = 'https://api-ploishare.cyclic.app/'
 
 
 const HomeLogin = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
+  //   const [email, setEmail] = useState("");
+  //   const [password, setPassword] = useState("");
 
-//   const onChangeEmail = (e) => {
-//     const email = e.target.value;
-//     setEmail(email);
-//     console.log(email);
-//   };
+  //   const onChangeEmail = (e) => {
+  //     const email = e.target.value;
+  //     setEmail(email);
+  //     console.log(email);
+  //   };
 
-//   const onChangePassword = (e) => {
-//     const password = e.target.value;
-//     setPassword(password);
-//     console.log(password);
-//   };
+  //   const onChangePassword = (e) => {
+  //     const password = e.target.value;
+  //     setPassword(password);
+  //     console.log(password);
+  //   };
 
   const [value, setValue] = useState({
     email: "",
@@ -46,10 +48,13 @@ const HomeLogin = () => {
   const handleSubmit = (e) => {
     console.log(value);
     e.preventDefault();
-    
+
     fetch(API_URL + "signin", {
+
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(value),
     }).then((response) => response.json())
       .then((data) => {
