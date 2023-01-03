@@ -16,9 +16,8 @@ function App() {
     <BrowserRouter>
       <Routes>
        
-          <Route index element={<HomeLogin />} />
-          <Route path="/vertify" element={<Vertify />} />
-     
+        <Route index element={<HomeLogin />} />
+        <Route path="/vertify" element={<Vertify />} /> 
         
       </Routes>
     </BrowserRouter>
