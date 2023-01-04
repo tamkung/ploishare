@@ -77,6 +77,7 @@ const HomeLogin = () => {
           }).then(() => {
             // alert("login sucess");
             localStorage.setItem("token", data.token);
+            localStorage.setItem("email", data.email);
             window.location = "/booking";
           });
         } else {

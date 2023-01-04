@@ -3,6 +3,8 @@ import { FloatButton } from 'antd';
 import { MenuOutlined, CommentOutlined, LogoutOutlined } from '@ant-design/icons';
 const logout = () => {
   // Clear the user's session
+  localStorage.removeItem('token');
+  localStorage.removeItem('email');
   sessionStorage.clear();
 
   // Redirect the user to the login page
