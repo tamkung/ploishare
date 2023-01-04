@@ -33,8 +33,13 @@ function Vertify() {
             </Form.Item>
 
             <button type="button" class="btn btn-outline-primary buttonNext">ยืนยันตัวตน</button>
+
           </Form>
-          <button className='backButton' onClick={() => { window.location = "/" }}> <BsIcons.BsArrowLeftShort /> ย้อนกลับ </button>
+          <div type="button" className="inline-flex backButton">
+            <BsIcons.BsArrowLeftCircle style={{marginRight:"10px" , fontSize:"25px"}}/>
+            ย้อนกลับ
+          </div>
+
         </div>
 
       </div>

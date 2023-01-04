@@ -70,6 +70,8 @@ body{
     transition: 300ms;
     margin-top: 20px;
     margin-bottom: 20px;
+    
+
 }
 
 .backButton:hover {
@@ -78,7 +80,6 @@ body{
 }
 
 @media only screen and (max-width: 1000px) {
-
     .box {
         padding-top: 3%;
         padding-left: 3%;
@@ -101,10 +102,8 @@ body{
         padding: 0.5%;
         color: white;
         font-weight: bold;
-    
     }
 }
-
 @media only screen and (max-width: 800px) {
     .box {
         padding-top: 3%;
@@ -128,6 +127,5 @@ body{
         padding: 2%;
         color: white;
         font-weight: bold;
-    
     }
 }
