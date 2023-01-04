@@ -7,8 +7,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import React, { useState } from "react";
 
-//const API_URL = 'https://api-ploishare.cyclic.app/'
-const API_URL = 'https://test-w8q8.onrender.com/'
+const API_URL = 'https://api-ploishare.cyclic.app/'
+//const API_URL = 'https://test-w8q8.onrender.com/'
 //const API_URL = 'http://localhost:8080/'
 
 // const signUp = (email, password) => {
@@ -50,7 +50,6 @@ const HomeLogin = () => {
     e.preventDefault();
 
     fetch(API_URL + "signin", {
-
       method: "POST",
       headers: {
         "Content-Type": "application/json",
