@@ -169,10 +169,10 @@ const Vertify = () => {
             <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button>
 
           </Form>
-          <div type="button" className="inline-flex backButton" onClick={()=>{window.location="/"}}>
+          <Link to="/" className="inline-flex backButton">
             <BsIcons.BsArrowLeftShort style={{marginRight:"5px" , fontSize:"25px"}}/>
             Back
-          </div>
+          </Link>
 
         </div>
 
