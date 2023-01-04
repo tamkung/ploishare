@@ -159,17 +159,14 @@ const Vertify = () => {
               <Input name="confirmPassword" />
             </Form.Item>
 
-<<<<<<< Updated upstream
-            <button
+            {/* <button
               type="button"
               class="btn btn-outline-primary buttonNext"
               onClick={() => handleSubmit()}
             >ยืนยันตัวตน
             </button>
-          </Form>
-          <button className='backButton' onClick={() => { window.location = "/" }}> <BsIcons.BsArrowLeftShort /> ย้อนกลับ </button>
-=======
-            <button type="button" class="btn btn-outline-primary buttonNext">Vertify</button>
+          </Form> */}
+            <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button>
 
           </Form>
           <div type="button" className="inline-flex backButton" onClick={()=>{window.location="/"}}>
@@ -177,7 +174,6 @@ const Vertify = () => {
             Back
           </div>
 
->>>>>>> Stashed changes
         </div>
 
       </div>
