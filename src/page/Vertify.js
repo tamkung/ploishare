@@ -182,4 +182,3 @@ const Vertify = () => {
 }
 
 export default Vertify
-
