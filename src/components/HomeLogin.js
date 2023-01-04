@@ -135,20 +135,20 @@ const HomeLogin = () => {
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
-              <input
+              <Input.Password
                 id="password"
                 name="password"
                 type="password"
                 autoComplete="current-password"
                 required
-                className="relative w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                className="relative appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Password"
                 onChange={handleChange}
               />
             </div>
           </div>
           <div className="textWarp">
-            <Link to="/vertify">ยืนยันตัวตน</Link>
+            <Link to="/vertify"> Vertification </Link>
           </div>
           <hr />
 
