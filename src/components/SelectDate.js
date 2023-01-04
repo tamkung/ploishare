@@ -43,8 +43,10 @@ const SelectDate = () => {
     return current && current < dayjs().endOf('day');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
+    console.log('StartDateTime : ', startDate, startTime);
+    console.log('EndDateTime : ', endDate, endTime);
 
   };
 
@@ -57,9 +59,10 @@ const SelectDate = () => {
       <Form.Item label="Start Date">
         <DatePicker
           onChange={(value, dateString) => {
-            console.log('Date Stared : ', value.format('YYYY-MM-DD'));
-            //console.log('Date Stared : ', dateString[0]);
-            //console.log('Formatted Selected Time: ', dateString[1]+'/n'+dateString[1])
+            setStartDate(value.format('YYYY-MM-DD'));
+            setEndDate(value.format('YYYY-MM-DD'));
+            console.log('Date Start : ', value.format('YYYY-MM-DD'));
+            console.log('Date End : ', value.format('YYYY-MM-DD'));
           }}
           locale={locale}
           disabledDate={disabledDate}
@@ -70,9 +73,8 @@ const SelectDate = () => {
         <DatePicker
           disabled={!endDateDisabled}
           onChange={(value, dateString) => {
+            setEndDate(value.format('YYYY-MM-DD'));
             console.log('Date Stared : ', value.format('YYYY-MM-DD'));
-            //console.log('Date Stared : ', dateString[0]);
-            //console.log('Formatted Selected Time: ', dateString[1]+'/n'+dateString[1])
           }}
           locale={locale}
           disabledDate={disabledDate}
@@ -81,30 +83,34 @@ const SelectDate = () => {
       </Form.Item>
       <Form.Item label="Start Time">
         <TimePicker
-          format="hh:mm"
+          format="HH:mm"
           minuteStep={30}
           locale={locale}
           disabledMinutes={disabledMinutes}
           // hide={disabledHours}
           onChange={(value, dateString) => {
-            console.log('Time Stared : ', value.format('hh:mm:00'));
-            //console.log('Date Stared : ', dateString[0]);
-            //console.log('Formatted Selected Time: ', dateString[1]+'/n'+dateString[1])
+            setStartTime(value.format('HH:mm:00'));
+            console.log('Time Stared : ', value.format('HH:mm:00'));
           }}
         />
       </Form.Item>
       <Form.Item label="End Time">
         <TimePicker
-          format="hh:mm"
+          format="HH:mm"
           minuteStep={30}
           locale={locale}
-          onChange={onEndTimeChange}
+          disabledMinutes={disabledMinutes}
+          onChange={(value, dateString) => {
+            setEndTime(value.format('HH:mm:00'));
+            console.log('Time Stared : ', value.format('HH:mm:00'));
+          }}
         />
       </Form.Item>
       <Form.Item label="Disable End Date">
         <Switch
           checked={endDateDisabled}
           onClick={onEndDateSwitchChange}
+          style={{ backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
         />
       </Form.Item>
       <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button>
