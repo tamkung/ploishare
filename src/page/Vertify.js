@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Space } from 'antd';
-import * as IoIcons from 'react-icons/io5';
+import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 function Vertify() {
   return (
     <div>
       <div>
-        <h1>ยืนยันตัวตน</h1>
+        <h1 className='textHeader'>ยืนยันตัวตน</h1>
         <div className='box'>
           <Form>
             <Form.Item
@@ -34,8 +34,9 @@ function Vertify() {
 
             <button type="button" class="btn btn-outline-primary buttonNext">ยืนยันตัวตน</button>
           </Form>
+          <button className='backButton' onClick={() => { window.location = "/" }}> <BsIcons.BsArrowLeftShort /> ย้อนกลับ </button>
         </div>
-        <button ><IoIcons.IoChevronBackCircleOutline /> ย้อนกลับ </button>
+
       </div>
     </div>
   )

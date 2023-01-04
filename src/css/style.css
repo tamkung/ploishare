@@ -1,5 +1,20 @@
-.textWarp {
+body{
+    height: 100%;
+}
+.textHeader{
+    background: #3355FF;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 20px 20px 0px 0px;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5%;
+    padding: 0.5%;
+    color: white;
+    font-weight: bold;
 
+}
+.textWarp {
     text-align: right;
     transition: 300ms;
     font-size: 18px;
@@ -14,41 +29,105 @@
 .buttonNext {
     font-weight: bold;
     height: 50px;
-
     border-radius: 8px 8px 8px 8px;
     width: 100%;
     color: white;
     background-color: #3590f3;
-
     transition: 300ms;
-
 }
 
 .buttonNext:hover {
-
     background-color: #004e89;
     color: white;
     transform: scale(1.02);
     transition: 300ms;
 }
+
 /* .form{
     margin: 5%;
 } */
+.backgroundWallpaper{
+    margin:10px;
+    border: #3355FF solid 2px;
+    border-radius: 20px 20px 20px 20px;
+    height: auto;
+}
 .box {
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 10%;
-    background-color: lightgray;
-    padding: 1%;
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: auto;
+    background-color: white;
+    border: #bdb18a solid 2px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.backButton {
+    padding-top: 20px;
+    color: #3355FF;
+    transition: 300ms;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.backButton:hover {
+    padding-left: 1%;
+    transition: 300ms;
 }
 
 @media only screen and (max-width: 1000px) {
+
     .box {
-        background-color: lightblue;
+        padding-top: 3%;
+        padding-left: 3%;
+        padding-right: 3%;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-bottom: auto;
+        background-color: white;
+        border: #3355FF solid 2px;
+        border-radius: 0px 0px 20px 20px;
+    }
+    .textHeader{
+        background: #3355FF;
+        font-size: 20px;
+        text-align: center;
+        border-radius: 20px 20px 0px 0px;
+        margin-left: 15%;
+        margin-right: 15%;
+        margin-top: 5%;
+        padding: 0.5%;
+        color: white;
+        font-weight: bold;
+    
     }
 }
+
 @media only screen and (max-width: 800px) {
     .box {
-        background-color: yellow;
+        padding-top: 3%;
+        padding-left: 3%;
+        padding-right: 3%;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: auto;
+        background-color: white;
+        border: #3355FF solid 2px;
+        border-radius: 0px 0px 20px 20px;
+    }
+    .textHeader{
+        background: #3355FF;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 20px 20px 0px 0px;
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 5%;
+        padding: 2%;
+        color: white;
+        font-weight: bold;
+    
     }
 }
