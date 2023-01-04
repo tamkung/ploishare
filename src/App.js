@@ -19,7 +19,10 @@ function App() {
        
         <Route index element={<HomeLogin />} />
         <Route path="/vertify" element={<Vertify />} /> 
-        <Route path="/booking" element={<Booking />} /> 
+        <Route path="/booking" element={<Booking />} />
+
+
+        
       </Routes>
     </BrowserRouter>
   );
