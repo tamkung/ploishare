@@ -133,7 +133,7 @@ const Vertify = () => {
   return (
     <div>
       <div>
-        <h1 className='textHeader'>Vertify</h1>
+        <h1 className='textHeader'>ยืนยันตัวตน</h1>
         <div className='box'>
           <Form>
             <Form.Item
@@ -159,7 +159,6 @@ const Vertify = () => {
               <Input name="confirmPassword" />
             </Form.Item>
 
-<<<<<<< Updated upstream
             <button
               type="button"
               class="btn btn-outline-primary buttonNext"
@@ -168,16 +167,6 @@ const Vertify = () => {
             </button>
           </Form>
           <button className='backButton' onClick={() => { window.location = "/" }}> <BsIcons.BsArrowLeftShort /> ย้อนกลับ </button>
-=======
-            <button type="button" class="btn btn-outline-primary buttonNext">Vertify</button>
-
-          </Form>
-          <div type="button" className="inline-flex backButton" onClick={()=>{window.location="/"}}>
-            <BsIcons.BsArrowLeftShort style={{marginRight:"5px" , fontSize:"25px"}}/>
-            Back
-          </div>
-
->>>>>>> Stashed changes
         </div>
 
       </div>
