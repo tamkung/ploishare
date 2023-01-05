@@ -3,12 +3,15 @@ import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { PoweroffOutlined } from '@ant-design/icons';
 
 //const API_URL = 'https://api-ploishare.cyclic.app/'
 const API_URL = 'https://test-w8q8.onrender.com/'
 //const API_URL = 'http://localhost:8080/'
 
 const Vertify = () => {
+  const [loadings, setLoadings] = useState([]);
+
 
   const [value, setValue] = useState({
     email: "",
@@ -57,6 +60,11 @@ const Vertify = () => {
       });
     } else {
       try {
+        setLoadings((prevLoadings) => {
+          const newLoadings = [...prevLoadings];
+          newLoadings[e] = true;
+          return newLoadings;
+        });
 
         const jsonData = {
           email: value.email,
@@ -74,6 +82,15 @@ const Vertify = () => {
           body: JSON.stringify(jsonData),
         }).then((response) => response.json())
           .then((data) => {
+            // const enterLoading = (index) => {
+
+            setLoadings((prevLoadings) => {
+              const newLoadings = [...prevLoadings];
+              newLoadings[e] = false;
+              return newLoadings;
+            });
+
+            // };
             console.log("Success:", data);
             if (data.status === "OK") {
               const Toast = Swal.mixin({
@@ -166,11 +183,14 @@ const Vertify = () => {
             >ยืนยันตัวตน
             </button>
           </Form> */}
-            <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button>
+            <Button className="btn btn-outline-primary buttonNext" type="primary" loading={loadings[0]} onClick={() => handleSubmit(0)}>
+              Vertify
+            </Button>
+            {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
 
           </Form>
           <Link to="/" className="inline-flex backButton">
-            <BsIcons.BsArrowLeftShort style={{marginRight:"5px" , fontSize:"25px"}}/>
+            <BsIcons.BsArrowLeftShort style={{ marginRight: "5px", fontSize: "25px" }} />
             Back
           </Link>
 
