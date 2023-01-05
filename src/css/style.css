@@ -1,7 +1,18 @@
-body{
+body {
     height: 100%;
 }
-.textHeader{
+
+.sanFont {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+.container {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 50px;
+}
+
+.textHeader {
     background: #3355FF;
     font-size: 20px;
     text-align: center;
@@ -14,6 +25,7 @@ body{
     font-weight: bold;
 
 }
+
 .textWarp {
     text-align: right;
     transition: 300ms;
@@ -43,30 +55,28 @@ body{
     transition: 300ms;
 }
 
-/* .form{
-    margin: 5%;
-} */
-.backgroundWallpaper{
-    margin:10px;
-    border: #3355FF solid 2px;
+.backgroundWallpaper {
+    margin: 10px;
+    border: #5773ff solid 2px;
     border-radius: 20px 20px 20px 20px;
     height: auto;
 }
+
 .box {
-    padding-top: 3%;
+    padding-top: 30px;
     padding-left: 3%;
     padding-right: 3%;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: auto;
     background-color: white;
-    border: #bdb18a solid 2px;
+    border: #5773ff solid 2px;
     border-radius: 0px 0px 20px 20px;
 }
 
 .backButton {
     padding-top: 20px;
-    color: #3355FF;
+    color: #5773ff;
     transition: 300ms;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -90,7 +100,8 @@ body{
         border: #3355FF solid 2px;
         border-radius: 0px 0px 20px 20px;
     }
-    .textHeader{
+
+    .textHeader {
         background: #3355FF;
         font-size: 20px;
         text-align: center;
@@ -101,9 +112,10 @@ body{
         padding: 0.5%;
         color: white;
         font-weight: bold;
-    
+
     }
 }
+
 @media only screen and (max-width: 800px) {
     .box {
         padding-top: 3%;
@@ -116,7 +128,8 @@ body{
         border: #3355FF solid 2px;
         border-radius: 0px 0px 20px 20px;
     }
-    .textHeader{
+
+    .textHeader {
         background: #3355FF;
         font-size: 16px;
         text-align: center;
@@ -127,6 +140,6 @@ body{
         padding: 2%;
         color: white;
         font-weight: bold;
-    
+
     }
 }

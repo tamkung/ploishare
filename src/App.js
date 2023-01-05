@@ -27,7 +27,7 @@ setupIonicReact({
 });
 
 function App() {
-  
+
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -36,14 +36,15 @@ function App() {
 
     // </div>
     <BrowserRouter>
+      
       <Routes>
-
         <Route index element={<HomeLogin />} />
         <Route path="/vertify" element={<Vertify />} />
         <Route path="/booking" element={<Booking />} />
 
 
       </Routes>
+
     </BrowserRouter>
   );
 }
