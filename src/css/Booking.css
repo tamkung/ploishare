@@ -27,7 +27,11 @@
     box-shadow: 5px 5px 5px #888888;
     transition: 300ms;
 }
-
+.nav-btn{
+    position: absolute;
+    bottom: 10%;
+    right: 1%;
+}
 @media only screen and (max-width: 1000px) {
     .item{
         display: block;

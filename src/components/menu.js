@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
 import { chevronDownCircle, chevronForwardCircle, chevronUpCircle, colorPalette, document, globe, logOut } from 'ionicons/icons';
-
+import '../css/Booking.css';
 const logout = () => {
   // Clear the user's session
   localStorage.removeItem('token');
@@ -14,9 +14,9 @@ const logout = () => {
 };
 
 const MenuButton = () => (
-  <div>
+  <div className='nav-btn'>
     <IonContent className="ion-padding">
-      <IonFab slot="fixed" vertical="bottom" horizontal="end">
+      <IonFab slot="fixed" horizontal="end">
         <IonFabButton>
           <IonIcon icon={chevronUpCircle}></IonIcon>
         </IonFabButton>
