@@ -3,8 +3,8 @@ import MenuButton from '../../src/components/menu'
 import SelectDate from '../components/SelectDate'
 function Booking() {
   return (
-    <div className='container'>
-      <div className='bookingSite'>
+    <div>
+      <div className='container'>
       <SelectDate/>
       </div>
       <div>

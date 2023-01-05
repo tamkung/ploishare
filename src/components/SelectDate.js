@@ -6,7 +6,7 @@ import axios from "axios";
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
-
+import '../css/Booking.css';
 const API_URL = 'https://api-ploishare.cyclic.app/'
 //const API_URL = 'https://test-w8q8.onrender.com/'
 //const API_URL = 'http://localhost:8080/'
@@ -87,7 +87,7 @@ const SelectDate = () => {
   //   return [0, 1, 2, 3, 4, 5, 6, 19, 20, 21, 22, 23];
   // };
   return (
-    <div className='container'>
+    <div>
       <Form>
         <Form.Item label="Start Date">
           <DatePicker
@@ -146,17 +146,17 @@ const SelectDate = () => {
             style={{ backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
           />
         </Form.Item>
-        <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button>
+        <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Search</button>
       </Form>
       <br />
       
       <h3 className='text-success'>รถว่าง {getCars.length} คัน</h3>
       <br />
-      <ul className='text-center'>
+      <div className='text-center flexbox'>
         {getCars.map((index, cars) => (
-          <li key={index} className='card mt-1 bg-success text-light'>{cars.id + " " + cars.make + " " + cars.model} </li>
+          <div type="button" key={index} className='item card mt-1 bg-success text-light'>{cars.id + " " + cars.make + " " + cars.model} </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

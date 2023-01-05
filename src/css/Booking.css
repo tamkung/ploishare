@@ -1,10 +1,18 @@
-.container {
-    position: relative;
-}
-
 .bookingSite {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.flexbox{
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.item{
+    display: block;
+    box-sizing: border-box;
+    width: 16%;
+    margin: 5px;
 }
