@@ -1,6 +1,8 @@
 import React from 'react';
-import { FloatButton } from 'antd';
-import { MenuOutlined, CommentOutlined, LogoutOutlined } from '@ant-design/icons';
+
+import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
+import { chevronDownCircle, chevronForwardCircle, chevronUpCircle, colorPalette, document, globe, logOut } from 'ionicons/icons';
+
 const logout = () => {
   // Clear the user's session
   localStorage.removeItem('token');
@@ -12,10 +14,26 @@ const logout = () => {
 };
 
 const MenuButton = () => (
-  <FloatButton.Group icon={<MenuOutlined />} type="primary" trigger="click">
-    <FloatButton />
-    <FloatButton icon={<CommentOutlined />} />
-    <FloatButton icon={<LogoutOutlined />} onClick={(logout)}/>
-  </FloatButton.Group>
+  <div>
+    <IonContent className="ion-padding">
+      <IonFab slot="fixed" vertical="bottom" horizontal="end">
+        <IonFabButton>
+          <IonIcon icon={chevronUpCircle}></IonIcon>
+        </IonFabButton>
+        <IonFabList side="top">
+          <IonFabButton
+            onClick={logout}>
+            <IonIcon icon={logOut}></IonIcon>
+          </IonFabButton>
+          <IonFabButton>
+            <IonIcon icon={colorPalette}></IonIcon>
+          </IonFabButton>
+          <IonFabButton>
+            <IonIcon icon={document}></IonIcon>
+          </IonFabButton>
+        </IonFabList>
+      </IonFab>
+    </IonContent>
+  </div>
 );
 export default MenuButton;

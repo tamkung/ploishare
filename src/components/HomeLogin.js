@@ -20,6 +20,7 @@ const API_URL = 'https://api-ploishare.cyclic.app/'
 
 
 const HomeLogin = () => {
+  
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
 
@@ -171,6 +172,7 @@ const HomeLogin = () => {
             </button> */}
           </div>
         </form>
+        
       </div>
     </div>
 
