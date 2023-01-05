@@ -29,33 +29,6 @@
 }
 
 @media only screen and (max-width: 1000px) {
-
-    .box {
-        padding-top: 3%;
-        padding-left: 3%;
-        padding-right: 3%;
-        margin-left: 15%;
-        margin-right: 15%;
-        margin-bottom: auto;
-        background-color: white;
-        border: #3355FF solid 2px;
-        border-radius: 0px 0px 20px 20px;
-    }
-    .textHeader{
-        background: #3355FF;
-        font-size: 20px;
-        text-align: center;
-        border-radius: 20px 20px 0px 0px;
-        margin-left: 15%;
-        margin-right: 15%;
-        margin-top: 5%;
-        padding: 0.5%;
-        color: white;
-        font-weight: bold;
-    
-    }
-}
-@media only screen and (max-width: 1000px) {
     .item{
         display: block;
         box-sizing: border-box;
