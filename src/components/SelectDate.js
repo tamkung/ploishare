@@ -62,7 +62,8 @@ const SelectDate = () => {
     // Can not select days before today and today
     return current && current < dayjs().endOf('day');
   };
-  const createRice = () => {
+  
+  const availableCar = () => {
 
     axios
       .get(API_URL + `/available-cars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
@@ -77,7 +78,7 @@ const SelectDate = () => {
 
     console.log('StartDateTime : ', startDate + startTime);
     console.log('EndDateTime : ', endDate, endTime);
-    createRice();
+    availableCar();
 
   };
 
@@ -152,8 +153,8 @@ const SelectDate = () => {
       <h3 className='text-success'>รถว่าง {getCars.length} คัน</h3>
       <br />
       <ul className='text-center'>
-        {getCars.map((cars) => (
-          <li className='card mt-1 bg-success text-light'>{cars.id + " " + cars.make + " " + cars.model} </li>
+        {getCars.map((index, cars) => (
+          <li key={index} className='card mt-1 bg-success text-light'>{cars.id + " " + cars.make + " " + cars.model} </li>
         ))}
       </ul>
     </div>
