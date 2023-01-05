@@ -70,6 +70,7 @@ const SelectDate = () => {
       .then((response) => {
         console.log(response.data);
         setGetCars(response.data);
+       
       })
       .catch((err) => console.log(err));
   };
@@ -153,8 +154,8 @@ const SelectDate = () => {
       <h3 className='text-success'>รถว่าง {getCars.length} คัน</h3>
       <br />
       <div className='text-center flexbox'>
-        {getCars.map((index, cars) => (
-          <div type="button" key={index} className='item card mt-1 bg-success text-light'>{cars.id + " " + cars.make + " " + cars.model} </div>
+        {getCars.map((cars,index) => (
+          <div type="button" className='item card mt-1 bg-success text-light' key={index}> {cars.id + " " + cars.make + " " + cars.model} </div>
         ))}
       </div>
     </div>
