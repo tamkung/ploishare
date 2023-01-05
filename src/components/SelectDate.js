@@ -156,7 +156,13 @@ const SelectDate = () => {
       <br />
       <div className='text-center flexbox'>
         {getCars.map((cars, index) => (
-          <div className='item'>
+          <div className='item' onClick={() => {
+            console.log(cars);
+            Swal.fire({
+              title: "เลือกรถ",
+              text: cars.id + " " + cars.make + " " + cars.model,
+            })
+          }}>
             <div type="button" className='btnMenu content mt-1' key={index}> {cars.id + " " + cars.make + " " + cars.model} <div className='container' style={{ height: "10vw", background: "red" }}></div></div>
           </div>
 
