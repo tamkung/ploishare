@@ -62,7 +62,7 @@ const SelectDate = () => {
     // Can not select days before today and today
     return current && current < dayjs().endOf('day');
   };
-  
+
   const availableCar = () => {
 
     axios
@@ -70,7 +70,7 @@ const SelectDate = () => {
       .then((response) => {
         console.log(response.data);
         setGetCars(response.data);
-       
+
       })
       .catch((err) => console.log(err));
   };
@@ -90,7 +90,7 @@ const SelectDate = () => {
   return (
     <div>
       <Form>
-        <Form.Item label="Start Date">
+        <Form.Item label="เลือกวันที่">
           <DatePicker
             onChange={(value, dateString) => {
               setStartDate(value.format('YYYY-MM-DD'));
@@ -101,9 +101,9 @@ const SelectDate = () => {
             locale={locale}
             disabledDate={disabledDate}
             format={'DD-MM-YYYY'}
+            placeholder="เลือกวันที่เริ่มต้น"
           />
-        </Form.Item>
-        <Form.Item label="End Date">
+          <h4>:</h4>
           <DatePicker
             disabled={!endDateDisabled}
             onChange={(value, dateString) => {
@@ -113,49 +113,53 @@ const SelectDate = () => {
             locale={locale}
             disabledDate={disabledDate}
             format={'DD-MM-YYYY'}
+            placeholder="เลือกวันที่คืน"
+          />
+          <Switch
+            checked={endDateDisabled}
+            onClick={onEndDateSwitchChange}
+            style={{ marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
           />
         </Form.Item>
-        <Form.Item label="Start Time">
+        <Form.Item label="เลือกเวลา">
           <TimePicker
             format="HH:mm"
             minuteStep={30}
             locale={locale}
             disabledMinutes={disabledMinutes}
+            placeholder="เลือกเวลาเริ่มต้น"
             // hide={disabledHours}
             onChange={(value, dateString) => {
               setStartTime(value.format('HH:mm:00'));
               console.log('Time Stared : ', value.format('HH:mm:00'));
             }}
           />
-        </Form.Item>
-        <Form.Item label="End Time">
+          <h4>:</h4>
           <TimePicker
             format="HH:mm"
             minuteStep={30}
             locale={locale}
             disabledMinutes={disabledMinutes}
+            placeholder="เลือกเวลาคืนรถ"
             onChange={(value, dateString) => {
               setEndTime(value.format('HH:mm:00'));
               console.log('Time Stared : ', value.format('HH:mm:00'));
             }}
           />
         </Form.Item>
-        <Form.Item label="Disable End Date">
-          <Switch
-            checked={endDateDisabled}
-            onClick={onEndDateSwitchChange}
-            style={{ backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
-          />
-        </Form.Item>
+
         <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Search</button>
       </Form>
       <br />
-      
+
       <h3 className='text-success'>รถว่าง {getCars.length} คัน</h3>
       <br />
       <div className='text-center flexbox'>
-        {getCars.map((cars,index) => (
-          <div type="button" className='item card mt-1 bg-success text-light' key={index}> {cars.id + " " + cars.make + " " + cars.model} </div>
+        {getCars.map((cars, index) => (
+          <div className='item'>
+            <div type="button" className='btnMenu content mt-1' key={index}> {cars.id + " " + cars.make + " " + cars.model} <div className='container' style={{ height: "10vw", background: "red" }}></div></div>
+          </div>
+
         ))}
       </div>
     </div>
