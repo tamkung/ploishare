@@ -3,11 +3,8 @@ import { Button, Checkbox, Form, Input, Space } from 'antd';
 import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-<<<<<<< Updated upstream
 import { PoweroffOutlined } from '@ant-design/icons';
-=======
 import '../css/style.css';
->>>>>>> Stashed changes
 
 //const API_URL = 'https://api-ploishare.cyclic.app/'
 const API_URL = 'https://test-w8q8.onrender.com/'
