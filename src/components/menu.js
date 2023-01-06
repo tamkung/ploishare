@@ -5,8 +5,7 @@ import { chevronDownCircle, chevronForwardCircle, chevronUpCircle, colorPalette,
 import '../css/Booking.css';
 const logout = () => {
   // Clear the user's session
-  localStorage.removeItem('token');
-  localStorage.removeItem('email');
+  localStorage.removeItem('user');
   sessionStorage.clear();
 
   // Redirect the user to the login page

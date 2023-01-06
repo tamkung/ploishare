@@ -5,7 +5,7 @@ import '../css/style.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const API_URL = 'https://api-ploishare.cyclic.app/'
 //const API_URL = 'https://test-w8q8.onrender.com/'
@@ -18,9 +18,18 @@ const API_URL = 'https://api-ploishare.cyclic.app/'
 //   });
 // };
 
-
 const HomeLogin = () => {
-
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+  };
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+      window.location.href = "/booking";
+    }
+  }, []);
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
 
@@ -58,6 +67,7 @@ const HomeLogin = () => {
       body: JSON.stringify(value),
     }).then((response) => response.json())
       .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
         console.log("Success:", data);
         if (data.status === "OK") {
           const Toast = Swal.mixin({
@@ -77,8 +87,8 @@ const HomeLogin = () => {
             title: "SignIn in successfully",
           }).then(() => {
             // alert("login sucess");
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("email", data.email);
+
+            //localStorage.setItem("email", data.email);
             window.location = "/booking";
           });
         } else {
@@ -99,6 +109,7 @@ const HomeLogin = () => {
 
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
+
         <div>
           <img
             className="mx-auto h-12 w-auto"
