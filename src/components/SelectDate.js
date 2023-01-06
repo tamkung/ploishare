@@ -8,6 +8,7 @@ import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
 import '../css/Booking.css';
 import '../css/style.css';
+
 const API_URL = 'https://api-ploishare.cyclic.app/'
 //const API_URL = 'https://test-w8q8.onrender.com/'
 //const API_URL = 'http://localhost:8080/'
@@ -21,15 +22,6 @@ const SelectDate = () => {
   const [endTime, setEndTime] = useState(null);
 
   const [getCars, setGetCars] = useState([]);
-
-  // const [values, setValues] = useState({
-  //   RiceDepositor: id,
-  //   RiceCategory: "",
-  //   RiceQuantity: "",
-  //   RiceReturn: "0",
-  //   RiceEntryDate: saveCurrentDate,
-  //   RiceIssueDate: "",
-  // });
 
   // const onStartDateChange = (date) => {
   //   setStartDate(date);

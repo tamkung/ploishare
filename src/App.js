@@ -2,9 +2,11 @@
 import HomeLogin from './components/HomeLogin';
 import Vertify from './page/Vertify';
 import Booking from './page/Booking';
+import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
+import React, { useState, useEffect } from "react";
 
 // /* Core CSS required for Ionic components to work properly */
 // import '@ionic/react/css/core.css';
@@ -27,7 +29,16 @@ setupIonicReact({
 });
 
 function App() {
-
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+  };
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -36,13 +47,13 @@ function App() {
 
     // </div>
     <BrowserRouter>
-      
+
       <Routes>
-        <Route index element={<HomeLogin />} />
+        {currentUser ? <Route index element={<Booking />} /> : <Route index element={<HomeLogin />} />}
         <Route path="/vertify" element={<Vertify />} />
-        <Route path="/booking" element={<Booking />} />
-
-
+        <Route path='*' element={<NotFound />} />
+        {/* <Route path="/booking" element={<Booking />} /> */}
+        
       </Routes>
 
     </BrowserRouter>

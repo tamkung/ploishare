@@ -19,17 +19,6 @@ const API_URL = 'https://api-ploishare.cyclic.app/'
 // };
 
 const HomeLogin = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
-  };
-  useEffect(() => {
-    const user = getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-      window.location.href = "/booking";
-    }
-  }, []);
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
 
@@ -67,8 +56,8 @@ const HomeLogin = () => {
       body: JSON.stringify(value),
     }).then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("user", JSON.stringify(data));
-        console.log("Success:", data);
+        
+        //console.log("Success:", data);
         if (data.status === "OK") {
           const Toast = Swal.mixin({
             toast: true,
@@ -86,10 +75,9 @@ const HomeLogin = () => {
             icon: "success",
             title: "SignIn in successfully",
           }).then(() => {
-            // alert("login sucess");
-
-            //localStorage.setItem("email", data.email);
-            window.location = "/booking";
+            console.log(data);
+            localStorage.setItem("user", JSON.stringify(data));
+            window.location = "/";
           });
         } else {
           Swal.fire({
