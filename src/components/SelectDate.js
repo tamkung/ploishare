@@ -8,10 +8,7 @@ import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
 import '../css/Booking.css';
 import '../css/style.css';
-
-const API_URL = 'https://api-ploishare.cyclic.app/'
-//const API_URL = 'https://test-w8q8.onrender.com/'
-//const API_URL = 'http://localhost:8080/'
+import { API_URL } from "../Constant";
 
 
 const SelectDate = () => {

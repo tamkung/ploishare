@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import React, { useState, useEffect } from "react";
-
-const API_URL = 'https://api-ploishare.cyclic.app/'
-//const API_URL = 'https://test-w8q8.onrender.com/'
-//const API_URL = 'http://localhost:8080/'
+import { API_URL } from "../Constant";
 
 // const signUp = (email, password) => {
 //   return axios.post(API_URL + "signup", {

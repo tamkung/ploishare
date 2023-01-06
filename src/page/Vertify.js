@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { PoweroffOutlined } from '@ant-design/icons';
 import '../css/style.css';
-
-//const API_URL = 'https://api-ploishare.cyclic.app/'
-const API_URL = 'https://test-w8q8.onrender.com/'
-//const API_URL = 'http://localhost:8080/'
+import { API_URL_SignUp } from "../Constant";
 
 const Vertify = () => {
   const [loadings, setLoadings] = useState([]);
@@ -74,7 +71,7 @@ const Vertify = () => {
 
         // ----------------------------axja--------------
 
-        fetch(API_URL + "signup", {
+        fetch(API_URL_SignUp + "signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
