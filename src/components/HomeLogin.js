@@ -53,7 +53,7 @@ const HomeLogin = () => {
       body: JSON.stringify(value),
     }).then((response) => response.json())
       .then((data) => {
-        
+
         //console.log("Success:", data);
         if (data.status === "OK") {
           const Toast = Swal.mixin({
@@ -149,15 +149,14 @@ const HomeLogin = () => {
             <Link to="/vertify"> Vertification </Link>
           </div>
           <hr />
-
-
           <div style={{ textAlign: "center", padding: "5px" }}>
             <button type="submit" className="buttonNext">
               Go
             </button>
             <br />
             <br />
-            <button className="bg-warning buttonNext">
+            <button className="bg-warning buttonNext"
+              onClick={() => { window.location = "/admin" }}>
               Admin
             </button>
             {/* <button

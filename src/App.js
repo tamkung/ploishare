@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
 
 import HomeLogin from './components/HomeLogin';
@@ -8,6 +8,7 @@ import Booking from './page/Booking';
 import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
+import HomeAdmin from "./components/admin/HomeAdmin";
 
 // /* Core CSS required for Ionic components to work properly */
 // import '@ionic/react/css/core.css';
@@ -51,6 +52,8 @@ function App() {
         <Route path='*' element={<NotFound />} />
         <Route path="/confirm/:email" element={<ConfirmSuccess />} />
         {/* <Route path="/booking" element={<Booking />} /> */}
+
+        <Route path="/admin" element={<HomeAdmin />} />
 
       </Routes>
     </div>
