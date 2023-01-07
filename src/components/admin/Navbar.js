@@ -43,9 +43,9 @@ const Navbar = () => {
         <div>
 
             <Drawer placement="left" onClose={onClose} open={open} >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <a href='/admin'>Home</a>
+                <br />
+                <a href='/admin/listrental'>ListRental</a>
             </Drawer>
             <AppBar position="static">
                 <Toolbar variant="dense">

@@ -59,7 +59,7 @@ const originData = [];
 //     console.log(originData);
 //     return originData;
 // }
-axios.get('https://api-ploishare.cyclic.app/cars').then((response) => {
+axios.get('https://api-ploishare.cyclic.app/list/cars').then((response) => {
     response.data.map((item) => {
         originData.push({
             key: item.id.toString(),

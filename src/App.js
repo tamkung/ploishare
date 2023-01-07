@@ -9,9 +9,10 @@ import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
 import HomeAdmin from "./components/admin/HomeAdmin";
+import ListRental from "./components/admin/ListRental";
 
-// /* Core CSS required for Ionic components to work properly */
-// import '@ionic/react/css/core.css';
+/* Core CSS required for Ionic components to work properly */
+import '@ionic/react/css/core.css';
 
 // /* Basic CSS for apps built with Ionic */
 // import '@ionic/react/css/normalize.css';
@@ -54,6 +55,7 @@ function App() {
         {/* <Route path="/booking" element={<Booking />} /> */}
 
         <Route path="/admin" element={<HomeAdmin />} />
+        <Route path="/admin/listrental" element={<ListRental />} />
 
       </Routes>
     </div>

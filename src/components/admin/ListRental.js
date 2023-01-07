@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, usePra } from 'react';
 import {
     Breadcrumb,
     Layout,
@@ -17,6 +17,31 @@ import {
 import axios from 'axios';
 
 import Navbar from './Navbar';
+
+const date = new Date('2023-02-02T10:00:00.000Z');
+var now_utc = Date.UTC(
+    date.getUTCFullYear(),
+    date.getUTCMonth(),
+    date.getUTCDate(),
+    date.getUTCHours() - 7,
+    date.getUTCMinutes(),
+    date.getUTCSeconds());
+//2023-02-02T10:00:00.000Z
+//2023-02-02T03:00:00.000Z
+const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    hourCycle: "h23",  // 24-hour format
+    locale: "th"  // Thai language
+
+};
+console.log(new Date(now_utc).toLocaleString('th', options));
+console.log(date.toISOString());
+console.log(date.toLocaleString('th', options));
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -56,28 +81,43 @@ const EditableCell = ({
 };
 const originData = [];
 
-const HomeAdmin = () => {
+const ListRental = () => {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
-            await axios.get('https://api-ploishare.cyclic.app/list/cars').then((response) => {
+            await axios.get('https://api-ploishare.cyclic.app/list/rentals').then((response) => {
                 response.data.map((item) => {
                     originData.push({
                         key: item.id.toString(),
                         id: item.id,
-                        make: item.make,
-                        model: item.model,
-                        year: item.year,
-                        color: item.color,
-                        rental_rate: item.rental_rate,
+                        car_id: item.car_id,
+                        start_date_time: new Date(Date.UTC(
+                            new Date(item.start_date_time).getUTCFullYear(),
+                            new Date(item.start_date_time).getUTCMonth(),
+                            new Date(item.start_date_time).getUTCDate(),
+                            new Date(item.start_date_time).getUTCHours() - 7,
+                            new Date(item.start_date_time).getUTCMinutes(),
+                            new Date(item.start_date_time).getUTCSeconds())).toLocaleString('th', options),
+
+                        end_date_time: new Date(Date.UTC(
+                            new Date(item.end_date_time).getUTCFullYear(),
+                            new Date(item.end_date_time).getUTCMonth(),
+                            new Date(item.end_date_time).getUTCDate(),
+                            new Date(item.end_date_time).getUTCHours() - 7,
+                            new Date(item.end_date_time).getUTCMinutes(),
+                            new Date(item.end_date_time).getUTCSeconds())).toLocaleString('th', options),
+                        rate: item.rate,
+                        day: item.day + ' วัน',
                     });
                 });
             });
             setData(originData);
+            console.log(originData);
         }
+
         fetchData();
     }, []);
 
@@ -124,33 +164,33 @@ const HomeAdmin = () => {
             editable: true,
         },
         {
-            title: 'Make',
-            dataIndex: 'make',
+            title: 'Car ID',
+            dataIndex: 'car_id',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Model',
-            dataIndex: 'model',
+            title: 'Start Date',
+            dataIndex: 'start_date_time',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Year',
-            dataIndex: 'year',
+            title: 'End Date',
+            dataIndex: 'end_date_time',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Color',
-            dataIndex: 'color',
+            title: 'Rate',
+            dataIndex: 'rate',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Rental Price',
-            dataIndex: 'rental_rate',
-            width: '20%',
+            title: 'Day',
+            dataIndex: 'day',
+            width: '15%',
             editable: true,
         },
         {
@@ -201,7 +241,7 @@ const HomeAdmin = () => {
     });
     return (
         <div>
-            
+
             <Navbar />
             <Layout>
 
@@ -246,4 +286,4 @@ const HomeAdmin = () => {
         </div>
     );
 };
-export default HomeAdmin;
+export default ListRental;
