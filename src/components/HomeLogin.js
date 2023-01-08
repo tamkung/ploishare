@@ -155,7 +155,7 @@ const HomeLogin = () => {
             </button>
             <br />
             <br />
-            <button className="bg-warning buttonNext"
+            <button className="bg-warning text-white buttonNext" 
               onClick={() => { window.location = "/admin" }}>
               Admin
             </button>

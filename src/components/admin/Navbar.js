@@ -14,6 +14,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import MenuMui from '@mui/material/Menu';
 import TypographyM from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [auth, setAuth] = React.useState(true);
@@ -43,9 +44,9 @@ const Navbar = () => {
         <div>
 
             <Drawer placement="left" onClose={onClose} open={open} >
-                <a href='/admin'>Home</a>
+                <Link to={'/admin'}>Home</Link>
                 <br />
-                <a href='/admin/listrental'>ListRental</a>
+                <Link to={'/admin/listrental'}>ListRental</Link>
             </Drawer>
             <AppBar position="static">
                 <Toolbar variant="dense">
