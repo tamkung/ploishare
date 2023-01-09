@@ -19,7 +19,7 @@ export default function Header() {
                     </a>
                 </li>
                 <li className="nav-item d-sm-inline-block">
-                    <a className="nav-link" href="/login">เข้าสู่ระบบ</a>
+                    <a className="btn nav-link" onClick={() => { window.location = "/" }}>ออกจากระบบ</a>
                 </li>
             </ul>
         </nav>

@@ -146,17 +146,17 @@ const Vertify = () => {
   };
 
   return (
-    <div >
-      <nav class="navbar" style={{ background: "#67b99a", fontWeight: "bold", color: "white" }}>
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+    <div style={{fontFamily:"IBM Plex Sans Thai" , background: "lightgray", height: "100%" }}>
+      <nav className="navbar" style={{ background: "#67b99a", fontWeight: "bold", color: "white" }}>
+        <div className="container-fluid">
+          <p className="navbar">
             {/* <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" /> */}
-            Vertify
-          </a>
+            ปล่อย Share
+          </p>
         </div>
       </nav>
       <div>
-        <Form className='mt-4 mr-3 ml-3'>
+        <Form className='mt-4 mr-3 ml-3' >
           <Form.Item
             label="Email"
             rules={[{ required: true, message: 'Please input your email!' }]}
@@ -187,22 +187,20 @@ const Vertify = () => {
             >ยืนยันตัวตน
             </button>
           </Form> */}
-          <Button className="buttonNext" type="primary" loading={loadings[0]} onClick={() => handleSubmit(0)}>
+          <button className="buttonNext" loading={loadings[0]} onClick={() => handleSubmit(0)}>
             Vertify
-          </Button>
+          </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
-          <Link to="/" className="inline-flex backButton">
-            <BsIcons.BsArrowLeftShort style={{ marginRight: "5px", fontSize: "25px" }} />
-            Back
-          </Link>
+
         </Form>
 
-
-
-
+        <Link to="/" className="ml-4 inline-flex backButton">
+          <BsIcons.BsArrowLeftShort style={{ marginRight: "5px", fontSize: "25px" }} />
+          Back
+        </Link>
       </div>
     </div>
   )
 }
 
-export default Vertify
+export default Vertify;
