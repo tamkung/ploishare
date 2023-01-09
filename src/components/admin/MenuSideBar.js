@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function MenuSideBar() {
     return (
@@ -21,14 +21,19 @@ export default function MenuSideBar() {
                             <nav className="mt-2">
                                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <li className="nav-item">
-                                        <Link className="nav-link " to={'/admin'}>
-                                            <p>ListCar</p>
-                                        </Link>
+                                        <NavLink className="nav-link " to={'/admin'} >
+                                            <p>Home</p>
+                                        </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <Link className="nav-link" to={'/admin/listrental'}>
+                                        <NavLink className="nav-link " to={'/admin/listcar'} >
+                                            <p>ListCar</p>
+                                        </NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link" to={'/admin/listrental'}>
                                             <p>ListRental</p>
-                                        </Link>
+                                        </NavLink>
                                     </li>
                                 </ul>
                             </nav>

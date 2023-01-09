@@ -11,7 +11,10 @@ export default function IndexAdmin() {
     <div>
       <Header />
       <MenuSideBar />
-      <ContentCar />
+      <div className='content-wrapper'>
+        <h1>Home</h1>
+      </div>
+
       <Footer />
     </div>
   )

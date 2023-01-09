@@ -10,6 +10,7 @@ import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
 import HomeAdmin from "./components/admin/HomeAdmin";
 import ListRental from "./components/admin/ListRental";
+import ListCar from "./components/admin/ListCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
 import UploadImg from "./components/upload";
 
@@ -58,6 +59,7 @@ function App() {
         {/* <Route path="/booking" element={<Booking />} /> */}
 
         <Route path="/admin" element={<IndexAdmin />} />
+        <Route path="/admin/listcar" element={<ListCar />} />
         <Route path="/admin/listrental" element={<ListRental />} />
         <Route path="/upload" element={<UploadImg />} />
       </Routes>
