@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Form, Input, Space } from 'antd';
+import {Form, Input } from 'antd';
 import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { PoweroffOutlined } from '@ant-design/icons';
 import '../css/style.css';
-import { API_URL_SignUp } from "../Constant";
+import SignUp from '../components/auth/SignUp';
 
 const Vertify = () => {
-  const [loadings, setLoadings] = useState([]);
-
 
   const [value, setValue] = useState({
     email: "",
@@ -58,87 +55,9 @@ const Vertify = () => {
       });
     } else {
       try {
-        setLoadings((prevLoadings) => {
-          const newLoadings = [...prevLoadings];
-          newLoadings[e] = true;
-          return newLoadings;
-        });
 
-        const jsonData = {
-          email: value.email,
-          password: value.confirmPassword,
-        };
+        SignUp(value);
 
-        // ----------------------------axja--------------
-
-        fetch(API_URL_SignUp + "signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            //"allow-access-control-origin": "*", // CORS
-          },
-          body: JSON.stringify(jsonData),
-        }).then((response) => response.json())
-          .then((data) => {
-            // const enterLoading = (index) => {
-
-            setLoadings((prevLoadings) => {
-              const newLoadings = [...prevLoadings];
-              newLoadings[e] = false;
-              return newLoadings;
-            });
-
-            // };
-            console.log("Success:", data);
-            if (data.status === "OK") {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 1000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.addEventListener("mouseenter", Swal.stopTimer);
-                  toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
-              });
-
-              Toast.fire({
-                icon: "success",
-                title: "SignUp successfully",
-              }).then(() => {
-                // alert("login sucess");
-                //localStorage.setItem("token", data.token);
-                window.location = "/";
-              });
-            } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: data.message,
-                //footer: '<a href="">Why do I have this issue?</a>'
-              })
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-
-        //   axios
-        //     .post(linkDB + "/signUp", jsonData)
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //       console.log(data);
-        //       if (data.status === "sucess") {
-        //         alert("SignUp sucess");
-        //         window.location = "/";
-        //       } else {
-        //         alert("SignUp failed");
-        //       }
-        //     })
-        //     .catch((err) => {
-        //       console.error("Error:", err);
-        //     });
       } catch (error) {
         console.log(error);
       }
@@ -146,7 +65,7 @@ const Vertify = () => {
   };
 
   return (
-    <div style={{fontFamily:"IBM Plex Sans Thai" , background: "lightgray", height: "100%" }}>
+    <div style={{ fontFamily: "IBM Plex Sans Thai", background: "lightgray", height: "100%" }}>
       <nav className="navbar" style={{ background: "#67b99a", fontWeight: "bold", color: "white" }}>
         <div className="container-fluid">
           <p className="navbar">
@@ -187,7 +106,7 @@ const Vertify = () => {
             >ยืนยันตัวตน
             </button>
           </Form> */}
-          <button className="buttonNext" loading={loadings[0]} onClick={() => handleSubmit(0)}>
+          <button className="buttonNext" onClick={() => handleSubmit(0)}>
             Vertify
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}

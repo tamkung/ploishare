@@ -3,13 +3,7 @@ import React from 'react';
 import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
 import { chevronDownCircle, chevronForwardCircle, chevronUpCircle, colorPalette, document, globe, logOut } from 'ionicons/icons';
 import '../css/Booking.css';
-const logout = () => {
-  // Clear the user's session
-  localStorage.removeItem('user');
-  localStorage.removeItem('type');
-  sessionStorage.clear();
-  window.location.replace('/');
-};
+import SignOut from '../components/auth/SignOut';
 
 const MenuButton = () => (
   <div className='nav-btn'>
@@ -20,7 +14,7 @@ const MenuButton = () => (
         </IonFabButton>
         <IonFabList side="top">
           <IonFabButton
-            onClick={logout}>
+            onClick={SignOut}>
             <IonIcon icon={logOut}></IonIcon>
           </IonFabButton>
           <IonFabButton>

@@ -16,7 +16,7 @@ import {
 
 import axios from 'axios';
 
-import Navbar from './Navbar';
+import Navbar from './backup/Navbar';
 
 const date = new Date('2023-02-02T10:00:00.000Z');
 var now_utc = Date.UTC(
@@ -242,7 +242,6 @@ const ContentRental = () => {
         };
     });
     return (
-            <Layout>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '12px 0' }}>
                         <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -276,10 +275,7 @@ const ContentRental = () => {
 
                     </Content>
                 </Layout>
-                <Layout >
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-                </Layout>
-            </Layout>
+                
     );
 };
 export default ContentRental;

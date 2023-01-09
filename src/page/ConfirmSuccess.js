@@ -21,9 +21,9 @@ function ConfirmSuccess() {
         </h1>
       </header>
       <br />
-      <Button variant="contained" onClick={() => {
+      {/* <Button variant="contained" onClick={() => {
         window.location = '/'
-      }}>Login</Button>
+      }}>Login</Button> */}
     </div>
   );
 };

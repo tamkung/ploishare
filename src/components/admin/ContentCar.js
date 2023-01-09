@@ -17,7 +17,7 @@ import {
 
 import axios from 'axios';
 
-import Navbar from './Navbar';
+import Navbar from './backup/Navbar';
 
 const { Header, Content, Sider, Footer } = Layout;
 

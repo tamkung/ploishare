@@ -5,10 +5,10 @@ import * as BsIcon5 from 'react-icons/fa'
 export default function MenuSideBar() {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="../../index3.html" className="brand-link elevation-4">
+            <Link to={"/"} className="brand-link elevation-4">
                 <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
-                <span className="brand-text font-weight-light">AdminLTE 3</span>
-            </a>
+                <span className="brand-text font-weight-light">ปล่อยShare</span>
+            </Link>
             <div className="sidebar os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">
                 <div className="os-resize-observer-host observed">
                     <div className="os-resize-observer" style={{ left: 0, right: 'auto' }} />
@@ -23,17 +23,19 @@ export default function MenuSideBar() {
                                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <li className="nav-item">
                                         <NavLink className="nav-link " to={'/'} >
-                                        <BsIcon5.FaHome className='inline-flex mr-2 ml-2' />
+                                            <BsIcon5.FaHome className='inline-flex mr-3 mb-1 ' size={25} />
                                             <p>Home</p>
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link " to={'/admin-listcar'} >
+                                        <NavLink className="nav-link " to={'/listcar'} >
+                                            <BsIcon5.FaCarAlt className='inline-flex mr-3 mb-1 ' size={25} />
                                             <p>ListCar</p>
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to={'/admin-listrental'}>
+                                        <NavLink className="nav-link" to={'/listrental'}>
+                                            <BsIcon5.FaListAlt className='inline-flex mr-3 mb-1 ' size={25} />
                                             <p>ListRental</p>
                                         </NavLink>
                                     </li>

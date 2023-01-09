@@ -8,20 +8,21 @@ import Booking from './page/Booking';
 import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
-import HomeAdmin from "./components/admin/HomeAdmin";
+import HomeAdmin from "./components/admin/backup/HomeAdmin";
 import ContentRental from "./components/admin/ContentRental";
 import ContentCar from "./components/admin/ContentCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
 import UploadImg from "./components/upload";
+import SignOut from "./components/auth/SignOut";
 
-import Header from './components/admin/Header'
-import MenuSideBar from './components/admin/MenuSideBar'
-import Footer from './components/admin/Footer'
+import LoHeader from './layout/LoHeader'
+import LoNavbar from './layout/LoNavbar'
+import LoFooter from './layout/LoFooter'
+
+import './css/Disable.css';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-import './css/Disable.css';
-
 
 // /* Basic CSS for apps built with Ionic */
 // import '@ionic/react/css/normalize.css';
@@ -56,41 +57,39 @@ function App() {
 
   return (
     <div>
-
       {admin == 'admin' ?
         <div>
           <div className='d-none d-sm-block'>
-            <Header />
-            <MenuSideBar />
+            <LoHeader />
+            <LoNavbar />
             <div className="content-wrapper">
               <Routes>
                 <Route index element={<IndexAdmin />} />
-                <Route path="/admin-listcar" element={<ContentCar />} />
-                <Route path="/admin-listrental" element={<ContentRental />} />
+                <Route path='*' element={<NotFound />} />
+                <Route path="/listcar" element={<ContentCar />} />
+                <Route path="/listrental" element={<ContentRental />} />
                 <Route path="/upload" element={<UploadImg />} />
               </Routes>
             </div>
-            <Footer />
+            <LoFooter />
           </div>
           <div className='container d-lg-none d-xl-none d-md-none'>
-            <div className='disable-nonti'>ระบบ Admin ไม่รองรับอุปกรณ์มือถือ</div>
+            <div className='disable-nonti'>ระบบ Admin ไม่รองรับอุปกรณ์มือถือ
+              <button className="buttonNext" onClick={SignOut}>Logout</button>
+            </div>
           </div>
         </div>
         : admin == 'user' ?
           <Routes>
             <Route index element={<Booking />} />
-            <Route path="/vertify" element={<Vertify />} />
             <Route path='*' element={<NotFound />} />
-            <Route path="/confirm/:email" element={<ConfirmSuccess />} />
           </Routes>
           : <Routes>
             <Route index element={<HomeLogin />} />
+            <Route path='*' element={<NotFound />} />
+            <Route path="/vertify" element={<Vertify />} />
+            <Route path="/confirm/:email" element={<ConfirmSuccess />} />
           </Routes>}
-
-
-      {/* <Route path="/booking" element={<Booking />} /> */}
-
-      {/* <Route path="/admin" element={<IndexAdmin />} /> */}
     </div >
   );
 }

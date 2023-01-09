@@ -4,32 +4,12 @@ import { Button, Checkbox, Form, Input, Space } from 'antd';
 import '../css/style.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2";
+
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../Constant";
-
-// const signUp = (email, password) => {
-//   return axios.post(API_URL + "signup", {
-//     email,
-//     password,
-//   });
-// };
+import SignIn from './auth/SignIn';
 
 const HomeLogin = () => {
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
-
-  //   const onChangeEmail = (e) => {
-  //     const email = e.target.value;
-  //     setEmail(email);
-  //     console.log(email);
-  //   };
-
-  //   const onChangePassword = (e) => {
-  //     const password = e.target.value;
-  //     setPassword(password);
-  //     console.log(password);
-  //   };
 
   const [value, setValue] = useState({
     email: "",
@@ -44,51 +24,7 @@ const HomeLogin = () => {
   const handleSubmit = (e) => {
     console.log(value);
     e.preventDefault();
-
-    fetch(API_URL + "signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(value),
-    }).then((response) => response.json())
-      .then((data) => {
-
-        //console.log("Success:", data);
-        if (data.status === "OK") {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener("mouseenter", Swal.stopTimer);
-              toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
-          });
-
-          Toast.fire({
-            icon: "success",
-            title: "SignIn in successfully",
-          }).then(() => {
-            //console.log(data.message);
-            localStorage.setItem("user", JSON.stringify(data));
-            localStorage.setItem("type", data.type);
-            window.location = "/";
-          });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: data.message,
-            //footer: '<a href="">Why do I have this issue?</a>'
-          })
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    SignIn(value);
   };
 
   return (
@@ -154,18 +90,6 @@ const HomeLogin = () => {
             <button type="submit" className="buttonNext">
               Go
             </button>
-            <br />
-            
-            {/* <button
-              type="submit"
-
-              className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-              </span>
-              Admin
-            </button> */}
           </div>
         </form>
 
