@@ -89,6 +89,7 @@ const ContentRental = () => {
     useEffect(() => {
         
         const fetchData = async () => {
+            originData.length = 0;
             await axios.get('https://api-ploishare.cyclic.app/list/rentals').then((response) => {
                 response.data.map((item) => {
                     originData.push({
