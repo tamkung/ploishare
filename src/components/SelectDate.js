@@ -10,6 +10,8 @@ import '../css/Booking.css';
 import '../css/style.css';
 import { API_URL } from "../Constant";
 
+//react icon
+import * as BsIcon5 from 'react-icons/bs'
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -78,11 +80,11 @@ const SelectDate = () => {
   //   return [0, 1, 2, 3, 4, 5, 6, 19, 20, 21, 22, 23];
   // };
   return (
-    <div className='sanFont'>
+    <div>
       <div className='container'>
         <Form>
-          <Form.Item   label="เลือกวันที่">
-            <DatePicker
+          <Form.Item label="เลือกวันที่">
+            <DatePicker style={{ width: "45%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -94,8 +96,8 @@ const SelectDate = () => {
               format={'DD-MM-YYYY'}
               placeholder="เลือกวันที่เริ่มต้น"
             />
-            <h4>:</h4>
-            <DatePicker
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+            <DatePicker style={{ width: "45%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -106,14 +108,17 @@ const SelectDate = () => {
               format={'DD-MM-YYYY'}
               placeholder="เลือกวันที่คืน"
             />
-            <Switch
-              checked={endDateDisabled}
-              onClick={onEndDateSwitchChange}
-              style={{ marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
-            />
+            <div className='mt-3' style={{ textAlign: "right", color: "gray" }}>
+              <p className='inline-flex'> เลือกมากกว่า 1 วัน </p>
+              <Switch
+                checked={endDateDisabled}
+                onClick={onEndDateSwitchChange}
+                style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
+              />
+            </div>
           </Form.Item>
           <Form.Item label="เลือกเวลา">
-            <TimePicker
+            <TimePicker style={{ width: "45%" }}
               format="HH:mm"
               minuteStep={30}
               locale={locale}
@@ -125,8 +130,8 @@ const SelectDate = () => {
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
             />
-            <h4>:</h4>
-            <TimePicker
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+            <TimePicker style={{ width: "45%" }}
               format="HH:mm"
               minuteStep={30}
               locale={locale}
