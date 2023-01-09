@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import * as BsIcon5 from 'react-icons/fa'
 
 export default function MenuSideBar() {
     return (
@@ -22,6 +23,7 @@ export default function MenuSideBar() {
                                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <li className="nav-item">
                                         <NavLink className="nav-link " to={'/admin'} >
+                                        <BsIcon5.FaHome className='inline-flex mr-2 ml-2' />
                                             <p>Home</p>
                                         </NavLink>
                                     </li>
