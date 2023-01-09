@@ -14,7 +14,6 @@ export default function IndexAdmin() {
       <div className='content-wrapper'>
         <h1>Home</h1>
       </div>
-
       <Footer />
       <div className='d-none d-sm-block'>
         <Header />
