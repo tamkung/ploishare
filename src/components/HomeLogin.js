@@ -72,9 +72,10 @@ const HomeLogin = () => {
             icon: "success",
             title: "SignIn in successfully",
           }).then(() => {
-            console.log(data);
+            //console.log(data.message);
             localStorage.setItem("user", JSON.stringify(data));
-            window.location = "/";
+            localStorage.setItem("type", data.type);
+            //window.location = "/";
           });
         } else {
           Swal.fire({
