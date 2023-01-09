@@ -8,7 +8,7 @@ export default function SignUp(value) {
         password: value.confirmPassword,
     };
 
-    fetch(API_URL_SignUp + "signup", {
+    fetch(API_URL_SignUp + "api/auth/signup", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

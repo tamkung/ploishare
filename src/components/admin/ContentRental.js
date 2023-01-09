@@ -16,7 +16,7 @@ import {
 
 import axios from 'axios';
 
-import Navbar from './backup/Navbar';
+import { API_URL } from '../../Constant';
 
 const date = new Date('2023-02-02T10:00:00.000Z');
 var now_utc = Date.UTC(
@@ -90,7 +90,7 @@ const ContentRental = () => {
         
         const fetchData = async () => {
             originData.length = 0;
-            await axios.get('https://api-ploishare.cyclic.app/list/rentals').then((response) => {
+            await axios.get(API_URL +'api/getbooking').then((response) => {
                 response.data.map((item) => {
                     originData.push({
                         key: item.id.toString(),

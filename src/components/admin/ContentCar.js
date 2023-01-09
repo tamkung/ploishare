@@ -17,7 +17,7 @@ import {
 
 import axios from 'axios';
 
-import Navbar from './backup/Navbar';
+import { API_URL } from '../../Constant';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -66,7 +66,7 @@ function ContentCar() {
 
         const fetchData = async () => {
             originData.length = 0;
-            await axios.get('https://api-ploishare.cyclic.app/list/cars').then((response) => {
+            await axios.get(API_URL + 'api/getcar').then((response) => {
                 response.data.map((item) => {
                     originData.push({
                         key: item.id.toString(),
@@ -215,42 +215,42 @@ function ContentCar() {
         };
     });
     return (
-            <Layout>
-                <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '12px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <Content
-                        style={{
-                            padding: 20,
-                            margin: 0,
-                            minHeight: 280,
-                            background: '#fff',
-                        }}
-                    >
-                        <Form form={form} component={false}>
-                            <Table loading={data.length === 0 ? true : false}
-                                components={{
-                                    body: {
-                                        cell: EditableCell,
-                                    },
-                                }}
-                                bordered
-                                dataSource={data}
-                                columns={mergedColumns}
-                                rowClassName="editable-row"
-                                pagination={{
-                                    onChange: cancel,
-                                }}
-                            />
-                        </Form>
+        <Layout>
+            <Layout style={{ padding: '0 24px 24px' }}>
+                <Breadcrumb style={{ margin: '12px 0' }}>
+                    <Breadcrumb.Item>Home</Breadcrumb.Item>
+                    <Breadcrumb.Item>List</Breadcrumb.Item>
+                    <Breadcrumb.Item>App</Breadcrumb.Item>
+                </Breadcrumb>
+                <Content
+                    style={{
+                        padding: 20,
+                        margin: 0,
+                        minHeight: 280,
+                        background: '#fff',
+                    }}
+                >
+                    <Form form={form} component={false}>
+                        <Table loading={data.length === 0 ? true : false}
+                            components={{
+                                body: {
+                                    cell: EditableCell,
+                                },
+                            }}
+                            bordered
+                            dataSource={data}
+                            columns={mergedColumns}
+                            rowClassName="editable-row"
+                            pagination={{
+                                onChange: cancel,
+                            }}
+                        />
+                    </Form>
 
-                    </Content>
-                </Layout>
-
+                </Content>
             </Layout>
+
+        </Layout>
     )
 }
 export default ContentCar;

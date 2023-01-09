@@ -3,7 +3,7 @@ import { API_URL } from "../../Constant";
 import Swal from "sweetalert2";
 
 export default function SignIn(value) {
-    fetch(API_URL + "signin", {
+    fetch(API_URL + "api/auth/signin", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
