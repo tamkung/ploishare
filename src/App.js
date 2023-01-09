@@ -59,8 +59,8 @@ function App() {
         {/* <Route path="/booking" element={<Booking />} /> */}
 
         <Route path="/admin" element={<IndexAdmin />} />
-        <Route path="/admin/listcar" element={<ListCar />} />
-        <Route path="/admin/listrental" element={<ListRental />} />
+        <Route path="/admin-listcar" element={<ListCar />} />
+        <Route path="/admin-listrental" element={<ListRental />} />
         <Route path="/upload" element={<UploadImg />} />
       </Routes>
     </div>

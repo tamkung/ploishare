@@ -26,12 +26,12 @@ export default function MenuSideBar() {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link " to={'/admin/listcar'} >
+                                        <NavLink className="nav-link " to={'/admin-listcar'} >
                                             <p>ListCar</p>
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to={'/admin/listrental'}>
+                                        <NavLink className="nav-link" to={'/admin-listrental'}>
                                             <p>ListRental</p>
                                         </NavLink>
                                     </li>
