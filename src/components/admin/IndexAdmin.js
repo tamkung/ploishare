@@ -21,7 +21,7 @@ export default function IndexAdmin() {
       </div>
 
 
-      <div className='container d-lg-none'>
+      <div className='container d-lg-none d-xl-none d-md-none'>
         <div className='disable-nonti'>ระบบ Admin ไม่รองรับอุปกรณ์มือถือ</div>
       </div>
     </div>
