@@ -147,52 +147,58 @@ const Vertify = () => {
 
   return (
     <div >
+      <nav class="navbar" style={{ background: "#67b99a", fontWeight: "bold", color: "white" }}>
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            {/* <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" /> */}
+            Vertify
+          </a>
+        </div>
+      </nav>
       <div>
-        <h1 className='textHeader '>Vertify</h1>
-        <div className='box'>
-          <Form>
-            <Form.Item
-              label="Email"
-              rules={[{ required: true, message: 'Please input your email!' }]}
-              onChange={handleChange}
-            >
-              <Input name="email" />
-            </Form.Item>
+        <Form className='mt-4 mr-3 ml-3'>
+          <Form.Item
+            label="Email"
+            rules={[{ required: true, message: 'Please input your email!' }]}
+            onChange={handleChange}
+          >
+            <Input name="email" />
+          </Form.Item>
 
-            <Form.Item
-              label="Password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-              onChange={handleChange}
-            >
-              <Input name="password" />
-            </Form.Item>
-            <Form.Item
-              label="Confirm Password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
-              onChange={handleChange}
-            >
-              <Input name="confirmPassword" />
-            </Form.Item>
+          <Form.Item
+            label="Password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+            onChange={handleChange}
+          >
+            <Input name="password" />
+          </Form.Item>
+          <Form.Item
+            label="Confirm Password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+            onChange={handleChange}
+          >
+            <Input name="confirmPassword" />
+          </Form.Item>
 
-            {/* <button
+          {/* <button
               type="button"
               class="btn btn-outline-primary buttonNext"
               onClick={() => handleSubmit()}
             >ยืนยันตัวตน
             </button>
           </Form> */}
-            <Button className="btn btn-outline-primary buttonNext" type="primary" loading={loadings[0]} onClick={() => handleSubmit(0)}>
-              Vertify
-            </Button>
-            {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
-
-          </Form>
+          <Button className="buttonNext" type="primary" loading={loadings[0]} onClick={() => handleSubmit(0)}>
+            Vertify
+          </Button>
+          {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
           <Link to="/" className="inline-flex backButton">
             <BsIcons.BsArrowLeftShort style={{ marginRight: "5px", fontSize: "25px" }} />
             Back
           </Link>
+        </Form>
 
-        </div>
+
+
 
       </div>
     </div>
