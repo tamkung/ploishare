@@ -11,6 +11,7 @@ import ConfirmSuccess from "./page/ConfirmSuccess";
 import HomeAdmin from "./components/admin/HomeAdmin";
 import ListRental from "./components/admin/ListRental";
 import IndexAdmin from "./components/admin/IndexAdmin";
+import UploadImg from "./components/upload";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -58,7 +59,7 @@ function App() {
 
         <Route path="/admin" element={<IndexAdmin />} />
         <Route path="/admin/listrental" element={<ListRental />} />
-
+        <Route path="/upload" element={<UploadImg />} />
       </Routes>
     </div>
   );

@@ -39,9 +39,9 @@ const options = {
     locale: "th"  // Thai language
 
 };
-console.log(new Date(now_utc).toLocaleString('th', options));
-console.log(date.toISOString());
-console.log(date.toLocaleString('th', options));
+// console.log(new Date(now_utc).toLocaleString('th', options));
+// console.log(date.toISOString());
+// console.log(date.toLocaleString('th', options));
 
 const { Header, Content, Sider, Footer } = Layout;
 

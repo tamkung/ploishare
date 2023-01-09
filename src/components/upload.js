@@ -17,7 +17,7 @@ const beforeUpload = (file) => {
   }
   return isJpgOrPng && isLt2M;
 };
-const App = () => {
+const UploadImg = () => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
   const handleChange = (info) => {
@@ -69,4 +69,4 @@ const App = () => {
     </Upload>
   );
 };
-export default App;
+export default UploadImg;
