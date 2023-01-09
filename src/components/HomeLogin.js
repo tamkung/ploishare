@@ -104,7 +104,7 @@ const HomeLogin = () => {
           />
           <br />
           <hr />
-          <h3 className="mt-6  text-2xl font-bold tracking-tight text-yellow-400" >
+          <h3 className="mt-6  text-2xl font-bold tracking-tight" style={{color:"#67b99a"}} >
             เข้าสู่ระบบ
           </h3>
 
@@ -155,7 +155,7 @@ const HomeLogin = () => {
             </button>
             <br />
             <br />
-            <button className="bg-warning text-white buttonNext" 
+            <button className="text-white buttonNext" 
               onClick={() => { window.location = "/admin" }}>
               Admin
             </button>
