@@ -8,7 +8,7 @@ function ConfirmSuccess() {
   const { email } = useParams();
 
   useEffect(() => {
-    axios.get(API_URL + "verify/?email=" + email).then((response) => {
+    axios.get(API_URL + "auth/verified/?email=" + email).then((response) => {
       console.log(response.data);
     });
   }, []);
