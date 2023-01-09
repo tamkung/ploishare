@@ -6,9 +6,8 @@ import '../css/Booking.css';
 const logout = () => {
   // Clear the user's session
   localStorage.removeItem('user');
+  localStorage.removeItem('type');
   sessionStorage.clear();
-
-  // Redirect the user to the login page
   window.location.replace('/');
 };
 

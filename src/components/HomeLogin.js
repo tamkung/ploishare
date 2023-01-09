@@ -75,7 +75,7 @@ const HomeLogin = () => {
             //console.log(data.message);
             localStorage.setItem("user", JSON.stringify(data));
             localStorage.setItem("type", data.type);
-            //window.location = "/";
+            window.location = "/";
           });
         } else {
           Swal.fire({
