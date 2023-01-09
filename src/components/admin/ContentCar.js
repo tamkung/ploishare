@@ -215,7 +215,6 @@ function ContentCar() {
         };
     });
     return (
-        <div className='content-wrapper'>
             <Layout>
                 <Layout style={{ padding: '0 24px 24px' }}>
                     <Breadcrumb style={{ margin: '12px 0' }}>
@@ -252,7 +251,6 @@ function ContentCar() {
                 </Layout>
 
             </Layout>
-        </div>
     )
 }
 export default ContentCar;

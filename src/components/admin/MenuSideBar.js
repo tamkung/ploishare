@@ -22,7 +22,7 @@ export default function MenuSideBar() {
                             <nav className="mt-2">
                                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <li className="nav-item">
-                                        <NavLink className="nav-link " to={'/admin'} >
+                                        <NavLink className="nav-link " to={'/'} >
                                         <BsIcon5.FaHome className='inline-flex mr-2 ml-2' />
                                             <p>Home</p>
                                         </NavLink>

@@ -1,5 +1,13 @@
 import React from 'react'
 
+const logout = () => {
+    // Clear the user's session
+    localStorage.removeItem('user');
+    localStorage.removeItem('type');
+    sessionStorage.clear();
+    window.location.replace('/');
+};
+
 export default function Header() {
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
@@ -7,8 +15,8 @@ export default function Header() {
                 <li className="nav-item">
                     <a className="nav-link" data-widget="pushmenu" href="#" role="button">
                         <i className="fas fa-bars" /></a>
-                        </li>
-                        <li className="nav-item d-none d-sm-inline-block">
+                </li>
+                <li className="nav-item d-none d-sm-inline-block">
                     <a className="nav-link" href="/">Admin ปล่อยShare</a>
                 </li>
             </ul>
@@ -19,10 +27,10 @@ export default function Header() {
                     </a>
                 </li>
                 <li className="nav-item d-sm-inline-block">
-                    <a className="btn nav-link" onClick={() => { window.location = "/" }}>ออกจากระบบ</a>
+                    <a className="btn nav-link" onClick={logout}>ออกจากระบบ</a>
                 </li>
             </ul>
-        </nav>
+        </nav >
 
     )
 }

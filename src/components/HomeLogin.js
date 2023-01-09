@@ -155,11 +155,7 @@ const HomeLogin = () => {
               Go
             </button>
             <br />
-            <br />
-            <button className="text-white buttonNext" 
-              onClick={() => { window.location = "/admin" }}>
-              Admin
-            </button>
+            
             {/* <button
               type="submit"
 

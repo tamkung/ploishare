@@ -9,13 +9,18 @@ import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
 import HomeAdmin from "./components/admin/HomeAdmin";
-import ListRental from "./components/admin/ListRental";
-import ListCar from "./components/admin/ListCar";
+import ContentRental from "./components/admin/ContentRental";
+import ContentCar from "./components/admin/ContentCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
 import UploadImg from "./components/upload";
 
+import Header from './components/admin/Header'
+import MenuSideBar from './components/admin/MenuSideBar'
+import Footer from './components/admin/Footer'
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
+import './css/Disable.css';
 
 
 // /* Basic CSS for apps built with Ionic */
@@ -36,34 +41,57 @@ setupIonicReact({
 });
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
-  };
+  const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
-    const user = getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
+    const type = localStorage.getItem("type");
+    // console.log(type);
+    if (type !== null) {
+      setAdmin(type);
+    } else {
+      setAdmin(null);
     }
+
   }, []);
 
   return (
     <div>
-      <Routes>
-        {currentUser ? <Route index element={<Booking />} /> : <Route index element={<HomeLogin />} />}
-        <Route path="/vertify" element={<Vertify />} />
-        <Route path='*' element={<NotFound />} />
-        <Route path="/confirm/:email" element={<ConfirmSuccess />} />
-        {/* <Route path="/booking" element={<Booking />} /> */}
 
-        <Route path="/admin" element={<IndexAdmin />} />
-        <Route path="/admin-listcar" element={<ListCar />} />
-        <Route path="/admin-listrental" element={<ListRental />} />
-        <Route path="/upload" element={<UploadImg />} />
-      </Routes>
-    </div>
+      {admin == 'admin' ?
+        <div>
+          <div className='d-none d-sm-block'>
+            <Header />
+            <MenuSideBar />
+            <div className="content-wrapper">
+              <Routes>
+                <Route index element={<IndexAdmin />} />
+                <Route path="/admin-listcar" element={<ContentCar />} />
+                <Route path="/admin-listrental" element={<ContentRental />} />
+                <Route path="/upload" element={<UploadImg />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
+          <div className='container d-lg-none d-xl-none d-md-none'>
+            <div className='disable-nonti'>ระบบ Admin ไม่รองรับอุปกรณ์มือถือ</div>
+          </div>
+        </div>
+        : admin == 'user' ?
+          <Routes>
+            <Route index element={<Booking />} />
+            <Route path="/vertify" element={<Vertify />} />
+            <Route path='*' element={<NotFound />} />
+            <Route path="/confirm/:email" element={<ConfirmSuccess />} />
+          </Routes>
+          : <Routes>
+            <Route index element={<HomeLogin />} />
+          </Routes>}
+
+
+      {/* <Route path="/booking" element={<Booking />} /> */}
+
+      {/* <Route path="/admin" element={<IndexAdmin />} /> */}
+    </div >
   );
 }
 
