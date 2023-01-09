@@ -12,6 +12,7 @@ import {
     Popconfirm,
     Table,
     Typography,
+    Image,
 } from 'antd';
 
 import axios from 'axios';
@@ -75,6 +76,7 @@ function ContentCar() {
                         year: item.year,
                         color: item.color,
                         rental_rate: item.rental_rate,
+                        image: item.image,
                     });
                 });
             });
@@ -152,7 +154,18 @@ function ContentCar() {
         {
             title: 'Rental Price',
             dataIndex: 'rental_rate',
-            width: '20%',
+            width: '15%',
+            editable: true,
+        },
+        {
+            title: 'Image',
+            dataIndex: 'image',
+            render: (image) => <Image
+                width={75}
+                height={75}
+                src={image}
+            />,
+            width: '15%',
             editable: true,
         },
         {
