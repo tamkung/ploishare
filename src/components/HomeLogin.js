@@ -4,7 +4,9 @@ import { Button, Checkbox, Form, Input, Space } from 'antd';
 import '../css/style.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import Vertify from '../page/Vertify'
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../Constant";
 import SignIn from './auth/SignIn';
@@ -41,58 +43,79 @@ const HomeLogin = () => {
           />
           <br />
           <hr />
-          <h3 className="mt-6  text-2xl font-bold tracking-tight" style={{color:"#67b99a"}} >
+
+
+
+
+          <h3 className="mt-6  text-2xl font-bold tracking-tight" style={{ color: "#67b99a" }} >
             เข้าสู่ระบบ
           </h3>
 
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="-space-y-px rounded-md shadow-sm">
+
+        <Tabs
+          defaultActiveKey="home"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="home" title="Login">
+
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <input type="hidden" name="remember" defaultValue="true" />
+              <div className="-space-y-px rounded-md shadow-sm">
 
 
-            <div>
-              <label htmlFor="email-address" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email-address"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Email address"
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <Input.Password
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="relative appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Password"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="textWarp">
-            <Link to="/vertify"> Vertification </Link>
-          </div>
-          <hr />
-          <div style={{ textAlign: "center", padding: "5px" }}>
-            <button type="submit" className="buttonNext">
-              Go
-            </button>
-          </div>
-        </form>
+                <div>
+                  <label htmlFor="email-address" className="sr-only">
+                    Email address
+                  </label>
+                  <input
+                    id="email-address"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Email address"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="password" className="sr-only">
+                    Password
+                  </label>
+                  <Input.Password
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    className="relative appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="textWarp">
+                <Link to="/vertify"> Vertification </Link>
+              </div>
+              <hr />
+              <div style={{ textAlign: "center", padding: "5px" }}>
+                <button type="submit" className="buttonNext">
+                  Go
+                </button>
+              </div>
+            </form>
 
+
+          </Tab>
+
+          <Tab eventKey="Vertify" title="Vertify">
+
+          </Tab>
+          <Vertify />
+
+        </Tabs>
       </div>
     </div>
 

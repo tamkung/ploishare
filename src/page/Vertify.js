@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import '../css/style.css';
 import SignUp from '../components/auth/SignUp';
 
-const Vertify = () => {
+function Vertify() {
 
   const [value, setValue] = useState({
     email: "",
