@@ -111,9 +111,9 @@ const HomeLogin = () => {
           </Tab>
 
           <Tab eventKey="Vertify" title="Vertify">
-
-          </Tab>
           <Vertify />
+          </Tab>
+         
 
         </Tabs>
       </div>
