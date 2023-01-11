@@ -20,7 +20,7 @@ function Vertify() {
   };
 
   const handleSubmit = (e) => {
-
+    e.preventDefault();
     if (value.email === "") {
       Swal.fire({
         position: "center",
@@ -55,8 +55,8 @@ function Vertify() {
       });
     } else {
       try {
-
-        SignUp(value);
+      console.log(value);
+      SignUp(value);
 
       } catch (error) {
         console.log(error);
@@ -68,8 +68,8 @@ function Vertify() {
     <div>
 
       <div>
-        <form>
-          <input
+        <form onSubmit={handleSubmit}>
+          <Input
             id="email-address"
             name="email"
             type="email"
@@ -102,7 +102,7 @@ function Vertify() {
             onChange={handleChange}
           />
 
-         
+
 
           {/* <button
               type="button"
@@ -111,8 +111,8 @@ function Vertify() {
             >ยืนยันตัวตน
             </button>
           </Form> */}
-          <hr className='mt-5 mb-4'/>
-          <button className="buttonNext" onClick={() => handleSubmit(0)}>
+          <hr className='mt-5 mb-4' />
+          <button className="buttonNext" >
             Vertify
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}

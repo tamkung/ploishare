@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
 
-import HomeLogin from './components/HomeLogin';
+import Login from './components/Login';
 import Vertify from './page/Vertify';
 import Booking from './page/Booking';
 import NotFound from './page/PageNotFound';
@@ -23,6 +23,7 @@ import './css/Disable.css';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
+import Home from "./page/Home";
 
 // /* Basic CSS for apps built with Ionic */
 // import '@ionic/react/css/normalize.css';
@@ -85,7 +86,7 @@ function App() {
             <Route path='*' element={<NotFound />} />
           </Routes>
           : <Routes>
-            <Route index element={<HomeLogin />} />
+            <Route index element={<Home />} />
             <Route path='*' element={<NotFound />} />
             <Route path="/vertify" element={<Vertify />} />
             <Route path="/confirm/:email" element={<ConfirmSuccess />} />

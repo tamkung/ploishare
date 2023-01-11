@@ -34,7 +34,7 @@
     "@ionic/react": "^6.4.1",
     "@ionic/react-router": "^6.4.1",
     "@mui/icons-material": "^5.11.0",
-    "@mui/material": "^5.11.3",
+    "@mui/material": "^5.11.4",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
