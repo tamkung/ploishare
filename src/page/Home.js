@@ -61,17 +61,17 @@ export default function BasicTabs() {
                 <hr />
 
                 <Box sx={{ width: '100%' }}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider', textColor: "red" }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ style: { background: '#67b99a' } }}>
                             <Tab label="เข้าสู่ระบบ" {...a11yProps(0)} />
                             <Tab label="ยืนยันตัวตน" {...a11yProps(1)} />
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
-                        <Login/>
+                        <Login />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <Vertify/>
+                        <Vertify />
                     </TabPanel>
                 </Box>
             </div>

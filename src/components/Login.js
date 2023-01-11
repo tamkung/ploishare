@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <div>
-      <form className="mt-2 space-y-6" onSubmit={handleSubmit}>
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true" />
         <div className="-space-y-px rounded-md shadow-sm">
           <div>
