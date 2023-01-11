@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -65,39 +65,44 @@ function Vertify() {
   };
 
   return (
-    <div style={{ fontFamily: "IBM Plex Sans Thai", background: "lightgray", height: "100%" }}>
-      <nav className="navbar" style={{ background: "#67b99a", fontWeight: "bold", color: "white" }}>
-        <div className="container-fluid">
-          <p className="navbar">
-            {/* <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" /> */}
-            ปล่อย Share
-          </p>
-        </div>
-      </nav>
-      <div>
-        <Form className='mt-4 mr-3 ml-3' >
-          <Form.Item
-            label="Email"
-            rules={[{ required: true, message: 'Please input your email!' }]}
-            onChange={handleChange}
-          >
-            <Input name="email" />
-          </Form.Item>
+    <div>
 
-          <Form.Item
-            label="Password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+      <div>
+        <form>
+          <input
+            id="email-address"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            className="relative block w-full appearance-none rounded-none rounded-b-md rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Email address"
             onChange={handleChange}
-          >
-            <Input name="password" />
-          </Form.Item>
-          <Form.Item
-            label="Confirm Password"
+          />
+
+          <Input.Password
+            id="password"
+            name="password"
+            type="password"
+            autoComplete="current-password"
             rules={[{ required: true, message: 'Please input your password!' }]}
+            className="relative appearance-none rounded-none rounded-b-md rounded-t-md border border-gray-300 px-3 py-2 mt-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Password"
             onChange={handleChange}
-          >
-            <Input name="confirmPassword" />
-          </Form.Item>
+          />
+
+          <Input.Password
+            id="Confirm-Password"
+            name="confirmPassword"
+            type="password"
+            autoComplete="current-password"
+            rules={[{ required: true, message: 'Please input your confirm password!' }]}
+            className="relative appearance-none rounded-none rounded-b-md rounded-t-md border border-gray-300 px-3 py-2 mt-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+            placeholder="Confirm Password"
+            onChange={handleChange}
+          />
+
+         
 
           {/* <button
               type="button"
@@ -106,17 +111,15 @@ function Vertify() {
             >ยืนยันตัวตน
             </button>
           </Form> */}
+          <hr className='mt-5 mb-4'/>
           <button className="buttonNext" onClick={() => handleSubmit(0)}>
             Vertify
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
 
-        </Form>
+        </form>
 
-        <Link to="/" className="ml-4 inline-flex backButton">
-          <BsIcons.BsArrowLeftShort style={{ marginRight: "5px", fontSize: "25px" }} />
-          Back
-        </Link>
+
       </div>
     </div>
   )

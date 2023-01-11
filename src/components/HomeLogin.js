@@ -45,26 +45,19 @@ const HomeLogin = () => {
           <hr />
 
 
-
-
-          <h3 className="mt-6  text-2xl font-bold tracking-tight" style={{ color: "#67b99a" }} >
-            เข้าสู่ระบบ
-          </h3>
-
         </div>
 
         <Tabs
-          defaultActiveKey="home"
-          id="uncontrolled-tab-example"
+          defaultActiveKey="login"
+          id="Tabs"
           className="mb-3"
-        >
-          <Tab eventKey="home" title="Login">
-
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          variant='pills'
+          style={{ background: "white", padding: "5px", borderRadius: "5px", border: "solid #67b99a 1px" }}>
+          <hr />
+          <Tab eventKey="login" title="เข้าสู่ระบบ">
+            <form className="mt-2 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="-space-y-px rounded-md shadow-sm">
-
-
                 <div>
                   <label htmlFor="email-address" className="sr-only">
                     Email address
@@ -96,29 +89,18 @@ const HomeLogin = () => {
                   />
                 </div>
               </div>
-              <div className="textWarp">
-                <Link to="/vertify"> Vertification </Link>
-              </div>
-              <hr />
-              <div style={{ textAlign: "center", padding: "5px" }}>
-                <button type="submit" className="buttonNext">
-                  Go
-                </button>
-              </div>
+              <hr className='mt-5' />
+              <button type="submit" className="buttonNext">
+                Go
+              </button>
             </form>
-
-
           </Tab>
-
-          <Tab eventKey="Vertify" title="Vertify">
-          <Vertify />
+          <Tab eventKey="Vertify" title="ยืนยันตัวตน">
+            <Vertify />
           </Tab>
-         
-
         </Tabs>
       </div>
     </div>
-
   );
 };
 export default HomeLogin;
