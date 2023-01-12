@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import logo from '../img/logo.png'
+import logo from '../img/ploishare_logo.png'
 import Login from '../components/Login';
 import Vertify from './Vertify';
 
@@ -53,7 +53,7 @@ export default function BasicTabs() {
         <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <img
-                    className="mx-auto h-12 w-auto"
+                    className="mx-auto h-auto w-auto"
                     src={logo}
                     alt="Your Logo"
                     style={{ width: '250px', height: '160px' }}
@@ -62,7 +62,7 @@ export default function BasicTabs() {
 
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', textColor: "red" }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ style: { background: '#67b99a' } }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TextColor="secondary" TabIndicatorProps={{ style: { background: '#67b99a' } }}>
                             <Tab label="เข้าสู่ระบบ" {...a11yProps(0)} />
                             <Tab label="ยืนยันตัวตน" {...a11yProps(1)} />
                         </Tabs>
