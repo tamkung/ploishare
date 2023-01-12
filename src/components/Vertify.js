@@ -4,7 +4,7 @@ import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import '../css/style.css';
-import SignUp from '../components/auth/SignUp';
+import SignUp from './auth/SignUp';
 
 function Vertify() {
 
