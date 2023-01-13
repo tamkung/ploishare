@@ -86,7 +86,6 @@ const App = () => {
                                 <Option value="usa">U.S.A</Option>
                             </Select>
                         </Form.Item>
-
                         <Form.Item
                             name="select-multiple"
                             label="Select[multiple]"
@@ -148,7 +147,7 @@ const App = () => {
                                 span: 12,
                                 offset: 6,
                             }}
-                        >
+                        > 
                             <Button type="primary" htmlType="submit">
                                 Submit
                             </Button>

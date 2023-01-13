@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as IoIcons from 'react-icons/io';
 import {
     Breadcrumb,
     Layout,
@@ -33,7 +34,9 @@ const EditableCell = ({
 }) => {
     const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
     return (
+
         <td {...restProps}>
+
             {editing ? (
                 <Form.Item
                     name={dataIndex}
@@ -53,6 +56,7 @@ const EditableCell = ({
                 children
             )}
         </td>
+
     );
 };
 const originData = [];
@@ -215,42 +219,49 @@ function ContentCar() {
         };
     });
     return (
-        <Layout>
-            <Layout style={{ padding: '0 24px 24px' }}>
-                <Breadcrumb style={{ margin: '12px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <Content
-                    style={{
-                        padding: 20,
-                        margin: 0,
-                        minHeight: 280,
-                        background: '#fff',
-                    }}
-                >
-                    <Form form={form} component={false}>
-                        <Table loading={data.length === 0 ? true : false}
-                            components={{
-                                body: {
-                                    cell: EditableCell,
-                                },
-                            }}
-                            bordered
-                            dataSource={data}
-                            columns={mergedColumns}
-                            rowClassName="editable-row"
-                            pagination={{
-                                onChange: cancel,
-                            }}
-                        />
-                    </Form>
+        <div>
+            <Layout>
+                <Layout style={{ padding: '0 24px 24px' }}>
+                    <Breadcrumb style={{ margin: '12px 0' }}>
+                        <Breadcrumb.Item>Home</Breadcrumb.Item>
+                        <Breadcrumb.Item>List</Breadcrumb.Item>
+                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                    </Breadcrumb>
 
-                </Content>
+                    <Content
+                        style={{
+                            padding: 20,
+                            borderRadius: "15px 15px 15px 15px",
+                            margin: 0,
+                            minHeight: 280,
+                            background: '#fff',
+                        }}
+                    >
+                        <div style={{ textAlign: "right" }}>
+                         <button className='btn-add' onClick={()=>{window.location="/addcar"}}> + Add</button>
+                        </div>
+                        <Form form={form} component={false}>
+                            <Table loading={data.length === 0 ? true : false}
+                                components={{
+                                    body: {
+                                        cell: EditableCell,
+                                    },
+                                }}
+                                bordered
+                                dataSource={data}
+                                columns={mergedColumns}
+                                rowClassName="editable-row"
+                                pagination={{
+                                    onChange: cancel,
+                                }}
+                            />
+                        </Form>
+
+                    </Content>
+                </Layout>
+
             </Layout>
-
-        </Layout>
+        </div>
     )
 }
 export default ContentCar;

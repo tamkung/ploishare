@@ -14,13 +14,13 @@ import ContentCar from "./components/admin/ContentCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
 import UploadImg from "./components/upload";
 import SignOut from "./components/auth/SignOut";
-
+import AddCar from "./components/admin/AddCar"
 import LoHeader from './layout/LoHeader'
 import LoNavbar from './layout/LoNavbar'
 import LoFooter from './layout/LoFooter'
 
 import './css/Disable.css';
-
+import './css/AdminStyle.css';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 import Home from "./page/Home";
@@ -68,6 +68,7 @@ function App() {
                 <Route index element={<IndexAdmin />} />
                 <Route path='*' element={<NotFound />} />
                 <Route path="/listcar" element={<ContentCar />} />
+                <Route path="/addcar" element={<AddCar />} />
                 <Route path="/listrental" element={<ContentRental />} />
                 <Route path="/upload" element={<UploadImg />} />
               </Routes>
