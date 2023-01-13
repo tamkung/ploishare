@@ -1,5 +1,6 @@
 import React from 'react';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { Province } from './Province';
 import {
     Layout,
     Button,
@@ -36,7 +37,7 @@ const normFile = (e) => {
     }
     return e?.fileList;
 };
-const App = () => {
+const AddCar = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
@@ -71,10 +72,36 @@ const App = () => {
                                             message: 'กรุณาป้อนเลขทะเบียน',
                                         },
                                     ]}>
-                                    <Input className="inline-flex" placeholder="Please input your license. ( Example 1กก-1234 )" />
-                                    <Input placeholder="Please input your license. ( Example 1กก-1234 )" />
-                                </Form.Item>
+                                    <Input className="inline-flex w-auto" />
+                                    <p className="inline-flex mr-2 ml-2"> - </p>
+                                    <Input className="inline-flex w-auto" />
 
+                                </Form.Item>
+                                <Form.Item
+                                    name="ิprovince"
+                                    label="จังหวัด"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'กรุณาเลือกจังหวัด',
+                                            type: 'array',
+                                        },
+                                    ]}
+                                >
+                                    <Select>
+
+
+                                        {Province.map((item, index) => {
+                                            return (
+                                                <Option key={index} value={item.name_th}>{item.name_th}</Option>
+
+                                            );
+                                        })}
+
+
+
+                                    </Select>
+                                </Form.Item>
                                 <Form.Item
                                     name="ิcar_brand"
                                     label="ยี่ห้อรถ"
@@ -86,10 +113,10 @@ const App = () => {
                                         },
                                     ]}
                                 >
-                                    <Select mode="multiple" placeholder="Please select colors">
-                                        <Option value="red">Red</Option>
-                                        <Option value="green">Green</Option>
-                                        <Option value="blue">Blue</Option>
+                                    <Select placeholder="เลือกยี่ห้อรถยนต์">
+                                        <Option value="Toyota">Toyota</Option>
+                                        <Option value="Honda">Honda</Option>
+                                        <Option value="Suzuki">Suzuki</Option>
                                     </Select>
                                 </Form.Item>
 
@@ -104,33 +131,24 @@ const App = () => {
                                         },
                                     ]}
                                 >
-                                    <Select mode="multiple" placeholder="Please select favourite colors">
-                                        <Option value="black">ดำ : Black</Option>
-                                        <Option value="white">ขาว : white</Option>
-                                        <Option value="red">แดง : Red</Option>
-                                        <Option value="green">เขียว : Green</Option>
-                                        <Option value="blue">น้ำเงิน : Blue</Option>
-                                        <Option value="lightblue">ฟ้า : Light Blue </Option>
-                                        <Option value="yellow">เหลือง : Yellow</Option>
-                                        <Option value="pink">ชมพู : Pink</Option>
-                                        <Option value="purple">ม่วง : Purple</Option>
+                                    <Select>
+                                        <Option value="black">ดำ</Option>
+                                        <Option value="white">ขาว </Option>
+                                        <Option value="red">แดง </Option>
+                                        <Option value="green">เขียว </Option>
+                                        <Option value="blue">น้ำเงิน </Option>
+                                        <Option value="lightblue">ฟ้า </Option>
+                                        <Option value="yellow">เหลือง</Option>
+                                        <Option value="pink">ชมพู</Option>
+                                        <Option value="purple">ม่วง</Option>
 
                                     </Select>
                                 </Form.Item>
-
-                                <Form.Item label="InputNumber">
-                                    <Form.Item name="input-number" noStyle>
-                                        <InputNumber min={1} max={10} />
-                                    </Form.Item>
-                                    <span
-                                        className="ant-form-text"
-                                        style={{
-                                            marginLeft: 8,
-                                        }}
-                                    >
-                                        machines
-                                    </span>
+                                <Form.Item label="ทะเบียนรถ"
+                                    name="detail">
+                                    <Input.TextArea rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม"/>
                                 </Form.Item>
+
 
                                 <Form.Item label="อัปโหลดรูปภาพ">
                                     <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
@@ -162,4 +180,4 @@ const App = () => {
         </div>
     );
 };
-export default App;
+export default AddCar;
