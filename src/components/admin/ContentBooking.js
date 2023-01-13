@@ -81,38 +81,41 @@ const EditableCell = ({
 };
 const originData = [];
 
-const ContentRental = () => {
+const ContentBooking = () => {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
 
     useEffect(() => {
-        
+
         const fetchData = async () => {
             originData.length = 0;
-            await axios.get(API_URL +'api/getbooking').then((response) => {
+            await axios.get(API_URL + 'api/getbooking').then((response) => {
                 response.data.map((item) => {
                     originData.push({
                         key: item.id.toString(),
-                        id: item.id,
-                        car_id: item.car_id,
-                        start_date_time: new Date(Date.UTC(
-                            new Date(item.start_date_time).getUTCFullYear(),
-                            new Date(item.start_date_time).getUTCMonth(),
-                            new Date(item.start_date_time).getUTCDate(),
-                            new Date(item.start_date_time).getUTCHours() - 7,
-                            new Date(item.start_date_time).getUTCMinutes(),
-                            new Date(item.start_date_time).getUTCSeconds())).toLocaleString('th', options),
+                        uName: item.uName,
+                        EmpoyeeNo: item.EmpoyeeNo,
+                        uPhone: item.uPhone,
+                        uSect: item.uSect,
+                        uPart: item.uPart,
+                        startDateTime: new Date(Date.UTC(
+                            new Date(item.startDateTime).getUTCFullYear(),
+                            new Date(item.startDateTime).getUTCMonth(),
+                            new Date(item.startDateTime).getUTCDate(),
+                            new Date(item.startDateTime).getUTCHours() - 7,
+                            new Date(item.startDateTime).getUTCMinutes(),
+                            new Date(item.startDateTime).getUTCSeconds())).toLocaleString('th', options),
 
-                        end_date_time: new Date(Date.UTC(
-                            new Date(item.end_date_time).getUTCFullYear(),
-                            new Date(item.end_date_time).getUTCMonth(),
-                            new Date(item.end_date_time).getUTCDate(),
-                            new Date(item.end_date_time).getUTCHours() - 7,
-                            new Date(item.end_date_time).getUTCMinutes(),
-                            new Date(item.end_date_time).getUTCSeconds())).toLocaleString('th', options),
-                        rate: item.rate,
-                        day: item.day + ' วัน',
+                            endDateTime: new Date(Date.UTC(
+                            new Date(item.endDateTime).getUTCFullYear(),
+                            new Date(item.endDateTime).getUTCMonth(),
+                            new Date(item.endDateTime).getUTCDate(),
+                            new Date(item.endDateTime).getUTCHours() - 7,
+                            new Date(item.endDateTime).getUTCMinutes(),
+                            new Date(item.endDateTime).getUTCSeconds())).toLocaleString('th', options),
+                            cLicense: item.cLicense,
+                            day: item.day + ' วัน',
                     });
                 });
             });
@@ -160,39 +163,63 @@ const ContentRental = () => {
     };
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
+            title: '#',
+            dataIndex: 'key',
+            width: '5%',
+            editable: true,
+        },
+        {
+            title: 'ชือ-สกุลผู้จอง',
+            dataIndex: 'uName',
+            width: '15%',
+            editable: true,
+        },
+        {
+            title: 'รหัสพนักงาน',
+            dataIndex: 'EmpoyeeNo',
             width: '10%',
             editable: true,
         },
         {
-            title: 'Car ID',
-            dataIndex: 'car_id',
-            width: '15%',
+            title: 'เบอร์โทรศัพท์',
+            dataIndex: 'uPhone',
+            width: '10%',
             editable: true,
         },
         {
-            title: 'Start Date',
-            dataIndex: 'start_date_time',
-            width: '15%',
+            title: 'หน่วยงาน',
+            dataIndex: 'uSect',
+            width: '10%',
             editable: true,
         },
         {
-            title: 'End Date',
-            dataIndex: 'end_date_time',
-            width: '15%',
+            title: 'แผนก',
+            dataIndex: 'uPart',
+            width: '10%',
             editable: true,
         },
         {
-            title: 'Rate',
-            dataIndex: 'rate',
-            width: '15%',
+            title: 'วันที่ใช้รถ',
+            dataIndex: 'startDateTime',
+            width: '10%',
             editable: true,
         },
         {
-            title: 'Day',
+            title: 'วันที่คืนรถ',
+            dataIndex: 'endDateTime',
+            width: '10%',
+            editable: true,
+        },
+        {
+            title: 'ทะเบียนรถ',
+            dataIndex: 'cLicense',
+            width: '10%',
+            editable: true,
+        },
+        {
+            title: 'จำยวนวัน',
             dataIndex: 'day',
-            width: '15%',
+            width: '10%',
             editable: true,
         },
         {
@@ -242,15 +269,14 @@ const ContentRental = () => {
         };
     });
     return (
-                <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '12px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
+        <div>
+            <Layout>
+                <Layout style={{ padding: '0 24px 24px', margin: '24px 0' }}>
+
                     <Content
                         style={{
                             padding: 20,
+                            borderRadius: "15px 15px 15px 15px",
                             margin: 0,
                             minHeight: 280,
                             background: '#fff',
@@ -275,7 +301,8 @@ const ContentRental = () => {
 
                     </Content>
                 </Layout>
-                
+            </Layout>
+        </div>
     );
 };
-export default ContentRental;
+export default ContentBooking;

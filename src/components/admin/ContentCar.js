@@ -19,6 +19,7 @@ import {
 import axios from 'axios';
 
 import { API_URL } from '../../Constant';
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -74,12 +75,11 @@ function ContentCar() {
                 response.data.map((item) => {
                     originData.push({
                         key: item.id.toString(),
-                        id: item.id,
-                        make: item.make,
-                        model: item.model,
-                        year: item.year,
+                        license: item.license,
+                        province: item.province,
+                        brand: item.brand,
                         color: item.color,
-                        rental_rate: item.rental_rate,
+                        detail: item.detail,
                         image: item.image,
                     });
                 });
@@ -126,43 +126,43 @@ function ContentCar() {
     };
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
+            title: '#',
+            dataIndex: 'key',
             width: '10%',
             editable: true,
         },
         {
-            title: 'Make',
-            dataIndex: 'make',
+            title: 'ป้ายทะเบียน',
+            dataIndex: 'license',
+            width: '10%',
+            editable: true,
+        },
+        {
+            title: 'จังหวัด',
+            dataIndex: 'province',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Model',
-            dataIndex: 'model',
+            title: 'ยี่ห้อ',
+            dataIndex: 'brand',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Year',
-            dataIndex: 'year',
-            width: '15%',
-            editable: true,
-        },
-        {
-            title: 'Color',
+            title: 'สี',
             dataIndex: 'color',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Rental Price',
-            dataIndex: 'rental_rate',
+            title: 'รายละเอียด',
+            dataIndex: 'detail',
             width: '15%',
             editable: true,
         },
         {
-            title: 'Image',
+            title: 'รูปภาพ',
             dataIndex: 'image',
             render: (image) => <Image
                 width={75}
@@ -221,12 +221,7 @@ function ContentCar() {
     return (
         <div>
             <Layout>
-                <Layout style={{ padding: '0 24px 24px' }}>
-                    <Breadcrumb style={{ margin: '12px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
+                <Layout style={{ padding: '0 24px 24px', margin: '24px 0' }}>
 
                     <Content
                         style={{
@@ -238,7 +233,7 @@ function ContentCar() {
                         }}
                     >
                         <div style={{ textAlign: "right" }}>
-                         <button className='btn-add' onClick={()=>{window.location="/addcar"}}> + Add</button>
+                            <Link to={'/listcar/addcar'}><button className='btn-add'> + Add</button></Link>
                         </div>
                         <Form form={form} component={false}>
                             <Table loading={data.length === 0 ? true : false}

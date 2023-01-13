@@ -9,7 +9,7 @@ import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
 import HomeAdmin from "./components/admin/backup/HomeAdmin";
-import ContentRental from "./components/admin/ContentRental";
+import ContentBooking from "./components/admin/ContentBooking";
 import ContentCar from "./components/admin/ContentCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
 import UploadImg from "./components/upload";
@@ -68,8 +68,8 @@ function App() {
                 <Route index element={<IndexAdmin />} />
                 <Route path='*' element={<NotFound />} />
                 <Route path="/listcar" element={<ContentCar />} />
-                <Route path="/addcar" element={<AddCar />} />
-                <Route path="/listrental" element={<ContentRental />} />
+                <Route path="/listcar/addcar" element={<AddCar />} />
+                <Route path="/listbooking" element={<ContentBooking />} />
                 <Route path="/upload" element={<UploadImg />} />
               </Routes>
             </div>

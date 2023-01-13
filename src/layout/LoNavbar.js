@@ -34,9 +34,9 @@ export default function MenuSideBar() {
                                         </NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to={'/listrental'}>
+                                        <NavLink className="nav-link" to={'/listbooking'}>
                                             <BsIcon5.FaListAlt className='inline-flex mr-3 mb-1 ' size={25} />
-                                            <p>ListRental</p>
+                                            <p>ListBooking</p>
                                         </NavLink>
                                     </li>
                                 </ul>
