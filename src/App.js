@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
 
 import Login from './components/Login';
-import Vertify from './page/Vertify';
+import Vertify from './components/Vertify';
 import Booking from './page/Booking';
 import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";

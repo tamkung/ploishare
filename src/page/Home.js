@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 
 import logo from '../img/ploishare_logo.png'
 import Login from '../components/Login';
-import Vertify from './Vertify';
+import Vertify from '../components/Vertify';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
