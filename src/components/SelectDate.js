@@ -156,10 +156,10 @@ const SelectDate = () => {
             console.log(cars);
             Swal.fire({
               title: "เลือกรถ",
-              text: cars.id + " " + cars.make + " " + cars.model,
+              text: cars.license + " " + cars.brand + " " + cars.color,
             })
           }}>
-            <div type="button" className='btnMenu content mt-1' key={index}> {cars.id + " " + cars.make + " " + cars.model} <div className='container' style={{ height: "10vw", background: "red" }}></div></div>
+            <div type="button" className='btnMenu content mt-1' key={index}> {cars.license + " " + cars.brand + " " + cars.color} <div className='container' style={{ height: "10vw", background: "red" }}></div></div>
           </div>
 
         ))}
