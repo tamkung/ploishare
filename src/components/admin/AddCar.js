@@ -41,121 +41,125 @@ const App = () => {
         console.log('Received values of form: ', values);
     };
     return (
-        <Layout>
-            <Layout>
-                <Header style={{ background: '#fff', padding: 0 }} />
-            </Layout>
-            <Layout>
-                <Sider width={200} className="site-layout-background" />
+        <div>
+            <div>
+                <Layout>
+                    <Layout>
+                        <Sider width={200} className="site-layout-background" />
+                    </Layout>
+                    <Layout >
+                        <Content className='mt-3 ml-4 mr-4' style={{ background: "white", padding: "20px", borderRadius: "15px", fontSize: "20px" }}>Add Car</Content>
+                        <Content className='mt-3 ml-4 mr-4' style={{ background: "white", padding: "20px", borderRadius: "15px" }}>
 
-            </Layout>
-            <Layout>
-                <Content>
-
-
-                    <Form
-                        name="validate_other"
-                        {...formItemLayout}
-                        onFinish={onFinish}
-                        initialValues={{
-                            'input-number': 3,
-                            'checkbox-group': ['A', 'B'],
-                            rate: 3.5,
-                        }}
-                    >
-                        <Form.Item label="Plain Text">
-                            <span className="ant-form-text">China</span>
-                        </Form.Item>
-
-                        <Form.Item label="Input">
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            name="select"
-                            label="Select"
-                            hasFeedback
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please select your country!',
-                                },
-                            ]}
-                        >
-                            <Select placeholder="Please select a country">
-                                <Option value="china">China</Option>
-                                <Option value="usa">U.S.A</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item
-                            name="select-multiple"
-                            label="Select[multiple]"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please select your favourite colors!',
-                                    type: 'array',
-                                },
-                            ]}
-                        >
-                            <Select mode="multiple" placeholder="Please select favourite colors">
-                                <Option value="red">Red</Option>
-                                <Option value="green">Green</Option>
-                                <Option value="blue">Blue</Option>
-                            </Select>
-                        </Form.Item>
-
-                        <Form.Item label="InputNumber">
-                            <Form.Item name="input-number" noStyle>
-                                <InputNumber min={1} max={10} />
-                            </Form.Item>
-                            <span
-                                className="ant-form-text"
-                                style={{
-                                    marginLeft: 8,
+                            <Form
+                                name="validate_other"
+                                {...formItemLayout}
+                                onFinish={onFinish}
+                                initialValues={{
+                                    'input-number': 3,
+                                    'checkbox-group': ['A', 'B'],
+                                    rate: 3.5,
                                 }}
                             >
-                                machines
-                            </span>
-                        </Form.Item>
 
-                        <Form.Item
-                            name="upload"
-                            label="Upload"
-                            valuePropName="fileList"
-                            getValueFromEvent={normFile}
-                            extra="longgggggggggggggggggggggggggggggggggg"
-                        >
-                            <Upload name="logo" action="/upload.do" listType="picture">
-                                <Button icon={<UploadOutlined />}>Click to upload</Button>
-                            </Upload>
-                        </Form.Item>
+                                <Form.Item label="ทะเบียนรถ"
+                                    name="license"
 
-                        <Form.Item label="Dragger">
-                            <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-                                <Upload.Dragger name="files" action="/upload.do">
-                                    <p className="ant-upload-drag-icon">
-                                        <InboxOutlined />
-                                    </p>
-                                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                    <p className="ant-upload-hint">Support for a single or bulk upload.</p>
-                                </Upload.Dragger>
-                            </Form.Item>
-                        </Form.Item>
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'กรุณาป้อนเลขทะเบียน',
+                                        },
+                                    ]}>
+                                    <Input className="inline-flex" placeholder="Please input your license. ( Example 1กก-1234 )" />
+                                    <Input placeholder="Please input your license. ( Example 1กก-1234 )" />
+                                </Form.Item>
 
-                        <Form.Item
-                            wrapperCol={{
-                                span: 12,
-                                offset: 6,
-                            }}
-                        > 
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Content>
-            </Layout>
-        </Layout>
+                                <Form.Item
+                                    name="ิcar_brand"
+                                    label="ยี่ห้อรถ"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'กรุณาเลือกยี่ห้อรถ',
+                                            type: 'array',
+                                        },
+                                    ]}
+                                >
+                                    <Select mode="multiple" placeholder="Please select colors">
+                                        <Option value="red">Red</Option>
+                                        <Option value="green">Green</Option>
+                                        <Option value="blue">Blue</Option>
+                                    </Select>
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="ิcar_color"
+                                    label="สีรถ"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'กรุณาเลือกสีรถ',
+                                            type: 'array',
+                                        },
+                                    ]}
+                                >
+                                    <Select mode="multiple" placeholder="Please select favourite colors">
+                                        <Option value="black">ดำ : Black</Option>
+                                        <Option value="white">ขาว : white</Option>
+                                        <Option value="red">แดง : Red</Option>
+                                        <Option value="green">เขียว : Green</Option>
+                                        <Option value="blue">น้ำเงิน : Blue</Option>
+                                        <Option value="lightblue">ฟ้า : Light Blue </Option>
+                                        <Option value="yellow">เหลือง : Yellow</Option>
+                                        <Option value="pink">ชมพู : Pink</Option>
+                                        <Option value="purple">ม่วง : Purple</Option>
+
+                                    </Select>
+                                </Form.Item>
+
+                                <Form.Item label="InputNumber">
+                                    <Form.Item name="input-number" noStyle>
+                                        <InputNumber min={1} max={10} />
+                                    </Form.Item>
+                                    <span
+                                        className="ant-form-text"
+                                        style={{
+                                            marginLeft: 8,
+                                        }}
+                                    >
+                                        machines
+                                    </span>
+                                </Form.Item>
+
+                                <Form.Item label="อัปโหลดรูปภาพ">
+                                    <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
+                                        <Upload.Dragger name="files" action="/upload.do">
+                                            <p className="ant-upload-drag-icon">
+                                                <InboxOutlined />
+                                            </p>
+                                            <p className="ant-upload-text">"คลิก" หรือ "ลาก" รูปภาพวางในช่องอัปโหลด</p>
+                                            <p className="ant-upload-hint">เพื่ออัปโหลดรูปภาพ</p>
+                                        </Upload.Dragger>
+                                    </Form.Item>
+                                </Form.Item>
+
+                                <Form.Item
+                                    wrapperCol={{
+                                        span: 12,
+                                        offset: 6,
+                                    }}
+                                >
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </Content>
+                    </Layout>
+                </Layout>
+            </div>
+        </div>
     );
 };
 export default App;
