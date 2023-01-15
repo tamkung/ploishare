@@ -1,6 +1,8 @@
-import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import { Province } from './Province';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import Swal from "sweetalert2";
 import {
     Layout,
     Button,
@@ -8,7 +10,10 @@ import {
     Form,
     Select,
     Upload,
+    message,
 } from 'antd';
+import { API_URL } from "../../Constant";
+import { Province } from './Province';
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -21,31 +26,6 @@ const formItemLayout = {
         span: 14,
     },
 };
-
-// const carBrand = [
-//     { "name": "Volvo" },
-//     { "name": "BMW" },
-//     { "name": "Mercedes-Benz" },
-//     { "name": "Porsche" },
-//     { "name": "Lexus" },
-//     { "name": "Peugeot" },
-//     { "name": "GWM" },
-//     { "name": "Audi" },
-//     { "name": "Toyota" },
-//     { "name": "Isuzu" },
-//     { "name": "Honda" },
-//     { "name": "Mitsubishi" },
-//     { "name": "Nissan" },
-//     { "name": "MG" },
-//     { "name": "Kia" },
-//     { "name": "Subaru" },
-//     { "name": "Mazda" },
-//     { "name": "Mini" },
-//     { "name": "Porsche" },
-//     { "name": "Jaguar" },
-//     { "name": "Ford" }
-// ];
-
 const carBrand = [
     "Volvo",
     "BMW",
@@ -80,9 +60,111 @@ const normFile = (e) => {
 };
 
 const AddCar = () => {
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+    const navigate = useNavigate();
+
+    const [form] = Form.useForm();
+    const [inputCarLicenseText, setInputCarLicenseText] = useState("");
+    const [inputCarLicenseNum, setInputCarLicenseNum] = useState("");
+    const [inputCarDetail, setInputCarDetail] = useState("");
+
+    const [selectedCarProvince, setSelectedCarProvince] = useState("");
+    const [selectedCarBrand, setSelectedCarBrand] = useState("");
+    const [selectedCarColor, setSelectedCarColor] = useState("");
+
+    const [image, setImage] = useState(null);
+
+    const handleChangeCarLicenseText = (e) => {
+        setInputCarLicenseText(e.target.value);
+        console.log(inputCarLicenseText);
     };
+    const handleChangeCarLicenseNum = (e) => {
+        setInputCarLicenseNum(e.target.value);
+        console.log(inputCarLicenseNum);
+    };
+    const handleChangeCarDetail = (e) => {
+        setInputCarDetail(e.target.value);
+        console.log(inputCarDetail);
+    };
+
+    const handleChangeCarProvince = (value) => {
+        setSelectedCarProvince(value);
+        console.log(value);
+    };
+
+    const handleChangeCarBrand = (value) => {
+        setSelectedCarBrand(value);
+        console.log(value);
+    };
+
+    const handleChangeCarColor = (value) => {
+        setSelectedCarColor(value);
+        console.log(value);
+    };
+
+    const handleUpload = (info) => {
+        if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully`);
+            setImage(info.file.response);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    };
+
+    const onFinish = (values) => {
+        console.log(image)
+        try {
+            axios.post(API_URL + "api/addcar",
+                {
+                    "license": inputCarLicenseText + "-" + inputCarLicenseNum,
+                    "province": selectedCarProvince,
+                    "brand": selectedCarBrand,
+                    "color": selectedCarColor,
+                    "detail": inputCarDetail,
+                    "image": image
+                }).then(response => {
+                    if (response.data.status === "OK") {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener("mouseenter", Swal.stopTimer);
+                                toast.addEventListener("mouseleave", Swal.resumeTimer);
+                            },
+                        });
+
+                        Toast.fire({
+                            icon: "success",
+                            title: "SignIn in successfully",
+                        }).then(() => {
+
+                            navigate("/listcar");
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: response.data.message,
+                        })
+                    }
+                }).catch(error => {
+                    console.log(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+
     return (
         <div>
             <Layout>
@@ -90,81 +172,92 @@ const AddCar = () => {
                     <Content className='mt-3 ml-4 mr-4' style={{ background: "white", padding: "20px", borderRadius: "15px", fontSize: "20px" }}>Add Car</Content>
                     <Content className='mt-3 ml-4 mr-4' style={{ background: "white", padding: "20px", borderRadius: "15px" }}>
                         <Form
-                            name="validate_other"
                             {...formItemLayout}
+                            form={form}
                             onFinish={onFinish}
+                            onFinishFailed={onFinishFailed}
                             initialValues={{
                                 'input-number': 3,
                                 'checkbox-group': ['A', 'B'],
                                 rate: 3.5,
                             }}>
-                            <Form.Item label="ทะเบียนรถ"
-                                name="license"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'กรุณาป้อนเลขทะเบียน',
-                                    },
-                                ]}>
-                                <Input className="inline-flex w-auto" />
+                            <Form.Item label="ทะเบียนรถ"  >
+                                <Form.Item
+                                    name={['carLicense', 'carLicenseText']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
+                                >
+                                    <Input className="inline-flex w-auto" value={inputCarLicenseText} onChange={handleChangeCarLicenseText} />
+                                </Form.Item>
                                 <p className="inline-flex mr-2 ml-2"> - </p>
-                                <Input className="inline-flex w-auto" />
+                                <Form.Item
+                                    name={['carLicense', 'carLicenseNum']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
+                                >
+                                    <Input className="inline-flex w-auto" value={inputCarLicenseNum} onChange={handleChangeCarLicenseNum} />
+                                </Form.Item>
                             </Form.Item>
                             <Form.Item
-                                name="province"
                                 label="จังหวัด"
+                                name={'carProvince'}
                                 rules={[
                                     {
                                         required: true,
                                         message: 'กรุณาเลือกจังหวัด',
-                                        type: 'array',
                                     },
-                                ]}
-                            >
-                                <Select>
-                                    {Province.map((item, index) => < Option key={index} value={item.name_th} >{item.name_th}</Option>)}
+                                ]}  >
+                                <Select placeholder="เลือกจังหวัด" onChange={handleChangeCarProvince} value={selectedCarProvince} >
+                                    {Province.map((item, index) => <Option key={index} value={item.name_th} >{item.name_th}</Option>)}
                                 </Select>
                             </Form.Item>
                             <Form.Item
-                                name="ิcar_brand"
                                 label="ยี่ห้อรถ"
+                                name={'carBrand'}
                                 rules={[
                                     {
                                         required: true,
                                         message: 'กรุณาเลือกยี่ห้อรถ',
-                                        type: 'array',
                                     },
-                                ]}
-                            >
-                                <Select placeholder="เลือกยี่ห้อรถยนต์">
+                                ]}>
+                                <Select placeholder="เลือกยี่ห้อรถยนต์" onChange={handleChangeCarBrand} value={selectedCarBrand} >
                                     {carBrand.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
                             </Form.Item>
 
                             <Form.Item
-                                name="car_color"
                                 label="สีรถ"
+                                name={'carColor'}
                                 rules={[
                                     {
                                         required: true,
                                         message: 'กรุณาเลือกสีรถ',
-                                        type: 'array',
                                     },
-                                ]}
-                            >
-                                <Select>
+                                ]}>
+                                <Select placeholder="เลือกสีรถยนต์" onChange={handleChangeCarColor} value={selectedCarColor}>
                                     {carColor.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
                             </Form.Item>
-                            <Form.Item label="รายละเอียดเพิ่มเติม"
-                                name="detail">
-                                <Input.TextArea rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม" />
+                            <Form.Item label="รายละเอียดเพิ่มเติม" name={'carDetail'}>
+                                <Input.TextArea name='carDetail' rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม" value={inputCarDetail} onChange={handleChangeCarDetail} />
                             </Form.Item>
-
-
                             <Form.Item label="อัปโหลดรูปภาพ">
                                 <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
-                                    <Upload.Dragger name="files" action="/upload.do">
+                                    <Upload.Dragger
+                                        name="img"
+                                        action={API_URL + "upload/firebase"}
+                                        onChange={handleUpload}
+                                        beforeUpload={(file) => {
+                                            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+                                            if (!isJpgOrPng) {
+                                                message.error('You can only upload JPG/PNG file!');
+                                            }
+                                            const isLt2M = file.size / 1024 / 1024 < 2;
+                                            if (!isLt2M) {
+                                                message.error('Image must smaller than 2MB!');
+                                            }
+                                            return isJpgOrPng && isLt2M;
+                                        }} >
                                         <p className="ant-upload-drag-icon">
                                             <InboxOutlined />
                                         </p>
@@ -178,9 +271,8 @@ const AddCar = () => {
                                 wrapperCol={{
                                     span: 12,
                                     offset: 6,
-                                }}
-                            >
-                                <Button type="primary" htmlType="submit">
+                                }} >
+                                <Button className="buttonNext" htmlType="submit" >
                                     Submit
                                 </Button>
                             </Form.Item>
