@@ -188,6 +188,7 @@ const AddCar = () => {
                                     rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
                                 >
                                     <Input className="inline-flex w-auto" value={inputCarLicenseText} onChange={handleChangeCarLicenseText} />
+
                                 </Form.Item>
                                 <p className="inline-flex mr-2 ml-2"> - </p>
                                 <Form.Item
@@ -196,7 +197,7 @@ const AddCar = () => {
                                     rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
                                 >
                                     <Input className="inline-flex w-auto" value={inputCarLicenseNum} onChange={handleChangeCarLicenseNum} />
-                                    <Select>
+                                    {/* <Select>
                                         <Option value="black">ดำ</Option>
                                         <Option value="white">ขาว </Option>
                                         <Option value="red">แดง </Option>
@@ -206,12 +207,12 @@ const AddCar = () => {
                                         <Option value="yellow">เหลือง</Option>
                                         <Option value="pink">ชมพู</Option>
                                         <Option value="purple">ม่วง</Option>
-                                    </Select>
+                                    </Select> */}
                                 </Form.Item>
-                                <Form.Item label="ทะเบียนรถ"
+                                {/* <Form.Item label="ทะเบียนรถ"
                                     name="detail">
                                     <Input.TextArea rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม"/>
-                                </Form.Item>
+                                </Form.Item> */}
                             </Form.Item>
                             <Form.Item
                                 label="จังหวัด"
@@ -294,7 +295,9 @@ const AddCar = () => {
                         </Form>
                     </Content>
                 </Layout>
+                
             </Layout>
+
         </div >
     );
 };
