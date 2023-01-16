@@ -196,6 +196,21 @@ const AddCar = () => {
                                     rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
                                 >
                                     <Input className="inline-flex w-auto" value={inputCarLicenseNum} onChange={handleChangeCarLicenseNum} />
+                                    <Select>
+                                        <Option value="black">ดำ</Option>
+                                        <Option value="white">ขาว </Option>
+                                        <Option value="red">แดง </Option>
+                                        <Option value="green">เขียว </Option>
+                                        <Option value="blue">น้ำเงิน </Option>
+                                        <Option value="lightblue">ฟ้า </Option>
+                                        <Option value="yellow">เหลือง</Option>
+                                        <Option value="pink">ชมพู</Option>
+                                        <Option value="purple">ม่วง</Option>
+                                    </Select>
+                                </Form.Item>
+                                <Form.Item label="ทะเบียนรถ"
+                                    name="detail">
+                                    <Input.TextArea rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม"/>
                                 </Form.Item>
                             </Form.Item>
                             <Form.Item
