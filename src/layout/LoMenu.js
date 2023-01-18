@@ -7,8 +7,8 @@ import SignOut from '../components/auth/SignOut';
 
 const MenuButton = () => (
   <div className='nav-btn' >
-    <IonContent className="ion-padding" >
-      <IonFab slot="fixed" horizontal="end">
+    <IonContent className="ion-padding" color="secondary">
+      <IonFab slot="fixed" horizontal="end" >
         <IonFabButton>
           <IonIcon icon={chevronUpCircle}></IonIcon>
         </IonFabButton>
