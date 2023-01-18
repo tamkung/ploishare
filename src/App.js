@@ -83,13 +83,17 @@ function App() {
 
 
         </div>
-        
+
         : admin == 'user' ?
-          <Routes>
-            
-            <Route index element={<Booking />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
+          <div>
+            <div className="app-bar" />
+            <Routes>
+
+              <Route index element={<Booking />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </div>
+
           : <Routes>
             <Route index element={<Home />} />
             <Route path='*' element={<NotFound />} />

@@ -161,7 +161,7 @@ const SelectDate = () => {
             </div> */}
             <div className="bigcard">
               <div className="colcard-left">
-                <div className='container' style={{ height: "50px", width: "50px" }} />
+                <img   src={cars.image}/>
               </div>
               <div className="colcard-right">
                 {cars.license + " " + cars.brand + " " + cars.color}
