@@ -5,8 +5,9 @@ import SignOut from '../components/auth/SignOut';
 function Booking() {
   return (
     <div>
+      
       <div className='d-lg-none'>
-        <div className='container'>
+        <div>
           <SelectDate />
         </div>
         <div>

@@ -80,9 +80,13 @@ function App() {
               <button className="buttonNext" onClick={SignOut}>Logout</button>
             </div>
           </div>
+
+
         </div>
+        
         : admin == 'user' ?
           <Routes>
+            
             <Route index element={<Booking />} />
             <Route path='*' element={<NotFound />} />
           </Routes>

@@ -2,6 +2,13 @@ body {
     height: 100%;
 }
 
+.app-bar {
+    display: flex;
+    align-items: center;
+    background-color: #67b99a;
+    height: 60px;
+}
+
 .sanFont {
     font-family: 'IBM Plex Sans Thai', sans-serif;
 }
@@ -62,6 +69,10 @@ body {
     border: #248277 solid 2px;
     border-radius: 20px 20px 20px 20px;
     height: auto;
+}
+
+.shd {
+    box-shadow: 0px 5px 10px #adadad
 }
 
 .box {

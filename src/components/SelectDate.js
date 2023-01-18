@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, DatePicker, TimePicker, Switch } from 'antd';
+import { Button, Form, DatePicker, TimePicker, Switch } from 'antd';
 import Swal from "sweetalert2";
 import axios from "axios";
-import { ExclamationCircleFilled } from '@ant-design/icons';
+
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
@@ -12,23 +12,6 @@ import { API_URL } from "../Constant";
 
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
-const { confirm } = Modal;
-
-const showPromiseConfirm = () => {
-  confirm({
-    title: 'Do you want to delete these items?',
-    icon: <ExclamationCircleFilled />,
-    content: 'When clicked the OK button, this dialog will be closed after 1 second',
-    title: "เลือกรถ",
-    text: cars.license + " " + cars.brand + " " + cars.color,
-    onOk() {
-      return new Promise((resolve, reject) => {
-        setTimeout(Math.random() > 0.5 ? resolve : reject, 5000);
-      }).catch(() => console.log('Oops errors!'));
-    },
-    onCancel() { },
-  });
-};
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -97,8 +80,8 @@ const SelectDate = () => {
   // };
   return (
     <div>
-      <div className='container'>
-        <Form>
+      <div className='shd datapick'>
+        <Form style={{ paddingLeft: "20px", paddingRight: "20px" }}>
           <Form.Item label="เลือกวันที่">
             <DatePicker style={{ width: "45%" }}
               onChange={(value, dateString) => {
@@ -160,17 +143,30 @@ const SelectDate = () => {
             />
           </Form.Item>
 
-          <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Search</button>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-      <br />
 
-      <h3 className='text-success'>รถว่าง {getCars.length} คัน</h3>
-      <br />
-      <div className='text-center flexbox'>
+      <h3 className='text-success mt-3 mb-5'>รถว่าง {getCars.length} คัน</h3>
+      <div className='flexbox'>
         {getCars.map((cars, index) => (
-          <div className='item' onClick={showPromiseConfirm}>
-            <div type="button" className='btnMenu content mt-1' key={index}> {cars.license + " " + cars.brand + " " + cars.color} <div className='container' style={{ height: "10vw", background: "red" }}></div></div>
+          <div className='item'>
+            {/* <div type="button" className='btnMenu content bg-success pl-3' key={index} onClick={() => {
+              console.log(cars);
+              Swal.fire({
+                title: "เลือกรถ",
+                text: cars.license + " " + cars.brand + " " + cars.color,
+              })
+            }}> {cars.license + " " + cars.brand + " " + cars.color}
+            </div> */}
+            <div className="bigcard">
+              <div className="colcard-left">
+                <div className='container' style={{ height: "50px", width: "50px" }} />
+              </div>
+              <div className="colcard-right">
+                {cars.license + " " + cars.brand + " " + cars.color}
+              </div>
+            </div>
           </div>
 
         ))}
@@ -179,10 +175,3 @@ const SelectDate = () => {
   );
 };
 export default SelectDate;
-
-
-// console.log(cars);
-// Swal.fire({
-//   title: "เลือกรถ",
-//   text: cars.license + " " + cars.brand + " " + cars.color,
-// })

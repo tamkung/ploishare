@@ -4,48 +4,80 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.flexbox{
+
+.flexbox {
     display: flex;
     box-sizing: border-box;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.item{
+
+.datapick {
+    padding: 15px;
+
+}
+
+.item {
     display: block;
     box-sizing: border-box;
     width: 16%;
-    padding: 5px;
+    margin-bottom: 15px;
 }
-.content{
+
+.bigcard {
+    background-color: aqua;
+    display: grid;
+    padding: 10px;
+    grid-template-columns: 1fr 2fr;
+}
+
+.colcard-left {
+    flex: 1;
+    background-color: #eee;
+}
+
+.colcard-right {
+    flex: 2;
+    background-color: #ddd;
+}
+
+.content {
     border: solid 1px #888888;
     border-radius: 10px 10px 10px 10px;
 }
-.btnMenu{
+
+.btnMenu {
     transition: 300ms;
 }
-.btnMenu:hover{
+
+.btnMenu:hover {
     box-shadow: 5px 5px 5px #888888;
     transition: 300ms;
 }
-.nav-btn{
+
+.nav-btn {
     position: fixed;
     bottom: 10%;
     right: 1%;
 }
+
+
+
+
 @media only screen and (max-width: 1000px) {
-    .item{
+    .item {
         display: block;
         box-sizing: border-box;
         width: 25%;
-        padding: 5px;
+
     }
 }
 
 @media only screen and (max-width: 800px) {
-    .item{
+    .item {
         display: block;
         box-sizing: border-box;
         width: 100%;
-        padding: 5px;
+
     }
 }
