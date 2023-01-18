@@ -6,8 +6,8 @@ import '../css/Booking.css';
 import SignOut from '../components/auth/SignOut';
 
 const MenuButton = () => (
-  <div className='nav-btn'>
-    <IonContent className="ion-padding">
+  <div className='nav-btn' >
+    <IonContent className="ion-padding" >
       <IonFab slot="fixed" horizontal="end">
         <IonFabButton>
           <IonIcon icon={chevronUpCircle}></IonIcon>

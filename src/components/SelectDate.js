@@ -79,11 +79,12 @@ const SelectDate = () => {
   //   return [0, 1, 2, 3, 4, 5, 6, 19, 20, 21, 22, 23];
   // };
   return (
-    <div>
-      <div className='shd datapick'>
-        <Form style={{ paddingLeft: "20px", paddingRight: "20px" }}>
-          <Form.Item label="เลือกวันที่">
-            <DatePicker style={{ width: "45%" }}
+    <div style={{ background: "#FCF3CF" }}>
+      <div className='shd datapick' style={{ paddingLeft: "10px", paddingRight: "10px", background: "#ffffff" }}>
+        <Form style={{ border: "solid gray 1px", padding: "10px", borderRadius: "15px", marginBottom: "15px" }}>
+          <div className='mb-3'>
+            <div>วันที่</div>
+            <DatePicker style={{ width: "36%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -96,7 +97,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker style={{ width: "45%" }}
+            <DatePicker style={{ width: "36%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -107,16 +108,17 @@ const SelectDate = () => {
               format={'DD-MM-YYYY'}
               placeholder="เลือกวันที่คืน"
             />
-            <div className='mt-3' style={{ textAlign: "right", color: "gray" }}>
-              <p className='inline-flex'> เลือกมากกว่า 1 วัน </p>
-              <Switch
-                checked={endDateDisabled}
-                onClick={onEndDateSwitchChange}
-                style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
-              />
-            </div>
-          </Form.Item>
-          <Form.Item label="เลือกเวลา">
+
+            <Switch
+              checked={endDateDisabled}
+              onClick={onEndDateSwitchChange}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
+            />
+
+          </div>
+
+          <div className='mb-3'>
+            <div>เวลา</div>
             <TimePicker style={{ width: "45%" }}
               format="HH:mm"
               minuteStep={30}
@@ -141,14 +143,14 @@ const SelectDate = () => {
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
             />
-          </Form.Item>
-
-          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+          </div>
         </Form>
+        <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
       </div>
 
-      <h3 className='text-success mt-3 mb-5'>รถว่าง {getCars.length} คัน</h3>
-      <div className='flexbox'>
+      <div className='container text-success'>รถว่าง {getCars.length} คัน</div>
+
+      <div className='container flexbox' >
         {getCars.map((cars, index) => (
           <div className='item'>
             {/* <div type="button" className='btnMenu content bg-success pl-3' key={index} onClick={() => {
@@ -161,7 +163,7 @@ const SelectDate = () => {
             </div> */}
             <div className="bigcard">
               <div className="colcard-left">
-                <img   src={cars.image}/>
+                <img src={cars.image} />
               </div>
               <div className="colcard-right">
                 {cars.license + " " + cars.brand + " " + cars.color}
