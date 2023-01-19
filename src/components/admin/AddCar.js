@@ -7,6 +7,7 @@ import {
     Layout,
     Button,
     Input,
+    InputNumber,
     Form,
     Select,
     Upload,
@@ -65,6 +66,7 @@ const AddCar = () => {
     const [form] = Form.useForm();
     const [inputCarLicenseText, setInputCarLicenseText] = useState("");
     const [inputCarLicenseNum, setInputCarLicenseNum] = useState("");
+    const [inputCarSeat, setInputCarSeat] = useState("");
     const [inputCarDetail, setInputCarDetail] = useState("");
 
     const [selectedCarProvince, setSelectedCarProvince] = useState("");
@@ -80,6 +82,10 @@ const AddCar = () => {
     const handleChangeCarLicenseNum = (e) => {
         setInputCarLicenseNum(e.target.value);
         console.log(inputCarLicenseNum);
+    };
+    const handleChangeCarSeat = (e) => {
+        setInputCarSeat(e);
+        console.log(inputCarSeat);
     };
     const handleChangeCarDetail = (e) => {
         setInputCarDetail(e.target.value);
@@ -122,6 +128,7 @@ const AddCar = () => {
                     "province": selectedCarProvince,
                     "brand": selectedCarBrand,
                     "color": selectedCarColor,
+                    "seat": inputCarSeat,
                     "detail": inputCarDetail,
                     "image": image
                 }).then(response => {
@@ -146,14 +153,15 @@ const AddCar = () => {
                             navigate("/listcar");
                         });
                     } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: response.data.message,
-                        })
+
                     }
                 }).catch(error => {
                     console.log(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'ป้ายทะเบียนซ้ำ',
+                    })
                 });
         } catch (error) {
             console.log(error);
@@ -163,7 +171,6 @@ const AddCar = () => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
 
     return (
         <div>
@@ -197,22 +204,7 @@ const AddCar = () => {
                                     rules={[{ required: true, message: 'กรุณาป้อนทะเบียนรถ' }]}
                                 >
                                     <Input className="inline-flex w-auto" value={inputCarLicenseNum} onChange={handleChangeCarLicenseNum} />
-                                    {/* <Select>
-                                        <Option value="black">ดำ</Option>
-                                        <Option value="white">ขาว </Option>
-                                        <Option value="red">แดง </Option>
-                                        <Option value="green">เขียว </Option>
-                                        <Option value="blue">น้ำเงิน </Option>
-                                        <Option value="lightblue">ฟ้า </Option>
-                                        <Option value="yellow">เหลือง</Option>
-                                        <Option value="pink">ชมพู</Option>
-                                        <Option value="purple">ม่วง</Option>
-                                    </Select> */}
                                 </Form.Item>
-                                {/* <Form.Item label="ทะเบียนรถ"
-                                    name="detail">
-                                    <Input.TextArea rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม"/>
-                                </Form.Item> */}
                             </Form.Item>
                             <Form.Item
                                 label="จังหวัด"
@@ -223,7 +215,7 @@ const AddCar = () => {
                                         message: 'กรุณาเลือกจังหวัด',
                                     },
                                 ]}  >
-                                <Select placeholder="เลือกจังหวัด" onChange={handleChangeCarProvince} value={selectedCarProvince} >
+                                <Select showSearch placeholder="เลือกจังหวัด" onChange={handleChangeCarProvince} value={selectedCarProvince} >
                                     {Province.map((item, index) => <Option key={index} value={item.name_th} >{item.name_th}</Option>)}
                                 </Select>
                             </Form.Item>
@@ -236,11 +228,10 @@ const AddCar = () => {
                                         message: 'กรุณาเลือกยี่ห้อรถ',
                                     },
                                 ]}>
-                                <Select placeholder="เลือกยี่ห้อรถยนต์" onChange={handleChangeCarBrand} value={selectedCarBrand} >
+                                <Select showSearch placeholder="เลือกยี่ห้อรถยนต์" onChange={handleChangeCarBrand} value={selectedCarBrand} >
                                     {carBrand.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
                             </Form.Item>
-
                             <Form.Item
                                 label="สีรถ"
                                 name={'carColor'}
@@ -250,9 +241,20 @@ const AddCar = () => {
                                         message: 'กรุณาเลือกสีรถ',
                                     },
                                 ]}>
-                                <Select placeholder="เลือกสีรถยนต์" onChange={handleChangeCarColor} value={selectedCarColor}>
+                                <Select showSearch placeholder="เลือกสีรถยนต์" onChange={handleChangeCarColor} value={selectedCarColor}>
                                     {carColor.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
+                            </Form.Item>
+                            <Form.Item
+                                label="จำนวนที่นั่ง"
+                                name={'carSeat'}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'กรุณาเลือกสีรถ',
+                                    },
+                                ]}>
+                                <InputNumber placeholder='ระบุจำนวนที่นั่ง' className="inline-flex w-auto" value={inputCarSeat} onChange={handleChangeCarSeat} min={1} max={10} />
                             </Form.Item>
                             <Form.Item label="รายละเอียดเพิ่มเติม" name={'carDetail'}>
                                 <Input.TextArea name='carDetail' rows={4} placeholder="กรอกรายละเอียดเพิ่มเติม" value={inputCarDetail} onChange={handleChangeCarDetail} />
@@ -295,7 +297,7 @@ const AddCar = () => {
                         </Form>
                     </Content>
                 </Layout>
-                
+
             </Layout>
 
         </div >
