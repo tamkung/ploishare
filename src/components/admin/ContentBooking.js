@@ -91,9 +91,9 @@ const ContentBooking = () => {
         const fetchData = async () => {
             originData.length = 0;
             await axios.get(API_URL + 'api/getbooking').then((response) => {
-                response.data.map((item, index) => {
+                response.data.map((item) => {
                     originData.push({
-                        key: index + 1,
+                        key: item.id.toString(),
                         uName: item.uName,
                         EmpoyeeNo: item.EmpoyeeNo,
                         uPhone: item.uPhone,
@@ -107,15 +107,15 @@ const ContentBooking = () => {
                             new Date(item.startDateTime).getUTCMinutes(),
                             new Date(item.startDateTime).getUTCSeconds())).toLocaleString('th', options),
 
-                        endDateTime: new Date(Date.UTC(
+                            endDateTime: new Date(Date.UTC(
                             new Date(item.endDateTime).getUTCFullYear(),
                             new Date(item.endDateTime).getUTCMonth(),
                             new Date(item.endDateTime).getUTCDate(),
                             new Date(item.endDateTime).getUTCHours() - 7,
                             new Date(item.endDateTime).getUTCMinutes(),
                             new Date(item.endDateTime).getUTCSeconds())).toLocaleString('th', options),
-                        cLicense: item.cLicense,
-                        day: item.day + ' วัน',
+                            cLicense: item.cLicense,
+                            day: item.day + ' วัน',
                     });
                 });
             });

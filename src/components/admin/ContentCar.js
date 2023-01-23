@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import * as IoIcons from 'react-icons/io';
-import { Link } from 'react-router-dom';
 import {
     Breadcrumb,
     Layout,
@@ -20,7 +19,7 @@ import {
 import axios from 'axios';
 
 import { API_URL } from '../../Constant';
-import NO_Img from '../../img/no_img.jpg';
+import { Link } from 'react-router-dom';
 
 const { Header, Content, Sider, Footer } = Layout;
 
@@ -73,14 +72,13 @@ function ContentCar() {
         const fetchData = async () => {
             originData.length = 0;
             await axios.get(API_URL + 'api/getcar').then((response) => {
-                response.data.map((item, index) => {
+                response.data.map((item) => {
                     originData.push({
-                        key: index + 1,
+                        key: item.id.toString(),
                         license: item.license,
                         province: item.province,
                         brand: item.brand,
                         color: item.color,
-                        seat: item.seat,
                         detail: item.detail,
                         image: item.image,
                     });
@@ -130,7 +128,7 @@ function ContentCar() {
         {
             title: '#',
             dataIndex: 'key',
-            width: '5%',
+            width: '10%',
             editable: true,
         },
         {
@@ -154,19 +152,13 @@ function ContentCar() {
         {
             title: 'สี',
             dataIndex: 'color',
-            width: '10%',
-            editable: true,
-        },
-        {
-            title: 'จำนวนที่นั่ง',
-            dataIndex: 'seat',
-            width: '10%',
+            width: '15%',
             editable: true,
         },
         {
             title: 'รายละเอียด',
             dataIndex: 'detail',
-            width: '20%',
+            width: '15%',
             editable: true,
         },
         {
@@ -175,7 +167,7 @@ function ContentCar() {
             render: (image) => <Image
                 width={75}
                 height={75}
-                src={image !== null ? image : NO_Img}
+                src={image}
             />,
             width: '15%',
             editable: true,
