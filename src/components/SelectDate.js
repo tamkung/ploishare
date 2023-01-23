@@ -9,9 +9,11 @@ import locale from 'antd/es/date-picker/locale/th_TH';
 import '../css/Booking.css';
 import '../css/style.css';
 import { API_URL } from "../Constant";
+import NO_Img from '../img/no_img.jpg';
 
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -152,8 +154,9 @@ const SelectDate = () => {
 
       <div className='container flexbox' >
         {getCars.map((cars, index) => (
-          <div className='item'>
-            {/* <div type="button" className='btnMenu content bg-success pl-3' key={index} onClick={() => {
+          <Link to={'/booking/' + cars.license}>
+            <div className='item'>
+              {/* <div type="button" className='btnMenu content bg-success pl-3' key={index} onClick={() => {
               console.log(cars);
               Swal.fire({
                 title: "เลือกรถ",
@@ -161,16 +164,16 @@ const SelectDate = () => {
               })
             }}> {cars.license + " " + cars.brand + " " + cars.color}
             </div> */}
-            <div className="bigcard">
-              <div className="colcard-left">
-                <img src={cars.image} />
-              </div>
-              <div className="colcard-right">
-                {cars.license + " " + cars.brand + " " + cars.color}
+              <div className="bigcard">
+                <div className="colcard-left">
+                  <img src={cars.image !== null ? cars.image : NO_Img} />
+                </div>
+                <div className="colcard-right">
+                  {cars.license + " " + cars.brand + " " + cars.color}
+                </div>
               </div>
             </div>
-          </div>
-
+          </Link>
         ))}
       </div>
     </div>

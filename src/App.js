@@ -4,7 +4,7 @@ import { setupIonicReact } from '@ionic/react';
 
 import Login from './components/Login';
 import Vertify from './components/Vertify';
-import Booking from './page/Booking';
+import IndexUser from './page/IndexUser';
 import NotFound from './page/PageNotFound';
 import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
@@ -24,6 +24,7 @@ import './css/AdminStyle.css';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 import Home from "./page/Home";
+import Booking from "./page/Booking";
 
 // /* Basic CSS for apps built with Ionic */
 // import '@ionic/react/css/normalize.css';
@@ -81,16 +82,15 @@ function App() {
             </div>
           </div>
 
-
         </div>
 
         : admin == 'user' ?
           <div>
             <div className="app-bar" />
             <Routes>
-
-              <Route index element={<Booking />} />
+              <Route index element={<IndexUser />} />
               <Route path='*' element={<NotFound />} />
+              <Route path="/booking/:id" element={<Booking />} />
             </Routes>
           </div>
 
