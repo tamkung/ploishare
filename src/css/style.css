@@ -20,8 +20,6 @@ body {
     margin-bottom: 15px;
 }
 
-
-
 .textHeader {
     background: #67b99a;
     font-size: 20px;
@@ -33,6 +31,10 @@ body {
     color: white;
     font-weight: bold;
 
+}
+
+.width-booking {
+    width: 36%;
 }
 
 .textWarp {
