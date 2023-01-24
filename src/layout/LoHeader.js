@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const logout = () => {
     // Clear the user's session
@@ -17,7 +18,7 @@ export default function Header() {
                         <i className="fas fa-bars" /></a>
                 </li>
                 <li className="nav-item d-none d-sm-inline-block">
-                    <a className="nav-link" href="/">Admin ปล่อยShare</a>
+                    <Link className="nav-link" to={"/"} >Admin ปล่อยShare</Link>
                 </li>
             </ul>
             <ul className="navbar-nav ml-auto">

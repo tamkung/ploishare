@@ -1,6 +1,6 @@
 import { InboxOutlined } from '@ant-design/icons';
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import {
@@ -144,12 +144,10 @@ const AddCar = () => {
                                 toast.addEventListener("mouseleave", Swal.resumeTimer);
                             },
                         });
-
                         Toast.fire({
                             icon: "success",
                             title: "SignIn in successfully",
                         }).then(() => {
-
                             navigate("/listcar");
                         });
                     } else {

@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
 
-import Login from './components/Login';
 import Vertify from './components/Vertify';
 import IndexUser from './page/IndexUser';
 import NotFound from './page/PageNotFound';
-import ReactDOM from "react-dom/client";
 import ConfirmSuccess from "./page/ConfirmSuccess";
-import HomeAdmin from "./components/admin/backup/HomeAdmin";
 import ContentBooking from "./components/admin/ContentBooking";
 import ContentCar from "./components/admin/ContentCar";
 import IndexAdmin from "./components/admin/IndexAdmin";
@@ -59,7 +56,7 @@ function App() {
 
   return (
     <div>
-      {admin == 'admin' ?
+      {admin === 'admin' ?
         <div>
           <div className='d-none d-sm-block'>
             <LoHeader />
@@ -69,7 +66,7 @@ function App() {
                 <Route index element={<IndexAdmin />} />
                 <Route path='*' element={<NotFound />} />
                 <Route path="/listcar" element={<ContentCar />} />
-                <Route path="/listcar/addcar" element={<AddCar />} />
+                <Route path="/addcar" element={<AddCar />} />
                 <Route path="/listbooking" element={<ContentBooking />} />
                 <Route path="/upload" element={<UploadImg />} />
               </Routes>
@@ -81,10 +78,8 @@ function App() {
               <button className="buttonNext" onClick={SignOut}>Logout</button>
             </div>
           </div>
-
         </div>
-
-        : admin == 'user' ?
+        : admin === 'user' ?
           <div>
             <div className="app-bar" />
             <Routes>
@@ -93,7 +88,6 @@ function App() {
               <Route path="/booking/:id" element={<Booking />} />
             </Routes>
           </div>
-
           : <Routes>
             <Route index element={<Home />} />
             <Route path='*' element={<NotFound />} />
