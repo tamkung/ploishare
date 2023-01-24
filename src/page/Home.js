@@ -58,8 +58,6 @@ export default function BasicTabs() {
                     alt="Your Logo"
                     style={{ width: '250px', height: '160px' }}
                 />
-                <hr />
-
                 <Box sx={{ width: '100%' }}>
                     <Box style={{ color: "red" }} sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ style: { background: '#67b99a' } }} >
