@@ -292,7 +292,7 @@ const AddCar = () => {
                                 <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
                                     <Upload.Dragger
                                         name="img"
-                                        action={API_URL + "upload/firebase"}
+                                        action={API_URL + "api/upload-file"}
                                         onChange={handleUpload}
                                         beforeUpload={(file) => {
                                             const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
