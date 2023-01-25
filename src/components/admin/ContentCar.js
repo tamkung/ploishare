@@ -100,7 +100,10 @@ function ContentCar() {
             if (result.isConfirmed) {
                 axios.post(API_URL + 'api/deletecar/' + record.license).then((response) => {
                     console.log(response.data);
-
+                    axios.delete(API_URL + 'api/delete-files-url', { data: { url: record.image } }
+                    ).then((response) => {
+                        console.log(response.data);
+                    });
                 });
                 Swal.fire(
                     'Deleted!',
