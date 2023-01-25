@@ -172,7 +172,9 @@ const SelectDate = () => {
                 </div>
               </div>
               <div className="colcard-right">
-                {cars.license + " " + cars.brand + " " + cars.color}
+                <div>{cars.license + " " + cars.license + " " + cars.brand }</div>
+                <div>{cars.license}</div>
+                <div>{cars.brand}</div>
               </div>
             </div>
           </div>

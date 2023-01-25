@@ -29,16 +29,21 @@ function Booking() {
         <div>
             {Loading !== false ?
                 <div>
+                    <div className="container">
+                        <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
+                    </div>
+                    <div>Car License : {getCar.license + " " + getCar.province}</div>
+                
+                    
                     <Link className="buttonNext" to={'/'}>Back</Link>
-                    <h1>Booking ID : {new Date().getTime()}</h1>
-                    <h1>Car License : {getCar.license + " " + getCar.province}</h1>
+                    {/* <h1>Booking ID : {new Date().getTime()}</h1> */}
+                   
                     <ul>
                         <li>Car Brand : {getCar.brand}</li>
                         <li>Car Color : {getCar.color}</li>
                         <li>Car Seat : {getCar.seat}</li>
                         <li>Car Detail : {getCar.detail}</li>
                     </ul>
-                    <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
 
                 </div>
                 : <div>Loading...</div>}

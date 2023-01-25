@@ -1,6 +1,6 @@
 import { InboxOutlined } from '@ant-design/icons';
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import {
@@ -65,6 +65,8 @@ const AddCar = () => {
 
     const [form] = Form.useForm();
     const [inputCarLicenseText, setInputCarLicenseText] = useState("");
+    const [inputCarYear, setInputCarYear] = useState("");
+    const [inputCarName, setInputCarName] = useState("");
     const [inputCarLicenseNum, setInputCarLicenseNum] = useState("");
     const [inputCarSeat, setInputCarSeat] = useState("");
     const [inputCarDetail, setInputCarDetail] = useState("");
@@ -82,6 +84,14 @@ const AddCar = () => {
     const handleChangeCarLicenseNum = (e) => {
         setInputCarLicenseNum(e.target.value);
         console.log(inputCarLicenseNum);
+    };
+    const handleChangeCarName = (e) => {
+        setInputCarName(e.target.value);
+        console.log(inputCarName);
+    };
+    const handleChangeCarYear = (e) => {
+        setInputCarYear(e.target.value);
+        console.log(inputCarYear);
     };
     const handleChangeCarSeat = (e) => {
         setInputCarSeat(e);
@@ -127,6 +137,7 @@ const AddCar = () => {
                     "license": inputCarLicenseText + "-" + inputCarLicenseNum,
                     "province": selectedCarProvince,
                     "brand": selectedCarBrand,
+                    "name": inputCarName + "ปี - " + inputCarYear,
                     "color": selectedCarColor,
                     "seat": inputCarSeat,
                     "detail": inputCarDetail,
@@ -144,10 +155,12 @@ const AddCar = () => {
                                 toast.addEventListener("mouseleave", Swal.resumeTimer);
                             },
                         });
+
                         Toast.fire({
                             icon: "success",
                             title: "SignIn in successfully",
                         }).then(() => {
+
                             navigate("/listcar");
                         });
                     } else {
@@ -229,6 +242,24 @@ const AddCar = () => {
                                 <Select showSearch placeholder="เลือกยี่ห้อรถยนต์" onChange={handleChangeCarBrand} value={selectedCarBrand} >
                                     {carBrand.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
+                            </Form.Item>
+                            <Form.Item label="รุ่นรถ"  >
+                                <Form.Item
+                                    name={['carName', 'carYear']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'กรุณาป้อนรุ่นรถ' }]}
+                                >
+                                    <Input className="inline-flex w-auto" value={inputCarName} onChange={handleChangeCarName} />
+
+                                </Form.Item>
+                                <p className="inline-flex mr-2 ml-2"> ปี </p>
+                                <Form.Item
+                                    name={['carName', 'carYear']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'กรุณาป้อนปีรถ' }]}
+                                >
+                                    <Input className="inline-flex w-auto" value={inputCarYear} onChange={handleChangeCarYear} />
+                                </Form.Item>
                             </Form.Item>
                             <Form.Item
                                 label="สีรถ"
