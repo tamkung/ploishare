@@ -1,11 +1,6 @@
-import React, { useState, useEffect, usePra } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-    Breadcrumb,
     Layout,
-    Menu,
-    theme,
-    Button,
-    Drawer,
     Form,
     Input,
     InputNumber,
@@ -43,7 +38,7 @@ const options = {
 // console.log(date.toISOString());
 // console.log(date.toLocaleString('th', options));
 
-const { Header, Content, Sider, Footer } = Layout;
+const { Content } = Layout;
 
 const EditableCell = ({
     editing,
