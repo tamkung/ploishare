@@ -98,37 +98,46 @@
     padding: 10px;
 }
 
-@media only screen and (max-width: 600px) {
-
-    .item {
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .datapick {
-        padding: 15px;
-
-    }
-
-    .itemBook {
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .brandname {
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .license {
-        font-size: 18px;
-        font-weight: bold;
-    }
+/* ----------------------------------------------------font---------------------------------------------------- */
+.brandname {
+    font-size: 48px;
+    font-weight: bold;
 }
+
+.license {
+    font-size: 32px;
+    font-weight: lighter;
+}
+
+.contentCar {
+    font-size: 22px;
+}
+
+.detailCar {
+    padding: 50px;
+    font-size: 22px;
+}
+
+.button-book {
+    font-weight: bold;
+    height: 50px;
+    border-radius: 8px 8px 8px 8px;
+    width: 70%;
+    margin-left: 15%;
+    color: #ffffff;
+    background-color: #2b82f5;
+    border: #ffffff solid 1px;
+    transition: 300ms;
+}
+
+.button-book:hover {
+    margin: 50px;
+    background-color: #174fc9;
+    color: #ffffff;
+    /* transform: scale(1.02); */
+    /* transition: 300ms; */
+}
+
 
 @media only screen and (max-width: 1000px) {
 
@@ -147,7 +156,7 @@
     .itemBook {
         display: block;
         box-sizing: border-box;
-        width: 50%;
+        width: 100%;
         padding: 10px;
     }
 
@@ -160,4 +169,31 @@
         font-size: 18px;
         font-weight: bold;
     }
+    .contentCar {
+        font-size: 22px;
+    }
+    
+    .detailCar {
+        padding: 50px;
+        font-size: 22px;
+    }
+
+    .button-book {
+        margin-left: 5%;
+        width: 90%;
+        border-radius: 8px 8px 8px 8px;
+        color: #252525;
+        background-color: #f8d01e;
+        border: #ffffff solid 1px;
+        transition: 300ms;
+    }
+
+    .button-book:hover {
+        margin: 50px;
+        background-color: #174fc9;
+        color: #ffffff;
+        /* transform: scale(1.02); */
+        /* transition: 300ms; */
+    }
+
 }
