@@ -102,6 +102,28 @@
     padding: 10px;
 }
 
+.button-book {
+    font-weight: bold;
+    height: 50px;
+    border-radius: 8px 8px 8px 8px;
+    width: 70%;
+    margin-left: 15%;
+    color: #ffffff;
+    background-color: #2b82f5;
+    border: #ffffff solid 1px;
+    transition: 300ms;
+}
+
+.button-book:hover {
+
+    background-color: #174fc9;
+    color: #ffffff;
+    /* transform: scale(1.02); */
+    /* transition: 300ms; */
+}
+.contentFrame{
+    margin-top: 25%;
+}
 /* ----------------------------------------------------font---------------------------------------------------- */
 .brandname {
     font-size: 48px;
@@ -122,25 +144,6 @@
     font-size: 22px;
 }
 
-.button-book {
-    font-weight: bold;
-    height: 50px;
-    border-radius: 8px 8px 8px 8px;
-    width: 70%;
-    margin-left: 15%;
-    color: #ffffff;
-    background-color: #2b82f5;
-    border: #ffffff solid 1px;
-    transition: 300ms;
-}
-
-.button-book:hover {
-    margin: 50px;
-    background-color: #174fc9;
-    color: #ffffff;
-    /* transform: scale(1.02); */
-    /* transition: 300ms; */
-}
 
 
 @media only screen and (max-width: 1000px) {

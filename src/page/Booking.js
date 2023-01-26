@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import '../css/Booking.css';
+import { positions } from "@mui/system";
 
 
 const contentStyle = {
@@ -52,15 +53,17 @@ function Booking() {
                         </Carousel>
                     </div>
                     <div className="itemBook" >
-                        <div>
-                            <div className="brandname">{getCar.brand}</div>
-                            <div className="license">ทะเบียนรถ : {getCar.license + " " + getCar.province}</div>
+                        <div className="contentFrame">
+                            <div>
+                                <div className="brandname">{getCar.brand}</div>
+                                <div className="license">ทะเบียนรถ : {getCar.license + " " + getCar.province}</div>
+                            </div>
+                            <ul className="contentCar">
+                                <li>สีรถ : {getCar.color}</li>
+                                <li>จำนวน : {getCar.seat} ที่นั่ง</li>
+                            </ul>
+                            <button className="button-book " style={{ textAlign: "center" , marginTop:"50px"}}> จองเลย </button>
                         </div>
-                        <ul className="contentCar">
-                            <li>สีรถ : {getCar.color}</li>
-                            <li>จำนวน : {getCar.seat} ที่นั่ง</li>
-                        </ul>
-                        <button className="button-book" style={{ textAlign: "center" }}> จองเลย </button>
                     </div>
                     <div className="detailCar">Car Detail : {getCar.detail}</div>
 
