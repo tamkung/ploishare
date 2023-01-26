@@ -31,16 +31,18 @@ function Booking() {
                     <div className="itemBook">
                         <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
                     </div>
-                    <div className="itemBook">
-                        <div><h5>Car License : {getCar.license + " " + getCar.province}</h5></div>
-                        <ul>
-                            <li>Car Brand : {getCar.brand}</li>
-                            <li>Car Color : {getCar.color}</li>
+                    <div className="itemBook" >
+                        <div>
+                            <div className="brandname">{getCar.brand}</div>
+                            <div className="license">ทะเบียนรถ : {getCar.license + " " + getCar.province}</div>
+                        </div>
+                        <ul className="contentCar">
+                            <li>สีรถ : {getCar.color}</li>
                             <li>Car Seat : {getCar.seat}</li>
-                            <li>Car Detail : {getCar.detail}</li>
                         </ul>
+                        <button className="buttonNext-Outline" style={{ textAlign: "center", width: "70%", marginLeft: "15%" }}> จองเลย </button>
                     </div>
-
+                    <div className="detailCar">Car Detail : {getCar.detail}</div>
 
                 </div>
 

@@ -59,6 +59,16 @@
     right: 1%;
 }
 
+.brandname {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.license {
+    font-size: 32px;
+    font-weight: lighter;
+}
+
 .flexbox {
     display: flex;
     flex-direction: row;
@@ -87,6 +97,7 @@
     width: 50%;
     padding: 10px;
 }
+
 @media only screen and (max-width: 600px) {
 
     .item {
@@ -101,4 +112,52 @@
 
     }
 
+    .itemBook {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .brandname {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .license {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .item {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .datapick {
+        padding: 15px;
+
+    }
+
+    .itemBook {
+        display: block;
+        box-sizing: border-box;
+        width: 50%;
+        padding: 10px;
+    }
+
+    .brandname {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .license {
+        font-size: 18px;
+        font-weight: bold;
+    }
 }

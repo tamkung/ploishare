@@ -5,7 +5,7 @@ body {
 .app-bar {
     display: flex;
     align-items: center;
-    background-color: #67b99a;
+    background-color: #2b82f5;
     height: 60px;
 }
 
@@ -60,9 +60,27 @@ body {
     transition: 300ms;
 }
 
+.buttonNext-Outline {
+    font-weight: bold;
+    height: 50px;
+    border-radius: 8px 8px 8px 8px;
+    width: 100%;
+    color: #ffffff;
+    background-color: #2b82f5;
+    border: #ffffff solid 1px;
+    transition: 300ms;
+}
+
 .buttonNext:hover {
     background-color: #67b99a;
     color: white;
+    /* transform: scale(1.02); */
+    /* transition: 300ms; */
+}
+.buttonNext-Outline:hover {
+    margin: 50px;
+    background-color: #174fc9;
+    color: #ffffff;
     /* transform: scale(1.02); */
     /* transition: 300ms; */
 }
