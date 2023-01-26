@@ -75,6 +75,7 @@ function ContentCar() {
                         license: item.license,
                         province: item.province,
                         brand: item.brand,
+                        model:item.model,
                         color: item.color,
                         seat: item.seat,
                         detail: item.detail,
@@ -158,13 +159,13 @@ function ContentCar() {
         {
             title: '#',
             dataIndex: 'key',
-            width: '5%',
+            width: '3%',
             editable: true,
         },
         {
             title: 'ป้ายทะเบียน',
             dataIndex: 'license',
-            width: '10%',
+            width: '8%',
             editable: true,
         },
         {
@@ -176,19 +177,25 @@ function ContentCar() {
         {
             title: 'ยี่ห้อ',
             dataIndex: 'brand',
-            width: '15%',
+            width: '10%',
+            editable: true,
+        },
+        {
+            title: 'รุ่น',
+            dataIndex: 'model',
+            width: '8%',
             editable: true,
         },
         {
             title: 'สี',
             dataIndex: 'color',
-            width: '10%',
+            width: '7%',
             editable: true,
         },
         {
             title: 'จำนวนที่นั่ง',
             dataIndex: 'seat',
-            width: '10%',
+            width: '7%',
             editable: true,
         },
         {

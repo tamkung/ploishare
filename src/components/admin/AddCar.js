@@ -66,7 +66,7 @@ const AddCar = () => {
     const [form] = Form.useForm();
     const [inputCarLicenseText, setInputCarLicenseText] = useState("");
     const [inputCarYear, setInputCarYear] = useState("");
-    const [inputCarName, setInputCarName] = useState("");
+    const [inputCarModel, setInputCarModel] = useState("");
     const [inputCarLicenseNum, setInputCarLicenseNum] = useState("");
     const [inputCarSeat, setInputCarSeat] = useState("");
     const [inputCarDetail, setInputCarDetail] = useState("");
@@ -76,6 +76,7 @@ const AddCar = () => {
     const [selectedCarColor, setSelectedCarColor] = useState("");
 
     const [image, setImage] = useState(null);
+    const [disabled, setDisabled] = useState(true)
 
     const handleChangeCarLicenseText = (e) => {
         setInputCarLicenseText(e.target.value);
@@ -85,9 +86,9 @@ const AddCar = () => {
         setInputCarLicenseNum(e.target.value);
         console.log(inputCarLicenseNum);
     };
-    const handleChangeCarName = (e) => {
-        setInputCarName(e.target.value);
-        console.log(inputCarName);
+    const handleChangeCarModel = (e) => {
+        setInputCarModel(e.target.value);
+        console.log(inputCarModel);
     };
     const handleChangeCarYear = (e) => {
         setInputCarYear(e.target.value);
@@ -124,6 +125,7 @@ const AddCar = () => {
         if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
             setImage(info.file.response);
+            setDisabled(false);
         } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
         }
@@ -137,7 +139,7 @@ const AddCar = () => {
                     "license": inputCarLicenseText + "-" + inputCarLicenseNum,
                     "province": selectedCarProvince,
                     "brand": selectedCarBrand,
-                    "name": inputCarName + "ปี - " + inputCarYear,
+                    "model": inputCarModel + " ปี " + inputCarYear,
                     "color": selectedCarColor,
                     "seat": inputCarSeat,
                     "detail": inputCarDetail,
@@ -171,7 +173,7 @@ const AddCar = () => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'ป้ายทะเบียนซ้ำ',
+                        text: error
                     })
                 });
         } catch (error) {
@@ -245,12 +247,11 @@ const AddCar = () => {
                             </Form.Item>
                             <Form.Item label="รุ่นรถ"  >
                                 <Form.Item
-                                    name={['carName', 'carYear']}
+                                    name={['carName', 'carModel']}
                                     noStyle
                                     rules={[{ required: true, message: 'กรุณาป้อนรุ่นรถ' }]}
                                 >
-                                    <Input className="inline-flex w-auto" value={inputCarName} onChange={handleChangeCarName} />
-
+                                    <Input className="inline-flex w-auto" value={inputCarModel} onChange={handleChangeCarModel} />
                                 </Form.Item>
                                 <p className="inline-flex mr-2 ml-2"> ปี </p>
                                 <Form.Item
@@ -314,13 +315,12 @@ const AddCar = () => {
                                     </Upload.Dragger>
                                 </Form.Item>
                             </Form.Item>
-
                             <Form.Item
                                 wrapperCol={{
                                     span: 12,
                                     offset: 6,
                                 }} >
-                                <Button className="buttonNext" htmlType="submit" >
+                                <Button className="buttonNext" htmlType="submit" disabled={disabled}>
                                     Submit
                                 </Button>
                             </Form.Item>
