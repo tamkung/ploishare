@@ -10,7 +10,7 @@ import '../css/Booking.css';
 import '../css/style.css';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
-
+import wallpaper from '../img/wallpaper-car.jpg'
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
 import { Link } from 'react-router-dom';
@@ -96,8 +96,8 @@ const SelectDate = () => {
   // };
   return (
     <div>
-      <div className='shd datapick'>
-        <Form className='datapick' style={{ border: "solid gray 1px", borderRadius: "15px", marginBottom: "15px" }}>
+      <div className='shd' style={{ position: "relative" }} >
+        <Form className='datapick' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" , background:"white" }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking'
@@ -194,6 +194,8 @@ const SelectDate = () => {
             <button className='ml-2' >Reset</button>
           </div>
         </Form>
+        <img src={wallpaper} style={{ width: "100%", height: "80%" }} />
+
         <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
       </div>
 

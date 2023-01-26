@@ -8,6 +8,10 @@
 
 
 .datapick {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 70%;
     padding-top: 20px;
     padding-left: 50px;
     padding-right: 50px;
@@ -169,10 +173,11 @@
         font-size: 18px;
         font-weight: bold;
     }
+
     .contentCar {
         font-size: 22px;
     }
-    
+
     .detailCar {
         padding: 50px;
         font-size: 22px;
