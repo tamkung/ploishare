@@ -27,11 +27,14 @@ const SelectDate = () => {
 
   const hourData = ['7.00', '7.30', '8.00', '8.30', '9.00', '9.30', '10.00', '10.30', '11.00', '11.30', '12.00', '12.30', '13.00', '13.30', '14.00', '14.30', '15.00', '15.30', '16.00', '16.30', '17.00', '17.30', '18.00'];
 
-  const handleHourChange = (value) => {
+  const handleStartTimeChange = (value) => {
     setStartTime(value);
     console.log('Start Time : ', value);
   };
-
+  const handleEndTimeChange = (value) => {
+    setEndTime(value);
+    console.log('Start Time : ', value);
+  };
   // const onStartDateChange = (date) => {
   //   setStartDate(date);
   //   console.log(date);
@@ -153,7 +156,7 @@ const SelectDate = () => {
                 style={{
                   width: 120,
                 }}
-                onChange={handleHourChange}
+                onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
                   label: hour,
                   value: hour,
@@ -163,8 +166,21 @@ const SelectDate = () => {
 
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
 
+            <Space wrap>
+              <Select
+                placeholder='เลือกเวลาเริ่มต้น'
+                style={{
+                  width: 120,
+                }}
+                onChange={handleEndTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
 
-            <TimePicker style={{ width: "45%" }}
+            {/* <TimePicker style={{ width: "45%" }}
               format="HH:mm"
               minuteStep={30}
               locale={locale}
@@ -174,8 +190,8 @@ const SelectDate = () => {
                 setEndTime(value.format('HH:mm:00'));
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
-            />
-            <button>Reset</button>
+            /> */}
+            <button className='ml-2' >Reset</button>
           </div>
         </Form>
         <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
@@ -195,7 +211,7 @@ const SelectDate = () => {
               })
             }}> {cars.license + " " + cars.brand + " " + cars.color}
             </div> */}
-            <div className="bigcard" onClick={() => { window.location = '/booking/' + cars.license }}>
+            <div className="btn bigcard" onClick={() => { window.location = '/booking/' + cars.license }}>
               <div className="colcard-left">
                 <div className='container'>
                   <img src={cars.image !== null ? cars.image : NO_Img} />

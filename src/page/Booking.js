@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
-
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
-
+import '../css/Booking.css';
 function Booking() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
@@ -28,24 +27,23 @@ function Booking() {
     return (
         <div>
             {Loading !== false ?
-                <div>
-                    <div className="container">
+                <div className="flexbook">
+                    <div className="itemBook">
                         <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
                     </div>
-                    <div>Car License : {getCar.license + " " + getCar.province}</div>
-                
-                    
-                    <Link className="buttonNext" to={'/'}>Back</Link>
-                    {/* <h1>Booking ID : {new Date().getTime()}</h1> */}
-                   
-                    <ul>
-                        <li>Car Brand : {getCar.brand}</li>
-                        <li>Car Color : {getCar.color}</li>
-                        <li>Car Seat : {getCar.seat}</li>
-                        <li>Car Detail : {getCar.detail}</li>
-                    </ul>
+                    <div className="itemBook">
+                        <div><h5>Car License : {getCar.license + " " + getCar.province}</h5></div>
+                        <ul>
+                            <li>Car Brand : {getCar.brand}</li>
+                            <li>Car Color : {getCar.color}</li>
+                            <li>Car Seat : {getCar.seat}</li>
+                            <li>Car Detail : {getCar.detail}</li>
+                        </ul>
+                    </div>
+
 
                 </div>
+
                 : <div>Loading...</div>}
         </div>
     );
