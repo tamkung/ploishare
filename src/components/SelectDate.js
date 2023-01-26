@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Form, DatePicker, TimePicker, Switch } from 'antd';
+import { Button, Form, DatePicker, TimePicker, Switch, Select, Space } from 'antd';
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -19,10 +19,15 @@ const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState(null);
+  const [startTime, setStartTime] = useState(hourData);
   const [endTime, setEndTime] = useState(null);
-
   const [getCars, setGetCars] = useState([]);
+
+  const hourData = ['7.00', '7.30', '8.00', '8.30', '9.00', '9.30', '10.00', '10.30', '11.00', '11.30', '12.00', '12.30', '13.00', '13.30', '14.00', '14.30', '15.00', '15.30', '16.00', '16.30', '17.00', '17.30', '18.00'];
+
+  const handleHourChange = (value) => {
+    setStartTime(hourData[value]);
+  };
 
   // const onStartDateChange = (date) => {
   //   setStartDate(date);
@@ -43,6 +48,9 @@ const SelectDate = () => {
   //   setEndTime(time);
   //   console.log(time);
   // };
+
+
+
 
   const onEndDateSwitchChange = (value) => {
     setEndDateDisabled(value);
@@ -82,8 +90,8 @@ const SelectDate = () => {
   // };
   return (
     <div>
-      <div className='shd datapick' style={{ paddingLeft: "10px", paddingRight: "10px", background: "#ffffff" }}>
-        <Form style={{ border: "solid gray 1px", padding: "10px", borderRadius: "15px", marginBottom: "15px" }}>
+      <div className='shd datapick'>
+        <Form className='datapick' style={{ border: "solid gray 1px", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking'
@@ -121,6 +129,8 @@ const SelectDate = () => {
 
           <div className='mb-3'>
             <div>เวลา</div>
+
+
             <TimePicker className='width-booking'
               format="HH:mm"
               minuteStep={30}
@@ -133,7 +143,24 @@ const SelectDate = () => {
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
             />
+
+            <Space wrap>
+              <Select
+                defaultValue={hourData[0]}
+                style={{
+                  width: 120,
+                }}
+                onChange={handleHourChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
+
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+
+
             <TimePicker style={{ width: "45%" }}
               format="HH:mm"
               minuteStep={30}
@@ -172,7 +199,7 @@ const SelectDate = () => {
                 </div>
               </div>
               <div className="colcard-right">
-                <div>{cars.license + " " + cars.license + " " + cars.brand }</div>
+                <div>{cars.license + " " + cars.license + " " + cars.brand}</div>
                 <div>{cars.license}</div>
                 <div>{cars.brand}</div>
               </div>

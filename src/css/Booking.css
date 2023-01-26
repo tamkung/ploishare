@@ -8,8 +8,10 @@
 
 
 .datapick {
-    padding: 15px;
-
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 20px;
 }
 
 
@@ -30,7 +32,7 @@
 
 .colcard-left {
     flex: 1;
-  
+
 }
 
 .colcard-right {
@@ -80,6 +82,10 @@
         width: 100%;
         padding: 10px;
     }
-    
+
+    .datapick {
+        padding: 15px;
+
+    }
 
 }
