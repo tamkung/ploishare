@@ -292,6 +292,7 @@ const AddCar = () => {
                                 <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
                                     <Upload.Dragger
                                         name="img"
+                                        multiple={false}
                                         action={API_URL + "api/upload-file"}
                                         onChange={handleUpload}
                                         beforeUpload={(file) => {
