@@ -19,14 +19,17 @@ const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [startTime, setStartTime] = useState(hourData);
-  const [endTime, setEndTime] = useState(null);
+
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
   const [getCars, setGetCars] = useState([]);
 
   const hourData = ['7.00', '7.30', '8.00', '8.30', '9.00', '9.30', '10.00', '10.30', '11.00', '11.30', '12.00', '12.30', '13.00', '13.30', '14.00', '14.30', '15.00', '15.30', '16.00', '16.30', '17.00', '17.30', '18.00'];
 
   const handleHourChange = (value) => {
-    setStartTime(hourData[value]);
+    setStartTime(value);
+    console.log('Start Time : ', value);
   };
 
   // const onStartDateChange = (date) => {
@@ -131,7 +134,7 @@ const SelectDate = () => {
             <div>เวลา</div>
 
 
-            <TimePicker className='width-booking'
+            {/* <TimePicker className='width-booking'
               format="HH:mm"
               minuteStep={30}
               locale={locale}
@@ -142,11 +145,11 @@ const SelectDate = () => {
                 setStartTime(value.format('HH:mm:00'));
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
-            />
+            /> */}
 
             <Space wrap>
               <Select
-                defaultValue={hourData[0]}
+                placeholder='เลือกเวลาเริ่มต้น'
                 style={{
                   width: 120,
                 }}
