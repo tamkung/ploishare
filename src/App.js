@@ -81,7 +81,7 @@ function App() {
         </div>
         : admin === 'user' ?
           <div>
-            <div className="app-bar" />
+            
             <Routes>
               <Route index element={<IndexUser />} />
               <Route path='*' element={<NotFound />} />

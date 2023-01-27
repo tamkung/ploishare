@@ -8,13 +8,16 @@
 
 
 .datapick {
-    top: 50%;
+    background-color: #ffffff;
+    color: #000000;
+    /* opacity: 85%; */
+    top: 25%;
     left: 50%;
     transform: translate(-50%);
-    width: 70%;
+    width: 60%;
     padding-top: 20px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-bottom: 20px;
 }
 
@@ -27,9 +30,8 @@
     background-color: antiquewhite;
     box-shadow: inset;
     display: grid;
-    padding: 10px;
     grid-template-columns: 1fr 2fr;
-    max-width: 500px;
+    width: 50%;
     height: 100px;
 }
 

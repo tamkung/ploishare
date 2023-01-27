@@ -14,6 +14,7 @@ import wallpaper from '../img/wallpaper-car.jpg'
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
 import { Link } from 'react-router-dom';
+import { Opacity } from '@mui/icons-material';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -97,7 +98,8 @@ const SelectDate = () => {
   return (
     <div>
       <div className='shd' style={{ position: "relative" }} >
-        <Form className='datapick' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" , background:"white" }}>
+        <img className='d-none d-sm-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover" }} />
+        <Form className='datapick d-none d-sm-block ' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking'
@@ -191,12 +193,12 @@ const SelectDate = () => {
                 console.log('Time Stared : ', value.format('HH:mm:00'));
               }}
             /> */}
-            <button className='ml-2' >Reset</button>
           </div>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
-        <img src={wallpaper} style={{ width: "100%", height: "80%" }} />
 
-        <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+
+
       </div>
 
       <div className='container text-success'>รถว่าง {getCars.length} คัน</div>
@@ -214,10 +216,10 @@ const SelectDate = () => {
             }}> {cars.license + " " + cars.brand + " " + cars.color}
             </div> */}
             <div className="btn bigcard" onClick={() => { window.location = '/booking/' + cars.license }}>
-              <div className="colcard-left">
-                <div className='container'>
-                  <img src={cars.image !== null ? cars.image : NO_Img} />
-                </div>
+              <div className="colcard-left" >
+
+                <img style={{ objectFit: "cover", height: "80px", width: "80px" }} src={cars.image !== null ? cars.image : NO_Img} />
+
               </div>
               <div className="colcard-right">
                 <div>{cars.license + " " + cars.license + " " + cars.brand}</div>
