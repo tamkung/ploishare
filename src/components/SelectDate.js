@@ -98,7 +98,7 @@ const SelectDate = () => {
   return (
     <div>
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-sm-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover" }} />
+        <img className='d-none d-sm-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
         <Form className='datapick d-none d-sm-block ' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
