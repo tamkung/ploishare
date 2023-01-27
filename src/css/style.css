@@ -77,7 +77,9 @@ body {
 .shd {
     box-shadow: 0px 5px 10px #adadad
 }
-
+.bg-color{
+    background: linear-gradient(90deg, rgba(224,224,224,1) 50%, rgba(252,252,252,1) 66%, rgba(223,223,223,1) 87%);
+}
 .box {
     padding-top: 30px;
     padding-left: 3%;

@@ -47,12 +47,13 @@
 
 .colcard-left {
     flex: 1;
-
+    border-radius: 15px 0px 0px 15px;
 }
 
 .colcard-right {
+    background-color: rgb(255, 255, 255);
     flex: 2;
-
+    border-radius: 0px 15px 15px 0px;
 }
 
 .content {
