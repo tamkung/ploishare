@@ -206,22 +206,14 @@ const SelectDate = () => {
       <div className='flexbox' >
         {getCars.map((cars, index) => (
 
-          <div className='item'>
-            {/* <div type="button" className='btnMenu content bg-success pl-3' key={index} onClick={() => {
-              console.log(cars);
-              Swal.fire({
-                title: "เลือกรถ",
-                text: cars.license + " " + cars.brand + " " + cars.color,
-              })
-            }}> {cars.license + " " + cars.brand + " " + cars.color}
-            </div> */}
-            <div className="btn bigcard" onClick={() => { window.location = '/booking/' + cars.license }}>
+          <div className='item mb-3 mr-2'>
+            <div className="bigcard" onClick={() => { window.location = '/booking/' + cars.license }} >
               <div className="colcard-left" >
 
-                <img style={{ objectFit: "cover", height: "80px", width: "80px" }} src={cars.image !== null ? cars.image : NO_Img} />
+                <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} />
 
               </div>
-              <div className="colcard-right">
+              <div className="colcard-right pl-3">
                 <div>{cars.license + " " + cars.license + " " + cars.brand}</div>
                 <div>{cars.license}</div>
                 <div>{cars.brand}</div>

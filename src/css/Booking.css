@@ -27,12 +27,11 @@
 
 .bigcard {
     border-radius: 15px;
-    background-color: antiquewhite;
-    box-shadow: inset;
+    background-color: white;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    width: 50%;
-    height: 100px;
+    height: 150px;
+
 }
 
 .colcard-left {
@@ -76,6 +75,8 @@
 }
 
 .flexbox {
+    padding-left: 50px;
+    padding-right: 50px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -85,8 +86,17 @@
 .item {
     display: block;
     box-sizing: border-box;
-    width: 50%;
+    width: 25%;
     padding: 10px;
+    transition: 300ms;
+    border-radius: 15px;
+}
+
+.item:hover {
+    box-shadow: 0px 5px 10px #adadad;
+    transition: 300ms;
+    background-color: #174fc9;
+
 }
 
 .flexbook {
@@ -123,9 +133,11 @@
     /* transform: scale(1.02); */
     /* transition: 300ms; */
 }
-.contentFrame{
+
+.contentFrame {
     margin-top: 25%;
 }
+
 /* ----------------------------------------------------font---------------------------------------------------- */
 .brandname {
     font-size: 48px;
