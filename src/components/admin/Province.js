@@ -3,7 +3,7 @@ export const Province = [
         "id": 1,
         "name_th": "กรุงเทพมหานคร",
         "name_en": "Bangkok",
-        "geography_id": 2,
+        "geography_id": 2.5,
         "created_at": "2019-08-09T03:33:09.000+07:00",
         "updated_at": "2022-05-16T06:31:03.648+07:00",
         "deleted_at": null
@@ -12,7 +12,7 @@ export const Province = [
         "id": 2,
         "name_th": "สมุทรปราการ",
         "name_en": "Samut Prakan",
-        "geography_id": 2,
+        "geography_id": 2.5,
         "created_at": "2019-08-09T03:33:09.000+07:00",
         "updated_at": "2022-05-16T06:31:03.648+07:00",
         "deleted_at": null
@@ -21,7 +21,7 @@ export const Province = [
         "id": 3,
         "name_th": "นนทบุรี",
         "name_en": "Nonthaburi",
-        "geography_id": 2,
+        "geography_id": 2.5,
         "created_at": "2019-08-09T03:33:09.000+07:00",
         "updated_at": "2022-05-16T06:31:03.648+07:00",
         "deleted_at": null
@@ -30,7 +30,7 @@ export const Province = [
         "id": 4,
         "name_th": "ปทุมธานี",
         "name_en": "Pathum Thani",
-        "geography_id": 2,
+        "geography_id": 2.5,
         "created_at": "2019-08-09T03:33:09.000+07:00",
         "updated_at": "2022-05-16T06:31:03.648+07:00",
         "deleted_at": null
@@ -525,7 +525,7 @@ export const Province = [
         "id": 59,
         "name_th": "สมุทรสาคร",
         "name_en": "Samut Sakhon",
-        "geography_id": 2,
+        "geography_id": 2.5,
         "created_at": "2019-08-09T03:33:09.000+07:00",
         "updated_at": "2022-05-16T06:31:03.648+07:00",
         "deleted_at": null
