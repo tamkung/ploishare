@@ -21,9 +21,9 @@ export default function BookingDetail() {
                 })
         }
         getCarById();
-        const { id } = useParams();
-    }, []);
 
+    }, []);
+    const { id } = useParams();
 
     return (
         <div >
