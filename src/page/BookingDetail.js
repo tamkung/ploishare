@@ -5,6 +5,8 @@ import { API_URL } from "../Constant";
 import '../css/Booking.css';
 import { Radio, Space, Input, Select } from 'antd';
 import { Province } from '../components/admin/Province';
+const { Option } = Select;
+
 export default function BookingDetail() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
@@ -65,23 +67,25 @@ export default function BookingDetail() {
                             </Radio.Group>
                             <Select
                                 placeholder='เลือกเวลาเริ่มต้น'
+                                showSearch
                                 style={{
                                     width: 200,
                                 }}
-                                disabled={radio == 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
-                                onChange={onProvinceChange}
-                                options={Province.map((index) => ({
-
-
-
-                                }))}
-                            />
+                                disabled={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
+                                onChange={onProvinceChange}>
+                                {Province.map((item, index) => {
+                                    return (
+                                        item.geography_id !== 2.5 ?
+                                            <Option key={index} value={item.name_th}>{item.name_th}</Option> : null
+                                    )
+                                })}
+                            </Select>
                         </div>
                         <button className="button-book mt-5">จองเลย </button>
                     </div>
                 </div>
             </div>
             {/* : <div>Loading...</div>} */}
-        </div>
+        </div >
     )
 }
