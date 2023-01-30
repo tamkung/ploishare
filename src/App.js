@@ -15,6 +15,7 @@ import AddCar from "./components/admin/AddCar"
 import LoHeader from './layout/LoHeader'
 import LoNavbar from './layout/LoNavbar'
 import LoFooter from './layout/LoFooter'
+import MenuButton from './layout/LoMenu'
 
 import './css/Disable.css';
 import './css/AdminStyle.css';
@@ -87,6 +88,7 @@ function App() {
               <Route path="/booking/:id" element={<Booking />} />
               <Route path="/booking-detail/:id" element={<BookingDetail />} />
             </Routes>
+            <MenuButton />
           </div>
           : <Routes>
             <Route index element={<Home />} />

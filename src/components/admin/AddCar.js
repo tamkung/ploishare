@@ -50,6 +50,11 @@ const carBrand = [
     "Jaguar"
 ];
 
+const carModel = {
+    Toyota: ['Toyota', 'Toyota', 'Toyota'],
+    Honda: ['Honda', 'Honda', 'Honda','Honda', 'Honda'],
+};
+
 const carColor = ["ดำ", "ขาว", "แดง", "เขียว", "น้ำเงิน", "ฟ้า", "เหลือง", "ชมพู", "ม่วง"];
 
 const normFile = (e) => {
@@ -75,6 +80,8 @@ const AddCar = () => {
     const [selectedCarBrand, setSelectedCarBrand] = useState("");
     const [selectedCarColor, setSelectedCarColor] = useState("");
 
+    const [selectedCarModel, setSelectedCarModel] = useState("");
+
     const [image, setImage] = useState(null);
     const [disabled, setDisabled] = useState(true)
 
@@ -86,10 +93,10 @@ const AddCar = () => {
         setInputCarLicenseNum(e.target.value);
         console.log(inputCarLicenseNum);
     };
-    const handleChangeCarModel = (e) => {
-        setInputCarModel(e.target.value);
-        console.log(inputCarModel);
-    };
+    // const handleChangeCarModel = (e) => {
+    //     setInputCarModel(e.target.value);
+    //     console.log(inputCarModel);
+    // };
     const handleChangeCarYear = (e) => {
         setInputCarYear(e.target.value);
         console.log(inputCarYear);
@@ -110,6 +117,11 @@ const AddCar = () => {
 
     const handleChangeCarBrand = (value) => {
         setSelectedCarBrand(value);
+        console.log(value);
+    };
+
+    const handleChangeCarModel = (value) => {
+        setSelectedCarModel(value);
         console.log(value);
     };
 
