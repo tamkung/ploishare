@@ -39,7 +39,7 @@ function Booking() {
     const { id } = useParams();
     return (
         <div >
-            <div className="app-bar"/>
+            <div className="app-bar" />
             {Loading !== false ?
                 <div className="flexbook">
                     <div className="itemBook" >
@@ -63,9 +63,8 @@ function Booking() {
                                 <li>สีรถ : {getCar.color}</li>
                                 <li>จำนวน : {getCar.seat} ที่นั่ง</li>
                             </ul>
-                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }} 
-                            onClick={()=>{window.location="/booking-detail" 
-                            }}> จองเลย </button>
+                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}
+                                onClick={() => { window.location = '/booking-detail' }}> จองเลย </button>
                         </div>
                     </div>
                     <div className="detailCar">Car Detail : {getCar.detail}</div>

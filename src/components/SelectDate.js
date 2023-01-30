@@ -13,8 +13,6 @@ import NO_Img from '../img/no_img.jpg';
 import wallpaper from '../img/wallpaper-car.jpg'
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
-import { Link } from 'react-router-dom';
-import { Opacity } from '@mui/icons-material';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
