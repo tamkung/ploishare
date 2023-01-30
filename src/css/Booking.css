@@ -48,7 +48,7 @@
     display: grid;
     grid-template-columns: 2fr 1.5fr;
     height: 200px;
-    box-shadow: #c0bbaf 1px 1px 10px;
+    box-shadow: #c0bbaf 0px 0px 15px;
 
 }
 
@@ -225,7 +225,7 @@
     }
 
     .bigcard {
-        height: 120px;
+        height: 150px;
         grid-template-columns: 1.5fr 1.5fr;
 
     }

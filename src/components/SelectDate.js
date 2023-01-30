@@ -301,7 +301,7 @@ const SelectDate = () => {
 
                 </div>
                 <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
-                  <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>{cars.license}</div>
+                  <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>{cars.license}</div>
                   <div>{cars.brand}</div>
                   <div>
                     <p className='textover mt-3 d-none d-sm-block' >{cars.detail}</p>

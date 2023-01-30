@@ -63,7 +63,9 @@ function Booking() {
                                 <li>สีรถ : {getCar.color}</li>
                                 <li>จำนวน : {getCar.seat} ที่นั่ง</li>
                             </ul>
-                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}> จองเลย </button>
+                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }} 
+                            onClick={()=>{window.location="/booking-detail" 
+                            }}> จองเลย </button>
                         </div>
                     </div>
                     <div className="detailCar">Car Detail : {getCar.detail}</div>
