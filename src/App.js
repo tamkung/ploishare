@@ -80,8 +80,7 @@ function App() {
           </div>
         </div>
         : admin === 'user' ?
-          <div className="bg-color">
-
+          <div>
             <Routes>
               <Route index element={<IndexUser />} />
               <Route path='*' element={<NotFound />} />

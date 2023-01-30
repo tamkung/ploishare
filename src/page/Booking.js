@@ -38,10 +38,11 @@ function Booking() {
 
     const { id } = useParams();
     return (
-        <div>
+        <div >
+            <div className="app-bar"/>
             {Loading !== false ?
                 <div className="flexbook">
-                    <div className="itemBook">
+                    <div className="itemBook" >
                         {/* <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} /> */}
                         <Carousel autoplay>
                             <div>
@@ -52,7 +53,7 @@ function Booking() {
                             </div>
                         </Carousel>
                     </div>
-                    <div className="itemBook" >
+                    <div className="itemBook"  >
                         <div className="contentFrame">
                             <div>
                                 <div className="brandname">{getCar.brand}</div>
@@ -62,7 +63,7 @@ function Booking() {
                                 <li>สีรถ : {getCar.color}</li>
                                 <li>จำนวน : {getCar.seat} ที่นั่ง</li>
                             </ul>
-                            <button className="button-book " style={{ textAlign: "center" , marginTop:"50px"}}> จองเลย </button>
+                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}> จองเลย </button>
                         </div>
                     </div>
                     <div className="detailCar">Car Detail : {getCar.detail}</div>

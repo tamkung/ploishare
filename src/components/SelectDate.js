@@ -97,9 +97,10 @@ const SelectDate = () => {
   // };
   return (
     <div>
+      {/*--------------------------------------------------------------- Desktop --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-sm-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
-        <Form className='datapick d-none d-sm-block ' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
+        <img className='d-none d-xl-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <Form className='datapick d-none d-xl-block' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking'
@@ -196,6 +197,91 @@ const SelectDate = () => {
           </div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
+      </div>
+
+      {/*--------------------------------------------------------------- Mobile --------------------------------------------------------------- */}
+      <div className='shd' style={{ position: "relative" }} >
+        <img className='d-block d-sm-none' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <Form className='datapick d-block d-sm-none' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", width: "90%", top: "15%" }}>
+          <div className='mb-3'>
+            <DatePicker className='width-booking' style={{ width: "35%" }}
+              onChange={(value, dateString) => {
+                setStartDate(value.format('YYYY-MM-DD'));
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Start : ', value.format('YYYY-MM-DD'));
+                console.log('Date End : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่เริ่มต้น"
+            />
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+            <DatePicker className='width-booking' style={{ width: "35%" }}
+              disabled={!endDateDisabled}
+              onChange={(value, dateString) => {
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Stared : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่คืน"
+            />
+
+            <Switch
+              checked={endDateDisabled}
+              onClick={onEndDateSwitchChange}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
+            />
+
+          </div>
+
+          <div className='mb-3'>
+            <Space wrap>
+              <Select
+                placeholder='เลือกเวลาเริ่มต้น'
+                style={{
+                  width: 120,
+                }}
+                onChange={handleStartTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
+
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+
+            <Space wrap>
+              <Select
+                placeholder='เลือกเวลาเริ่มต้น'
+                style={{
+                  width: 120,
+                }}
+                onChange={handleEndTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
+
+            {/* <TimePicker style={{ width: "45%" }}
+              format="HH:mm"
+              minuteStep={30}
+              locale={locale}
+              disabledMinutes={disabledMinutes}
+              placeholder="เลือกเวลาคืนรถ"
+              onChange={(value, dateString) => {
+                setEndTime(value.format('HH:mm:00'));
+                console.log('Time Stared : ', value.format('HH:mm:00'));
+              }}
+            /> */}
+          </div>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+        </Form>
 
 
 
@@ -218,6 +304,7 @@ const SelectDate = () => {
                   <div>{cars.license + " " + cars.license + " " + cars.brand}</div>
                   <div>{cars.license}</div>
                   <div>{cars.brand}</div>
+                  <div>{cars.detail}</div>
                 </div>
               </div>
             </div>

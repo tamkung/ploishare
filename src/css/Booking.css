@@ -30,6 +30,12 @@
 
 }
 
+.textover {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-item:hover {
     box-shadow: 0px 5px 10px #adadad;
     transition: 300ms;
@@ -42,6 +48,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     height: 150px;
+    box-shadow: #c0bbaf 1px 1px 10px;
 
 }
 
@@ -131,17 +138,14 @@
     width: 70%;
     margin-left: 15%;
     color: #ffffff;
-    background-color: #2b82f5;
+    background-color: #f1c812;
     border: #ffffff solid 1px;
     transition: 300ms;
 }
 
 .button-book:hover {
-
-    background-color: #174fc9;
+    background-color: #c5a40e;
     color: #ffffff;
-    /* transform: scale(1.02); */
-    /* transition: 300ms; */
 }
 
 .contentFrame {
@@ -171,6 +175,14 @@
 
 
 @media only screen and (max-width: 1000px) {
+    .contentFrame {
+        margin-top: 10px;
+    }
+
+    .flexbox {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 
     .item {
         display: block;
@@ -210,22 +222,16 @@
         font-size: 22px;
     }
 
-    .button-book {
-        margin-left: 5%;
-        width: 90%;
-        border-radius: 8px 8px 8px 8px;
-        color: #252525;
-        background-color: #f8d01e;
-        border: #ffffff solid 1px;
-        transition: 300ms;
+    .bigcard {
+        height: 100px;
+
     }
 
-    .button-book:hover {
-        margin: 50px;
-        background-color: #174fc9;
-        color: #ffffff;
-        /* transform: scale(1.02); */
-        /* transition: 300ms; */
+    .detailCar {
+        padding: 15px;
+        font-size: 16px;
+        ;
     }
+
 
 }
