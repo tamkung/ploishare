@@ -15,6 +15,7 @@ import AddCar from "./components/admin/AddCar"
 import LoHeader from './layout/LoHeader'
 import LoNavbar from './layout/LoNavbar'
 import LoFooter from './layout/LoFooter'
+import MenuButton from './layout/LoMenu'
 
 import './css/Disable.css';
 import './css/AdminStyle.css';
@@ -86,6 +87,7 @@ function App() {
               <Route path='*' element={<NotFound />} />
               <Route path="/booking/:id" element={<Booking />} />
             </Routes>
+            <MenuButton />
           </div>
           : <Routes>
             <Route index element={<Home />} />
