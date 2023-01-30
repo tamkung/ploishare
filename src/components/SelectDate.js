@@ -157,7 +157,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 120,
+                  width: 350,
                 }}
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
@@ -173,7 +173,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 120,
+                  width: 350,
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({
@@ -294,17 +294,18 @@ const SelectDate = () => {
 
           <div className='item mb-3'>
             <div type="button" className='card-item'>
-              <div className="bigcard" onClick={() => { window.location = '/booking/' + cars.license }} >
+              <div className="bigcard textover" onClick={() => { window.location = '/booking/' + cars.license }} >
                 <div className="colcard-left" >
 
                   <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} />
 
                 </div>
-                <div className="colcard-right pl-3">
-                  <div>{cars.license + " " + cars.license + " " + cars.brand}</div>
-                  <div>{cars.license}</div>
+                <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
+                  <div style={{ fontWeight: "bold", fontSize: "1.5rem" }}>{cars.license}</div>
                   <div>{cars.brand}</div>
-                  <div>{cars.detail}</div>
+                  <div>
+                    <p className='textover mt-3 d-none d-sm-block' >{cars.detail}</p>
+                  </div>
                 </div>
               </div>
             </div>

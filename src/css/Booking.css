@@ -46,14 +46,14 @@
     border-radius: 15px;
     background-color: white;
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    height: 150px;
-    box-shadow: #c0bbaf 1px 1px 10px;
+    grid-template-columns: 2fr 1.5fr;
+    height: 200px;
+    box-shadow: #c0bbaf 0px 0px 15px;
 
 }
 
 .colcard-left {
-    flex: 1;
+    flex: 2;
     border-radius: 15px 0px 0px 15px;
 }
 
@@ -61,6 +61,8 @@
     background-color: rgb(255, 255, 255);
     flex: 2;
     border-radius: 0px 15px 15px 0px;
+    white-space: wrap;
+    overflow: hidden
 }
 
 .content {
@@ -223,7 +225,8 @@
     }
 
     .bigcard {
-        height: 100px;
+        height: 150px;
+        grid-template-columns: 1.5fr 1.5fr;
 
     }
 

@@ -23,7 +23,7 @@ import './css/AdminStyle.css';
 import '@ionic/react/css/core.css';
 import Home from "./page/Home";
 import Booking from "./page/Booking";
-
+import BookingDetail from "./page/BookingDetail";
 // /* Basic CSS for apps built with Ionic */
 // import '@ionic/react/css/normalize.css';
 // import '@ionic/react/css/structure.css';
@@ -86,6 +86,7 @@ function App() {
               <Route index element={<IndexUser />} />
               <Route path='*' element={<NotFound />} />
               <Route path="/booking/:id" element={<Booking />} />
+              <Route path="/booking-detail/:id" element={<BookingDetail />} />
             </Routes>
             <MenuButton />
           </div>
