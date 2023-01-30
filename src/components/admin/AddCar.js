@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import { API_URL } from "../../Constant";
 import { Province } from './Province';
+import { carBrands, carYear, carColor } from './Car';
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -27,35 +28,6 @@ const formItemLayout = {
         span: 14,
     },
 };
-const carBrand = [
-    "Volvo",
-    "BMW",
-    "Mercedes-Benz",
-    "Porsche",
-    "Lexus",
-    "Peugeot",
-    "GWM",
-    "Audi",
-    "Toyota",
-    "Isuzu",
-    "Honda",
-    "Mitsubishi",
-    "Nissan",
-    "MG",
-    "Kia",
-    "Subaru",
-    "Mazda",
-    "Mini",
-    "Porsche",
-    "Jaguar"
-];
-
-const carModel = {
-    Toyota: ['Toyota', 'Toyota', 'Toyota'],
-    Honda: ['Honda', 'Honda', 'Honda','Honda', 'Honda'],
-};
-
-const carColor = ["ดำ", "ขาว", "แดง", "เขียว", "น้ำเงิน", "ฟ้า", "เหลือง", "ชมพู", "ม่วง"];
 
 const normFile = (e) => {
     console.log('Upload event:', e);
@@ -70,17 +42,15 @@ const AddCar = () => {
 
     const [form] = Form.useForm();
     const [inputCarLicenseText, setInputCarLicenseText] = useState("");
-    const [inputCarYear, setInputCarYear] = useState("");
-    const [inputCarModel, setInputCarModel] = useState("");
     const [inputCarLicenseNum, setInputCarLicenseNum] = useState("");
     const [inputCarSeat, setInputCarSeat] = useState("");
     const [inputCarDetail, setInputCarDetail] = useState("");
 
     const [selectedCarProvince, setSelectedCarProvince] = useState("");
     const [selectedCarBrand, setSelectedCarBrand] = useState("");
+    const [selectedCarModel, setSelectedCarModel] = useState([]);
+    const [selectedCarYear, setSelectedCarYear] = useState("");
     const [selectedCarColor, setSelectedCarColor] = useState("");
-
-    const [selectedCarModel, setSelectedCarModel] = useState("");
 
     const [image, setImage] = useState(null);
     const [disabled, setDisabled] = useState(true)
@@ -93,14 +63,7 @@ const AddCar = () => {
         setInputCarLicenseNum(e.target.value);
         console.log(inputCarLicenseNum);
     };
-    // const handleChangeCarModel = (e) => {
-    //     setInputCarModel(e.target.value);
-    //     console.log(inputCarModel);
-    // };
-    const handleChangeCarYear = (e) => {
-        setInputCarYear(e.target.value);
-        console.log(inputCarYear);
-    };
+
     const handleChangeCarSeat = (e) => {
         setInputCarSeat(e);
         console.log(inputCarSeat);
@@ -110,6 +73,7 @@ const AddCar = () => {
         console.log(inputCarDetail);
     };
 
+
     const handleChangeCarProvince = (value) => {
         setSelectedCarProvince(value);
         console.log(value);
@@ -117,6 +81,7 @@ const AddCar = () => {
 
     const handleChangeCarBrand = (value) => {
         setSelectedCarBrand(value);
+        setSelectedCarModel([])
         console.log(value);
     };
 
@@ -125,10 +90,19 @@ const AddCar = () => {
         console.log(value);
     };
 
+    const handleChangeCarYear = (value) => {
+        setSelectedCarYear(value);
+        console.log(selectedCarYear);
+    };
+
     const handleChangeCarColor = (value) => {
         setSelectedCarColor(value);
         console.log(value);
     };
+
+    const selectedCarModels = selectedCarBrand
+        ? carBrands.find(brand => brand.label === selectedCarBrand).models
+        : [];
 
     const handleUpload = (info) => {
         if (info.file.status !== 'uploading') {
@@ -151,7 +125,7 @@ const AddCar = () => {
                     "license": inputCarLicenseText + "-" + inputCarLicenseNum,
                     "province": selectedCarProvince,
                     "brand": selectedCarBrand,
-                    "model": inputCarModel + " ปี " + inputCarYear,
+                    "model": selectedCarModel + " ปี " + selectedCarYear,
                     "color": selectedCarColor,
                     "seat": inputCarSeat,
                     "detail": inputCarDetail,
@@ -253,8 +227,13 @@ const AddCar = () => {
                                         message: 'กรุณาเลือกยี่ห้อรถ',
                                     },
                                 ]}>
-                                <Select showSearch placeholder="เลือกยี่ห้อรถยนต์" onChange={handleChangeCarBrand} value={selectedCarBrand} >
-                                    {carBrand.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                <Select
+                                    showSearch
+                                    placeholder="เลือกยี่ห้อรถยนต์"
+                                    onChange={handleChangeCarBrand}
+                                    value={selectedCarBrand}
+                                >
+                                    {carBrands.map((brand, index) => <Option key={index} value={brand.label}>{brand.label}</Option>)}
                                 </Select>
                             </Form.Item>
                             <Form.Item label="รุ่นรถ"  >
@@ -263,7 +242,20 @@ const AddCar = () => {
                                     noStyle
                                     rules={[{ required: true, message: 'กรุณาป้อนรุ่นรถ' }]}
                                 >
-                                    <Input className="inline-flex w-auto" value={inputCarModel} onChange={handleChangeCarModel} />
+                                    <Select
+                                        style={{ width: 150 }}
+                                        showSearch
+                                        placeholder="เลือกยี่ห้อรถยนต์"
+                                        onChange={handleChangeCarModel}
+                                        value={selectedCarModel}
+                                        disabled={!selectedCarBrand}
+                                    >
+                                        {selectedCarModels.map(model => (
+                                            <Option key={model} value={model}>
+                                                {model}
+                                            </Option>
+                                        ))}
+                                    </Select>
                                 </Form.Item>
                                 <p className="inline-flex mr-2 ml-2"> ปี </p>
                                 <Form.Item
@@ -271,17 +263,21 @@ const AddCar = () => {
                                     noStyle
                                     rules={[{ required: true, message: 'กรุณาป้อนปีรถ' }]}
                                 >
-                                    <Input className="inline-flex w-auto" value={inputCarYear} onChange={handleChangeCarYear} />
+                                    <Select
+                                        style={{ width: 150 }}
+                                        showSearch
+                                        placeholder="กรุณาป้อนปีรถ"
+                                        onChange={handleChangeCarYear}
+                                        value={selectedCarYear}
+                                    >
+                                        {carYear.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                    </Select>
                                 </Form.Item>
                             </Form.Item>
                             <Form.Item
                                 label="สีรถ"
                                 name={'carColor'}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'กรุณาเลือกสีรถ',
-                                    },
+                                rules={[{ required: true, message: 'กรุณาเลือกสีรถ', },
                                 ]}>
                                 <Select showSearch placeholder="เลือกสีรถยนต์" onChange={handleChangeCarColor} value={selectedCarColor}>
                                     {carColor.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
@@ -293,7 +289,7 @@ const AddCar = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'กรุณาเลือกสีรถ',
+                                        message: 'กรุณาระบุจำนวนที่นั่ง',
                                     },
                                 ]}>
                                 <InputNumber placeholder='ระบุจำนวนที่นั่ง' className="inline-flex w-auto" value={inputCarSeat} onChange={handleChangeCarSeat} min={1} max={10} />
@@ -339,9 +335,7 @@ const AddCar = () => {
                         </Form>
                     </Content>
                 </Layout>
-
             </Layout>
-
         </div >
     );
 };
