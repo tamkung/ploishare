@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
-import NO_Img from '../img/no_img.jpg';
 import '../css/Booking.css';
 
 export default function BookingDetail() {
