@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
 import '../css/Booking.css';
-
+import { Radio, Space, Input, Select } from 'antd';
+import { Province } from '../components/admin/Province';
 export default function BookingDetail() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
-
+    const [radio, setRadio] = useState('กรุงเทพฯ และ ปริมณฑล');
+    const [province, setProvince] = useState();
     useEffect(() => {
         async function getCarById() {
             await axios.get(`${API_URL}api/getcarbyid/${id}`)
@@ -25,6 +27,17 @@ export default function BookingDetail() {
     }, []);
     const { id } = useParams();
 
+    const onRadioChange = (e) => {
+        console.log('radio checked', e.target.value);
+        setRadio(e.target.value);
+
+    };
+    const onProvinceChange = (value) => {
+        console.log(value);
+        setProvince(value);
+
+    };
+
     return (
         <div >
             <div className="app-bar" />
@@ -36,11 +49,35 @@ export default function BookingDetail() {
                         <hr />
                     </div>
                 </div>
-                <div className="itemBook"  >
+                <div className="itemBook bg-success"  >
                     <div className="container">
-                        <div style={{ fontWeight: "bolder", fontSize: "2rem" }}>รายละเอียดการจอง</div>
-                        <hr />
-                        <button className="button-book">จองเลย </button>
+                        <br />
+                        <br />
+                        <div className="container">
+                            <Radio.Group name="radiogroup" defaultValue='กรุงเทพฯ และ ปริมณฑล'
+                                checked={radio}
+                                onChange={onRadioChange}
+                                direction="vertical">
+
+                                <Radio value='กรุงเทพฯ และ ปริมณฑล'>กรุงเทพฯ และ ปริมณฑล</Radio>
+                                <Radio value='ต่างจังหวัด'>ต่างจังหวัด</Radio>
+
+                            </Radio.Group>
+                            <Select
+                                placeholder='เลือกเวลาเริ่มต้น'
+                                style={{
+                                    width: 200,
+                                }}
+                                disabled={radio == 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
+                                onChange={onProvinceChange}
+                                options={Province.map((index) => ({
+
+
+
+                                }))}
+                            />
+                        </div>
+                        <button className="button-book mt-5">จองเลย </button>
                     </div>
                 </div>
             </div>

@@ -208,7 +208,7 @@ const SelectDate = () => {
                 setEndDate(value.format('YYYY-MM-DD'));
                 console.log('Date Start : ', value.format('YYYY-MM-DD'));
                 console.log('Date End : ', value.format('YYYY-MM-DD'));
-              }}
+              }}อ
               locale={locale}
               disabledDate={disabledDate}
               format={'DD-MM-YYYY'}
