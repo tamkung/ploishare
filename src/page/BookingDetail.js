@@ -3,10 +3,25 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
 import '../css/Booking.css';
-import { Radio, Space, Input, Select } from 'antd';
-import { Province } from '../components/admin/Province';
-const { Option } = Select;
+import {
+    Form,
+    Input,
+    Button,
+    Radio,
+    Select,
+    Cascader,
+    DatePicker,
+    InputNumber,
+    TreeSelect,
+    Switch,
+    Checkbox,
+    Upload,
+} from 'antd';
 
+import { Province } from '../components/admin/Province';
+import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+const { Option } = Select;
+const { TextArea } = Input;
 export default function BookingDetail() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
@@ -46,13 +61,13 @@ export default function BookingDetail() {
             {/* {Loading !== false ? */}
             <div className="flexbook">
                 <div className="itemBook" >
-                    <div className="container">
+                    <div >
                         <div style={{ fontWeight: "bolder", fontSize: "2rem" }}>รายละเอียดการจอง</div>
                         <hr />
                     </div>
                 </div>
-                <div className="itemBook bg-success"  >
-                    <div className="container">
+                <div className="itemBook" style={{ background: "red" }}  >
+                    <div>
                         <br />
                         <br />
                         <div className="container">
@@ -66,12 +81,12 @@ export default function BookingDetail() {
 
                             </Radio.Group>
                             <Select
-                                placeholder='เลือกเวลาเริ่มต้น'
+                                placeholder='เลือกจังหวัด'
                                 showSearch
                                 style={{
                                     width: 200,
                                 }}
-                                disabled={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
+                                hidden={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
                                 onChange={onProvinceChange}>
                                 {Province.map((item, index) => {
                                     return (
@@ -80,6 +95,47 @@ export default function BookingDetail() {
                                     )
                                 })}
                             </Select>
+                        </div>
+                        <div className="contianer">
+                            <Form
+                                labelCol={{
+                                    span: 4,
+                                }}
+                                wrapperCol={{
+                                    span: 14,
+                                }}
+                                layout="horizontal"
+                                style={{
+                                    maxWidth: 600,
+                                }}
+                            >
+                                <Form.Item label="ชื่อ นามสกุล">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="เลขประจำตัว">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="เบอร์โทรศัพท์">
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item label="Upload" valuePropName="fileList">
+                                    <Upload action="/upload.do" listType="picture-card">
+                                        <div>
+                                            <PlusOutlined />
+                                            <div
+                                                style={{
+                                                    marginTop: 8,
+                                                }}
+                                            >
+                                                Upload
+                                            </div>
+                                        </div>
+                                    </Upload>
+                                </Form.Item>
+                                <Form.Item label="หมายเหตุ">
+                                    <TextArea rows={4} />
+                                </Form.Item>
+                            </Form>
                         </div>
                         <button className="button-book mt-5">จองเลย </button>
                     </div>
