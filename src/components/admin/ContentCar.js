@@ -336,7 +336,7 @@ function ContentCar() {
                             background: '#fff',
                         }}
                     >
-                        <div style={{ textAlign: "right",paddingBottom:20 }}>
+                        <div style={{ textAlign: "right", paddingBottom: 20 }}>
                             <CSVLink style={{ marginRight: 10 }} className='btn-add' data={originData} headers={headers}>
                                 Export
                             </CSVLink>
