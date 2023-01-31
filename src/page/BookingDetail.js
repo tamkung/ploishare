@@ -16,11 +16,12 @@ import {
     Switch,
     Checkbox,
     Upload,
-    Modal
+    Modal,
+
 } from 'antd';
 
 import { Province } from '../components/admin/Province';
-import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { UserOutlined, CloudUploadOutlined } from '@ant-design/icons';
 const { Option } = Select;
 const { TextArea } = Input;
 export default function BookingDetail() {
@@ -28,19 +29,16 @@ export default function BookingDetail() {
     const [Loading, setLoading] = useState(false);
     const [radio, setRadio] = useState('กรุงเทพฯ และ ปริมณฑล');
     const [province, setProvince] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const info = () => {
-        Modal.info({
-          title: 'This is a notification message',
-          content: (
-            <div>
-              <p>some messages...some messages...</p>
-              <p>some messages...some messages...</p>
-            </div>
-          ),
-          onOk() {},
-        });
-      };
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
 
     useEffect(() => {
         async function getCarById() {
@@ -139,7 +137,7 @@ export default function BookingDetail() {
                                 <Form.Item label="Upload" valuePropName="fileList">
                                     <Upload action="/upload.do" listType="picture-card">
                                         <div>
-                                            <PlusOutlined />
+                                            <CloudUploadOutlined />
                                             <div
                                                 style={{
                                                     marginTop: 8,
@@ -163,8 +161,12 @@ export default function BookingDetail() {
                                 onChange={(e) => setComponentDisabled(e.target.checked)}
                             />
 
-                            <button type="button" onClick={info} > ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
-                            
+                            <button style={{ marginLeft: "10px", color: !componentDisabled ? 'gray' : 'blue', textDecoration: "underline" }} className="text-primary" type="button" onClick={showModal} >ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
+                            <Modal okButtonProps={{ style: { display: 'none' } }} title="เงื่อนไขและข้อกำหนด" open={isModalOpen} onCancel={handleCancel}>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                                <p>Some contents...</p>
+                            </Modal>
                         </div>
                         <button className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
                     </div>
