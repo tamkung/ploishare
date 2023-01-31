@@ -55,6 +55,11 @@ export default function BookingDetail() {
 
     };
 
+    const [componentDisabled, setComponentDisabled] = useState(false);
+    const onFormLayoutChange = ({ disabled }) => {
+        setComponentDisabled(disabled);
+    };
+    console.log(componentDisabled);
     return (
         <div >
             <div className="app-bar" />
@@ -66,7 +71,7 @@ export default function BookingDetail() {
                         <hr />
                     </div>
                 </div>
-                <div className="itemBook" style={{ background: "red" }}  >
+                <div className="itemBook" style={{ textAlign: "left" }} >
                     <div>
                         <br />
                         <br />
@@ -75,40 +80,38 @@ export default function BookingDetail() {
                                 checked={radio}
                                 onChange={onRadioChange}
                                 direction="vertical">
-
                                 <Radio value='กรุงเทพฯ และ ปริมณฑล'>กรุงเทพฯ และ ปริมณฑล</Radio>
                                 <Radio value='ต่างจังหวัด'>ต่างจังหวัด</Radio>
-
                             </Radio.Group>
-                            <Select
-                                placeholder='เลือกจังหวัด'
-                                showSearch
-                                style={{
-                                    width: 200,
-                                }}
-                                hidden={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}
-                                onChange={onProvinceChange}>
-                                {Province.map((item, index) => {
-                                    return (
-                                        item.geography_id !== 2.5 ?
-                                            <Option key={index} value={item.name_th}>{item.name_th}</Option> : null
-                                    )
-                                })}
-                            </Select>
+
                         </div>
-                        <div className="contianer">
+                        <div className="contianer pl-2 pr-2">
                             <Form
                                 labelCol={{
-                                    span: 4,
+                                    span: 6,
                                 }}
                                 wrapperCol={{
-                                    span: 14,
+                                    span: 12,
                                 }}
                                 layout="horizontal"
-                                style={{
-                                    maxWidth: 600,
-                                }}
+
                             >
+                                <Form.Item label="จังหวัดที่คุณต้องการเดินทาง" hidden={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}>
+                                    <Select
+                                        placeholder='เลือกจังหวัด'
+                                        showSearch
+                                        style={{
+                                            width: '100%',
+                                        }}
+                                        onChange={onProvinceChange}>
+                                        {Province.map((item, index) => {
+                                            return (
+                                                item.geography_id !== 2.5 ?
+                                                    <Option key={index} value={item.name_th}>{item.name_th}</Option> : null
+                                            )
+                                        })}
+                                    </Select>
+                                </Form.Item>
                                 <Form.Item label="ชื่อ นามสกุล">
                                     <Input />
                                 </Form.Item>
@@ -135,9 +138,19 @@ export default function BookingDetail() {
                                 <Form.Item label="หมายเหตุ">
                                     <TextArea rows={4} />
                                 </Form.Item>
+
+
                             </Form>
                         </div>
-                        <button className="button-book mt-5">จองเลย </button>
+                        <div className="mt-2" style={{ textAlign: "center" }}>
+                            <Checkbox
+                                checked={componentDisabled}
+                                onChange={(e) => setComponentDisabled(e.target.checked)}
+                            >
+                                ฉันอ่านและยอมรับข้อกำหนดทั้งหมด
+                            </Checkbox>
+                        </div>
+                        <button className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
                     </div>
                 </div>
             </div>
