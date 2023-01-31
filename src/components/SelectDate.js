@@ -101,7 +101,7 @@ const SelectDate = () => {
         <Form className='datapick d-none d-xl-block' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
-            <DatePicker className='width-booking'
+            <DatePicker className='width-booking' style={{ width: "45%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -114,7 +114,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking'
+            <DatePicker className='width-booking' style={{ width: "45%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -179,6 +179,7 @@ const SelectDate = () => {
                   value: hour,
                 }))}
               />
+              <div><strong>จำนวน 00 วัน 00 ขั่วโมง</strong></div>
             </Space>
 
             {/* <TimePicker style={{ width: "45%" }}
@@ -208,7 +209,7 @@ const SelectDate = () => {
                 setEndDate(value.format('YYYY-MM-DD'));
                 console.log('Date Start : ', value.format('YYYY-MM-DD'));
                 console.log('Date End : ', value.format('YYYY-MM-DD'));
-              }}อ
+              }} อ
               locale={locale}
               disabledDate={disabledDate}
               format={'DD-MM-YYYY'}
@@ -240,7 +241,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 120,
+                  width: 140,
                 }}
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
@@ -256,7 +257,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 120,
+                  width: 140,
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({
@@ -264,6 +265,7 @@ const SelectDate = () => {
                   value: hour,
                 }))}
               />
+
             </Space>
 
             {/* <TimePicker style={{ width: "45%" }}
@@ -278,7 +280,8 @@ const SelectDate = () => {
               }}
             /> */}
           </div>
-          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+          <div><strong>จำนวน วัน ชั่วโมง</strong></div>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext mt-3">Search</button>
         </Form>
 
 
