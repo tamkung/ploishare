@@ -10,6 +10,7 @@ import {
     Typography,
     Image,
 } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -123,30 +124,31 @@ function ContentCar() {
 
     const updateCarStatus = (record) => {
         console.log(record);
-        // Swal.fire({
-        //     title: 'Are you sure?',
-        //     text: "You won't be able to revert this!",
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Yes, update it!'
-        // }).then((result) => {
-        //     if (result.isConfirmed) {
-        //         axios.post(API_URL + 'api/updatecar/' + license).then((response) => {
-        //             console.log(response.data);
-        //         });
-        //         Swal.fire(
-        //             'Updated!',
-        //             'Your file has been updated.',
-        //             'success'
-        //         ).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 window.location.reload();
-        //             }
-        //         });
-        //     }
-        // })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(API_URL + 'api/updatecar', { license: record.license, status: record.status === 1 ? 0 : 1 }
+                ).then((response) => {
+                    console.log(response.data);
+                });
+                Swal.fire(
+                    'Updated!',
+                    'Your file has been updated.',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.reload();
+                    }
+                });
+            }
+        })
     };
 
     const isEditing = (record) => record.key === editingKey;
@@ -228,30 +230,42 @@ function ContentCar() {
         {
             title: 'รูปภาพ',
             dataIndex: 'image',
+            align: 'center',
             render: (image) => <Image
                 width={75}
                 height={75}
                 src={image !== null ? image : NO_Img}
             />,
-            width: '10%',
+            width: '8%',
             editable: true,
         },
         {
             title: 'สถานะ',
             dataIndex: 'status',
-            render: (status) => <button
-                className={status === 1 ? 'btn btn-success' : 'btn btn-danger'}
-                onClick={updateCarStatus(status)}
-            >
-                {status === 1 ? 'ปกติ' : 'พักงาน'}
-            </button>,
-            width: '8%',
-           // editable: true,
+            width: '7%',
+            align: 'center',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+
+                    </span>
+                ) : (
+                    <button
+                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-danger'}
+                        onClick={() => updateCarStatus(record)}
+                    >
+                        {record.status === 1 ? 'ปกติ' : 'พักงาน'}
+                    </button>
+                );
+            },
+            // editable: true,
         },
         {
             title: 'ดำเนินการ',
             dataIndex: 'operation',
             width: '7%',
+            align: 'center',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
@@ -270,7 +284,7 @@ function ContentCar() {
                     </span>
                 ) : (
                     <Typography.Link disabled={editingKey !== ''} onClick={() => deleteCar(record)}>
-                        Delete
+                        <DeleteOutlined />
                     </Typography.Link>
                 );
             },
