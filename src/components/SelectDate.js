@@ -11,8 +11,10 @@ import '../css/style.css';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import wallpaper from '../img/wallpaper-car.jpg'
+
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -293,8 +295,8 @@ const SelectDate = () => {
       <div className='flexbox' >
         {getCars.map((cars, index) => (
 
-          <div className='item mb-3'>
-            <div type="button" className='card-item'>
+          <div className='item mb-3' >
+            <div type="button" className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
               <div className="bigcard textover" onClick={() => { window.location = '/booking/' + cars.license }} >
                 <div className="colcard-left" >
 
@@ -304,9 +306,12 @@ const SelectDate = () => {
                 <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
                   <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
                   <div>{cars.brand}</div>
-                  <div>{cars.license}</div>
                   <div>จำนวน {cars.seat} ที่นั่ง</div>
+                  <div>{cars.license}</div>
+
+                 
                 </div>
+                
               </div>
             </div>
           </div>

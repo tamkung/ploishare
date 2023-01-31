@@ -16,6 +16,7 @@ import {
     Switch,
     Checkbox,
     Upload,
+    Modal
 } from 'antd';
 
 import { Province } from '../components/admin/Province';
@@ -27,6 +28,20 @@ export default function BookingDetail() {
     const [Loading, setLoading] = useState(false);
     const [radio, setRadio] = useState('กรุงเทพฯ และ ปริมณฑล');
     const [province, setProvince] = useState();
+
+    const info = () => {
+        Modal.info({
+          title: 'This is a notification message',
+          content: (
+            <div>
+              <p>some messages...some messages...</p>
+              <p>some messages...some messages...</p>
+            </div>
+          ),
+          onOk() {},
+        });
+      };
+
     useEffect(() => {
         async function getCarById() {
             await axios.get(`${API_URL}api/getcarbyid/${id}`)
@@ -146,9 +161,10 @@ export default function BookingDetail() {
                             <Checkbox
                                 checked={componentDisabled}
                                 onChange={(e) => setComponentDisabled(e.target.checked)}
-                            >
-                                ฉันอ่านและยอมรับข้อกำหนดทั้งหมด
-                            </Checkbox>
+                            />
+
+                            <button type="button" onClick={info} > ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
+                            
                         </div>
                         <button className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
                     </div>
