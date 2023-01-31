@@ -75,11 +75,12 @@ function ContentCar() {
                         license: item.license,
                         province: item.province,
                         brand: item.brand,
-                        model:item.model,
+                        model: item.model,
                         color: item.color,
                         seat: item.seat,
                         detail: item.detail,
                         image: item.image,
+                        status: item.status,
                     });
                 });
             });
@@ -89,6 +90,7 @@ function ContentCar() {
     }, []);
 
     const deleteCar = (record) => {
+        console.log(record);
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -117,19 +119,38 @@ function ContentCar() {
                 });
             }
         })
+    };
 
+    const updateCarStatus = (record) => {
+        console.log(record);
+        // Swal.fire({
+        //     title: 'Are you sure?',
+        //     text: "You won't be able to revert this!",
+        //     icon: 'warning',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Yes, update it!'
+        // }).then((result) => {
+        //     if (result.isConfirmed) {
+        //         axios.post(API_URL + 'api/updatecar/' + license).then((response) => {
+        //             console.log(response.data);
+        //         });
+        //         Swal.fire(
+        //             'Updated!',
+        //             'Your file has been updated.',
+        //             'success'
+        //         ).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 window.location.reload();
+        //             }
+        //         });
+        //     }
+        // })
     };
 
     const isEditing = (record) => record.key === editingKey;
-    const edit = (record) => {
-        form.setFieldsValue({
-            name: '',
-            age: '',
-            address: '',
-            ...record,
-        });
-        setEditingKey(record.key);
-    };
+
     const cancel = () => {
         setEditingKey('');
     };
@@ -171,13 +192,13 @@ function ContentCar() {
         {
             title: 'จังหวัด',
             dataIndex: 'province',
-            width: '15%',
+            width: '10%',
             editable: true,
         },
         {
             title: 'ยี่ห้อ',
             dataIndex: 'brand',
-            width: '10%',
+            width: '8%',
             editable: true,
         },
         {
@@ -212,12 +233,25 @@ function ContentCar() {
                 height={75}
                 src={image !== null ? image : NO_Img}
             />,
-            width: '15%',
+            width: '10%',
             editable: true,
         },
         {
-            title: 'operation',
+            title: 'สถานะ',
+            dataIndex: 'status',
+            render: (status) => <button
+                className={status === 1 ? 'btn btn-success' : 'btn btn-danger'}
+                onClick={updateCarStatus(status)}
+            >
+                {status === 1 ? 'ปกติ' : 'พักงาน'}
+            </button>,
+            width: '8%',
+           // editable: true,
+        },
+        {
+            title: 'ดำเนินการ',
             dataIndex: 'operation',
+            width: '7%',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
