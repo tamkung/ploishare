@@ -246,6 +246,7 @@ function ContentCar() {
             dataIndex: 'image',
             align: 'center',
             render: (image) => <Image
+               
                 width={75}
                 height={75}
                 src={image !== null ? image : NO_Img}
@@ -343,7 +344,7 @@ function ContentCar() {
                             <Link to={'/addcar'} className='btn-add'> + Add</Link>
                         </div>
                         <Form form={form} component={false}>
-                            <Table loading={data.length === 0 ? true : false}
+                            <Table loading={data.length === 0 ? true : false} 
                                 components={{
                                     body: {
                                         cell: EditableCell,
