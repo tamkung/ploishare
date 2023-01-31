@@ -11,6 +11,8 @@ import {
     Image,
 } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
+import { CSVLink } from "react-csv";
+
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -63,6 +65,18 @@ function ContentCar() {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
+
+    const headers = [
+        { label: "ป้ายทะเบียน", key: "license" },
+        { label: "จังหวัด", key: "province" },
+        { label: "ยี้ห้อรถ", key: "brand" },
+        { label: "รุ่น", key: "model" },
+        { label: "สี", key: "color" },
+        { label: "จำนวนที่นั่ง", key: "seat" },
+        { label: "รายละเอียด", key: "detail" },
+        { label: "รูปภาพ", key: "image" },
+        { label: "สถานะ", key: "status" },
+    ];
 
     useEffect(() => {
 
@@ -322,8 +336,11 @@ function ContentCar() {
                             background: '#fff',
                         }}
                     >
-                        <div style={{ textAlign: "right" }}>
-                            <Link to={'/addcar'}><button className='btn-add'> + Add</button></Link>
+                        <div style={{ textAlign: "right",paddingBottom:20 }}>
+                            <CSVLink style={{ marginRight: 10 }} className='btn-add' data={originData} headers={headers}>
+                                Export
+                            </CSVLink>
+                            <Link to={'/addcar'} className='btn-add'> + Add</Link>
                         </div>
                         <Form form={form} component={false}>
                             <Table loading={data.length === 0 ? true : false}
