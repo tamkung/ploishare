@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from 'antd';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
@@ -20,6 +20,9 @@ const contentStyle = {
 function Booking() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
+    const location = useLocation()
+    const { value } = location.state
+    console.log(value)
 
     useEffect(() => {
         async function getCarById() {
@@ -63,8 +66,11 @@ function Booking() {
                                 <li>สีรถ : {getCar.color}</li>
                                 <li>จำนวน : {getCar.seat} ที่นั่ง</li>
                             </ul>
-                            <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}
-                                onClick={() => { window.location = '/booking-detail/' +  getCar.license  }}> จองเลย </button>
+                            <Link to={"/booking-detail/" + getCar.license} state={{ value: value }}>
+                                <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}>
+                                    จองเลย
+                                </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="detailCar">Car Detail : {getCar.detail}</div>

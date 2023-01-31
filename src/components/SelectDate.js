@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Form, DatePicker, TimePicker, Switch, Select, Space } from 'antd';
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -26,7 +27,7 @@ const SelectDate = () => {
 
   const [getCars, setGetCars] = useState([]);
 
-  const hourData = ['7.00', '7.30', '8.00', '8.30', '9.00', '9.30', '10.00', '10.30', '11.00', '11.30', '12.00', '12.30', '13.00', '13.30', '14.00', '14.30', '15.00', '15.30', '16.00', '16.30', '17.00', '17.30', '18.00'];
+  const hourData = ['07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:.00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'];
 
   const handleStartTimeChange = (value) => {
     setStartTime(value);
@@ -75,7 +76,7 @@ const SelectDate = () => {
   const availableCar = () => {
 
     axios
-      .get(API_URL + `/api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
+      .get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
       .then((response) => {
         console.log(response.data);
         setGetCars(response.data);
@@ -85,9 +86,18 @@ const SelectDate = () => {
 
   const handleSubmit = async (e) => {
 
-    console.log('StartDateTime : ', startDate + startTime);
+    console.log('StartDateTime : ', startDate, startTime);
     console.log('EndDateTime : ', endDate, endTime);
-    availableCar();
+    if (startDate == null || endDate == null || startTime == "" || endTime == "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+      })
+    } else {
+      availableCar();
+    }
+
 
   };
 
@@ -297,7 +307,7 @@ const SelectDate = () => {
 
           <div className='item mb-3' >
             <div type="button" className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
-              <div className="bigcard textover" onClick={() => { window.location = '/booking/' + cars.license }} >
+              <Link className="bigcard textover" to={"/booking/" + cars.license} state={{ value: { startDate, endDate, startTime, endTime } }} >
                 <div className="colcard-left" >
 
                   <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} />
@@ -309,10 +319,10 @@ const SelectDate = () => {
                   <div>จำนวน {cars.seat} ที่นั่ง</div>
                   <div>{cars.license}</div>
 
-                 
+
                 </div>
-                
-              </div>
+
+              </Link>
             </div>
           </div>
 
