@@ -42,17 +42,17 @@ function Booking() {
     const { id } = useParams();
     return (
         <div >
-            <div className="app-bar" />
+            <div className="app-bar mb-5" />
             {Loading !== false ?
-                <div className="flexbook">
+                <div className="flexbook" style={{ borderRadius: "15px", marginLeft: "15px", marginRight: "15px", background: "white" }}>
                     <div className="itemBook" >
                         {/* <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} /> */}
-                        <Carousel autoplay>
-                            <div>
-                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
+                        <Carousel autoplay style={{ borderRadius: "15px" }}>
+                            <div >
+                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} style={{ borderRadius: "15px" }} />
                             </div>
                             <div>
-                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} />
+                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} style={{ borderRadius: "15px" }} />
                             </div>
                         </Carousel>
                     </div>
@@ -73,7 +73,7 @@ function Booking() {
                             </Link>
                         </div>
                     </div>
-                    <div className="detailCar">Car Detail : {getCar.detail}</div>
+                    <div className="detailCar mb-3">Car Detail : {getCar.detail}</div>
 
                 </div>
 

@@ -173,12 +173,12 @@ export default function BookingDetail() {
         <div >
             <div className="app-bar" />
             {/* {Loading !== false ? */}
-            <div className="flexbook">
+            <div className="flexbook mt-5" style={{ borderRadius: "15px", background: "white", marginLeft: "15px", marginRight: "15px", padding: "15px" }}>
                 <div className="itemBook" >
                     <div >
-                        <div style={{ fontWeight: "bolder", fontSize: "2rem" }}>รายละเอียดการจอง</div>
+                        <div style={{ fontWeight: "bolder", fontSize: "1.4rem" }}>รายละเอียดการจอง</div>
                         <hr />
-                        <img src={getCar.image} alt={getCar.name} />
+                        <img className="mt-3" src={getCar.image} alt={getCar.name} style={{ borderRadius: "15px" }} />
                         <div style={{ fontWeight: "bolder", fontSize: "1.5rem" }}>{getCar.license}</div>
                         <div style={{ fontWeight: "bolder", fontSize: "1.5rem" }}>{getCar.model}</div>
                         <h2>วันที่ใช้รถ : {value.startDate}</h2>
@@ -243,7 +243,7 @@ export default function BookingDetail() {
                                 <Form.Item label="เบอร์โทรศัพท์" name={"phone"}>
                                     <Input value={phone} onChange={handleChangePhone} />
                                 </Form.Item>
-                                <Form.Item label="Upload" valuePropName="fileList">
+                                <Form.Item label="เอกสารขออนุญาติ" valuePropName="fileList">
                                     <Upload action="/upload.do" listType="picture-card">
                                         <div>
                                             <CloudUploadOutlined />

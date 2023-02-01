@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Form, DatePicker, TimePicker, Switch, Select, Space } from 'antd';
+import { Button, Form, DatePicker, TimePicker, Switch, Select, Space, Tag } from 'antd';
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ import wallpaper from '../img/wallpaper-car.jpg'
 
 //react icon
 import * as BsIcon5 from 'react-icons/bs'
-import { InfoCircleOutlined } from '@ant-design/icons';
+import { InfoCircleOutlined, CarOutlined } from '@ant-design/icons';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -300,9 +300,13 @@ const SelectDate = () => {
 
       </div>
 
-      <div className='container text-success'>รถว่าง {getCars.length} คัน</div>
-
-      <div className='flexbox' >
+   
+      <div className='flexbox mt-4' >
+        <Space className="mb-3" size={[0, 8]} wrap style={{ width:"100%" }}>
+          <Tag color="#ffffff" style={{ color: "#000000" }}>
+            รถว่าง {getCars.length} คัน
+          </Tag>
+        </Space>
         {getCars.map((cars, index) => (
 
           <div className='item mb-3' >
