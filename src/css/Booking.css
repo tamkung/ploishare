@@ -27,7 +27,7 @@
 
 .card-item {
     border-radius: 20px;
-
+    box-shadow: #000000 0px 0px 15px;
 }
 
 .textover {
@@ -37,9 +37,10 @@
 }
 
 .card-item:hover {
-    box-shadow: 0px 5px 10px #adadad;
+ 
     transition: 300ms;
-    border: solid 5px #ff5e01;
+    border: solid 5px #fac34d;
+    
 }
 
 .bigcard {
@@ -48,7 +49,7 @@
     display: grid;
     grid-template-columns: 2fr 1.5fr;
     height: 200px;
-    box-shadow: #c0bbaf 0px 0px 15px;
+    
 
 }
 
