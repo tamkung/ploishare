@@ -89,11 +89,15 @@ const ContentBooking = () => {
                 response.data.map((item, index) => {
                     originData.push({
                         key: index + 1,
+                        id: item.id,
+                        province: item.province,
                         uName: item.uName,
-                        EmpoyeeNo: item.EmpoyeeNo,
+                        empoyeeNo: item.empoyeeNo,
+                        uEmail: item.uEmail,
                         uPhone: item.uPhone,
                         uSect: item.uSect,
                         uPart: item.uPart,
+                        note: item.note,
                         startDateTime: new Date(Date.UTC(
                             new Date(item.startDateTime).getUTCFullYear(),
                             new Date(item.startDateTime).getUTCMonth(),
@@ -109,8 +113,10 @@ const ContentBooking = () => {
                             new Date(item.endDateTime).getUTCHours() - 7,
                             new Date(item.endDateTime).getUTCMinutes(),
                             new Date(item.endDateTime).getUTCSeconds())).toLocaleString('th', options),
+                        bookingDate: item.bookingDate,
                         cLicense: item.cLicense,
                         day: item.day + ' วัน',
+                        status: item.status,
                     });
                 });
             });
@@ -160,62 +166,99 @@ const ContentBooking = () => {
         {
             title: '#',
             dataIndex: 'key',
-            width: '5%',
+            editable: true,
+        },
+        {
+            title: 'จังหวัดที่เดินทางไป',
+            dataIndex: 'province',
+            //width: '10%',
             editable: true,
         },
         {
             title: 'ชือ-สกุลผู้จอง',
             dataIndex: 'uName',
-            width: '15%',
+            // width: '10%',
             editable: true,
         },
         {
             title: 'รหัสพนักงาน',
             dataIndex: 'EmpoyeeNo',
-            width: '10%',
+            // width: '10%',
+            editable: true,
+        },
+        {
+            title: 'อีเมล์',
+            dataIndex: 'uEmail',
+            // width: '10%',
             editable: true,
         },
         {
             title: 'เบอร์โทรศัพท์',
             dataIndex: 'uPhone',
-            width: '10%',
+            //width: '10%',
             editable: true,
         },
         {
             title: 'หน่วยงาน',
             dataIndex: 'uSect',
-            width: '10%',
+            // width: '10%',
             editable: true,
         },
         {
             title: 'แผนก',
             dataIndex: 'uPart',
-            width: '10%',
+            //width: '10%',
             editable: true,
         },
         {
             title: 'วันที่ใช้รถ',
             dataIndex: 'startDateTime',
-            width: '10%',
+            //width: '10%',
             editable: true,
         },
         {
             title: 'วันที่คืนรถ',
             dataIndex: 'endDateTime',
-            width: '10%',
+            // width: '10%',
+            editable: true,
+        },
+        {
+            title: 'วันที่จอง',
+            dataIndex: 'bookingDate',
+            //width: '10%',
             editable: true,
         },
         {
             title: 'ทะเบียนรถ',
             dataIndex: 'cLicense',
-            width: '10%',
+            // width: '10%',
             editable: true,
         },
         {
-            title: 'จำยวนวัน',
+            title: 'จำนวนวัน',
             dataIndex: 'day',
-            width: '10%',
+            //width: '10%',
             editable: true,
+        },
+        {
+            title: 'สถานะ',
+            dataIndex: 'status',
+            //width: '10%',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+
+                    </span>
+                ) : (
+                    <button
+                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-danger'}
+                        //onClick={() => updateCarStatus(record)}
+                    >
+                        {record.status === 1 ? 'ยืนยัน' : 'รอยืนยัน'}
+                    </button>
+                );
+            },
         },
         {
             title: 'operation',
@@ -291,6 +334,7 @@ const ContentBooking = () => {
                                 pagination={{
                                     onChange: cancel,
                                 }}
+                                scroll={{ x: 1500 }}
                             />
                         </Form>
 
