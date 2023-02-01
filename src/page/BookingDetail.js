@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { API_URL } from "../Constant";
+import { API_URL, API_URL_SignUp } from "../Constant";
 import Swal from "sweetalert2";
 import '../css/Booking.css';
 import {
@@ -84,7 +84,7 @@ export default function BookingDetail() {
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
         try {
-            await axios.post(API_URL + 'api/addbooking',
+            await axios.post(API_URL_SignUp + 'api/addbooking',
                 {
                     "id": Date.now(),
                     "province": province === null ? "กรุงเทพฯ และ ปริมณฑล" : province,
