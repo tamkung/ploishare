@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+document.body.style.backgroundColor = "#2b82f5";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 

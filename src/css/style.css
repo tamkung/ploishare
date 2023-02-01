@@ -1,3 +1,4 @@
+
 body {
     height: 100%;
 }
@@ -75,7 +76,7 @@ body {
 }
 
 .shd {
-    box-shadow: 0px 5px 10px #adadad
+    box-shadow: 0px 5px 10px #313131
 }
 .bg-color{
     background: linear-gradient(90deg, rgba(224,224,224,1) 50%, rgba(252,252,252,1) 66%, rgba(223,223,223,1) 87%);
