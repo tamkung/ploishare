@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-document.body.style.backgroundColor = "#11518A";
+document.body.style.background = "linear-gradient(to bottom, #11518A, #0A345A )";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 

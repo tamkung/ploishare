@@ -109,8 +109,8 @@ const SelectDate = () => {
     <div>
       {/*--------------------------------------------------------------- Desktop --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-xl-block' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
-        <Form className='datapick d-none d-xl-block' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
+        <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking' style={{ width: "45%" }}
@@ -141,7 +141,7 @@ const SelectDate = () => {
             <Switch
               checked={endDateDisabled}
               onClick={onEndDateSwitchChange}
-              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? 'rgba(249, 210, 12, 1' : 'gray' }}
             />
 
           </div>
@@ -212,8 +212,8 @@ const SelectDate = () => {
 
       {/*--------------------------------------------------------------- Mobile --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-block d-sm-none' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} />
-        <Form className='datapick d-block d-sm-none' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", width: "90%", top: "15%" }}>
+        <img className='d-block d-sm-none filter-low' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <Form className='datapick d-block d-sm-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", width: "90%", top: "15%" }}>
           <div className='mb-3'>
             <DatePicker className='width-booking' style={{ width: "35%" }}
               onChange={(value, dateString) => {
@@ -243,7 +243,7 @@ const SelectDate = () => {
             <Switch
               checked={endDateDisabled}
               onClick={onEndDateSwitchChange}
-              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? '#3355ff' : 'gray' }}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? 'rgba(249, 210, 12, 1' : 'gray' }}
             />
 
           </div>
@@ -300,9 +300,9 @@ const SelectDate = () => {
 
       </div>
 
-   
+
       <div className='flexbox mt-4' >
-        <Space className="mb-3" size={[0, 8]} wrap style={{ width:"100%" }}>
+        <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
           <Tag color="#ffffff" style={{ color: "#000000" }}>
             รถว่าง {getCars.length} คัน
           </Tag>
@@ -310,7 +310,7 @@ const SelectDate = () => {
         {getCars.map((cars, index) => (
 
           <div className='item mb-3' >
-            <div type="button" className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
+            <div className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
               <Link className="bigcard textover" to={"/booking/" + cars.license} state={{ value: { startDate, endDate, startTime, endTime } }} >
                 <div className="colcard-left" >
 

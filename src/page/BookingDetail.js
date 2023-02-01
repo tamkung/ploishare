@@ -13,6 +13,7 @@ import {
     Upload,
     Modal,
     Button,
+    Descriptions
 
 } from 'antd';
 import { Province } from '../components/admin/Province';
@@ -176,15 +177,22 @@ export default function BookingDetail() {
             <div className="flexbook mt-5" style={{ borderRadius: "15px", background: "white", marginLeft: "15px", marginRight: "15px", padding: "15px" }}>
                 <div className="itemBook" >
                     <div >
-                        <div style={{ fontWeight: "bolder", fontSize: "1.4rem" }}>รายละเอียดการจอง</div>
+                        <div style={{ fontWeight: "bolder", fontSize: "1.6rem" }}>การจอง</div>
                         <hr />
-                        <img className="mt-3" src={getCar.image} alt={getCar.name} style={{ borderRadius: "15px" }} />
-                        <div style={{ fontWeight: "bolder", fontSize: "1.5rem" }}>{getCar.license}</div>
-                        <div style={{ fontWeight: "bolder", fontSize: "1.5rem" }}>{getCar.model}</div>
-                        <h2>วันที่ใช้รถ : {value.startDate}</h2>
-                        <h2>เวลาที่ใช้รถ : {value.startTime}</h2>
-                        <h2>วันที่คืนรถ : {value.endDate}</h2>
-                        <h2>เวลที่คืนรถ : {value.endTime}</h2>
+                        <Descriptions className="mt-3" title="รายละเอียดการจอง">
+                            <Descriptions.Item label="รถ">{getCar.brand} {getCar.model}</Descriptions.Item>
+                            <Descriptions.Item label="สี">{getCar.color}</Descriptions.Item>
+                            <Descriptions.Item label="ทะเบียน">{getCar.license}</Descriptions.Item>
+                            <Descriptions.Item label="วันที่ใช้รถ">{value.startDate} {value.startTime}</Descriptions.Item>
+                            <Descriptions.Item label="วันที่คืนรถ">{value.endDate} {value.endTime}</Descriptions.Item>
+
+                        </Descriptions>
+
+
+
+                        <hr className="mt-3" />
+                        <img className="mt-3" src={getCar.image} alt={getCar.name} style={{ borderRadius: "15px", width: '100%' }} />
+
                     </div>
                 </div>
                 <div className="itemBook" style={{ textAlign: "left" }} >
@@ -243,7 +251,7 @@ export default function BookingDetail() {
                                 <Form.Item label="เบอร์โทรศัพท์" name={"phone"}>
                                     <Input value={phone} onChange={handleChangePhone} />
                                 </Form.Item>
-                                <Form.Item label="เอกสารขออนุญาติ" valuePropName="fileList">
+                                <Form.Item label="เอกสารขออนุญาต" valuePropName="fileList">
                                     <Upload action="/upload.do" listType="picture-card">
                                         <div>
                                             <CloudUploadOutlined />
