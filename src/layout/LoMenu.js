@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { IonContent, IonFab, IonFabButton, IonFabList, IonHeader, IonIcon, IonTitle, IonToolbar } from '@ionic/react';
-import { chevronDownCircle, chevronForwardCircle, chevronUpCircle, colorPalette, document, globe, logOut, home } from 'ionicons/icons';
+import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/react';
+import { chevronUpCircle, document, logOut, home } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import '../css/Booking.css';
 import SignOut from '../components/auth/SignOut';
@@ -19,14 +19,14 @@ const MenuButton = () => (
             <IonIcon icon={logOut}></IonIcon>
           </IonFabButton>
           <IonFabButton>
-            <Link to={"bookinglist"}><IonIcon icon={document}></IonIcon></Link>
+            <Link to={"/booking-list"}><IonIcon icon={document}></IonIcon></Link>
           </IonFabButton>
           <IonFabButton onClick={() => window.location = "/"}>
             <IonIcon icon={home} ></IonIcon>
-        </IonFabButton>
-      </IonFabList>
-    </IonFab>
-  </IonContent>
+          </IonFabButton>
+        </IonFabList>
+      </IonFab>
+    </IonContent>
   </div >
 );
 export default MenuButton;

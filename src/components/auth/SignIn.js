@@ -32,6 +32,7 @@ export default function SignIn(value) {
                     //console.log(data.message);
                     localStorage.setItem("user", JSON.stringify(data));
                     localStorage.setItem("type", data.type);
+                    localStorage.setItem("email", data.email);
                     window.location = "/";
                 });
             } else {

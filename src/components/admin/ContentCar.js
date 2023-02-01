@@ -79,7 +79,6 @@ function ContentCar() {
     ];
 
     useEffect(() => {
-
         const fetchData = async () => {
             originData.length = 0;
             await axios.get(API_URL + 'api/getcar').then((response) => {

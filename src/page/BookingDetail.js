@@ -26,8 +26,10 @@ export default function BookingDetail() {
     const location = useLocation()
     const { value } = location.state
     const [loading, setLoading] = useState(false);
-    
+    const email = localStorage.getItem("email");
+
     useEffect(() => {
+        console.log(email);
         async function getCarById() {
             await axios.get(`${API_URL}api/getcarbyid/${id}`)
                 .then(res => {
@@ -49,7 +51,7 @@ export default function BookingDetail() {
 
     const [getCar, setGetCar] = useState([]);
     const [radio, setRadio] = useState('กรุงเทพฯ และ ปริมณฑล');
-    const [province, setProvince] = useState();
+    const [province, setProvince] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [name, setName] = useState("");
@@ -77,21 +79,24 @@ export default function BookingDetail() {
 
     const addBooking = async (values) => {
         setComponentDisabled(false);
-        setLoading(true);
+        console.log(province === null ? "กรุงเทพฯ และ ปริมณฑล" : province);
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
         try {
             await axios.post(API_URL + 'api/addbooking',
                 {
                     "id": Date.now(),
+                    "province": province === null ? "กรุงเทพฯ และ ปริมณฑล" : province,
                     "uName": values.name,
                     "empoyeeNo": values.empoyeeNo,
+                    "uEmail": email,
                     "uPhone": values.phone,
                     "uSect": null,
                     "uPart": null,
                     "note": values.note,
                     "startDateTime": startDateTime,
                     "endDateTime": endDateTime,
+                    //"bookingDate": new Date().toLocaleDateString(),
                     "cLicense": getCar.license,
                 }).then(response => {
                     if (response.data.status === "OK") {
@@ -150,6 +155,7 @@ export default function BookingDetail() {
 
     const onRadioChange = (e) => {
         console.log('radio checked', e.target.value);
+        setProvince(null)
         setRadio(e.target.value);
 
     };
@@ -231,6 +237,9 @@ export default function BookingDetail() {
                                 <Form.Item label="เลขประจำตัว" name={"empoyeeNo"}>
                                     <Input value={empoyeeNo} onChange={handleChangeEmpoyeeNo} />
                                 </Form.Item>
+                                <Form.Item label="อีเมล" name={"email"}>
+                                    <Input defaultValue={email} disabled />
+                                </Form.Item>
                                 <Form.Item label="เบอร์โทรศัพท์" name={"phone"}>
                                     <Input value={phone} onChange={handleChangePhone} />
                                 </Form.Item>
@@ -264,7 +273,7 @@ export default function BookingDetail() {
                                         <p>Some contents...</p>
                                     </Modal>
                                 </div>
-                                <button type="submit" loading={loading} className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
+                                <button className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
                             </Form>
                         </div>
 
