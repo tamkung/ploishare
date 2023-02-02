@@ -65,14 +65,11 @@ const SelectDate = () => {
   };
 
   const availableCar = () => {
-
-    axios
-      //.get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
-      .get(API_URL + 'api/getavailablecars',
-        {
-          startDateTime: startDate + " " + startTime,
-          endDateTime: endDate + " " + endTime
-        })
+    //axios.get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
+    axios.post(API_URL + 'api/getavailablecars', {
+        startDateTime: startDate + " " + startTime,
+        endDateTime: endDate + " " + endTime
+    })
       .then((response) => {
         console.log(response.data);
         setGetCars(response.data);

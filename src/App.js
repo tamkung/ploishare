@@ -60,7 +60,7 @@ function App() {
     <div>
       {admin === 'admin' ?
         <div>
-          <div className='d-none d-sm-block'>
+          {/* <div className='d-none d-sm-block'> */}
             <LoHeader />
             <LoNavbar />
             <div className="content-wrapper">
@@ -74,12 +74,12 @@ function App() {
               </Routes>
             </div>
             <LoFooter />
-          </div>
-          <div className='container d-lg-none d-xl-none d-md-none'>
+          {/* </div> */}
+          {/* <div className='container d-lg-none d-xl-none d-md-none'>
             <div className='disable-nonti'>ระบบ Admin ไม่รองรับอุปกรณ์มือถือ
               <button className="buttonNext" onClick={SignOut}>Logout</button>
             </div>
-          </div>
+          </div> */}
         </div>
         : admin === 'user' ?
           <div>
