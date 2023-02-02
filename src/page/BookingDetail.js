@@ -99,6 +99,7 @@ export default function BookingDetail() {
                     "endDateTime": endDateTime,
                     //"bookingDate": new Date().toLocaleDateString(),
                     "cLicense": getCar.license,
+                    "cName": getCar.brand + " : " + getCar.model,
                 }).then(response => {
                     if (response.data.status === "OK") {
                         const Toast = Swal.mixin({

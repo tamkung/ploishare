@@ -30,9 +30,9 @@ function BookingList() {
             startDateTime: item.startDateTime,
             endDateTime: item.endDateTime,
             cLicense: item.cLicense,
+            cName: item.cName, //ชื่อรถ
             day: item.day,
             status: item.status,
-
           });
         });
       });
