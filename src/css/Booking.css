@@ -6,7 +6,6 @@
 
 }
 
-
 .datapick {
     background-color: #ffffff;
     color: #000000;
@@ -37,10 +36,10 @@
 }
 
 .card-item:hover {
- 
+
     transition: 300ms;
     border: solid 5px #fac34d;
-    
+
 }
 
 .bigcard {
@@ -49,7 +48,7 @@
     display: grid;
     grid-template-columns: 2fr 1.5fr;
     height: 200px;
-    
+
 
 }
 
@@ -103,6 +102,15 @@
     flex-direction: row;
     flex-wrap: wrap;
     box-sizing: border-box;
+}
+
+.itembook {
+    display: block;
+    box-sizing: border-box;
+    width: 25%;
+    padding: 10px;
+    transition: 300ms;
+    padding-top: 15px;
 }
 
 .item {
