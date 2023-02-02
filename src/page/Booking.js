@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from 'antd';
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import '../css/Booking.css';
-import { positions } from "@mui/system";
-
 
 const contentStyle = {
     height: '160px',
@@ -20,13 +18,15 @@ const contentStyle = {
 function Booking() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
-    const location = useLocation()
-    const { value } = location.state
+    const location = useLocation();
+    const { value } = location.state;
+    const { car } = location.state;
     console.log(value)
+    console.log(car)
 
     useEffect(() => {
         async function getCarById() {
-            await axios.get(`${API_URL}api/getcarbyid/${id}`)
+            await axios.get(`${API_URL}api/getcarbyid/${car}`)
                 .then(res => {
                     setGetCar(res.data);
                     console.log(res.data);
@@ -39,7 +39,6 @@ function Booking() {
         getCarById();
     }, []);
 
-    const { id } = useParams();
     return (
         <div >
             <div className="app-bar mb-5" />
@@ -66,7 +65,7 @@ function Booking() {
                                 <li>สีรถ : {getCar.color}</li>
                                 <li>จำนวน : {getCar.seat} ที่นั่ง</li>
                             </ul>
-                            <Link to={"/booking-detail/" + getCar.license} state={{ value: value }}>
+                            <Link to={"/booking-detail"} state={{ value: value, car: car }}>
                                 <button className="button-book" style={{ textAlign: "center", marginTop: "50px" }}>
                                     จองเลย
                                 </button>

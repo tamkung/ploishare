@@ -87,8 +87,8 @@ function App() {
             <Routes>
               <Route index element={<IndexUser />} />
               <Route path='*' element={<NotFound />} />
-              <Route path="/booking/:id" element={<Booking />} />
-              <Route path="/booking-detail/:id" element={<BookingDetail />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking-detail" element={<BookingDetail />} />
               <Route path="/booking-list" element={<BookingList />} />
             </Routes>
             <MenuButton />

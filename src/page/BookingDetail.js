@@ -24,15 +24,16 @@ const { TextArea } = Input;
 
 export default function BookingDetail() {
     const navigate = useNavigate();
-    const location = useLocation()
-    const { value } = location.state
+    const location = useLocation();
+    const { value } = location.state;
+    const { car } = location.state;
     const [loading, setLoading] = useState(false);
     const email = localStorage.getItem("email");
 
     useEffect(() => {
         console.log(email);
         async function getCarById() {
-            await axios.get(`${API_URL}api/getcarbyid/${id}`)
+            await axios.get(`${API_URL}api/getcarbyid/${car}`)
                 .then(res => {
                     setGetCar(res.data);
                     console.log(res.data);
@@ -45,8 +46,6 @@ export default function BookingDetail() {
         getCarById();
 
     }, []);
-
-    const { id } = useParams();
 
     const [form] = Form.useForm();
 

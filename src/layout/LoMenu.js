@@ -18,8 +18,8 @@ const MenuButton = () => (
             onClick={SignOut}>
             <IonIcon icon={logOut}></IonIcon>
           </IonFabButton>
-          <IonFabButton>
-            <Link to={"/booking-list"}><IonIcon icon={document}></IonIcon></Link>
+          <IonFabButton onClick={() => window.location = "/booking-list"}>
+            <IonIcon icon={document}></IonIcon>
           </IonFabButton>
           <IonFabButton onClick={() => window.location = "/"}>
             <IonIcon icon={home} ></IonIcon>

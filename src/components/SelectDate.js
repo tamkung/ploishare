@@ -9,13 +9,11 @@ import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
 import '../css/Booking.css';
 import '../css/style.css';
+import * as BsIcon5 from 'react-icons/bs'
+
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import wallpaper from '../img/wallpaper-car.jpg'
-
-//react icon
-import * as BsIcon5 from 'react-icons/bs'
-import { InfoCircleOutlined, CarOutlined } from '@ant-design/icons';
 
 const SelectDate = () => {
   const [endDateDisabled, setEndDateDisabled] = useState(false);
@@ -57,15 +55,8 @@ const SelectDate = () => {
   //   console.log(time);
   // };
 
-
-
-
   const onEndDateSwitchChange = (value) => {
     setEndDateDisabled(value);
-  };
-
-  const disabledMinutes = (selectedHour) => {
-    return [0].filter((item) => item > selectedHour % 30);
   };
 
   const disabledDate = (current) => {
@@ -76,7 +67,12 @@ const SelectDate = () => {
   const availableCar = () => {
 
     axios
-      .get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
+      //.get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
+      .get(API_URL + 'api/getavailablecars',
+        {
+          startDateTime: startDate + " " + startTime,
+          endDateTime: endDate + " " + endTime
+        })
       .then((response) => {
         console.log(response.data);
         setGetCars(response.data);
@@ -109,7 +105,7 @@ const SelectDate = () => {
     <div>
       {/*--------------------------------------------------------------- Desktop --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
         <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
           <div className='mb-3'>
             <div>วันที่</div>
@@ -212,7 +208,7 @@ const SelectDate = () => {
 
       {/*--------------------------------------------------------------- Mobile --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-block d-sm-none filter-low' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} />
+        <img className='d-block d-sm-none filter-low' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
         <Form className='datapick d-block d-sm-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", width: "90%", top: "15%" }}>
           <div className='mb-3'>
             <DatePicker className='width-booking' style={{ width: "35%" }}
@@ -308,31 +304,25 @@ const SelectDate = () => {
           </Tag>
         </Space>
         {getCars.map((cars, index) => (
-
-          <div className='item mb-3' >
+          <div div className='item mb-3' key={index} >
             <div className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
-              <Link className="bigcard textover" to={"/booking/" + cars.license} state={{ value: { startDate, endDate, startTime, endTime } }} >
+              <Link className="bigcard textover" to={"/booking"} state={{ value: { startDate, endDate, startTime, endTime }, car: cars.license }} >
                 <div className="colcard-left" >
-
-                  <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} />
-
+                  <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} alt={cars.license} />
                 </div>
                 <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
                   <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
                   <div>{cars.brand}</div>
                   <div>จำนวน {cars.seat} ที่นั่ง</div>
                   <div>{cars.license}</div>
-
-
                 </div>
-
               </Link>
             </div>
           </div>
 
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 export default SelectDate;
