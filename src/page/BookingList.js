@@ -50,9 +50,10 @@ function BookingList() {
       {getBooking.map((item, index) => {
         return (
           <Card className="text-center ml-3 mr-3 mt-3">
-            <Card.Header>{item.cLicense}{item.model}</Card.Header>
+            <Card.Header>{item.cLicense} {item.cName}</Card.Header>
             <Card.Body>
-              <Card.Title>{item.uName} </Card.Title>
+              <Card.Title>{item.uName}</Card.Title>
+
               <Card.Text>
               {item.startDateTime} 
               </Card.Text>
