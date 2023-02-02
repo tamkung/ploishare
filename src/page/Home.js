@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import logo from '../img/ploishare_logo.png'
 import Login from '../components/Login';
 import Vertify from '../components/Vertify';
+import { Padding } from '@mui/icons-material';
+import { positions } from '@mui/system';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -50,17 +52,17 @@ export default function BasicTabs() {
     };
 
     return (
-        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="w-full max-w-md space-y-8">
+        <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 " >
+            <div className="w-full max-w-md space-y-8 " style={{ background: "white", padding: "30px", borderRadius: "15px", boxShadow: "#282828 0px 5px 10px" }}>
                 <img
                     className="mx-auto h-auto w-auto"
                     src={logo}
-                    alt="Your Logo"
+                    alt="ปล่อย Share Logo"
                     style={{ width: '250px', height: '160px' }}
                 />
                 <Box sx={{ width: '100%' }}>
                     <Box style={{ color: "red" }} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" TabIndicatorProps={{ style: { background: '#67b99a' } }} >
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" >
                             <Tab label="เข้าสู่ระบบ" {...a11yProps(0)} />
                             <Tab label="ยืนยันตัวตน" {...a11yProps(1)} />
                         </Tabs>
