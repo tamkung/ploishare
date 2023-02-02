@@ -66,6 +66,8 @@ function ContentCar() {
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
 
+    const [loading, setLoading] = useState(true);
+
     const headers = [
         { label: "ป้ายทะเบียน", key: "license" },
         { label: "จังหวัด", key: "province" },
@@ -78,28 +80,30 @@ function ContentCar() {
         { label: "สถานะ", key: "status" },
     ];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            originData.length = 0;
-            await axios.get(API_URL + 'api/getcar').then((response) => {
-                // eslint-disable-next-line array-callback-return
-                response.data.map((item, index) => {
-                    originData.push({
-                        key: index + 1,
-                        license: item.license,
-                        province: item.province,
-                        brand: item.brand,
-                        model: item.model,
-                        color: item.color,
-                        seat: item.seat,
-                        detail: item.detail,
-                        image: item.image,
-                        status: item.status,
-                    });
+    const fetchData = async () => {
+        setLoading(true);
+        originData.length = 0;
+        await axios.get(API_URL + 'api/getcar').then((response) => {
+            response.data.map((item, index) => {
+                originData.push({
+                    key: index + 1,
+                    license: item.license,
+                    province: item.province,
+                    brand: item.brand,
+                    model: item.model,
+                    color: item.color,
+                    seat: item.seat,
+                    detail: item.detail,
+                    image: item.image,
+                    status: item.status,
                 });
             });
-            setData(originData);
-        }
+        });
+        setData(originData);
+        setLoading(false);
+    }
+
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -128,7 +132,7 @@ function ContentCar() {
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.reload();
+                        fetchData();
                     }
                 });
             }
@@ -157,7 +161,7 @@ function ContentCar() {
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.reload();
+                        fetchData();
                     }
                 });
             }
@@ -169,28 +173,8 @@ function ContentCar() {
     const cancel = () => {
         setEditingKey('');
     };
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.key);
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, {
-                    ...item,
-                    ...row,
-                });
-                setData(newData);
-                setEditingKey('');
-            } else {
-                newData.push(row);
-                setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
+
+
     const columns = [
         {
             title: '#',
@@ -245,7 +229,7 @@ function ContentCar() {
             dataIndex: 'image',
             align: 'center',
             render: (image) => <Image
-               
+
                 width={75}
                 height={75}
                 src={image !== null ? image : NO_Img}
@@ -284,17 +268,7 @@ function ContentCar() {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-                        <Typography.Link
-                            onClick={() => save(record.key)}
-                            style={{
-                                marginRight: 8,
-                            }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
+
                     </span>
                 ) : (
                     <Typography.Link disabled={editingKey !== ''} onClick={() => deleteCar(record)}>
@@ -343,19 +317,21 @@ function ContentCar() {
                             <Link to={'/addcar'} className='btn-add'> + Add</Link>
                         </div>
                         <Form form={form} component={false}>
-                            <Table loading={data.length === 0 ? true : false} 
+                            <Table 
+                            loading={loading}
                                 components={{
                                     body: {
                                         cell: EditableCell,
                                     },
                                 }}
                                 bordered
-                                dataSource={data}
+                                dataSource={data.length === 0 ? null : data}
                                 columns={mergedColumns}
                                 rowClassName="editable-row"
                                 pagination={{
                                     onChange: cancel,
                                 }}
+                                scroll={{ x: 1500 }}
                             />
                         </Form>
 

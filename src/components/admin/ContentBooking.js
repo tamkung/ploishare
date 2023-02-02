@@ -4,14 +4,16 @@ import {
     Form,
     Input,
     InputNumber,
-    Popconfirm,
     Table,
-    Typography,
+    DatePicker,
+    Button,
 } from 'antd';
 
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
 import { API_URL } from '../../Constant';
+
+const { RangePicker } = DatePicker;
 
 const date = new Date('2023-02-02T10:00:00.000Z');
 var now_utc = Date.UTC(
@@ -23,6 +25,7 @@ var now_utc = Date.UTC(
     date.getUTCSeconds());
 //2023-02-02T10:00:00.000Z
 //2023-02-02T03:00:00.000Z
+
 const options = {
     year: "numeric",
     month: "2-digit",
@@ -32,11 +35,7 @@ const options = {
     hour12: false,
     hourCycle: "h23",  // 24-hour format
     locale: "th"  // Thai language
-
 };
-// console.log(new Date(now_utc).toLocaleString('th', options));
-// console.log(date.toISOString());
-// console.log(date.toLocaleString('th', options));
 
 const { Content } = Layout;
 
@@ -80,14 +79,96 @@ const ContentBooking = () => {
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    const [loading, setLoading] = useState(true);
+
+    const fetchData = async () => {
+        setLoading(true);
+        originData.length = 0;
+        await axios.get(API_URL + 'api/getbooking').then((response) => {
+            response.data.map((item, index) => {
+                originData.push({
+                    key: index + 1,
+                    id: item.id,
+                    province: item.province,
+                    uName: item.uName,
+                    empoyeeNo: item.empoyeeNo,
+                    uEmail: item.uEmail,
+                    uPhone: item.uPhone,
+                    uSect: item.uSect,
+                    uPart: item.uPart,
+                    note: item.note,
+                    startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
+                    endDateTime: new Date(item.endDateTime).toLocaleString('th', options),
+                    bookingDate: new Date(item.bookingDate).toLocaleString('th', options),
+                    cLicense: item.cLicense,
+                    cName: item.cName,
+                    day: item.day + ' วัน',
+                    status: item.status,
+                });
+            });
+        });
+        setData(originData);
+        setLoading(false);
+        console.log(originData);
+    }
 
     useEffect(() => {
+        fetchData();
+    }, []);
 
-        const fetchData = async () => {
-            originData.length = 0;
-            await axios.get(API_URL + 'api/getbooking').then((response) => {
+    const approveCar = (record) => {
+        console.log(record);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(API_URL + 'api/updatebookingapprove', { id: record.id, status: record.status === 1 ? 0 : 1 }
+                ).then((response) => {
+                    console.log(response.data);
+                });
+                Swal.fire(
+                    'Updated!',
+                    'Your file has been updated.',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        if (startDate === '' || endDate === '') {
+                            fetchData();
+                        } else {
+                            searchDate();
+                        }
+                    }
+                });
+            }
+        })
+    };
+
+    const searchDate = () => {
+        console.log(startDate)
+        console.log(endDate)
+        if (startDate === '' || endDate === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'กรุณาเลือกวันที่',
+            })
+        } else {
+            axios.post(API_URL + 'api/searchbookingbydaterange', { startDate: startDate + " 00:00:00", endDate: endDate + " 23:59:59" }
+            ).then((response) => {
+                console.log(response.data);
+                originData.length = 0;
+                const new_data = [];
                 response.data.map((item, index) => {
-                    originData.push({
+                    new_data.push({
                         key: index + 1,
                         id: item.id,
                         province: item.province,
@@ -98,70 +179,32 @@ const ContentBooking = () => {
                         uSect: item.uSect,
                         uPart: item.uPart,
                         note: item.note,
-                        startDateTime: new Date(Date.UTC(
-                            new Date(item.startDateTime).getUTCFullYear(),
-                            new Date(item.startDateTime).getUTCMonth(),
-                            new Date(item.startDateTime).getUTCDate(),
-                            new Date(item.startDateTime).getUTCHours() - 7,
-                            new Date(item.startDateTime).getUTCMinutes(),
-                            new Date(item.startDateTime).getUTCSeconds())).toLocaleString('th', options),
-
-                        endDateTime: new Date(Date.UTC(
-                            new Date(item.endDateTime).getUTCFullYear(),
-                            new Date(item.endDateTime).getUTCMonth(),
-                            new Date(item.endDateTime).getUTCDate(),
-                            new Date(item.endDateTime).getUTCHours() - 7,
-                            new Date(item.endDateTime).getUTCMinutes(),
-                            new Date(item.endDateTime).getUTCSeconds())).toLocaleString('th', options),
-                        bookingDate: item.bookingDate,
+                        startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
+                        endDateTime: new Date(item.endDateTime).toLocaleString('th', options),
+                        bookingDate: new Date(item.bookingDate).toLocaleString('th', options),
                         cLicense: item.cLicense,
+                        cName: item.cName,
                         day: item.day + ' วัน',
                         status: item.status,
                     });
                 });
+                setData(new_data);
+                console.log(new_data.length);
             });
-            setData(originData);
-            console.log(originData);
         }
+    };
 
-        fetchData();
-    }, []);
+    const handleChangeDate = (date, dateString) => {
+        setStartDate(dateString[0]);
+        setEndDate(dateString[1]);
+    };
 
     const isEditing = (record) => record.key === editingKey;
-    const edit = (record) => {
-        form.setFieldsValue({
-            name: '',
-            age: '',
-            address: '',
-            ...record,
-        });
-        setEditingKey(record.key);
-    };
+
     const cancel = () => {
         setEditingKey('');
     };
-    const save = async (key) => {
-        try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.key);
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, {
-                    ...item,
-                    ...row,
-                });
-                setData(newData);
-                setEditingKey('');
-            } else {
-                newData.push(row);
-                setData(newData);
-                setEditingKey('');
-            }
-        } catch (errInfo) {
-            console.log('Validate Failed:', errInfo);
-        }
-    };
+
     const columns = [
         {
             title: '#',
@@ -171,7 +214,6 @@ const ContentBooking = () => {
         {
             title: 'จังหวัดที่เดินทางไป',
             dataIndex: 'province',
-            //width: '10%',
             editable: true,
         },
         {
@@ -180,70 +222,66 @@ const ContentBooking = () => {
             // width: '10%',
             editable: true,
         },
-        {
-            title: 'รหัสพนักงาน',
-            dataIndex: 'EmpoyeeNo',
-            // width: '10%',
-            editable: true,
-        },
+        // {
+        //     title: 'รหัสพนักงาน',
+        //     dataIndex: 'EmpoyeeNo',
+        //     editable: true,
+        // },
         {
             title: 'อีเมล์',
             dataIndex: 'uEmail',
-            // width: '10%',
             editable: true,
         },
         {
             title: 'เบอร์โทรศัพท์',
             dataIndex: 'uPhone',
-            //width: '10%',
             editable: true,
         },
-        {
-            title: 'หน่วยงาน',
-            dataIndex: 'uSect',
-            // width: '10%',
-            editable: true,
-        },
-        {
-            title: 'แผนก',
-            dataIndex: 'uPart',
-            //width: '10%',
-            editable: true,
-        },
+        // {
+        //     title: 'หน่วยงาน',
+        //     dataIndex: 'uSect',
+        //     editable: true,
+        // },
+        // {
+        //     title: 'แผนก',
+        //     dataIndex: 'uPart',
+        //     editable: true,
+        // },
         {
             title: 'วันที่ใช้รถ',
             dataIndex: 'startDateTime',
-            //width: '10%',
             editable: true,
         },
         {
             title: 'วันที่คืนรถ',
             dataIndex: 'endDateTime',
-            // width: '10%',
             editable: true,
         },
         {
             title: 'วันที่จอง',
             dataIndex: 'bookingDate',
-            //width: '10%',
             editable: true,
         },
         {
             title: 'ทะเบียนรถ',
             dataIndex: 'cLicense',
-            // width: '10%',
+            editable: true,
+        },
+        {
+            title: 'ชื่อรถ',
+            dataIndex: 'cName',
             editable: true,
         },
         {
             title: 'จำนวนวัน',
             dataIndex: 'day',
-            //width: '10%',
             editable: true,
         },
         {
             title: 'สถานะ',
             dataIndex: 'status',
-            //width: '10%',
+            width: '120px',
+            align: 'center',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
@@ -252,37 +290,11 @@ const ContentBooking = () => {
                     </span>
                 ) : (
                     <button
-                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-danger'}
-                        //onClick={() => updateCarStatus(record)}
+                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-warning'}
+                        onClick={() => approveCar(record)}
                     >
                         {record.status === 1 ? 'ยืนยัน' : 'รอยืนยัน'}
                     </button>
-                );
-            },
-        },
-        {
-            title: 'operation',
-            dataIndex: 'operation',
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-                        <Typography.Link
-                            onClick={() => save(record.key)}
-                            style={{
-                                marginRight: 8,
-                            }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
-                    </span>
-                ) : (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => edit(record)}>
-                        Edit
-                    </Typography.Link>
                 );
             },
         },
@@ -291,7 +303,6 @@ const ContentBooking = () => {
 
         if (!col.editable) {
             return col;
-            console.log(col);
         }
         return {
             ...col,
@@ -321,14 +332,21 @@ const ContentBooking = () => {
                         }}
                     >
                         <Form form={form} component={false}>
-                            <Table loading={data.length === 0 ? true : false}
+                            <div className='row' style={{ paddingBottom: "10px" }}>
+                                <RangePicker onChange={handleChangeDate} />
+                                <Button onClick={searchDate} >
+                                    ค้นหา
+                                </Button>
+                            </div>
+                            <Table
+                                loading={loading}
                                 components={{
                                     body: {
                                         cell: EditableCell,
                                     },
                                 }}
                                 bordered
-                                dataSource={data}
+                                dataSource={data.length === 0 ? null : data}
                                 columns={mergedColumns}
                                 rowClassName="editable-row"
                                 pagination={{
