@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import '../css/Booking.css';
+import { margin } from "@mui/system";
 
 const contentStyle = {
     height: '160px',
@@ -43,7 +44,7 @@ function Booking() {
         <div >
             <div className="app-bar mb-5" />
             {Loading !== false ?
-                <div className="flexbook" style={{ borderRadius: "15px", marginLeft: "15px", marginRight: "15px", background: "white" }}>
+                <div className="flexbook" style={{ borderRadius: "15px", marginLeft: "15px", marginRight: "15px", background: "white", marginBottom: "50px" }}>
                     <div className="itemBook" >
                         {/* <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} /> */}
                         <Carousel autoplay style={{ borderRadius: "15px" }}>
@@ -55,7 +56,7 @@ function Booking() {
                             </div>
                         </Carousel>
                     </div>
-                    <div className="itemBook"  >
+                    <div className="itemBook pl-3 pr-3"  >
                         <div className="contentFrame">
                             <div>
                                 <div className="brandname">{getCar.brand}</div>

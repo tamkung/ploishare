@@ -48,11 +48,18 @@ function BookingList() {
   return (
     <div>
       <div className="app-bar" />
+      <div>
+        <div className="jumbotron w-100" style={{ borderRadius: "0px" }}>
+          <strong>รายการจองทั้งหมด</strong>
+          <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <hr className="my-4" />
+        </div>
+      </div>
       <div className='flexbox pl-3 pr-3 mt-3'>
         {getBooking.map((item, index) => {
           return (
-            <Card className="itembook mr-2 ml-2">
-              <Card.Header style={{ textAlign: "center" }}><div onChange={()=>{if(item.status === 0 ){return(<span className='wait-lightdot' />)}}}></div> สถานะปัจจุบัน  : {item.status} </Card.Header>
+            <Card className="item mr-2 ml-2">
+              <Card.Header style={{ textAlign: "center" }}><div onChange={() => { if (item.status === 0) { return (<span className='wait-lightdot' />) } }}></div> สถานะปัจจุบัน  : {item.status} </Card.Header>
               <Card.Body>
                 <Card.Title>{item.cLicense} {item.cName}</Card.Title>
 
@@ -63,6 +70,8 @@ function BookingList() {
               </Card.Body>
               <Card.Footer className="text-muted">จำนวนวัน : {item.day} วัน</Card.Footer>
             </Card>
+
+
             // <div className='card text-center'>
             //   <p>เลขที่การจอง : {item.id}</p>
             //   <p>จังหวัด : {item.province}</p>

@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     SignIn(value);
   };
-
+console.log(value)
   return (
     <div>
       <div>
