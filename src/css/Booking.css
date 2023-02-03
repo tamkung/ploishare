@@ -104,6 +104,28 @@
     box-sizing: border-box;
 }
 
+.wait-lightdot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(255, 208, 0);
+    border-radius: 50%;
+    display: inline-block;
+}
+.running-lightdot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(0, 255, 13);
+    border-radius: 50%;
+    display: inline-block;
+}
+.off-lightdot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(109, 109, 109);
+    border-radius: 50%;
+    display: inline-block;
+}
+
 .itembook {
     display: block;
     box-sizing: border-box;

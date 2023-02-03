@@ -52,9 +52,9 @@ function BookingList() {
         {getBooking.map((item, index) => {
           return (
             <Card className="itembook mr-2 ml-2">
-              <Card.Header>{item.cLicense} {item.cName}</Card.Header>
+              <Card.Header style={{ textAlign: "center" }} onChange={() => { if (item.status === 0) { return (<span className='wait-lightdot' />) } else if (item.status === 1) { return (<span className='wait-lightdot' />) } }}>สถานะปัจจุบัน  : {item.status} </Card.Header>
               <Card.Body>
-                <Card.Title>{item.uName}</Card.Title>
+                <Card.Title>{item.uName} {item.cLicense} {item.cName}</Card.Title>
 
                 <Card.Text>
                   {item.startDateTime}
