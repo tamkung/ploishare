@@ -111,6 +111,7 @@ const ContentBooking = () => {
                     cName: item.cName,
                     day: item.day + ' วัน',
                     status: item.status,
+                    finish: item.finish,
                 });
             });
         });
@@ -135,8 +136,10 @@ const ContentBooking = () => {
             confirmButtonText: 'Yes, update it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatebookingapprove', { id: record.id, status: record.status === 1 ? 0 : 1 }
-                ).then((response) => {
+                axios.post(API_URL + 'api/updatebookingapprove', {
+                    id: record.id,
+                    status: record.status === 1 ? 0 : 1
+                }).then((response) => {
                     console.log(response.data);
                 });
                 Swal.fire(
@@ -299,6 +302,27 @@ const ContentBooking = () => {
                     >
                         {record.status === 1 ? 'ยืนยัน' : 'รอยืนยัน'}
                     </button>
+                );
+            },
+        },
+        {
+            title: 'การเปิดใช้งาน',
+            dataIndex: 'status',
+            width: '120px',
+            align: 'center',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+
+                    </span>
+                ) : (
+                    <div
+                        className={record.finish === 1 ? 'btn btn-success' : 'btn btn-warning'}
+                    //onClick={() => approveCar(record)}
+                    >
+                        {record.finish === 0 ? '' : 'รอยืนยัน'}
+                    </div>
                 );
             },
         },

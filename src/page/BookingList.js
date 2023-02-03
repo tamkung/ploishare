@@ -38,7 +38,9 @@ function BookingList() {
             cLicense: item.cLicense,
             cName: item.cName, //ชื่อรถ
             day: item.day,
-            status: item.status,
+            status: item.status, //0=รออนุมัติ, 1=อนุมัติ
+            active: item.active, //0=ยังไม่เปิดใช้งาน, 1=เปิดใช้งาน
+            finish: item.finish, //0=ยังไม่สิ้นสุดการใช้งาน, 1=สิ้นสุดการใช้งาน
           });
         });
       });
@@ -50,8 +52,17 @@ function BookingList() {
 
   }, []);
 
-  const startDrive = () => {
-    alert('เริ่มใช้งานรถ');
+  const activeDrive = (license) => {
+    try {
+      axios.post(API_URL + 'api/updatebookingactive', {
+        id: license,
+        active: 1,
+      }).then((response) => {
+        console.log('response', response.data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -68,7 +79,12 @@ function BookingList() {
         {getBooking.map((item, index) => {
           return (
             <Card className="item mr-2 ml-2">
-              <Card.Header style={{ textAlign: "center" }}> สถานะปัจจุบัน  : {item.status} </Card.Header>
+              <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
+                item.status === 0 && item.active === 0 ? "รออนุมัติ" :
+                  item.status === 1 && item.active === 0 ? "รอเปิดใช้งาน" :
+                    item.status === 1 && item.active === 1 ? "เปิดใช้งาน" :
+                      item.status === 1 && item.active === 1 && item.finish === 1 ? "สิ้นสุดการใช้งาน" : "ไม่ระบุ"
+              } </Card.Header>
               <Card.Body>
                 <Card.Title>{item.cLicense} {item.cName}</Card.Title>
 
@@ -76,10 +92,16 @@ function BookingList() {
                   {item.startDateTime}
                 </Card.Text>
                 <div className='text-center'>
-                  <button className={item.status === 0 ? 'btn btn-secondary' : 'btn btn-danger'}
-                    onClick={item.status === 0 ? () => { alert('รออนุมัติ') } : () => { startDrive() }}
+                  <button className={item.status === 0 && item.active === 0 ? "btn btn-secondary" :
+                    item.status === 1 && item.active === 0 ? "btn btn-success" :
+                      item.status === 1 && item.active === 1 ? "btn btn-danger" :
+                        item.status === 1 && item.active === 1 && item.finish === 1 ? "btn btn-secondary" : "ไม่ระบุ"}
+                    onClick={item.status === 0 ? () => { alert('รออนุมัติ') } : () => { activeDrive(item.license) }}
                   >
-                    {item.status === 0 ? "รออนุมัติ" : "เปิดใช้งาน"}
+                    {item.status === 0 && item.active === 0 ? "รออนุมัติ" :
+                      item.status === 1 && item.active === 0 ? "เปิดใช้งาน" :
+                        item.status === 1 && item.active === 1 ? "ปิดใช้งาน" :
+                          item.status === 1 && item.active === 1 && item.finish === 1 ? "สิ้นสุดการใช้งาน" : "ไม่ระบุ"}
                   </button>
                 </div>
 
