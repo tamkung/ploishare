@@ -1,13 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { API_URL } from '../Constant';
+import { GET_USER, API_URL } from '../Constant';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import '../css/Booking.css';
+import authCheck from '../service/Auth';
 
 function BookingList() {
+  useEffect(() => {
+    authCheck();
+  }, []);
+
   const [getBooking, setGetBooking] = useState([]);
-  const email = localStorage.getItem("email");
+  const email = GET_USER.email;
   const originData = [];
 
   useEffect(() => {
@@ -45,6 +50,10 @@ function BookingList() {
 
   }, []);
 
+  const startDrive = () => {
+    alert('เริ่มใช้งานรถ');
+  }
+
   return (
     <div>
       <div className="app-bar" />
@@ -59,18 +68,24 @@ function BookingList() {
         {getBooking.map((item, index) => {
           return (
             <Card className="item mr-2 ml-2">
-              <Card.Header style={{ textAlign: "center" }}><div onChange={() => { if (item.status === 0) { return (<span className='wait-lightdot' />) } }}></div> สถานะปัจจุบัน  : {item.status} </Card.Header>
+              <Card.Header style={{ textAlign: "center" }}> สถานะปัจจุบัน  : {item.status} </Card.Header>
               <Card.Body>
                 <Card.Title>{item.cLicense} {item.cName}</Card.Title>
 
                 <Card.Text>
                   {item.startDateTime}
                 </Card.Text>
-                <button className='buttonNext mt-5'>Go somewhere</button>
+                <div className='text-center'>
+                  <button className={item.status === 0 ? 'btn btn-secondary' : 'btn btn-danger'}
+                    onClick={item.status === 0 ? () => { alert('รออนุมัติ') } : () => { startDrive() }}
+                  >
+                    {item.status === 0 ? "รออนุมัติ" : "เปิดใช้งาน"}
+                  </button>
+                </div>
+
               </Card.Body>
               <Card.Footer className="text-muted">จำนวนวัน : {item.day} วัน</Card.Footer>
             </Card>
-
 
             // <div className='card text-center'>
             //   <p>เลขที่การจอง : {item.id}</p>

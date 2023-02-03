@@ -11,22 +11,21 @@ function HomeAdmin() {
     const [booking, setBooking] = useState([]);
     const [user, setUser] = useState([]);
 
-
     useEffect(() => {
         const fetchData = async () => {
             car.length = 0;
             booking.length = 0;
             user.length = 0;
 
-            await axios.get(API_URL + 'api/getcar').then((response) => {
+            axios.get(API_URL + 'api/getcar').then((response) => {
                 setCar(response.data);
                 console.log(response.data.length);
             });
-            await axios.get(API_URL + 'api/getbooking').then((response) => {
+            axios.get(API_URL + 'api/getbooking').then((response) => {
                 setBooking(response.data);
                 console.log(response.data.length);
             });
-            await axios.get(API_URL + 'api/getuser').then((response) => {
+            axios.get(API_URL + 'api/getuser').then((response) => {
                 setUser(response.data);
                 console.log(response.data.length);
             });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { API_URL, API_URL_SignUp } from "../Constant";
+import {GET_USER, API_URL, API_URL_SignUp } from "../Constant";
 import Swal from "sweetalert2";
 import '../css/Booking.css';
 import {
@@ -28,7 +28,7 @@ export default function BookingDetail() {
     const { value } = location.state;
     const { car } = location.state;
     const [loading, setLoading] = useState(false);
-    const email = localStorage.getItem("email");
+    const email = GET_USER.email;
 
     useEffect(() => {
         console.log(email);

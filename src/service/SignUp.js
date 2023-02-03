@@ -1,4 +1,4 @@
-import { API_URL_SignUp } from "../../Constant";
+import { API_URL_SignUp } from "../Constant";
 import Swal from "sweetalert2";
 
 export default function SignUp(value) {

@@ -16,7 +16,7 @@ import { CSVLink } from "react-csv";
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import authCheck from '../../service/Auth';
 import { API_URL } from '../../Constant';
 import NO_Img from '../../img/no_img.jpg';
 
@@ -62,6 +62,10 @@ const EditableCell = ({
 const originData = [];
 
 function ContentCar() {
+    useEffect(() => {
+        authCheck();
+    }, []);
+
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
@@ -317,8 +321,8 @@ function ContentCar() {
                             <Link to={'/addcar'} className='btn-add'> + Add</Link>
                         </div>
                         <Form form={form} component={false}>
-                            <Table 
-                            loading={loading}
+                            <Table
+                                loading={loading}
                                 components={{
                                     body: {
                                         cell: EditableCell,

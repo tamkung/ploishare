@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { API_URL } from '../../Constant';
-
+import authCheck from '../../service/Auth';
 const { RangePicker } = DatePicker;
 
 const date = new Date('2023-02-02T10:00:00.000Z');
@@ -76,6 +76,10 @@ const EditableCell = ({
 const originData = [];
 
 const ContentBooking = () => {
+    useEffect(() => {
+        authCheck();
+    }, []);
+
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');

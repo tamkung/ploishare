@@ -16,6 +16,7 @@ import {
 import { API_URL } from "../../Constant";
 import { Province } from './Province';
 import { carBrands, carYear, carColor } from './Car';
+import authCheck from '../../service/Auth';
 
 const { Content } = Layout;
 const { Option } = Select;
@@ -38,6 +39,10 @@ const normFile = (e) => {
 };
 
 const AddCar = () => {
+    useEffect(() => {
+        authCheck();
+    }, []);
+
     const navigate = useNavigate();
 
     const [form] = Form.useForm();

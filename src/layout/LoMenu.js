@@ -4,7 +4,7 @@ import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/re
 import { chevronUpCircle, document, logOut, home } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 import '../css/Booking.css';
-import SignOut from '../components/auth/SignOut';
+import SignOut from '../service/SignOut';
 
 const MenuButton = () => (
   <div className='nav-btn' >

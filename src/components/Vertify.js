@@ -4,7 +4,7 @@ import * as BsIcons from 'react-icons/bs';
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import '../css/style.css';
-import SignUp from './auth/SignUp';
+import SignUp from '../service/SignUp';
 
 function Vertify() {
 
@@ -101,9 +101,6 @@ function Vertify() {
             placeholder="Confirm Password"
             onChange={handleChange}
           />
-
-
-
           {/* <button
               type="button"
               class="btn btn-outline-primary buttonNext"
@@ -116,10 +113,7 @@ function Vertify() {
             Vertify
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
-
         </form>
-
-
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import { Input, Space } from 'antd';
 import '../css/style.css';
 
 import React, { useState, useEffect } from "react";
-import SignIn from './auth/SignIn';
+import SignIn from '../service/SignIn';
 
 
 

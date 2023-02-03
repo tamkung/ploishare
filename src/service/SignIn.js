@@ -1,5 +1,5 @@
 import React from 'react'
-import { API_URL } from "../../Constant";
+import { API_URL } from "../Constant";
 import Swal from "sweetalert2";
 
 export default function SignIn(value) {
@@ -31,8 +31,6 @@ export default function SignIn(value) {
                 }).then(() => {
                     //console.log(data.message);
                     localStorage.setItem("user", JSON.stringify(data));
-                    localStorage.setItem("type", data.type);
-                    localStorage.setItem("email", data.email);
                     window.location = "/";
                 });
             } else {
