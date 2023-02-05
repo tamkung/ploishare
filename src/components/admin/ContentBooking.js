@@ -136,9 +136,9 @@ const ContentBooking = () => {
             confirmButtonText: 'Yes, update it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatebookingapprove', {
+                axios.post(API_URL + 'api/updatebookingstatus', {
                     id: record.id,
-                    status: record.status === 1 ? 0 : 1
+                    status: 1,
                 }).then((response) => {
                     console.log(response.data);
                 });
@@ -287,7 +287,7 @@ const ContentBooking = () => {
         {
             title: 'สถานะ',
             dataIndex: 'status',
-            width: '120px',
+            width: '130px',
             align: 'center',
             render: (_, record) => {
                 const editable = isEditing(record);
@@ -297,11 +297,11 @@ const ContentBooking = () => {
                     </span>
                 ) : (
                     <button
-                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-warning'}
-                        onClick={() => approveCar(record)}
+                        className={record.status !== "0" ? 'btn btn-success' : 'btn btn-warning'}
+                        onClick={record.status === "0" ? () => approveCar(record) : () => { }}
                     >
-                        {record.status === 1 ? 'ยืนยัน' : 'รอยืนยัน'}
-                    </button>
+                        {record.status !== "0" ? 'ยืนยันแล้ว' : 'รอยืนยัน'}
+                    </button >
                 );
             },
         },
@@ -317,11 +317,10 @@ const ContentBooking = () => {
 
                     </span>
                 ) : (
-                    <div
-                        className={record.finish === 1 ? 'btn btn-success' : 'btn btn-warning'}
-                    //onClick={() => approveCar(record)}
-                    >
-                        {record.finish === 0 ? '' : 'รอยืนยัน'}
+                    <div>
+                        {record.status === "0" ? 'รอยืนยัน' :
+                            record.status === "1" ? 'ยืนยันแล้ว' :
+                                record.status === "2" ? 'เปิดใช้งาน' : "สร็จสิ้น"}
                     </div>
                 );
             },

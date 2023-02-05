@@ -22,6 +22,17 @@ import { CloudUploadOutlined } from '@ant-design/icons';
 const { Option } = Select;
 const { TextArea } = Input;
 
+const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    hourCycle: "h23",  // 24-hour format
+    locale: "en-EN"  // Thai language
+};
+
 export default function BookingDetail() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -82,6 +93,7 @@ export default function BookingDetail() {
         console.log(province === null ? "กรุงเทพฯ และ ปริมณฑล" : province);
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
+        console.log(new Date().toLocaleString('en-EN', options),);
         try {
             await axios.post(API_URL_SignUp + 'api/addbooking',
                 {
@@ -96,7 +108,7 @@ export default function BookingDetail() {
                     "note": values.note,
                     "startDateTime": startDateTime,
                     "endDateTime": endDateTime,
-                    //"bookingDate": new Date().toLocaleDateString(),
+                    //"bookingDate": new Date().toLocaleString('en-EN', options),
                     "cLicense": getCar.license,
                     "cName": getCar.brand + " : " + getCar.model,
                 }).then(response => {
