@@ -67,8 +67,8 @@ const SelectDate = () => {
   const availableCar = () => {
     //axios.get(API_URL + `api/getavailablecars?startDateTime=${startDate + " " + startTime}&endDateTime=${endDate + " " + endTime} `)
     axios.post(API_URL + 'api/getavailablecars', {
-        startDateTime: startDate + " " + startTime,
-        endDateTime: endDate + " " + endTime
+      startDateTime: startDate + " " + startTime,
+      endDateTime: endDate + " " + endTime
     })
       .then((response) => {
         console.log(response.data);
@@ -306,12 +306,16 @@ const SelectDate = () => {
               <Link className="bigcard textover" to={"/booking"} state={{ value: { startDate, endDate, startTime, endTime }, car: cars.license }} >
                 <div className="colcard-left" >
                   <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} alt={cars.license} />
+
                 </div>
                 <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
                   <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
                   <div>{cars.brand}</div>
                   <div>จำนวน {cars.seat} ที่นั่ง</div>
-                  <div>{cars.license}</div>
+                  <div className='license-card mt-3'>
+                    <div>{cars.license}</div>
+                    <div>{cars.province}</div>
+                  </div>
                 </div>
               </Link>
             </div>

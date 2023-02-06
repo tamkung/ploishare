@@ -100,7 +100,7 @@ function BookingList() {
       <div className='flexbox pl-3 pr-3 mt-3'>
         {getBooking.map((item, index) => {
           return (
-            <Card className="item mr-2 ml-2" key={index}>
+            <Card className="item-list mr-2 ml-2" key={index}>
               <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
                 item.status === "0" ? "รออนุมัติ" :
                   item.status === "1" ? "อนุมัติ" :
@@ -113,10 +113,10 @@ function BookingList() {
                   {item.startDateTime}
                 </Card.Text>
                 <div className='text-center'>
-                  <button className={
-                    item.status === "0" ? "btn btn-secondary" :
-                      item.status === "1" ? "btn btn-success" :
-                        item.status === "2" ? "btn btn-danger" : "btn btn-secondary"}
+                  <div className={
+                    item.status === "0" ? "btn wait-cardlist" :
+                      item.status === "1" ? "btn turn-on-cardlist" :
+                        item.status === "2" ? "btn turn-off-cardlist" : "btn success-cardlist"}
                     onClick={
                       item.status === "0" ? () => { alert('รออนุมัติ') } :
                         item.status === "1" ? () => { updateStatus(item.id, 2) } :
@@ -125,7 +125,7 @@ function BookingList() {
                     {item.status === "0" ? "รออนุมัติ" :
                       item.status === "1" ? "เปิดใช้งาน" :
                         item.status === "2" ? "ปิดใช้งาน" : "สิ้นสุดการใช้งาน"}
-                  </button>
+                  </div>
                 </div>
 
               </Card.Body>
