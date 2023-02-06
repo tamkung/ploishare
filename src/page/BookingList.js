@@ -51,8 +51,9 @@ function BookingList() {
           cName: item.cName, //ชื่อรถ
           day: item.day,
           status: item.status, //0=รออนุมัติ, 1=อนุมัติ, 2=เปิดใช้งาน, 3=ปิดใช้งาน(สิ้นสุดการใช้งาน)
-          active: item.active, //0=ยังไม่เปิดใช้งาน, 1=เปิดใช้งาน
-          finish: item.finish, //0=ยังไม่สิ้นสุดการใช้งาน, 1=สิ้นสุดการใช้งาน
+          startMile: item.startMile, //เลขไมล์เริ่มต้น
+          endMile: item.endMile, //เลขไมล์สิ้นสุด
+          distance: item.distance, //ระยะทาง
         });
       });
     });
@@ -68,20 +69,84 @@ function BookingList() {
   const updateStatus = (id, status) => {
     console.log('id', id);
     try {
-      axios.post(API_URL + 'api/updatebookingstatus', {
-        id: id,
-        status: status,
-      }).then((response) => {
-        console.log(response.data);
+      if (status === 2) {
         Swal.fire({
-          icon: 'success',
-          title: 'เปิดใช้งานสำเร็จ',
-          showConfirmButton: false,
-          timer: 1500
-        }).then(() => {
-          fetchData();
-        });
-      });
+          title: 'กรอกเลขไมล์เริ่มต้น',
+          input: 'number',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          showLoaderOnConfirm: true,
+          preConfirm: (startMile) => {
+            axios.post(API_URL + 'api/updatebookingstartmile', {
+              id: id,
+              startMile: startMile,
+            }).then((response) => {
+              console.log(response.data);
+              axios.post(API_URL + 'api/updatebookingstatus', {
+                id: id,
+                status: status,
+              }).then((response) => {
+                console.log(response.data);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'เปิดใช้งานสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  fetchData();
+                });
+              });
+            });
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+          }
+        })
+      } else {
+        Swal.fire({
+          title: 'กรอกเลขไมล์สิ้นสุด',
+          input: 'number',
+          inputAttributes: {
+            autocapitalize: 'off'
+          },
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          showLoaderOnConfirm: true,
+          preConfirm: (endMile) => {
+            axios.post(API_URL + 'api/updatebookingendmile', {
+              id: id,
+              endMile: endMile,
+            }).then((response) => {
+              console.log(response.data);
+              axios.post(API_URL + 'api/updatebookingstatus', {
+                id: id,
+                status: status,
+              }).then((response) => {
+                console.log(response.data);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'เปิดใช้งานสำเร็จ',
+                  showConfirmButton: false,
+                  timer: 1500
+                }).then(() => {
+                  fetchData();
+                });
+              });
+            });
+          },
+          allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+          }
+        })
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -108,10 +173,16 @@ function BookingList() {
               </Card.Header>
               <Card.Body>
                 <Card.Title>{item.cLicense} {item.cName}</Card.Title>
-
                 <Card.Text>
                   {item.startDateTime}
                 </Card.Text>
+                {item.status === "2" ? <Card.Text>
+                  ไมล์เริ่มต้น : {item.startMile}</Card.Text> :
+                  item.status === "3" ? <Card.Text>
+                    ไมล์เริ่มต้น : {item.startMile}<br />
+                    ไมล์สิ้นสุด : {item.endMile} <br />
+                    ระยะทางที่ใช้ : {item.distance} กม.
+                  </Card.Text> : null}
                 <div className='text-center'>
                   <div className={
                     item.status === "0" ? "btn wait-cardlist" :

@@ -7,11 +7,15 @@ import {
     Table,
     DatePicker,
     Button,
+    Image
 } from 'antd';
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { CSVLink } from "react-csv";
+
 import { API_URL } from '../../Constant';
+import NO_Img from '../../img/no_img.jpg';
 import authCheck from '../../service/Auth';
 const { RangePicker } = DatePicker;
 
@@ -80,6 +84,27 @@ const ContentBooking = () => {
         authCheck();
     }, []);
 
+    const headers = [
+        { label: "จังหวัดที่เดินทางไป", key: "province" },
+        { label: "ชือ-สกุลผู้จอง", key: "uName" },
+        { label: "รหัสพนักงาน", key: "empoyeeNo" },
+        { label: "อีเมล์", key: "uEmail" },
+        { label: "เบอร์โทรศัพท์	", key: "uPhone" },
+        { label: "โน๊ต	", key: "note" },
+        { label: "วันที่ใช้รถ", key: "startDateTime" },
+        { label: "วันที่คืนรถ", key: "endDateTime" },
+        { label: "วันที่จอง", key: "bookingDate" },
+        { label: "ทะเบียนรถ", key: "cLicense" },
+        { label: "ชื่อรถ", key: "cName" },
+        { label: "จำนวนวัน", key: "day" },
+        { label: "รูปขออนุมัติ", key: "image" },
+        { label: "สถานะ", key: "status" },
+        { label: "การเปิดใช้งาน", key: "status" },
+        { label: "ไมล์เริ่มต้น", key: "startMile" },
+        { label: "ไมล์สิ้นสุด", key: "endMile" },
+        { label: "ระยะทาง", key: "distance" },
+    ];
+
     const [form] = Form.useForm();
     const [data, setData] = useState([]);
     const [editingKey, setEditingKey] = useState('');
@@ -110,8 +135,11 @@ const ContentBooking = () => {
                     cLicense: item.cLicense,
                     cName: item.cName,
                     day: item.day + ' วัน',
+                    image: item.image,
                     status: item.status,
-                    finish: item.finish,
+                    startMile: item.startMile, // ไมล์เริ่มต้น
+                    endMile: item.endMile,  // ไมล์สิ้นสุด
+                    distance: item.distance, // ระยะทาง
                 });
             });
         });
@@ -229,11 +257,11 @@ const ContentBooking = () => {
             // width: '10%',
             editable: true,
         },
-        // {
-        //     title: 'รหัสพนักงาน',
-        //     dataIndex: 'EmpoyeeNo',
-        //     editable: true,
-        // },
+        {
+            title: 'รหัสพนักงาน',
+            dataIndex: 'empoyeeNo',
+            editable: true,
+        },
         {
             title: 'อีเมล์',
             dataIndex: 'uEmail',
@@ -254,6 +282,11 @@ const ContentBooking = () => {
         //     dataIndex: 'uPart',
         //     editable: true,
         // },
+        {
+            title: 'โน๊ต',
+            dataIndex: 'note',
+            editable: true,
+        },
         {
             title: 'วันที่ใช้รถ',
             dataIndex: 'startDateTime',
@@ -282,6 +315,19 @@ const ContentBooking = () => {
         {
             title: 'จำนวนวัน',
             dataIndex: 'day',
+            editable: true,
+        },
+        {
+            title: 'รูปขออนุมัติ',
+            dataIndex: 'image',
+            align: 'center',
+            render: (image) => <Image
+
+                width={75}
+                height={75}
+                src={image !== null ? image : NO_Img}
+            />,
+            width: '8%',
             editable: true,
         },
         {
@@ -320,10 +366,25 @@ const ContentBooking = () => {
                     <div>
                         {record.status === "0" ? 'รอยืนยัน' :
                             record.status === "1" ? 'ยืนยันแล้ว' :
-                                record.status === "2" ? 'เปิดใช้งาน' : "สร็จสิ้น"}
+                                record.status === "2" ? 'เปิดใช้งาน' : "เสร็จสิ้น"}
                     </div>
                 );
             },
+        },
+        {
+            title: 'ไมล์เริ่มต้น',
+            dataIndex: 'startMile',
+            editable: true,
+        },
+        {
+            title: 'ไมล์สิ้นสุด',
+            dataIndex: 'endMile',
+            editable: true,
+        },
+        {
+            title: 'ระยะทาง',
+            dataIndex: 'distance',
+            editable: true,
         },
     ];
     const mergedColumns = columns.map((col) => {
@@ -364,6 +425,11 @@ const ContentBooking = () => {
                                 <Button onClick={searchDate} >
                                     ค้นหา
                                 </Button>
+                                <CSVLink style={{ marginRight: 10 }} data={originData} headers={headers}>
+                                    <Button>
+                                        Export
+                                    </Button>
+                                </CSVLink>
                             </div>
                             <Table
                                 loading={loading}
@@ -379,7 +445,7 @@ const ContentBooking = () => {
                                 pagination={{
                                     onChange: cancel,
                                 }}
-                                scroll={{ x: 1500 }}
+                                scroll={{ x: 2200 }}
                             />
                         </Form>
 

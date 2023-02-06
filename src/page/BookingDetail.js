@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import {GET_USER, API_URL, API_URL_SignUp } from "../Constant";
+import { GET_USER, API_URL, API_URL_SignUp } from "../Constant";
 import Swal from "sweetalert2";
 import '../css/Booking.css';
 import {
@@ -13,6 +13,7 @@ import {
     Upload,
     Modal,
     Button,
+    message,
     Descriptions
 
 } from 'antd';
@@ -65,6 +66,9 @@ export default function BookingDetail() {
     const [province, setProvince] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const [image, setImage] = useState(null);
+    const [disabled, setDisabled] = useState(true)
+
     const [name, setName] = useState("");
     const [empoyeeNo, setEmpoyeeNo] = useState("");
     const [phone, setPhone] = useState("");
@@ -86,6 +90,20 @@ export default function BookingDetail() {
     const handleChangeNote = (e) => {
         setNote(e.target.value);
         console.log(note);
+    };
+
+    const handleUpload = (info) => {
+        if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully`);
+            console.log(info.file.response);
+            setImage(info.file.response);
+            setDisabled(false);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
     };
 
     const addBooking = async (values) => {
@@ -111,6 +129,7 @@ export default function BookingDetail() {
                     //"bookingDate": new Date().toLocaleString('en-EN', options),
                     "cLicense": getCar.license,
                     "cName": getCar.brand + " : " + getCar.model,
+                    image: image,
                 }).then(response => {
                     if (response.data.status === "OK") {
                         const Toast = Swal.mixin({
@@ -197,11 +216,7 @@ export default function BookingDetail() {
                             <Descriptions.Item label="ทะเบียน">{getCar.license}</Descriptions.Item>
                             <Descriptions.Item label="วันที่ใช้รถ">{value.startDate} {value.startTime}</Descriptions.Item>
                             <Descriptions.Item label="วันที่คืนรถ">{value.endDate} {value.endTime}</Descriptions.Item>
-
                         </Descriptions>
-
-
-
                         <hr className="mt-3" />
                         <img className="mt-3" src={getCar.image} alt={getCar.name} style={{ borderRadius: "15px", width: '100%' }} />
 
@@ -264,7 +279,24 @@ export default function BookingDetail() {
                                     <Input value={phone} onChange={handleChangePhone} />
                                 </Form.Item>
                                 <Form.Item label="เอกสารขออนุญาต" valuePropName="fileList">
-                                    <Upload action="/upload.do" listType="picture-card">
+                                    <Upload
+                                        listType="picture-card"
+                                        name="img"
+                                        multiple={false}
+                                        maxCount={1}
+                                        action={API_URL + "api/upload-file"}
+                                        onChange={handleUpload}
+                                        beforeUpload={(file) => {
+                                            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+                                            if (!isJpgOrPng) {
+                                                message.error('You can only upload JPG/PNG file!');
+                                            }
+                                            const isLt2M = file.size / 1024 / 1024 < 2;
+                                            if (!isLt2M) {
+                                                message.error('Image must smaller than 2MB!');
+                                            }
+                                            return isJpgOrPng && isLt2M;
+                                        }} >
                                         <div>
                                             <CloudUploadOutlined />
                                             <div

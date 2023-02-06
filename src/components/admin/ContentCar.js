@@ -155,7 +155,7 @@ function ContentCar() {
             confirmButtonText: 'Yes, update it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatecar', { license: record.license, status: record.status === 1 ? 0 : 1 }
+                axios.post(API_URL + 'api/updatecarstatus', { license: record.license, status: record.status === 1 ? 0 : 1 }
                 ).then((response) => {
                     console.log(response.data);
                 });
