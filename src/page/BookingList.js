@@ -162,28 +162,30 @@ function BookingList() {
           <hr className="my-4" />
         </div>
       </div>
-      <div className='flexbox pl-3 pr-3 mt-3'>
+      <div className='flexbox pl-2 pr-2 mt-3'>
         {getBooking.map((item, index) => {
           return (
-            <Card className="item-list mr-2 ml-2" key={index}>
-              <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
-                item.status === "0" ? "รออนุมัติ" :
-                  item.status === "1" ? "อนุมัติ" :
-                    item.status === "2" ? "เปิดใช้งาน" : "เสร็จสิ้น"}
-              </Card.Header>
-              <Card.Body>
-                <Card.Title>{item.cLicense} {item.cName}</Card.Title>
-                <Card.Text>
-                  {item.startDateTime}
-                </Card.Text>
-                {item.status === "2" ? <Card.Text>
-                  ไมล์เริ่มต้น : {item.startMile}</Card.Text> :
-                  item.status === "3" ? <Card.Text>
-                    ไมล์เริ่มต้น : {item.startMile}<br />
-                    ไมล์สิ้นสุด : {item.endMile} <br />
-                    ระยะทางที่ใช้ : {item.distance} กม.
-                  </Card.Text> : null}
-                <div className='text-center'>
+            <div className="item-list" key={index}>
+              <Card className='min-card'>
+                <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
+                  item.status === "0" ? "รออนุมัติ" :
+                    item.status === "1" ? "อนุมัติ" :
+                      item.status === "2" ? "เปิดใช้งาน" : "เสร็จสิ้น"}
+                </Card.Header>
+                <Card.Body style={{ minHeight: "160px" }}>
+                  <Card.Title>{item.cLicense} {item.cName}</Card.Title>
+                  <Card.Text>
+                    {item.startDateTime}
+                  </Card.Text>
+                  {item.status === "2" ? <Card.Text>
+                    ไมล์เริ่มต้น : {item.startMile}</Card.Text> :
+                    item.status === "3" ? <Card.Text>
+                      ไมล์เริ่มต้น : {item.startMile}<br />
+                      ไมล์สิ้นสุด : {item.endMile} <br />
+                      ระยะทางที่ใช้ : {item.distance} กม.
+                    </Card.Text> : null}
+                </Card.Body>
+                <Card.Footer className="text-muted"><div className='text-center'>
                   <div className={
                     item.status === "0" ? "btn wait-cardlist" :
                       item.status === "1" ? "btn turn-on-cardlist" :
@@ -197,12 +199,10 @@ function BookingList() {
                       item.status === "1" ? "เปิดใช้งาน" :
                         item.status === "2" ? "ปิดใช้งาน" : "สิ้นสุดการใช้งาน"}
                   </div>
-                </div>
-
-              </Card.Body>
-              <Card.Footer className="text-muted">จำนวนวัน : {item.day} วัน</Card.Footer>
-            </Card>
-
+                </div></Card.Footer>
+                <Card.Footer className="text-muted">จำนวนวัน : {item.day} วัน</Card.Footer>
+              </Card>
+            </div>
             // <div className='card text-center'>
             //   <p>เลขที่การจอง : {item.id}</p>
             //   <p>จังหวัด : {item.province}</p>

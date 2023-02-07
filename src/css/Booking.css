@@ -341,3 +341,13 @@
 
 
 }
+
+@media only screen and (max-width: 1200px) {
+
+    .item-list {
+        display: block;
+        box-sizing: border-box;
+        width: 50%;
+        padding: 10px;
+    }
+}
