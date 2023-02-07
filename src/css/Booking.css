@@ -161,23 +161,37 @@
 .wait-lightdot {
     height: 10px;
     width: 10px;
-    background-color: rgb(255, 208, 0);
+    background-color: rgb(250, 193, 4);
     border-radius: 50%;
     display: inline-block;
 }
 
-.running-lightdot {
+.turn-on-lightdot {
     height: 10px;
     width: 10px;
-    background-color: rgb(0, 255, 13);
+    background-color: rgb(60, 135, 247);
     border-radius: 50%;
     display: inline-block;
 }
 
-.off-lightdot {
+.turn-off-lightdot {
     height: 10px;
     width: 10px;
-    background-color: rgb(109, 109, 109);
+    background-color: rgb(245, 77, 77);
+    border-radius: 50%;
+    display: inline-block;
+}
+.success-lightdot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(165, 165, 165);
+    border-radius: 50%;
+    display: inline-block;
+}
+.cancel-lightdot {
+    height: 10px;
+    width: 10px;
+    background-color: rgb(165, 165, 165);
     border-radius: 50%;
     display: inline-block;
 }
@@ -272,7 +286,29 @@
 
 
 
-@media only screen and (max-width: 1000px) {
+
+
+@media only screen and (max-width: 1200px) {
+
+    .item-list {
+        display: block;
+        box-sizing: border-box;
+        width: 50%;
+        padding: 10px;
+    }
+    .item {
+        display: block;
+        box-sizing: border-box;
+        width: 50%;
+        padding: 10px;
+    }
+    .datapick {
+        padding: 15px;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
     .contentFrame {
         margin-top: 10px;
     }
@@ -340,14 +376,4 @@
     }
 
 
-}
-
-@media only screen and (max-width: 1200px) {
-
-    .item-list {
-        display: block;
-        box-sizing: border-box;
-        width: 50%;
-        padding: 10px;
-    }
 }

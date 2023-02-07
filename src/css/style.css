@@ -1,6 +1,6 @@
-
 body {
     height: 100%;
+    font-family: 'Noto Sans Thai', sans-serif;
 }
 
 .app-bar {
@@ -8,10 +8,6 @@ body {
     align-items: center;
     background-color: #2b82f5;
     height: 60px;
-}
-
-.sanFont {
-    font-family: 'IBM Plex Sans Thai', sans-serif;
 }
 
 .container {

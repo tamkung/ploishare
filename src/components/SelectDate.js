@@ -103,10 +103,10 @@ const SelectDate = () => {
       {/*--------------------------------------------------------------- Desktop --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
         <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
-        <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px" }}>
+        <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
-            <DatePicker className='width-booking' style={{ width: "45%" }}
+            <DatePicker className='width-booking' style={{ width: "45%"}}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -119,7 +119,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking' style={{ width: "45%" }}
+            <DatePicker className='width-booking' style={{ width: "45%"}}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -139,7 +139,7 @@ const SelectDate = () => {
 
           </div>
 
-          <div className='mb-3'>
+          <div className='mb-3'style={{ fontFamily: 'Noto Sans Thai' }}>
             <div>เวลา</div>
 
 
@@ -156,12 +156,12 @@ const SelectDate = () => {
               }}
             /> */}
 
-            <Space wrap>
+            <Space wrap >
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 350,
+                  width: '300px' , fontFamily: 'Noto Sans Thai' 
                 }}
+                placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
                   label: hour,
@@ -174,9 +174,9 @@ const SelectDate = () => {
 
             <Space wrap>
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
+                placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: 350,
+                  width: '390px', fontFamily: 'Noto Sans Thai' 
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({
@@ -184,7 +184,7 @@ const SelectDate = () => {
                   value: hour,
                 }))}
               />
-              <div><strong>จำนวน 00 วัน 00 ขั่วโมง</strong></div>
+
             </Space>
 
             {/* <TimePicker style={{ width: "45%" }}
@@ -288,11 +288,84 @@ const SelectDate = () => {
           <div><strong>จำนวน วัน ชั่วโมง</strong></div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext mt-3">Search</button>
         </Form>
-
-
-
       </div>
 
+      {/*--------------------------------------------------------------- Tablet --------------------------------------------------------------- */}
+      <div className='shd' style={{ position: "relative" }} >
+        <img className='d-none d-md-block d-lg-none filter-low' src={wallpaper} style={{ width: "100%", height: "400px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
+        <Form className='datapick d-none d-md-block d-lg-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
+          <div className='mb-3'>
+            <div>วันที่</div>
+            <DatePicker className='width-booking' style={{ width: "40%", fontFamily: 'Noto Sans Thai' }}
+              onChange={(value, dateString) => {
+                setStartDate(value.format('YYYY-MM-DD'));
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Start : ', value.format('YYYY-MM-DD'));
+                console.log('Date End : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่เริ่มต้น"
+            />
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+            <DatePicker className='width-booking' style={{ width: "40%", fontFamily: 'Noto Sans Thai' }}
+              disabled={!endDateDisabled}
+              onChange={(value, dateString) => {
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Stared : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่คืน"
+            />
+
+            <Switch
+              checked={endDateDisabled}
+              onClick={onEndDateSwitchChange}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? 'rgba(249, 210, 12, 1' : 'gray' }}
+            />
+
+          </div>
+
+          <div className='mb-3'style={{ fontFamily: 'Noto Sans Thai' }}>
+            <div>เวลา</div>
+
+            <Space wrap >
+              <Select
+                placeholder='เลือกเวลาเริ่มต้น'
+                style={{
+                  width: 200
+                }}
+                onChange={handleStartTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
+
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+
+            <Space wrap>
+              <Select
+                placeholder='เลือกเวลาเริ่มต้น'
+                style={{
+                  width: 200,
+                }}
+                onChange={handleEndTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+              <div><strong style={{ fontFamily: 'Noto Sans Thai' }}>จำนวน 00 วัน 00 ขั่วโมง</strong></div>
+            </Space>
+          </div>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+        </Form>
+      </div>
 
       <div className='flexbox mt-4' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
@@ -312,10 +385,8 @@ const SelectDate = () => {
                   <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
                   <div>{cars.brand}</div>
                   <div>จำนวน {cars.seat} ที่นั่ง</div>
-                  <div className='license-card mt-3'>
-                    <div>{cars.license}</div>
-                    <div>{cars.province}</div>
-                  </div>
+                  <div>{cars.license}</div>
+                  <div>{cars.province}</div>
                 </div>
               </Link>
             </div>

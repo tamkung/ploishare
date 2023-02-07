@@ -6,7 +6,8 @@ import Card from 'react-bootstrap/Card';
 import '../css/Booking.css';
 import authCheck from '../service/Auth';
 import Swal from 'sweetalert2';
-
+import { Modal } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 const options = {
   year: "numeric",
   month: "2-digit",
@@ -26,7 +27,7 @@ function BookingList() {
   const [getBooking, setGetBooking] = useState([]);
   const email = GET_USER.email;
   const originData = [];
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const fetchData = async () => {
     originData.length = 0;
     await axios.get(API_URL + 'api/getbookingbyemail/' + email).then((response) => {
@@ -61,7 +62,15 @@ function BookingList() {
     setGetBooking(originData);
     console.log('getBooking', getBooking);
   }
+  const [componentDisabled, setComponentDisabled] = useState(false);
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     fetchData();
   }, []);
@@ -156,11 +165,16 @@ function BookingList() {
     <div>
       <div className="app-bar" />
       <div>
-        <div className="jumbotron w-100" style={{ borderRadius: "0px" }}>
-          <strong>รายการจองทั้งหมด</strong>
-          <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-          <hr className="my-4" />
-        </div>
+        <div className="ml-4 mt-4" style={{ fontSize: "2rem", color: "white", fontWeight: "bold" }}>รายการจองทั้งหมด <strong style={{ marginLeft: "10px" , fontSize:"1.5rem"}} type="button" onClick={showModal} > <InfoCircleOutlined twoToneColor="#ffffff" /></strong></div>
+        <Modal okButtonProps={{ style: { display: 'none' } }} title="รายละเอียดสถานะ" open={isModalOpen} onCancel={handleCancel}>
+          <ul>
+            <il className="mr-4"> <p className='wait-lightdot mr-2' />รออนุมัติ คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
+            <il className="mr-4"> <p className='turn-on-lightdot mr-2' />เปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
+            <il className="mr-4"> <p className='turn-off-lightdot mr-2' />ปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
+            <il className="mr-4"> <p className='success-lightdot mr-2' />เสร็จสิ้น คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
+          </ul>
+        </Modal>
+        <hr className="my-4 ml-4 mr-4" style={{border:"solid 1px white"}} />
       </div>
       <div className='flexbox pl-2 pr-2 mt-3'>
         {getBooking.map((item, index) => {
@@ -170,7 +184,7 @@ function BookingList() {
                 <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
                   item.status === "0" ? "รออนุมัติ" :
                     item.status === "1" ? "อนุมัติ" :
-                      item.status === "2" ? "เปิดใช้งาน" : "เสร็จสิ้น"}
+                      item.status === "2" ? "กำลังใช้งาน" : "เสร็จสิ้น"}
                 </Card.Header>
                 <Card.Body style={{ minHeight: "160px" }}>
                   <Card.Title>{item.cLicense} {item.cName}</Card.Title>
