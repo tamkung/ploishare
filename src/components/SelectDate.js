@@ -159,7 +159,7 @@ const SelectDate = () => {
             <Space wrap >
               <Select
                 style={{
-                  width: '300px' , fontFamily: 'Noto Sans Thai' 
+                  width: '300px' 
                 }}
                 placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
@@ -176,7 +176,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: '390px', fontFamily: 'Noto Sans Thai' 
+                  width: '390px' 
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({

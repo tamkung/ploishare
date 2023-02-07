@@ -165,16 +165,26 @@ function BookingList() {
     <div>
       <div className="app-bar" />
       <div>
-        <div className="ml-4 mt-4" style={{ fontSize: "2rem", color: "white", fontWeight: "bold" }}>รายการจองทั้งหมด <strong style={{ marginLeft: "10px" , fontSize:"1.5rem"}} type="button" onClick={showModal} > <InfoCircleOutlined twoToneColor="#ffffff" /></strong></div>
+        <div className="ml-4 mt-4" style={{ fontSize: "2rem", color: "white", fontWeight: "bold" }}>รายการจองทั้งหมด <strong style={{ marginLeft: "10px", fontSize: "1.5rem" }} type="button" onClick={showModal} > <InfoCircleOutlined twoToneColor="#ffffff" /></strong></div>
         <Modal okButtonProps={{ style: { display: 'none' } }} title="รายละเอียดสถานะ" open={isModalOpen} onCancel={handleCancel}>
-          <ul>
-            <il className="mr-4"> <p className='wait-lightdot mr-2' />รออนุมัติ คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
-            <il className="mr-4"> <p className='turn-on-lightdot mr-2' />เปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
-            <il className="mr-4"> <p className='turn-off-lightdot mr-2' />ปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
-            <il className="mr-4"> <p className='success-lightdot mr-2' />เสร็จสิ้น คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</il> <br />
+          <ul >
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='wait-lightdot mr-2' />รออนุมัติ คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
+            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+            </il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='turn-on-lightdot mr-2' />เปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
+            <p>เมื่อเปิดการใช้งานรถ ระบบจะแจ้งเตือนให้กรอกเลขไมล์รถยนต์ปัจจุบันก่อนใช้งานรถยนต์</p>
+            </il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='turn-off-lightdot mr-2' />ปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
+            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+            </il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='success-lightdot mr-2' />เสร็จสิ้น คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
+            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+            </il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>* เมื่อเปิดใช้งานรถยนต์ทางผู้ยืมจะต้องเข้ามาปิดการใช้งานบนเว็บไซต์</p></il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>** ทางเรามีบัตรให้บริการเติมน้ำมันโดยผู้จองไม่จำเป็นต้องจ่ายค่าน้ำมันขณะใช้งานรถ ทางระบบจะเรียกเก็บเงินภายหลัง โดยคำนวณค่าใช้จ่ายจากเลขไมล์รถยนต์</p></il> <br />
           </ul>
         </Modal>
-        <hr className="my-4 ml-4 mr-4" style={{border:"solid 1px white"}} />
+        <hr className="my-4 ml-4 mr-4" style={{ border: "solid 1px white" }} />
       </div>
       <div className='flexbox pl-2 pr-2 mt-3'>
         {getBooking.map((item, index) => {
