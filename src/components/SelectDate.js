@@ -72,7 +72,15 @@ const SelectDate = () => {
     })
       .then((response) => {
         console.log(response.data);
-        setGetCars(response.data);
+        if (response.data.length == 0) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'ไม่มีรถว่างในช่วงเวลาที่เลือก',
+          })
+        } else {
+          setGetCars(response.data);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -106,7 +114,7 @@ const SelectDate = () => {
         <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
-            <DatePicker className='width-booking' style={{ width: "45%"}}
+            <DatePicker className='width-booking' style={{ width: "45%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -119,7 +127,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking' style={{ width: "45%"}}
+            <DatePicker className='width-booking' style={{ width: "45%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -139,7 +147,7 @@ const SelectDate = () => {
 
           </div>
 
-          <div className='mb-3'style={{ fontFamily: 'Noto Sans Thai' }}>
+          <div className='mb-3' style={{ fontFamily: 'Noto Sans Thai' }}>
             <div>เวลา</div>
 
 
@@ -159,7 +167,7 @@ const SelectDate = () => {
             <Space wrap >
               <Select
                 style={{
-                  width: '300px' 
+                  width: '300px'
                 }}
                 placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
@@ -176,7 +184,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: '390px' 
+                  width: '390px'
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({
@@ -329,7 +337,7 @@ const SelectDate = () => {
 
           </div>
 
-          <div className='mb-3'style={{ fontFamily: 'Noto Sans Thai' }}>
+          <div className='mb-3' style={{ fontFamily: 'Noto Sans Thai' }}>
             <div>เวลา</div>
 
             <Space wrap >

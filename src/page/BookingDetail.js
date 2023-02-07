@@ -107,7 +107,7 @@ export default function BookingDetail() {
     };
 
     const addBooking = async (values) => {
-        setComponentDisabled(false);
+        setLoading(true);
         console.log(province === null ? "กรุงเทพฯ และ ปริมณฑล" : province);
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
@@ -161,6 +161,7 @@ export default function BookingDetail() {
                         title: 'Oops...',
                         text: error
                     })
+                    setLoading(false);
                 });
         } catch (error) {
             console.log(error);
@@ -325,7 +326,15 @@ export default function BookingDetail() {
                                         <p>Some contents...</p>
                                     </Modal>
                                 </div>
-                                <button className="button-book mt-5" disabled={!componentDisabled} style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}>จองเลย </button>
+                                <Button
+                                    className="button-book mt-5"
+                                    disabled={!componentDisabled}
+                                    loading={loading}
+                                    htmlType="submit"
+                                    style={{ backgroundColor: !componentDisabled ? 'gray' : '' }}
+                                >
+                                    จองเลย
+                                </Button>
                             </Form>
                         </div>
 
