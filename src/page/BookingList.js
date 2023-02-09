@@ -6,8 +6,11 @@ import Card from 'react-bootstrap/Card';
 import '../css/Booking.css';
 import authCheck from '../service/Auth';
 import Swal from 'sweetalert2';
-import { Modal } from 'antd';
+import { Image, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
+import { GoAlert, GoEye } from "react-icons/go";
+import { BiImageAdd } from "react-icons/bi";
+
 const options = {
   year: "numeric",
   month: "2-digit",
@@ -28,6 +31,8 @@ function BookingList() {
   const email = GET_USER.email;
   const originData = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const fetchData = async () => {
     originData.length = 0;
     await axios.get(API_URL + 'api/getbookingbyemail/' + email).then((response) => {
@@ -51,6 +56,7 @@ function BookingList() {
           cLicense: item.cLicense,
           cName: item.cName, //ชื่อรถ
           day: item.day,
+          image: item.image,
           status: item.status, //0=รออนุมัติ, 1=อนุมัติ, 2=เปิดใช้งาน, 3=ปิดใช้งาน(สิ้นสุดการใช้งาน)
           startMile: item.startMile, //เลขไมล์เริ่มต้น
           endMile: item.endMile, //เลขไมล์สิ้นสุด
@@ -161,6 +167,57 @@ function BookingList() {
     }
   }
 
+  const uploadImage = (id) => {
+    console.log('id', id);
+    try {
+      Swal.fire({
+        title: 'อัพโหลดรูปภาพ',
+        input: 'file',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        showLoaderOnConfirm: true,
+        preConfirm: (image) => {
+          const formData = new FormData();
+          console.log('image', image);
+          formData.append('img', image);
+          formData.append('id', id);
+          axios.post(API_URL + 'api/upload-file', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }).then((response) => {
+            console.log(response.data);
+            axios.post(API_URL + 'api/updatebookingimage', {
+              id: id,
+              image: response.data,
+            }).then((response) => {
+              console.log(response.data);
+              Swal.fire({
+                icon: 'success',
+                title: 'อัพโหลดรูปภาพสำเร็จ',
+                showConfirmButton: false,
+                timer: 1500
+              }).then(() => {
+                fetchData();
+              });
+            });
+          });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+
   return (
     <div>
       <div className="app-bar" />
@@ -169,16 +226,16 @@ function BookingList() {
         <Modal okButtonProps={{ style: { display: 'none' } }} title="รายละเอียดสถานะ" open={isModalOpen} onCancel={handleCancel}>
           <ul >
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='wait-lightdot mr-2' />รออนุมัติ คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
-            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+              <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
             </il> <br />
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='turn-on-lightdot mr-2' />เปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
-            <p>เมื่อเปิดการใช้งานรถ ระบบจะแจ้งเตือนให้กรอกเลขไมล์รถยนต์ปัจจุบันก่อนใช้งานรถยนต์</p>
+              <p>เมื่อเปิดการใช้งานรถ ระบบจะแจ้งเตือนให้กรอกเลขไมล์รถยนต์ปัจจุบันก่อนใช้งานรถยนต์</p>
             </il> <br />
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='turn-off-lightdot mr-2' />ปิดใช้งาน คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
-            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+              <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
             </il> <br />
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='success-lightdot mr-2' />เสร็จสิ้น คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
-            <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
+              <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
             </il> <br />
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>* เมื่อเปิดใช้งานรถยนต์ทางผู้ยืมจะต้องเข้ามาปิดการใช้งานบนเว็บไซต์</p></il> <br />
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>** ทางเรามีบัตรให้บริการเติมน้ำมันโดยผู้จองไม่จำเป็นต้องจ่ายค่าน้ำมันขณะใช้งานรถ ทางระบบจะเรียกเก็บเงินภายหลัง โดยคำนวณค่าใช้จ่ายจากเลขไมล์รถยนต์</p></il> <br />
@@ -197,9 +254,40 @@ function BookingList() {
                       item.status === "2" ? "กำลังใช้งาน" : "เสร็จสิ้น"}
                 </Card.Header>
                 <Card.Body style={{ minHeight: "160px" }}>
-                  <Card.Title>{item.cLicense} {item.cName}</Card.Title>
+                  <Card.Title className='flex'>
+                    ป้ายทะเบียน : {item.cLicense} {item.cName}
+
+                  </Card.Title>
                   <Card.Text>
-                    {item.startDateTime}
+                    ใช้งานวันที่ : {item.startDateTime}<br />
+                    <div className='flex items-center'>
+                      รูปอนุมัติ : {item.image ?
+                        <div className='flex items-center'>
+                          <GoEye className='text-primary ml-2 cursor-pointer'
+                            onClick={() => setVisible(true)} />
+                          <Image
+                            width={200}
+                            style={{ display: 'none' }}
+                            src={item.image}
+                            alt="รูปอนุมัติ"
+                            preview={{
+                              visible,
+                              src: item.image,
+                              onVisibleChange: (value) => {
+                                setVisible(value);
+                              },
+                            }}
+                          />
+                        </div>
+                        : <div className='flex items-center text-danger ml-2 '>
+                          ไม่มีรูปภาพ
+                          {/* <GoAlert className='text-danger' /> */}
+                          <BiImageAdd className='text-success cursor-pointer ml-2'
+                            size={20}
+                            onClick={() => uploadImage(item.id)}
+                          />
+                        </div>}
+                    </div>
                   </Card.Text>
                   {item.status === "2" ? <Card.Text>
                     ไมล์เริ่มต้น : {item.startMile}</Card.Text> :
