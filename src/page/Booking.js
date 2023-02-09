@@ -22,6 +22,7 @@ function Booking() {
     const location = useLocation();
     const { value } = location.state;
     const { car } = location.state;
+    const [image, setImage] = useState([]);
     console.log(value)
     console.log(car)
 
@@ -32,13 +33,18 @@ function Booking() {
                     setGetCar(res.data);
                     console.log(res.data);
                     setLoading(true);
+                    setImage(JSON.parse(res.data.image));
+
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
         getCarById();
+        console.log(image)
     }, []);
+
+
 
     return (
         <div >
@@ -57,12 +63,13 @@ function Booking() {
                     <div className="itemBook" >
                         {/* <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} /> */}
                         <Carousel autoplay style={{ borderRadius: "15px" }}>
-                            <div >
-                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} style={{ borderRadius: "15px" }} />
-                            </div>
-                            <div>
-                                <img src={getCar.image !== null ? getCar.image : NO_Img} alt={getCar.license} style={{ borderRadius: "15px" }} />
-                            </div>
+                            {image.map((item, index) => {
+                                return (
+                                    <div key={index} >
+                                        <img src={item} alt={getCar.license}  style={{ borderRadius: "15px" }} />
+                                    </div>
+                                )
+                            })}
                         </Carousel>
                     </div>
                     <div className="itemBook pl-3 pr-3"  >
@@ -83,9 +90,7 @@ function Booking() {
                         </div>
                     </div>
                     <div className="detailCar mb-3">Car Detail : {getCar.detail}</div>
-
                 </div>
-
                 : <div>Loading...</div>}
         </div>
     );

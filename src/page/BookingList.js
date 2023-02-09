@@ -8,7 +8,7 @@ import authCheck from '../service/Auth';
 import Swal from 'sweetalert2';
 import { Image, Modal, Spin } from 'antd';
 import { InfoCircleOutlined, SyncOutlined } from '@ant-design/icons';
-import { GoAlert, GoEye } from "react-icons/go";
+import { FcCancel } from 'react-icons/fc';
 import { BiImageAdd } from "react-icons/bi";
 
 import logoSolo from '../img/logo-solo.png'
@@ -229,6 +229,41 @@ function BookingList() {
     }
   }
 
+  const updateCancel = (id) => {
+    console.log('id', id);
+    try {
+      Swal.fire({
+        icon: 'warning',
+        title: 'ยืนยันการยกเลิก',
+        showCancelButton: true,
+        confirmButtonText: 'ยืนยัน',
+        showLoaderOnConfirm: true,
+        preConfirm: () => {
+          axios.post(API_URL + 'api/updatebookingstatus', {
+            id: id,
+            status: 4,
+          }).then((response) => {
+            console.log(response.data);
+            Swal.fire({
+              icon: 'success',
+              title: 'ยกเลิกสำเร็จ',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              fetchData();
+            });
+          });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div>
@@ -271,9 +306,10 @@ function BookingList() {
               <div className="item-list" key={index}>
                 <Card className='min-card'>
                   <Card.Header style={{ textAlign: "center" }}>{
-                    item.status === "0" ? <p className='inline-block'><div className='wait-lightdot mr-1' />รออนุมัติ</p> :
-                      item.status === "1" ? <p className='inline-block'><div className='allowed-lightdot mr-1' />อนุมัติแล้ว</p> :
-                        item.status === "2" ? <p className='inline-block'><SyncOutlined spin style={{ fontSize: '1.2rem' , color:"rgb(8, 207, 1)" }}/> กำลังใช้งาน</p> : <p className='inline-block'><div className='success-lightdot mr-1' />เสร็จสิ้น</p>}
+                    item.status === "0" ? <p className='inline-block'><div className='wait-lightdot mr-1' />รออนุมัติ <div className='absolute top-3 right-3 cursor-pointer'><FcCancel size={25} onClick={() => { updateCancel(item.id) }} /></div></p> :
+                      item.status === "1" ? <p className='inline-block'><div className='allowed-lightdot mr-1' />อนุมัติแล้ว <div className='absolute top-3 right-3 cursor-pointer'><FcCancel size={25} onClick={() => { updateCancel(item.id) }} /></div></p> :
+                        item.status === "2" ? <p className='inline-block'><SyncOutlined spin style={{ fontSize: '1.2rem', color: "rgb(8, 207, 1)" }} /> กำลังใช้งาน</p> :
+                          item.status === "3" ? <p className='inline-block'><div className='success-lightdot mr-1' />เสร็จสิ้น</p> : <p className='inline-block'><div className='success-lightdot mr-1' />ยกเลิก</p>}
                   </Card.Header>
                   <Card.Body style={{ minHeight: "180px" }}>
                     <Card.Title className='flex'>
@@ -291,19 +327,21 @@ function BookingList() {
                         ไมล์สิ้นสุด : {item.endMile} <br />
                         ระยะทางที่ใช้ : {item.distance} กม.
                       </Card.Text> : null}
-                    <div className='flex items-center'>
-                      {item.image ?
-                        <div className='flex items-center text-success'>
-                          ขออนุญาตเรียบร้อย
-                        </div>
-                        : <div className='flex items-center text-danger ' type="button" onClick={() => uploadImage(item.id)}>
-                          *เพิ่มใบขออนุญาต
-                          {/* <GoAlert className='text-danger' /> */}
-                          <BiImageAdd className='text-danger cursor-pointer ml-2'
-                            size={20}
-                          />
-                        </div>}
-                    </div>
+                    {item.status !== "4" ?
+                      <div className='flex items-center'>
+                        {item.image ?
+                          <div className='flex items-center text-success'>
+                            ขออนุญาตเรียบร้อย
+                          </div>
+                          : <div className='flex items-center text-danger ' type="button" onClick={() => uploadImage(item.id)}>
+                            *เพิ่มใบขออนุญาต
+                            {/* <GoAlert className='text-danger' /> */}
+                            <BiImageAdd className='text-danger cursor-pointer ml-2'
+                              size={20}
+                            />
+                          </div>}
+                      </div>
+                      : null}
                   </Card.Body>
                   <Card.Footer className="text-muted"><div className='text-center'>
                     <div className={
@@ -317,7 +355,8 @@ function BookingList() {
                     >
                       {item.status === "0" ? "รออนุมัติ" :
                         item.status === "1" ? "เปิดใช้งาน" :
-                          item.status === "2" ? "ปิดใช้งาน" : "สิ้นสุดการใช้งาน"}
+                          item.status === "2" ? "ปิดใช้งาน" :
+                            item.status === "3" ? "สิ้นสุดการใช้งาน" : "ยกเลิก"}
                     </div>
                   </div></Card.Footer>
                   <Card.Footer className="text-muted">จำนวนวัน : {item.day} วัน</Card.Footer>
@@ -343,7 +382,7 @@ function BookingList() {
           })}
         </div>
       }
-    </div>
+    </div >
   )
 }
 

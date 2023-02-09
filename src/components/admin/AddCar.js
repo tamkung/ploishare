@@ -118,7 +118,11 @@ const AddCar = () => {
         if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
             // setImage(info.file.response);
-            images.push(info.file.response)
+            images.length = 0;
+            info.fileList.map((file) => {
+                images.push(file.response)
+            })
+            //images.push(info.file.response)
             console.log("images : " + images)
             setImageList(images)
             //console.log("imageList : " + imageList)

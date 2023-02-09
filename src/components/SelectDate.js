@@ -381,26 +381,29 @@ const SelectDate = () => {
           </Tag>
         </Space>
 
-        {getCars.map((cars, index) => (
-          <div div className='item mb-3' key={index} >
-            <div className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
-              <Link className="bigcard textover" to={"/booking"} state={{ value: { startDate, endDate, startTime, endTime }, car: cars.license }} >
-                <div className="colcard-left" >
-                  <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? cars.image : NO_Img} alt={cars.license} />
+        {getCars.map((cars, index) => {
+          const images = JSON.parse(cars.image);
+          return (
+            <div div className='item mb-3' key={index} >
+              <div className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
+                <Link className="bigcard textover" to={"/booking"} state={{ value: { startDate, endDate, startTime, endTime }, car: cars.license }} >
+                  <div className="colcard-left" >
+                    <img style={{ objectFit: "cover", height: "100%", width: "100%", borderRadius: "15px 0px 0px 15px" }} src={cars.image !== null ? images[0] : NO_Img} alt={cars.license} />
 
-                </div>
-                <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
-                  <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
-                  <div>{cars.brand}</div>
-                  <div>จำนวน {cars.seat} ที่นั่ง</div>
-                  <div>{cars.license}</div>
-                  <div>{cars.province}</div>
-                </div>
-              </Link>
+                  </div>
+                  <div className="colcard-right pl-3 pt-3 pb-3 pr-3  textover">
+                    <div className='textover' style={{ fontWeight: "bold", fontSize: "1.1rem" }}>{cars.model}</div>
+                    <div>{cars.brand}</div>
+                    <div>จำนวน {cars.seat} ที่นั่ง</div>
+                    <div>{cars.license}</div>
+                    <div>{cars.province}</div>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </div>
 
-        ))}
+          )
+        })}
       </div>
     </div >
   );

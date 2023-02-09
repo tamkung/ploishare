@@ -42,6 +42,7 @@ export default function BookingDetail() {
     const { car } = location.state;
     const [loading, setLoading] = useState(false);
     const email = GET_USER.email;
+    const [imageList, setImageList] = useState([]);
 
     useEffect(() => {
         console.log(email);
@@ -51,13 +52,14 @@ export default function BookingDetail() {
                     setGetCar(res.data);
                     console.log(res.data);
                     //setLoading(true);
+                    setImageList(JSON.parse(res.data.image));
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
         getCarById();
-
+        console.log(imageList)
     }, []);
 
     const [form] = Form.useForm();
@@ -229,7 +231,7 @@ export default function BookingDetail() {
                             <Descriptions.Item label="วันที่คืนรถ">{value.endDate} {value.endTime}</Descriptions.Item>
                         </Descriptions>
                         <hr className="mt-3" />
-                        <img className="mt-3" src={getCar.image} alt={getCar.name} style={{ borderRadius: "15px", width: '100%' }} />
+                        <img className="mt-3" src={imageList[0]} alt={getCar.name} style={{ borderRadius: "15px", width: '100%' }} />
 
                     </div>
                 </div>

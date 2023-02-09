@@ -366,7 +366,8 @@ const ContentBooking = () => {
                     <div>
                         {record.status === "0" ? 'รอยืนยัน' :
                             record.status === "1" ? 'ยืนยันแล้ว' :
-                                record.status === "2" ? 'เปิดใช้งาน' : "เสร็จสิ้น"}
+                                record.status === "2" ? 'เปิดใช้งาน' :
+                                    record.status === "3" ? "เสร็จสิ้น" : "ยกเลิก"}
                     </div>
                 );
             },

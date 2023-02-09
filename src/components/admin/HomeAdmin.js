@@ -13,6 +13,8 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import faker from 'faker';
+import { FaCarAlt, FaClipboardList } from 'react-icons/fa';
+import { GiCarKey } from 'react-icons/gi';
 
 ChartJS.register(
     CategoryScale,
@@ -61,6 +63,8 @@ function HomeAdmin() {
     const [car, setCar] = useState([]);
     const [booking, setBooking] = useState([]);
     const [user, setUser] = useState([]);
+    const counter = [];
+    const [countActive, setCountActive] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,18 +74,25 @@ function HomeAdmin() {
 
             axios.get(API_URL + 'api/getcar').then((response) => {
                 setCar(response.data);
-                console.log(response.data.length);
+                //console.log(response.data.length);
             });
             axios.get(API_URL + 'api/getbooking').then((response) => {
                 setBooking(response.data);
-                console.log(response.data.length);
+                console.log(response.data);
+                response.data.forEach(function (obj) {
+                    var key = obj.status
+                    counter[key] = (counter[key] || 0) + 1
+                })
+                setCountActive(counter[2]);
+                console.log("Active : " + countActive);
             });
             axios.get(API_URL + 'api/getuser').then((response) => {
                 setUser(response.data);
-                console.log(response.data.length);
+                //console.log(response.data.length);
             });
         }
         fetchData();
+
     }, []);
     return (
         <div>
@@ -100,7 +111,7 @@ function HomeAdmin() {
                         <div className="row">
                             <div className="col-12 col-sm-6 col-md-3">
                                 <div className="info-box">
-                                    <span className="info-box-icon bg-info elevation-1"><i className="fas fa-cog" /></span>
+                                    <span className="info-box-icon bg-info elevation-1"><FaCarAlt /></span>
                                     <div className="info-box-content">
                                         <span className="info-box-text">รถทั้งหมด</span>
                                         <span className="info-box-number">
@@ -114,7 +125,7 @@ function HomeAdmin() {
                             {/* /.col */}
                             <div className="col-12 col-sm-6 col-md-3">
                                 <div className="info-box mb-3">
-                                    <span className="info-box-icon bg-danger elevation-1"><i className="fas fa-thumbs-up" /></span>
+                                    <span className="info-box-icon bg-danger elevation-1"><FaClipboardList /></span>
                                     <div className="info-box-content">
                                         <span className="info-box-text">การจองทั้งหมด</span>
                                         <span className="info-box-number">{booking.length}</span>
@@ -128,10 +139,10 @@ function HomeAdmin() {
                             <div className="clearfix hidden-md-up" />
                             <div className="col-12 col-sm-6 col-md-3">
                                 <div className="info-box mb-3">
-                                    <span className="info-box-icon bg-success elevation-1"><i className="fas fa-shopping-cart" /></span>
+                                    <span className="info-box-icon bg-success elevation-1"><GiCarKey /></span>
                                     <div className="info-box-content">
-                                        <span className="info-box-text">-</span>
-                                        <span className="info-box-number">-</span>
+                                        <span className="info-box-text">กำลังใช้งาน</span>
+                                        <span className="info-box-number">{countActive}</span>
                                     </div>
                                     {/* /.info-box-content */}
                                 </div>
@@ -149,12 +160,15 @@ function HomeAdmin() {
                             </div>
                         </div>
                         <div>
-                            <Bar options={options} data={data} />
+
                         </div>
+                        {/* <div>
+                            <Bar options={options} data={data} />
+                        </div> */}
                     </Content>
                 </Layout>
             </Layout>
-        </div>
+        </div >
     )
 }
 
