@@ -32,6 +32,7 @@ function BookingList() {
   const originData = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [image, setImage] = useState('');
 
   const fetchData = async () => {
     originData.length = 0;
@@ -80,6 +81,12 @@ function BookingList() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const previewImage = (visible, image) => {
+    console.log('image', image);
+    setVisible(visible);
+    setImage(image);
+  }
 
   const updateStatus = (id, status) => {
     console.log('id', id);
@@ -264,7 +271,7 @@ function BookingList() {
                       รูปอนุมัติ : {item.image ?
                         <div className='flex items-center'>
                           <GoEye className='text-primary ml-2 cursor-pointer'
-                            onClick={() => setVisible(true)} />
+                            onClick={() => previewImage(true, item.image)} />
                           <Image
                             width={200}
                             style={{ display: 'none' }}
@@ -272,8 +279,9 @@ function BookingList() {
                             alt="รูปอนุมัติ"
                             preview={{
                               visible,
-                              src: item.image,
+                              src: image,
                               onVisibleChange: (value) => {
+                                console.log(item.image);
                                 setVisible(value);
                               },
                             }}
