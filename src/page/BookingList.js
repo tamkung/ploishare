@@ -294,22 +294,7 @@ function BookingList() {
                     <div className='flex items-center'>
                       {item.image ?
                         <div className='flex items-center text-success'>
-                          ขออนุญาตเรียบร้อย<GoEye className='text-success ml-2 cursor-pointer'
-                            onClick={() => previewImage(true, item.image)} />
-                          <Image
-                            width={200}
-                            style={{ display: 'none' }}
-                            src={item.image}
-                            alt="รูปอนุมัติ"
-                            preview={{
-                              visible,
-                              src: image,
-                              onVisibleChange: (value) => {
-                                console.log(item.image);
-                                setVisible(value);
-                              },
-                            }}
-                          />
+                          ขออนุญาตเรียบร้อย
                         </div>
                         : <div className='flex items-center text-danger ' type="button" onClick={() => uploadImage(item.id)}>
                           *เพิ่มใบขออนุญาต
