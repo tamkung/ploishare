@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import logo from '../img/ploishare_logo.png'
+import LandScapeLogo from '../img/landscape-logo.png'
 import Login from '../components/Login';
 import Vertify from '../components/Vertify';
 import { Padding } from '@mui/icons-material';
@@ -56,7 +56,7 @@ export default function BasicTabs() {
             <div className="w-full max-w-md space-y-8 " style={{ background: "white", padding: "30px", borderRadius: "15px", boxShadow: "#282828 0px 5px 10px" }}>
                 <img
                     className="mx-auto h-auto w-auto"
-                    src={logo}
+                    src={LandScapeLogo}
                     alt="ปล่อย Share Logo"
                     style={{ width: '250px', height: '160px' }}
                 />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { GET_USER, API_URL, API_URL_SignUp } from "../Constant";
 import Swal from "sweetalert2";
 import '../css/Booking.css';
+import logoSolo from '../img/logo-solo.png'
 import {
     Form,
     Input,
@@ -204,9 +205,18 @@ export default function BookingDetail() {
     };
     return (
         <div >
-            <div className="app-bar" />
+            <div className="app-bar mb-3" style={{ textAlign: "left" }}>
+                <img
+                    type="button"
+                    className="ml-4 h-10 w-auto"
+                    src={logoSolo}
+                    alt="ปล่อย Share Logo"
+                    onClick={() => { window.location = "/" }}
+
+                />
+            </div>
             {/* {Loading !== false ? */}
-            <div className="flexbook mt-5" style={{ borderRadius: "15px", background: "white", marginLeft: "15px", marginRight: "15px", padding: "15px" }}>
+            <div className="flexbook" style={{ borderRadius: "15px", background: "white", marginLeft: "15px", marginRight: "15px", padding: "15px" }}>
                 <div className="itemBook" >
                     <div >
                         <div style={{ fontWeight: "bolder", fontSize: "1.6rem" }}>การจอง</div>
@@ -319,12 +329,12 @@ export default function BookingDetail() {
                                         onChange={(e) => setComponentDisabled(e.target.checked)}
                                     />
 
-                                    <button style={{ marginLeft: "10px", color: !componentDisabled ? 'gray' : 'blue', textDecoration: "underline" }} className="text-primary" type="button" onClick={showModal} >ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
+                                    {/* <button style={{ marginLeft: "10px", color: !componentDisabled ? 'gray' : 'blue', textDecoration: "underline" }} className="text-primary" type="button" onClick={showModal} >ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
                                     <Modal okButtonProps={{ style: { display: 'none' } }} title="เงื่อนไขและข้อกำหนด" open={isModalOpen} onCancel={handleCancel}>
                                         <p>Some contents...</p>
                                         <p>Some contents...</p>
                                         <p>Some contents...</p>
-                                    </Modal>
+                                    </Modal> */}
                                 </div>
                                 <Button
                                     className="button-book mt-5"

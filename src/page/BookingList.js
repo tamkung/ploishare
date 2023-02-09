@@ -8,9 +8,13 @@ import authCheck from '../service/Auth';
 import Swal from 'sweetalert2';
 import { Image, Modal, Spin } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
+<<<<<<< Updated upstream
 import { GoAlert, GoEye } from "react-icons/go";
 import { BiImageAdd } from "react-icons/bi";
 
+=======
+import logoSolo from '../img/logo-solo.png'
+>>>>>>> Stashed changes
 const options = {
   year: "numeric",
   month: "2-digit",
@@ -231,7 +235,16 @@ function BookingList() {
 
   return (
     <div>
-      <div className="app-bar" />
+      <div className="app-bar" style={{ textAlign: "left" }}>
+        <img
+          type="button"
+          className="ml-4 h-10 w-auto"
+          src={logoSolo}
+          alt="ปล่อย Share Logo"
+          onClick={() => { window.location = "/" }}
+
+        />
+      </div>
       <div>
         <div className="ml-4 mt-4" style={{ fontSize: "2rem", color: "white", fontWeight: "bold" }}>รายการจองทั้งหมด <strong style={{ marginLeft: "10px", fontSize: "1.5rem" }} type="button" onClick={showModal} > <InfoCircleOutlined twoToneColor="#ffffff" /></strong></div>
         <Modal okButtonProps={{ style: { display: 'none' } }} title="รายละเอียดสถานะ" open={isModalOpen} onCancel={handleCancel}>

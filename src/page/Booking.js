@@ -6,7 +6,7 @@ import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
 import '../css/Booking.css';
 import { margin } from "@mui/system";
-
+import logoSolo from '../img/logo-solo.png'
 const contentStyle = {
     height: '160px',
     color: '#fff',
@@ -42,7 +42,16 @@ function Booking() {
 
     return (
         <div >
-            <div className="app-bar mb-5" />
+            <div className="app-bar mb-3" style={{ textAlign: "left" }}>
+                <img
+                    type="button"
+                    className="ml-4 h-10 w-auto"
+                    src={logoSolo}
+                    alt="ปล่อย Share Logo"
+                    onClick={() => { window.location = "/" }}
+
+                />
+            </div>
             {Loading !== false ?
                 <div className="flexbook" style={{ borderRadius: "15px", marginLeft: "15px", marginRight: "15px", background: "white", marginBottom: "50px" }}>
                     <div className="itemBook" >

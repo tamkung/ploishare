@@ -216,7 +216,7 @@ const SelectDate = () => {
         <img className='d-block d-sm-none filter-low' src={wallpaper} style={{ width: "100%", height: "300px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
         <Form className='datapick d-block d-sm-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", width: "90%", top: "15%" }}>
           <div className='mb-3'>
-            <DatePicker className='width-booking' style={{ width: "35%" }}
+            <DatePicker className='width-booking' style={{ width: "33%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -229,7 +229,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking' style={{ width: "35%" }}
+            <DatePicker className='width-booking' style={{ width: "33%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -254,7 +254,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 140,
+                  width: 130,
                 }}
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
@@ -270,7 +270,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 140,
+                  width: 130,
                 }}
                 onChange={handleEndTimeChange}
                 options={hourData.map((hour) => ({
@@ -293,7 +293,6 @@ const SelectDate = () => {
               }}
             /> */}
           </div>
-          <div><strong>จำนวน วัน ชั่วโมง</strong></div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext mt-3">Search</button>
         </Form>
       </div>
@@ -304,7 +303,7 @@ const SelectDate = () => {
         <Form className='datapick d-none d-md-block d-lg-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
-            <DatePicker className='width-booking' style={{ width: "40%", fontFamily: 'Noto Sans Thai' }}
+            <DatePicker className='width-booking' style={{ width: "38%", fontFamily: 'Noto Sans Thai' }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -317,7 +316,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking' style={{ width: "40%", fontFamily: 'Noto Sans Thai' }}
+            <DatePicker className='width-booking' style={{ width: "38%", fontFamily: 'Noto Sans Thai' }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -368,19 +367,19 @@ const SelectDate = () => {
                   value: hour,
                 }))}
               />
-              <div><strong style={{ fontFamily: 'Noto Sans Thai' }}>จำนวน 00 วัน 00 ขั่วโมง</strong></div>
             </Space>
           </div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-
-      <div className='flexbox mt-4' >
+      <marquee className="mt-3" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}>หากต้องการจองรถด่วน โปรดติดต่อผู้ดูแล Line:@........ หรือ โทร 062-222-2222</marquee>
+      <div className='flexbox mt-2' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
           <Tag color="#ffffff" style={{ color: "#000000" }}>
             รถว่าง {getCars.length} คัน
           </Tag>
         </Space>
+
         {getCars.map((cars, index) => (
           <div div className='item mb-3' key={index} >
             <div className='card-item' data-toggle="tooltip" data-placement="top" title={cars.detail} >
