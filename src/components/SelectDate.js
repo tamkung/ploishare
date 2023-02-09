@@ -12,6 +12,7 @@ import '../css/style.css';
 import * as BsIcon5 from 'react-icons/bs'
 
 import { API_URL } from "../Constant";
+import LineIcon from '../img/line.png';
 import NO_Img from '../img/no_img.jpg';
 import wallpaper from '../img/wallpaper-car.jpg'
 
@@ -372,7 +373,7 @@ const SelectDate = () => {
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-      <marquee className="mt-3" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}>หากต้องการจองรถด่วน โปรดติดต่อผู้ดูแล Line:@........ หรือ โทร 062-222-2222</marquee>
+      <marquee className="mt-3 bg-white inline-block" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}>หากต้องการจองรถด่วน หรือติดปัญหาโปรดติดต่อผู้ดูแล <img className="inline-block" src={LineIcon} alt={"Background"} /> : @ploishared หรือ โทร 02-555-5555</marquee>
       <div className='flexbox mt-2' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
           <Tag color="#ffffff" style={{ color: "#000000" }}>

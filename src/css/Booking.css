@@ -166,7 +166,7 @@
     display: inline-block;
 }
 
-.turn-on-lightdot {
+.allowed-lightdot {
     height: 10px;
     width: 10px;
     background-color: rgb(60, 135, 247);
@@ -174,10 +174,10 @@
     display: inline-block;
 }
 
-.turn-off-lightdot {
+.running-lightdot {
     height: 10px;
     width: 10px;
-    background-color: rgb(245, 77, 77);
+    background-color: rgb(8, 207, 1);
     border-radius: 50%;
     display: inline-block;
 }
@@ -191,7 +191,7 @@
 .cancel-lightdot {
     height: 10px;
     width: 10px;
-    background-color: rgb(165, 165, 165);
+    background-color: rgb(240, 21, 21);
     border-radius: 50%;
     display: inline-block;
 }

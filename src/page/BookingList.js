@@ -7,14 +7,11 @@ import '../css/Booking.css';
 import authCheck from '../service/Auth';
 import Swal from 'sweetalert2';
 import { Image, Modal, Spin } from 'antd';
-import { InfoCircleOutlined } from '@ant-design/icons';
-<<<<<<< Updated upstream
+import { InfoCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import { GoAlert, GoEye } from "react-icons/go";
 import { BiImageAdd } from "react-icons/bi";
 
-=======
 import logoSolo from '../img/logo-solo.png'
->>>>>>> Stashed changes
 const options = {
   year: "numeric",
   month: "2-digit",
@@ -273,47 +270,19 @@ function BookingList() {
             return (
               <div className="item-list" key={index}>
                 <Card className='min-card'>
-                  <Card.Header style={{ textAlign: "center" }}>สถานะปัจจุบัน  : {
-                    item.status === "0" ? "รออนุมัติ" :
-                      item.status === "1" ? "อนุมัติ" :
-                        item.status === "2" ? "กำลังใช้งาน" : "เสร็จสิ้น"}
+                  <Card.Header style={{ textAlign: "center" }}>{
+                    item.status === "0" ? <p className='inline-block'><div className='wait-lightdot mr-1' />รออนุมัติ</p> :
+                      item.status === "1" ? <p className='inline-block'><div className='allowed-lightdot mr-1' />อนุมัติแล้ว</p> :
+                        item.status === "2" ? <p className='inline-block'><SyncOutlined spin style={{ fontSize: '1.2rem' , color:"rgb(8, 207, 1)" }}/> กำลังใช้งาน</p> : <p className='inline-block'><div className='success-lightdot mr-1' />เสร็จสิ้น</p>}
                   </Card.Header>
-                  <Card.Body style={{ minHeight: "160px" }}>
+                  <Card.Body style={{ minHeight: "180px" }}>
                     <Card.Title className='flex'>
                       ป้ายทะเบียน : {item.cLicense} {item.cName}
 
                     </Card.Title>
                     <Card.Text>
                       ใช้งานวันที่ : {item.startDateTime}<br />
-                      <div className='flex items-center'>
-                        รูปอนุมัติ : {item.image ?
-                          <div className='flex items-center'>
-                            <GoEye className='text-primary ml-2 cursor-pointer'
-                              onClick={() => previewImage(true, item.image)} />
-                            <Image
-                              width={200}
-                              style={{ display: 'none' }}
-                              src={item.image}
-                              alt="รูปอนุมัติ"
-                              preview={{
-                                visible,
-                                src: image,
-                                onVisibleChange: (value) => {
-                                  console.log(item.image);
-                                  setVisible(value);
-                                },
-                              }}
-                            />
-                          </div>
-                          : <div className='flex items-center text-danger ml-2 '>
-                            ไม่มีรูปภาพ
-                            {/* <GoAlert className='text-danger' /> */}
-                            <BiImageAdd className='text-success cursor-pointer ml-2'
-                              size={20}
-                              onClick={() => uploadImage(item.id)}
-                            />
-                          </div>}
-                      </div>
+
                     </Card.Text>
                     {item.status === "2" ? <Card.Text>
                       ไมล์เริ่มต้น : {item.startMile}</Card.Text> :
@@ -322,6 +291,34 @@ function BookingList() {
                         ไมล์สิ้นสุด : {item.endMile} <br />
                         ระยะทางที่ใช้ : {item.distance} กม.
                       </Card.Text> : null}
+                    <div className='flex items-center'>
+                      {item.image ?
+                        <div className='flex items-center text-success'>
+                          ขออนุญาตเรียบร้อย<GoEye className='text-success ml-2 cursor-pointer'
+                            onClick={() => previewImage(true, item.image)} />
+                          <Image
+                            width={200}
+                            style={{ display: 'none' }}
+                            src={item.image}
+                            alt="รูปอนุมัติ"
+                            preview={{
+                              visible,
+                              src: image,
+                              onVisibleChange: (value) => {
+                                console.log(item.image);
+                                setVisible(value);
+                              },
+                            }}
+                          />
+                        </div>
+                        : <div className='flex items-center text-danger ' type="button" onClick={() => uploadImage(item.id)}>
+                          *เพิ่มใบขออนุญาต
+                          {/* <GoAlert className='text-danger' /> */}
+                          <BiImageAdd className='text-danger cursor-pointer ml-2'
+                            size={20}
+                          />
+                        </div>}
+                    </div>
                   </Card.Body>
                   <Card.Footer className="text-muted"><div className='text-center'>
                     <div className={
