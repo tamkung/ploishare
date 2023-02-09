@@ -39,6 +39,12 @@ export default function MenuSideBar() {
                                             <p>ListBooking</p>
                                         </NavLink>
                                     </li>
+                                    {/* <li className="nav-item">
+                                        <NavLink className="nav-link" to={'/listimage'}>
+                                            <BsIcon5.FaImages className='inline-flex mr-3 mb-1 ' size={25} />
+                                            <p>ManageImage</p>
+                                        </NavLink>
+                                    </li> */}
                                 </ul>
                             </nav>
                         </div>

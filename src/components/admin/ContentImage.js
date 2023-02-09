@@ -75,19 +75,12 @@ function ContentCar() {
     const fetchData = async () => {
         setLoading(true);
         originData.length = 0;
-        await axios.get(API_URL + 'api/getcar').then((response) => {
+        await axios.get(API_URL + 'api/get-files').then((response) => {
             response.data.map((item, index) => {
                 originData.push({
                     key: index + 1,
-                    license: item.license,
-                    province: item.province,
-                    brand: item.brand,
-                    model: item.model,
-                    color: item.color,
-                    seat: item.seat,
-                    detail: item.detail,
-                    image: item.image,
-                    status: item.status,
+                    name: item.name,
+                    url: item.url,
                 });
             });
         });
@@ -99,7 +92,7 @@ function ContentCar() {
         fetchData();
     }, []);
 
-    const deleteCar = (record) => {
+    const deleteImage = (record) => {
         console.log(record);
         Swal.fire({
             title: 'Are you sure?',
@@ -111,50 +104,18 @@ function ContentCar() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(API_URL + 'api/deletecar/' + record.license).then((response) => {
-                    console.log(response.data);
-                    axios.delete(API_URL + 'api/delete-files-url', { data: { url: record.image } }
-                    ).then((response) => {
-                        console.log(response.data);
-                    });
-                });
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        fetchData();
-                    }
-                });
-            }
-        })
-    };
-
-    const updateCarStatus = (record) => {
-        console.log(record);
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, update it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatecarstatus', { license: record.license, status: record.status === 1 ? 0 : 1 }
+                axios.delete(API_URL + 'api/delete-file/' + record.name
                 ).then((response) => {
                     console.log(response.data);
-                });
-                Swal.fire(
-                    'Updated!',
-                    'Your file has been updated.',
-                    'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        fetchData();
-                    }
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            fetchData();
+                        }
+                    });
                 });
             }
         })
@@ -175,95 +136,29 @@ function ContentCar() {
             editable: true,
         },
         {
-            title: 'ป้ายทะเบียน',
-            dataIndex: 'license',
+            title: 'ชื่อ',
+            dataIndex: 'name',
             width: '8%',
             editable: true,
         },
         {
-            title: 'จังหวัด',
-            dataIndex: 'province',
+            title: 'URL',
+            dataIndex: 'url',
             width: '10%',
-            editable: true,
-        },
-        {
-            title: 'ยี่ห้อ',
-            dataIndex: 'brand',
-            width: '8%',
-            editable: true,
-        },
-        {
-            title: 'รุ่น',
-            dataIndex: 'model',
-            width: '8%',
-            editable: true,
-        },
-        {
-            title: 'สี',
-            dataIndex: 'color',
-            width: '7%',
-            editable: true,
-        },
-        {
-            title: 'จำนวนที่นั่ง',
-            dataIndex: 'seat',
-            width: '7%',
-            editable: true,
-        },
-        {
-            title: 'รายละเอียด',
-            dataIndex: 'detail',
-            width: '20%',
+            render: (url) => <a href={url} target='_blank' >{url}</a>,
             editable: true,
         },
         {
             title: 'รูปภาพ',
-            dataIndex: 'image',
+            dataIndex: 'url',
             align: 'center',
-            render: (image) => {
-                const images = JSON.parse(image);
-                console.log(images);
-                return (
-                    <Image.PreviewGroup>
-                        {images.map((item) => {
-                            console.log(item);
-                            return (
-                                <Image
-                                    width={75}
-                                    height={75}
-                                    src={item}
-                                />
-                            )
-                        }
-                        )}
-                    </Image.PreviewGroup>
-
-                )
-            },
+            render: (image) => <Image
+                width={75}
+                height={75}
+                src={image !== null ? image : NO_Img}
+            />,
             width: '8%',
             editable: true,
-        },
-        {
-            title: 'สถานะ',
-            dataIndex: 'status',
-            width: '7%',
-            align: 'center',
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-
-                    </span>
-                ) : (
-                    <button
-                        className={record.status === 1 ? 'btn btn-success' : 'btn btn-danger'}
-                        onClick={() => updateCarStatus(record)}
-                    >
-                        {record.status === 1 ? 'ปกติ' : 'พักงาน'}
-                    </button>
-                );
-            },
-            // editable: true,
         },
         {
             title: 'ดำเนินการ',
@@ -274,10 +169,9 @@ function ContentCar() {
                 const editable = isEditing(record);
                 return editable ? (
                     <span>
-
                     </span>
                 ) : (
-                    <Typography.Link disabled={editingKey !== ''} onClick={() => deleteCar(record)}>
+                    <Typography.Link disabled={editingKey !== ''} onClick={() => deleteImage(record)}>
                         <DeleteOutlined />
                     </Typography.Link>
                 );
@@ -316,9 +210,6 @@ function ContentCar() {
                             background: '#fff',
                         }}
                     >
-                        <div style={{ textAlign: "right", paddingBottom: 20 }}>
-                            <Link to={'/addcar'} className='btn-add'> + Add</Link>
-                        </div>
                         <Form form={form} component={false}>
                             <Table
                                 loading={loading}

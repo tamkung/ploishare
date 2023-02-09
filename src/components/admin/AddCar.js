@@ -58,6 +58,8 @@ const AddCar = () => {
     const [selectedCarColor, setSelectedCarColor] = useState("");
 
     const [image, setImage] = useState(null);
+    const images = [];
+    const [imageList, setImageList] = useState([]);
     const [disabled, setDisabled] = useState(true)
 
     const handleChangeCarLicenseText = (e) => {
@@ -111,11 +113,15 @@ const AddCar = () => {
 
     const handleUpload = (info) => {
         if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
+            //console.log(info.file, info.fileList);
         }
         if (info.file.status === 'done') {
             message.success(`${info.file.name} file uploaded successfully`);
-            setImage(info.file.response);
+            // setImage(info.file.response);
+            images.push(info.file.response)
+            console.log("images : " + images)
+            setImageList(images)
+            //console.log("imageList : " + imageList)
             setDisabled(false);
         } else if (info.file.status === 'error') {
             message.error(`${info.file.name} file upload failed.`);
@@ -123,7 +129,8 @@ const AddCar = () => {
     };
 
     const onFinish = (values) => {
-        console.log(image)
+        //console.log(image)
+        console.log(imageList)
         try {
             axios.post(API_URL + "api/addcar",
                 {
@@ -134,7 +141,7 @@ const AddCar = () => {
                     "color": selectedCarColor,
                     "seat": inputCarSeat,
                     "detail": inputCarDetail,
-                    "image": image
+                    "image": JSON.stringify(imageList)
                 }).then(response => {
                     if (response.data.status === "OK") {
                         const Toast = Swal.mixin({
@@ -306,7 +313,8 @@ const AddCar = () => {
                                 <Form.Item name="dragger" valuePropName="fileList" getValueFromEvent={normFile} noStyle>
                                     <Upload.Dragger
                                         name="img"
-                                        multiple={false}
+                                        multiple={true}
+                                        maxCount={3}
                                         action={API_URL + "api/upload-file"}
                                         onChange={handleUpload}
                                         beforeUpload={(file) => {
