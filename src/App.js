@@ -45,7 +45,6 @@ function App() {
     if (GET_USER === null) {
       setAdmin(null);
     } else {
-      //const user = JSON.parse(localStorage.getItem("user"));
       console.log(GET_USER.type);
       if (GET_USER.type !== null) {
         setAdmin(GET_USER.type);
