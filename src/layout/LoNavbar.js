@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import * as BsIcon5 from 'react-icons/fa'
+import  LOGO  from '../img/logo-solo.png'
 
 export default function MenuSideBar() {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             <Link to={"/"} className="brand-link elevation-4">
-                <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: '.8' }} />
+                <img src={LOGO} alt="AdminLTE Logo" className="brand-image " style={{ opacity: '.8' }} />
                 <span className="brand-text font-weight-light">ปล่อยShare</span>
             </Link>
             <div className="sidebar os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">

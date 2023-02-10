@@ -110,64 +110,74 @@ export default function BookingDetail() {
     };
 
     const addBooking = async (values) => {
-        setLoading(true);
+        console.log(values); 
         console.log(province === null ? "กรุงเทพฯ และ ปริมณฑล" : province);
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
         console.log(new Date().toLocaleString('en-EN', options),);
-        try {
-            await axios.post(API_URL_SignUp + 'api/addbooking',
-                {
-                    "id": Date.now(),
-                    "province": province === null ? "กรุงเทพฯ และ ปริมณฑล" : province,
-                    "uName": values.name,
-                    "empoyeeNo": values.empoyeeNo,
-                    "uEmail": email,
-                    "uPhone": values.phone,
-                    "uSectNo": null,
-                    "uSectName": null,
-                    "note": values.note,
-                    "startDateTime": startDateTime,
-                    "endDateTime": endDateTime,
-                    //"bookingDate": new Date().toLocaleString('en-EN', options),
-                    "cLicense": getCar.license,
-                    "cName": getCar.brand + " : " + getCar.model,
-                    image: image,
-                }).then(response => {
-                    if (response.data.status === "OK") {
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 1000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.addEventListener("mouseenter", Swal.stopTimer);
-                                toast.addEventListener("mouseleave", Swal.resumeTimer);
-                            },
-                        });
-                        Toast.fire({
-                            icon: "success",
-                            title: "Booking added successfully",
-                        }).then(() => {
-                            navigate("/booking-list");
-                        });
-                    } else {
 
-                    }
-                }).catch(error => {
-                    console.log(error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: error
-                    })
-                    setLoading(false);
-                });
-        } catch (error) {
-            console.log(error);
+        if (values.name === undefined || values.empoyeeNo === undefined || values.phone === undefined) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+            })
+        } else {
+            setLoading(true);
+            try {
+                await axios.post(API_URL_SignUp + 'api/addbooking',
+                    {
+                        "id": Date.now(),
+                        "province": province === null ? "กรุงเทพฯ และ ปริมณฑล" : province,
+                        "uName": values.name,
+                        "empoyeeNo": values.empoyeeNo,
+                        "uEmail": email,
+                        "uPhone": values.phone,
+                        "uSectNo": null,
+                        "uSectName": null,
+                        "note": values.note,
+                        "startDateTime": startDateTime,
+                        "endDateTime": endDateTime,
+                        //"bookingDate": new Date().toLocaleString('en-EN', options),
+                        "cLicense": getCar.license,
+                        "cName": getCar.brand + " : " + getCar.model,
+                        image: image,
+                    }).then(response => {
+                        if (response.data.status === "OK") {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 1000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                                },
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "Booking added successfully",
+                            }).then(() => {
+                                navigate("/booking-list");
+                            });
+                        } else {
+
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error
+                        })
+                        setLoading(false);
+                    });
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
+    };
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values);

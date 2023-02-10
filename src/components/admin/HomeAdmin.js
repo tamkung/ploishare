@@ -109,7 +109,7 @@ function HomeAdmin() {
                         }}
                     >
                         <div className="row">
-                            <div className="col-12 col-sm-6 col-md-3">
+                            <div className="col-6 ">
                                 <div className="info-box">
                                     <span className="info-box-icon bg-info elevation-1"><FaCarAlt /></span>
                                     <div className="info-box-content">
@@ -123,7 +123,7 @@ function HomeAdmin() {
                                 {/* /.info-box */}
                             </div>
                             {/* /.col */}
-                            <div className="col-12 col-sm-6 col-md-3">
+                            <div className="col-6 ">
                                 <div className="info-box mb-3">
                                     <span className="info-box-icon bg-danger elevation-1"><FaClipboardList /></span>
                                     <div className="info-box-content">
@@ -137,7 +137,7 @@ function HomeAdmin() {
                             {/* /.col */}
                             {/* fix for small devices only */}
                             <div className="clearfix hidden-md-up" />
-                            <div className="col-12 col-sm-6 col-md-3">
+                            <div className="col-6 ">
                                 <div className="info-box mb-3">
                                     <span className="info-box-icon bg-success elevation-1"><GiCarKey /></span>
                                     <div className="info-box-content">
@@ -149,7 +149,7 @@ function HomeAdmin() {
                                 {/* /.info-box */}
                             </div>
                             {/* /.col */}
-                            <div className="col-12 col-sm-6 col-md-3">
+                            <div className="col-6 ">
                                 <div className="info-box mb-3">
                                     <span className="info-box-icon bg-warning elevation-1"><i className="fas fa-users" /></span>
                                     <div className="info-box-content">
@@ -159,12 +159,6 @@ function HomeAdmin() {
                                 </div>
                             </div>
                         </div>
-                        <div>
-
-                        </div>
-                        {/* <div>
-                            <Bar options={options} data={data} />
-                        </div> */}
                     </Content>
                 </Layout>
             </Layout>
