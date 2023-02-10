@@ -8,7 +8,7 @@ export default function MenuSideBar() {
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             <Link to={"/"} className="brand-link elevation-4">
                 <img src={LOGO} alt="AdminLTE Logo" className="brand-image " style={{ opacity: '.8' }} />
-                <span className="brand-text font-weight-light">ปล่อยShare</span>
+                <span className="brand-text font-weight-light" style={{marginLeft:'0.5rem'}}> Menu</span>
             </Link>
             <div className="sidebar os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-scrollbar-vertical-hidden os-host-transition">
                 <div className="os-resize-observer-host observed">
