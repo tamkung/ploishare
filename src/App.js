@@ -12,6 +12,7 @@ import LoFooter from './layout/LoFooter'
 import MenuButton from './layout/LoMenu'
 
 import { GET_USER } from "./Constant";
+import callAPI from "./service/CallAPI";
 
 import './css/Disable.css';
 import './css/AdminStyle.css';
@@ -39,6 +40,7 @@ function App() {
   const [admin, setAdmin] = useState(null);
 
   useEffect(() => {
+    callAPI();
     console.log(GET_USER);
     if (GET_USER === null) {
       setAdmin(null);
