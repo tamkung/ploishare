@@ -299,10 +299,10 @@ const SelectDate = () => {
         </Form>
       </div>
 
-      {/*--------------------------------------------------------------- Tablet --------------------------------------------------------------- */}
+      {/*--------------------------------------------------------------- bigger --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-md-block d-lg-none filter-low' src={wallpaper} style={{ width: "100%", height: "400px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
-        <Form className='datapick d-none d-md-block d-lg-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
+        <img className='d-none d-lg-block d-xl-none filter-low' src={wallpaper} style={{ width: "100%", height: "400px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
+        <Form className='datapick d-none d-lg-block d-xl-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking' style={{ width: "38%", fontFamily: 'Noto Sans Thai' }}
@@ -374,6 +374,110 @@ const SelectDate = () => {
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
+
+      <div className='shd' style={{ position: "relative" }} >
+        <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
+        <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
+          <div className='mb-3'>
+            <div>วันที่</div>
+            <DatePicker className='width-booking' style={{ width: "45%" }}
+              onChange={(value, dateString) => {
+                setStartDate(value.format('YYYY-MM-DD'));
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Start : ', value.format('YYYY-MM-DD'));
+                console.log('Date End : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่เริ่มต้น"
+            />
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+            <DatePicker className='width-booking' style={{ width: "45%" }}
+              disabled={!endDateDisabled}
+              onChange={(value, dateString) => {
+                setEndDate(value.format('YYYY-MM-DD'));
+                console.log('Date Stared : ', value.format('YYYY-MM-DD'));
+              }}
+              locale={locale}
+              disabledDate={disabledDate}
+              format={'DD-MM-YYYY'}
+              placeholder="เลือกวันที่คืน"
+            />
+
+            <Switch
+              checked={endDateDisabled}
+              onClick={onEndDateSwitchChange}
+              style={{ textAlign: "right", marginLeft: "15px", backgroundColor: endDateDisabled ? 'rgba(249, 210, 12, 1' : 'gray' }}
+            />
+
+          </div>
+
+          <div className='mb-3' style={{ fontFamily: 'Noto Sans Thai' }}>
+            <div>เวลา</div>
+
+
+            {/* <TimePicker className='width-booking'
+              format="HH:mm"
+              minuteStep={30}
+              locale={locale}
+              disabledMinutes={disabledMinutes}
+              placeholder="เลือกเวลาเริ่มต้น"
+              // hide={disabledHours}
+              onChange={(value, dateString) => {
+                setStartTime(value.format('HH:mm:00'));
+                console.log('Time Stared : ', value.format('HH:mm:00'));
+              }}
+            /> */}
+
+            <Space wrap >
+              <Select
+                style={{
+                  width: '300px'
+                }}
+                placeholder='เลือกเวลาเริ่มต้น'
+                onChange={handleStartTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+            </Space>
+
+            <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
+
+            <Space wrap>
+              <Select
+                placeholder='เลือกเวลาคืนรถ'
+                style={{
+                  width: '390px'
+                }}
+                onChange={handleEndTimeChange}
+                options={hourData.map((hour) => ({
+                  label: hour,
+                  value: hour,
+                }))}
+              />
+
+            </Space>
+
+            {/* <TimePicker style={{ width: "45%" }}
+              format="HH:mm"
+              minuteStep={30}
+              locale={locale}
+              disabledMinutes={disabledMinutes}
+              placeholder="เลือกเวลาคืนรถ"
+              onChange={(value, dateString) => {
+                setEndTime(value.format('HH:mm:00'));
+                console.log('Time Stared : ', value.format('HH:mm:00'));
+              }}
+            /> */}
+          </div>
+          <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
+        </Form>
+      </div>
+
+
       <marquee className="mt-3 bg-white inline-block" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}><a className="mr-5" type="button" href="https:/forms.gle/4wTbRgUZUbkNMJGF7" target="_blank"><img className="inline-block" src={HeartIcon} alt={"Background"} /> โปรดประเมินความพึงพอใจเพื่อนำไปปรับปรุง : forms.gle/4wTbRgUZUbkNMJGF7</a>  หากต้องการจองรถด่วน หรือติดปัญหาโปรดติดต่อผู้ดูแล <img className="inline-block" src={LineIcon} alt={"Background"} /> : @ploishared หรือ โทร 02-555-5555</marquee>
       <div className='flexbox mt-2' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
