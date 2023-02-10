@@ -124,8 +124,8 @@ export default function BookingDetail() {
                     "empoyeeNo": values.empoyeeNo,
                     "uEmail": email,
                     "uPhone": values.phone,
-                    "uSect": null,
-                    "uPart": null,
+                    "uSectNo": null,
+                    "uSectName": null,
                     "note": values.note,
                     "startDateTime": startDateTime,
                     "endDateTime": endDateTime,
@@ -146,12 +146,10 @@ export default function BookingDetail() {
                                 toast.addEventListener("mouseleave", Swal.resumeTimer);
                             },
                         });
-
                         Toast.fire({
                             icon: "success",
                             title: "Booking added successfully",
                         }).then(() => {
-
                             navigate("/booking-list");
                         });
                     } else {
