@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Form, DatePicker, TimePicker, Switch, Select, Space, Tag } from 'antd';
 import Swal from "sweetalert2";
 import axios from "axios";
-
+import { LikeOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import locale from 'antd/es/date-picker/locale/th_TH';
@@ -13,6 +13,7 @@ import * as BsIcon5 from 'react-icons/bs'
 
 import { API_URL } from "../Constant";
 import LineIcon from '../img/line.png';
+import HeartIcon from '../img/heart.png';
 import NO_Img from '../img/no_img.jpg';
 import wallpaper from '../img/wallpaper-car.jpg'
 
@@ -373,10 +374,10 @@ const SelectDate = () => {
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-      <marquee className="mt-3 bg-white inline-block" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}>หากต้องการจองรถด่วน หรือติดปัญหาโปรดติดต่อผู้ดูแล <img className="inline-block" src={LineIcon} alt={"Background"} /> : @ploishared หรือ โทร 02-555-5555</marquee>
+      <marquee className="mt-3 bg-white inline-block" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}><a className="mr-5" type="button" href="https:/forms.gle/4wTbRgUZUbkNMJGF7" target="_blank"><img className="inline-block" src={HeartIcon} alt={"Background"} /> โปรดประเมินความพึงพอใจเพื่อนำไปปรับปรุง : forms.gle/4wTbRgUZUbkNMJGF7</a>  หากต้องการจองรถด่วน หรือติดปัญหาโปรดติดต่อผู้ดูแล <img className="inline-block" src={LineIcon} alt={"Background"} /> : @ploishared หรือ โทร 02-555-5555</marquee>
       <div className='flexbox mt-2' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
-          <Tag color="#ffffff" style={{ color: "#000000" }}>
+          <Tag color="#ffffff" style={{ color: "#000000" ,fontFamily: 'Noto Sans Thai'}}>
             รถว่าง {getCars.length} คัน
           </Tag>
         </Space>

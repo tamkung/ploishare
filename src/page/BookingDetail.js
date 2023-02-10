@@ -331,12 +331,12 @@ export default function BookingDetail() {
                                         onChange={(e) => setComponentDisabled(e.target.checked)}
                                     />
 
-                                    {/* <button style={{ marginLeft: "10px", color: !componentDisabled ? 'gray' : 'blue', textDecoration: "underline" }} className="text-primary" type="button" onClick={showModal} >ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
+                                    <button style={{ marginLeft: "10px", color: !componentDisabled ? 'gray' : 'blue', textDecoration: "underline" }} className="text-primary" type="button" onClick={showModal} >ฉันอ่านและยอมรับข้อกำหนดทั้งหมด</button>
                                     <Modal okButtonProps={{ style: { display: 'none' } }} title="เงื่อนไขและข้อกำหนด" open={isModalOpen} onCancel={handleCancel}>
                                         <p>Some contents...</p>
                                         <p>Some contents...</p>
                                         <p>Some contents...</p>
-                                    </Modal> */}
+                                    </Modal>
                                 </div>
                                 <Button
                                     className="button-book mt-5"
