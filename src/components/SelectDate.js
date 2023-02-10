@@ -299,10 +299,10 @@ const SelectDate = () => {
         </Form>
       </div>
 
-      {/*--------------------------------------------------------------- bigger --------------------------------------------------------------- */}
+      {/*--------------------------------------------------------------- Tablet --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-lg-block d-xl-none filter-low' src={wallpaper} style={{ width: "100%", height: "400px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
-        <Form className='datapick d-none d-lg-block d-xl-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
+        <img className='d-none d-md-block d-lg-none filter-low' src={wallpaper} style={{ width: "100%", height: "400px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
+        <Form className='datapick d-none d-md-block d-lg-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking' style={{ width: "38%", fontFamily: 'Noto Sans Thai' }}
@@ -374,10 +374,11 @@ const SelectDate = () => {
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-
+      
+      {/*--------------------------------------------------------------- Bigger --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
-        <img className='d-none d-xl-block filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
-        <Form className='datapick d-none d-xl-block shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
+        <img className='d-none d-lg-block d-xl-none filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
+        <Form className='datapick d-none d-lg-block d-xl-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
             <DatePicker className='width-booking' style={{ width: "45%" }}
@@ -481,7 +482,7 @@ const SelectDate = () => {
       <marquee className="mt-3 bg-white inline-block" direction="right" onmouseout="this.start()" onmouseover="this.stop()" scrollamount="6" scrolldelay="10" style={{ color: "white" }}><a className="mr-5" type="button" href="https:/forms.gle/4wTbRgUZUbkNMJGF7" target="_blank"><img className="inline-block" src={HeartIcon} alt={"Background"} /> โปรดประเมินความพึงพอใจเพื่อนำไปปรับปรุง : forms.gle/4wTbRgUZUbkNMJGF7</a>  หากต้องการจองรถด่วน หรือติดปัญหาโปรดติดต่อผู้ดูแล <img className="inline-block" src={LineIcon} alt={"Background"} /> : @ploishared หรือ โทร 02-555-5555</marquee>
       <div className='flexbox mt-2' >
         <Space className="mb-3" size={[0, 8]} wrap style={{ width: "100%" }}>
-          <Tag color="#ffffff" style={{ color: "#000000" ,fontFamily: 'Noto Sans Thai'}}>
+          <Tag color="#ffffff" style={{ color: "#000000", fontFamily: 'Noto Sans Thai' }}>
             รถว่าง {getCars.length} คัน
           </Tag>
         </Space>
