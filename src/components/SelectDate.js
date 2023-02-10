@@ -381,7 +381,7 @@ const SelectDate = () => {
         <Form className='datapick d-none d-lg-block d-xl-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>
             <div>วันที่</div>
-            <DatePicker className='width-booking' style={{ width: "45%" }}
+            <DatePicker className='width-booking' style={{ width: "40%" }}
               onChange={(value, dateString) => {
                 setStartDate(value.format('YYYY-MM-DD'));
                 setEndDate(value.format('YYYY-MM-DD'));
@@ -394,7 +394,7 @@ const SelectDate = () => {
               placeholder="เลือกวันที่เริ่มต้น"
             />
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-            <DatePicker className='width-booking' style={{ width: "45%" }}
+            <DatePicker className='width-booking' style={{ width: "40%" }}
               disabled={!endDateDisabled}
               onChange={(value, dateString) => {
                 setEndDate(value.format('YYYY-MM-DD'));
