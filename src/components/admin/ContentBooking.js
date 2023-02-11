@@ -7,7 +7,8 @@ import {
     Table,
     DatePicker,
     Button,
-    Image
+    Image,
+    Select,
 } from 'antd';
 
 import axios from 'axios';
@@ -18,6 +19,7 @@ import { API_URL } from '../../Constant';
 import NO_Img from '../../img/no_img.jpg';
 import authCheck from '../../service/Auth';
 const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 const date = new Date('2023-02-02T10:00:00.000Z');
 var now_utc = Date.UTC(
@@ -78,6 +80,7 @@ const EditableCell = ({
     );
 };
 const originData = [];
+const emails = [];
 
 const ContentBooking = () => {
     useEffect(() => {
@@ -111,7 +114,21 @@ const ContentBooking = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
+    const [email, setEmail] = useState('');
+
+
     const [loading, setLoading] = useState(true);
+
+    const getuEmail = async () => {
+        emails.length = 0;
+        await axios.get(API_URL + 'api/getuser').then((response) => {
+            console.log(response.data);
+            response.data.map((item, index) => {
+                emails.push(item.email);
+                console.log(item.email);
+            });
+        });
+    }
 
     const fetchData = async () => {
         setLoading(true);
@@ -150,6 +167,7 @@ const ContentBooking = () => {
 
     useEffect(() => {
         fetchData();
+        getuEmail();
     }, []);
 
     const approveCar = (record) => {
@@ -220,7 +238,11 @@ const ContentBooking = () => {
                         cLicense: item.cLicense,
                         cName: item.cName,
                         day: item.day + ' วัน',
+                        image: item.image,
                         status: item.status,
+                        startMile: item.startMile, // ไมล์เริ่มต้น
+                        endMile: item.endMile,  // ไมล์สิ้นสุด
+                        distance: item.distance, // ระยะทาง
                     });
                 });
                 setData(new_data);
@@ -229,9 +251,58 @@ const ContentBooking = () => {
         }
     };
 
+    const searchEmail = (value) => {
+        console.log("aasd"+value);
+        if (value === '') {
+            fetchData();
+        } else {
+            axios.post(API_URL + 'api/searchbookingbyemail', { uEmail: value }
+            ).then((response) => {
+                console.log(response.data);
+                originData.length = 0;
+                const new_data = [];
+                response.data.map((item, index) => {
+                    new_data.push({
+                        key: index + 1,
+                        id: item.id,
+                        province: item.province,
+                        uName: item.uName,
+                        empoyeeNo: item.empoyeeNo,
+                        uEmail: item.uEmail,
+                        uPhone: item.uPhone,
+                        uSect: item.uSect,
+                        uPart: item.uPart,
+                        note: item.note,
+                        startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
+                        endDateTime: new Date(item.endDateTime).toLocaleString('th', options),
+                        bookingDate: new Date(item.bookingDate).toLocaleString('th', options),
+                        cLicense: item.cLicense,
+                        cName: item.cName,
+                        day: item.day + ' วัน',
+                        image: item.image,
+                        status: item.status,
+                        startMile: item.startMile, // ไมล์เริ่มต้น
+                        endMile: item.endMile,  // ไมล์สิ้นสุด
+                        distance: item.distance, // ระยะทาง
+                    });
+                });
+                setData(new_data);
+                console.log(new_data.length);
+                searchDate();
+                //fetchData();
+            });
+        }
+    };
+
     const handleChangeDate = (date, dateString) => {
         setStartDate(dateString[0]);
         setEndDate(dateString[1]);
+    };
+
+    const handleChangeEmail = async (value) => {
+        await setEmail(value);
+        await searchEmail(value);
+        console.log(value);
     };
 
     const isEditing = (record) => record.key === editingKey;
@@ -422,6 +493,18 @@ const ContentBooking = () => {
                     >
                         <Form form={form} component={false}>
                             <div className='row' style={{ paddingBottom: "10px" }}>
+                                <Select
+                                    className='w-40'
+                                    showSearch
+                                    onChange={handleChangeEmail}
+                                    value={email}
+                                >
+                                    {emails.map((email, index) => {
+                                        return (
+                                            <Option key={index} value={email} >{email}</Option>
+                                        )
+                                    })}
+                                </Select>
                                 <RangePicker onChange={handleChangeDate} />
                                 <Button onClick={searchDate} >
                                     ค้นหา

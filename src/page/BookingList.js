@@ -12,15 +12,17 @@ import { FcCancel } from 'react-icons/fc';
 import { BiImageAdd } from "react-icons/bi";
 
 import logoSolo from '../img/logo-solo.png'
+
 const options = {
   year: "numeric",
   month: "2-digit",
   day: "2-digit",
   hour: "2-digit",
   minute: "2-digit",
+  second: "2-digit",
   hour12: false,
   hourCycle: "h23",  // 24-hour format
-  locale: "th"  // Thai language
+  locale: "en-EN"  // Thai language
 };
 
 function BookingList() {
@@ -32,8 +34,6 @@ function BookingList() {
   const email = GET_USER.email;
   const originData = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [image, setImage] = useState('');
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -72,7 +72,6 @@ function BookingList() {
     setLoading(false);
     console.log('getBooking', getBooking);
   }
-  const [componentDisabled, setComponentDisabled] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -85,93 +84,108 @@ function BookingList() {
     fetchData();
   }, []);
 
-  const previewImage = (visible, image) => {
-    console.log('image', image);
-    setVisible(visible);
-    setImage(image);
-  }
-
-  const updateStatus = (id, status) => {
+  const updateStatus = async (id, status, license, startMile) => {
     console.log('id', id);
+    console.log("license", license);
+    console.log("startMile", startMile);
+    const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
+    const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+    console.log('timeStamp', timeStamp);
     try {
-      if (status === 2) {
-        Swal.fire({
-          title: 'กรอกเลขไมล์เริ่มต้น',
-          input: 'number',
-          inputAttributes: {
-            autocapitalize: 'off'
-          },
-          showCancelButton: true,
-          confirmButtonText: 'Submit',
-          showLoaderOnConfirm: true,
-          preConfirm: (startMile) => {
-            axios.post(API_URL + 'api/updatebookingstartmile', {
-              id: id,
-              startMile: startMile,
-            }).then((response) => {
-              console.log(response.data);
-              axios.post(API_URL + 'api/updatebookingstatus', {
+      await axios.get(API_URL + 'api/getcarbyid/' + license).then((response) => {
+        console.log(response.data);
+        if (status === 2) {
+          Swal.fire({
+            title: 'กรอกเลขไมล์เริ่มต้น',
+            text: 'เลขไมล์ปัจจุบันของรถ : ' + response.data.license + ' คือ ' + response.data.currentMile + ' กิโลเมตร',
+            input: 'number',
+            inputValue: response.data.currentMile,
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: (startMile) => {
+              axios.post(API_URL + 'api/updatebookingstartmile', {
                 id: id,
-                status: status,
+                startMile: startMile,
               }).then((response) => {
                 console.log(response.data);
-                Swal.fire({
-                  icon: 'success',
-                  title: 'เปิดใช้งานสำเร็จ',
-                  showConfirmButton: false,
-                  timer: 1500
-                }).then(() => {
-                  fetchData();
+                axios.post(API_URL + 'api/updatebookingstatus', {
+                  id: id,
+                  status: status,
+                }).then((response) => {
+                  console.log(response.data);
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'เปิดใช้งานสำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then(() => {
+                    fetchData();
+                  });
                 });
               });
-            });
-          },
-          allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-          if (result.isConfirmed) {
-
-          }
-        })
-      } else {
-        Swal.fire({
-          title: 'กรอกเลขไมล์สิ้นสุด',
-          input: 'number',
-          inputAttributes: {
-            autocapitalize: 'off'
-          },
-          showCancelButton: true,
-          confirmButtonText: 'Submit',
-          showLoaderOnConfirm: true,
-          preConfirm: (endMile) => {
-            axios.post(API_URL + 'api/updatebookingendmile', {
-              id: id,
-              endMile: endMile,
-            }).then((response) => {
-              console.log(response.data);
-              axios.post(API_URL + 'api/updatebookingstatus', {
-                id: id,
-                status: status,
-              }).then((response) => {
-                console.log(response.data);
-                Swal.fire({
-                  icon: 'success',
-                  title: 'เปิดใช้งานสำเร็จ',
-                  showConfirmButton: false,
-                  timer: 1500
-                }).then(() => {
-                  fetchData();
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if (result.isConfirmed) {
+            }
+          })
+        } else {
+          Swal.fire({
+            title: 'กรอกเลขไมล์สิ้นสุด',
+            text: 'เลขไมล์เริ่มต้นของรถ : ' + license + ' คือ ' + startMile + ' กิโลเมตร',
+            input: 'number',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: (endMile) => {
+              if (endMile < startMile) {
+                Swal.showValidationMessage(
+                  `เลขไมล์สิ้นสุดต้องมากกว่าเลขไมล์เริ่มต้น`
+                )
+              } else {
+                axios.post(API_URL + 'api/updatebookingendmile', {
+                  id: id,
+                  endDateTime: timeStamp,
+                  endMile: endMile,
+                }).then((response) => {
+                  axios.post(API_URL + 'api/updatecarmile', {
+                    license: license,
+                    currentMile: endMile,
+                  })
+                  console.log(response.data);
+                  axios.post(API_URL + 'api/updatebookingstatus', {
+                    id: id,
+                    status: status,
+                  }).then((response) => {
+                    console.log(response.data);
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'ปิดใช้งานสำเร็จ',
+                      showConfirmButton: false,
+                      timer: 1500
+                    }).then(() => {
+                      fetchData();
+                    });
+                  });
                 });
-              });
-            });
-          },
-          allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-          if (result.isConfirmed) {
+              }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if (result.isConfirmed) {
 
-          }
-        })
-      }
+            }
+          })
+        }
 
+      });
     } catch (err) {
       console.log(err);
     }
@@ -293,8 +307,10 @@ function BookingList() {
             <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <strong><p className='success-lightdot mr-2' />เสร็จสิ้น คือ สถานะรออนุมัติคำสั่งจองรถจากผู้ดูแลระบบ</strong>
               <p>ทางผู้ดูแลระบบจะทำการตรวจสอบข้อมูล และอนุมัติคำสั่งจองของท่านให้ไวที่สุด</p>
             </il> <br />
-            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>* เมื่อเปิดใช้งานรถยนต์ทางผู้ยืมจะต้องเข้ามาปิดการใช้งานบนเว็บไซต์</p></il> <br />
-            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>** ทางเรามีบัตรให้บริการเติมน้ำมันโดยผู้จองไม่จำเป็นต้องจ่ายค่าน้ำมันขณะใช้งานรถ ทางระบบจะเรียกเก็บเงินภายหลัง โดยคำนวณค่าใช้จ่ายจากเลขไมล์รถยนต์</p></il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>* เมื่อเปิดใช้งานรถยนต์ทางผู้ยืมจะต้องเข้ามาปิดการใช้งานบนเว็บไซต์</p>
+            </il> <br />
+            <il style={{ fontFamily: 'Noto Sans Thai' }} className="mr-4"> <p>** ทางเรามีบัตรให้บริการเติมน้ำมันโดยผู้จองไม่จำเป็นต้องจ่ายค่าน้ำมันขณะใช้งานรถ ทางระบบจะเรียกเก็บเงินภายหลัง โดยคำนวณค่าใช้จ่ายจากเลขไมล์รถยนต์</p>
+            </il> <br />
           </ul>
         </Modal>
         <hr className="my-4 ml-4 mr-4" style={{ border: "solid 1px white" }} />
@@ -350,8 +366,8 @@ function BookingList() {
                           item.status === "2" ? "btn turn-off-cardlist" : "btn success-cardlist"}
                       onClick={
                         item.status === "0" ? () => { alert('รออนุมัติ') } :
-                          item.status === "1" ? () => { updateStatus(item.id, 2) } :
-                            item.status === "2" ? () => { updateStatus(item.id, 3) } : () => { alert('สิ้นสุดการใช้งาน') }}
+                          item.status === "1" ? () => { updateStatus(item.id, 2, item.cLicense, item.startMile) } :
+                            item.status === "2" ? () => { updateStatus(item.id, 3, item.cLicense, item.startMile) } : () => { alert('สิ้นสุดการใช้งาน') }}
                     >
                       {item.status === "0" ? "รออนุมัติ" :
                         item.status === "1" ? "เปิดใช้งาน" :
