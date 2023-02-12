@@ -14,6 +14,7 @@ import {
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { CSVLink } from "react-csv";
+import { FaRegStopCircle } from 'react-icons/fa';
 
 import { API_URL } from '../../Constant';
 import NO_Img from '../../img/no_img.jpg';
@@ -252,7 +253,7 @@ const ContentBooking = () => {
     };
 
     const searchEmail = (value) => {
-        console.log("aasd"+value);
+        console.log("aasd" + value);
         if (value === '') {
             fetchData();
         } else {
@@ -288,10 +289,43 @@ const ContentBooking = () => {
                 });
                 setData(new_data);
                 console.log(new_data.length);
-                searchDate();
                 //fetchData();
             });
         }
+    };
+    const updateStatus = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, update it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(API_URL + 'api/updatebookingstatus', {
+                    id: id,
+                    status: 3,
+                }).then((response) => {
+                    console.log(response.data);
+                });
+                Swal.fire(
+                    'Updated!',
+                    'Your file has been updated.',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        if (startDate === '' || endDate === '') {
+                            fetchData();
+                        } else {
+                            searchDate();
+                        }
+                    }
+                });
+            }
+        })
     };
 
     const handleChangeDate = (date, dateString) => {
@@ -401,6 +435,7 @@ const ContentBooking = () => {
             width: '8%',
             editable: true,
         },
+
         {
             title: 'สถานะ',
             dataIndex: 'status',
@@ -413,32 +448,11 @@ const ContentBooking = () => {
 
                     </span>
                 ) : (
-                    <button
-                        className={record.status !== "0" ? 'btn btn-success' : 'btn btn-warning'}
-                        onClick={record.status === "0" ? () => approveCar(record) : () => { }}
-                    >
-                        {record.status !== "0" ? 'ยืนยันแล้ว' : 'รอยืนยัน'}
-                    </button >
-                );
-            },
-        },
-        {
-            title: 'การเปิดใช้งาน',
-            dataIndex: 'status',
-            width: '120px',
-            align: 'center',
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-
-                    </span>
-                ) : (
                     <div>
                         {record.status === "0" ? 'รอยืนยัน' :
-                            record.status === "1" ? 'ยืนยันแล้ว' :
-                                record.status === "2" ? 'เปิดใช้งาน' :
-                                    record.status === "3" ? "เสร็จสิ้น" : "ยกเลิก"}
+                            record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div>  :
+                                record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
+                                    record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
                     </div>
                 );
             },
