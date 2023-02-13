@@ -12,7 +12,7 @@ export const RouteUser = [
         element: <NotFound />,
     },
     {
-        path: "/",
+        path: "/home",
         element: <IndexUser />,
     },
     {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useNavigate } from "react-router-dom";
 import { setupIonicReact } from '@ionic/react';
 
 import { RouteAdmin } from "./routes/AdminRoutes";
 import { RouteUser } from "./routes/UserRoutes";
 import { RoutePublic } from "./routes/PublicRoutes";
+import IndexUser from "./page/IndexUser";
 
 import LoHeader from './layout/LoHeader'
 import LoNavbar from './layout/LoNavbar'
@@ -38,6 +39,7 @@ setupIonicReact({
 
 function App() {
   const [admin, setAdmin] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     callAPI();

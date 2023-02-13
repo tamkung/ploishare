@@ -1,13 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
-const logout = () => {
-    // Clear the user's session
-    localStorage.removeItem('user');
-    localStorage.removeItem('type');
-    sessionStorage.clear();
-    window.location.replace('/');
-};
+import SignOut from '../service/SignOut';
 
 export default function Header() {
     return (
@@ -18,7 +11,7 @@ export default function Header() {
                         <i className="fas fa-bars" /></a>
                 </li>
                 <li className="nav-item d-none d-sm-inline-block">
-                    <Link className="nav-link" to={"/"} >Admin ปล่อยShare</Link>
+                    <Link className="nav-link" to={"/home"} >Admin ปล่อยShare</Link>
                 </li>
             </ul>
             <ul className="navbar-nav ml-auto">
@@ -28,10 +21,9 @@ export default function Header() {
                     </a>
                 </li>
                 <li className="nav-item d-sm-inline-block">
-                    <a className="btn nav-link" onClick={logout}>ออกจากระบบ</a>
+                    <a className="btn nav-link" onClick={SignOut}>ออกจากระบบ</a>
                 </li>
             </ul>
         </nav >
-
     )
 }

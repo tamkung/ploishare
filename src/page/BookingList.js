@@ -289,7 +289,7 @@ function BookingList() {
           className="ml-4 h-10 w-auto"
           src={logoSolo}
           alt="ปล่อย Share Logo"
-          onClick={() => { navigate('/') }}
+          onClick={() => { navigate('/home') }}
 
         />
       </div>

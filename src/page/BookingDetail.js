@@ -224,7 +224,7 @@ export default function BookingDetail() {
                     className="ml-4 h-10 w-auto"
                     src={logoSolo}
                     alt="ปล่อย Share Logo"
-                    onClick={() => { window.location = "/" }}
+                    onClick={() => { navigate('/home') }}
 
                 />
             </div>

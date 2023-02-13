@@ -31,7 +31,7 @@ export default function SignIn(value) {
                 }).then(() => {
                     //console.log(data.message);
                     localStorage.setItem("user", JSON.stringify(data));
-                    window.location = "/";
+                    window.location = "/home";
                 });
             } else {
                 Swal.fire({
