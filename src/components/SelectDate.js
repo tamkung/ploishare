@@ -214,7 +214,7 @@ const SelectDate = () => {
             <Space wrap >
               <Select
                 style={{
-                  width: '300px'
+                  width: 130
                 }}
                 disabled={!startDate}
                 placeholder='เลือกเวลาเริ่มต้น'
@@ -230,7 +230,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: '390px'
+                  width: 130
                 }}
                 disabled={!startTime}
                 onChange={handleEndTimeChange}
@@ -290,7 +290,7 @@ const SelectDate = () => {
             <Space wrap >
               <Select
                 style={{
-                  width: '300px'
+                  width: 200
                 }}
                 disabled={!startDate}
                 placeholder='เลือกเวลาเริ่มต้น'
@@ -306,7 +306,7 @@ const SelectDate = () => {
               <Select
                 placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: '390px'
+                  width: 200
                 }}
                 disabled={!startTime}
                 onChange={handleEndTimeChange}
