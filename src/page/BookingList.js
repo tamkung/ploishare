@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GET_USER, API_URL } from '../Constant';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -35,6 +36,7 @@ function BookingList() {
   const originData = [];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     originData.length = 0;
@@ -287,7 +289,7 @@ function BookingList() {
           className="ml-4 h-10 w-auto"
           src={logoSolo}
           alt="ปล่อย Share Logo"
-          onClick={() => { window.location = "/" }}
+          onClick={() => { navigate('/') }}
 
         />
       </div>
