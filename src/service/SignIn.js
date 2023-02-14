@@ -3,6 +3,8 @@ import { API_URL } from "../Constant";
 import Swal from "sweetalert2";
 
 export default function SignIn(value) {
+    const scg_email = new RegExp("[a-zA-Z0-9]+@scg+.com");
+
     fetch(API_URL + "api/auth/signin", {
         method: "POST",
         headers: {
@@ -11,25 +13,13 @@ export default function SignIn(value) {
         body: JSON.stringify(value),
     }).then((response) => response.json())
         .then((data) => {
-
             if (data.status === "OK") {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
+                Swal.fire({
+                    icon: "success",
+                    title: "SignUp in successfully",
                     showConfirmButton: false,
                     timer: 1000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener("mouseenter", Swal.stopTimer);
-                        toast.addEventListener("mouseleave", Swal.resumeTimer);
-                    },
-                });
-
-                Toast.fire({
-                    icon: "success",
-                    title: "SignIn in successfully",
                 }).then(() => {
-                    //console.log(data.message);
                     localStorage.setItem("user", JSON.stringify(data));
                     window.location = "/home";
                 });
@@ -38,7 +28,7 @@ export default function SignIn(value) {
                     icon: 'error',
                     title: 'Oops...',
                     text: data.message,
-                })
+                });
             }
         })
         .catch((error) => {
