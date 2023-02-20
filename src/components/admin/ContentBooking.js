@@ -449,8 +449,13 @@ const ContentBooking = () => {
                     </span>
                 ) : (
                     <div>
-                        {record.status === "0" ? 'รอยืนยัน' :
-                            record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div>  :
+                        {record.status === "0" ? <button
+                            className='btn btn-warning text-white'
+                            onClick={() => approveCar(record)}
+                        >
+                            รอยืนยัน
+                        </button> :
+                            record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div> :
                                 record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
                                     record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
                     </div>
