@@ -91,8 +91,11 @@ function BookingList() {
     console.log("license", license);
     console.log("startMile", startMile);
     const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
-    const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+    //const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+    const dateObj = new Date(newDataTime);
+    var timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
     console.log('timeStamp', timeStamp);
+    
     try {
       await axios.get(API_URL + 'api/getcarbyid/' + license).then((response) => {
         console.log(response.data);
@@ -191,6 +194,7 @@ function BookingList() {
     } catch (err) {
       console.log(err);
     }
+    
   }
 
   const uploadImage = (id) => {

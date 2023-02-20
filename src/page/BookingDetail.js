@@ -144,7 +144,8 @@ export default function BookingDetail() {
                         "bookingDate": timeStamp,
                         "cLicense": getCar.license,
                         "cName": getCar.brand + " : " + getCar.model,
-                        image: image,
+                        "image": image,
+                        "status": 1,
                     }).then(response => {
                         if (response.data.status === "OK") {
                             const Toast = Swal.mixin({
