@@ -28,34 +28,24 @@ const SelectDate = () => {
   const [getCars, setGetCars] = useState([]);
 
   const hourData = ['07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:.00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'];
+  //const hourData2 = ['07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:.00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00'];
+  const [endHourData, setEndHourData] = useState(hourData);
 
   const handleStartTimeChange = (value) => {
     setStartTime(value);
-    console.log('Start Time : ', value);
+    if (startDate === endDate) {
+      const newHour = hourData.splice(0, hourData.indexOf(value));
+      setEndHourData(hourData);
+      console.log(newHour)
+      console.log('Start Time : ', value);
+    } else {
+      setEndHourData(hourData);
+    }
   };
   const handleEndTimeChange = (value) => {
     setEndTime(value);
-    console.log('Start Time : ', value);
+    console.log('End Time : ', value);
   };
-  // const onStartDateChange = (date) => {
-  //   setStartDate(date);
-  //   console.log(date);
-  // };
-
-  // const onEndDateChange = (date) => {
-  //   setEndDate(date);
-  //   console.log(date);
-  // };
-
-  // const onStartTimeChange = (time) => {
-  //   setStartTime(time);
-  //   console.log(time);
-  // };
-
-  // const onEndTimeChange = (time) => {
-  //   setEndTime(time);
-  //   console.log(time);
-  // };
 
   const onEndDateSwitchChange = (value) => {
     setEndDateDisabled(value);
@@ -74,7 +64,7 @@ const SelectDate = () => {
     })
       .then((response) => {
         console.log(response.data);
-        if (response.data.length == 0) {
+        if (response.data.length === 0) {
           Swal.fire({
             icon: 'warning',
             title: 'Oops...',
@@ -88,10 +78,9 @@ const SelectDate = () => {
   };
 
   const handleSubmit = async (e) => {
-
     console.log('StartDateTime : ', startDate, startTime);
     console.log('EndDateTime : ', endDate, endTime);
-    if (startDate == null || endDate == null || startTime == "" || endTime == "") {
+    if (startDate === null || endDate === null || startTime === "" || endTime === "") {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -104,10 +93,6 @@ const SelectDate = () => {
 
   };
 
-  // Disable hours outside of the 7:00 AM to 7:00 PM range
-  // const disabledHours = () => {
-  //   return [0, 1, 2, 3, 4, 5, 6, 19, 20, 21, 22, 23];
-  // };
   return (
     <div>
       {/*--------------------------------------------------------------- Desktop --------------------------------------------------------------- */}
@@ -152,25 +137,12 @@ const SelectDate = () => {
           <div className='mb-3' style={{ fontFamily: 'Noto Sans Thai' }}>
             <div>เวลา</div>
 
-
-            {/* <TimePicker className='width-booking'
-              format="HH:mm"
-              minuteStep={30}
-              locale={locale}
-              disabledMinutes={disabledMinutes}
-              placeholder="เลือกเวลาเริ่มต้น"
-              // hide={disabledHours}
-              onChange={(value, dateString) => {
-                setStartTime(value.format('HH:mm:00'));
-                console.log('Time Stared : ', value.format('HH:mm:00'));
-              }}
-            /> */}
-
             <Space wrap >
               <Select
                 style={{
                   width: '300px'
                 }}
+                disabled={!startDate}
                 placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
@@ -179,35 +151,22 @@ const SelectDate = () => {
                 }))}
               />
             </Space>
-
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-
             <Space wrap>
               <Select
                 placeholder='เลือกเวลาคืนรถ'
                 style={{
                   width: '390px'
                 }}
+                disabled={!startTime}
                 onChange={handleEndTimeChange}
-                options={hourData.map((hour) => ({
+                options={endHourData.map((hour) => ({
                   label: hour,
                   value: hour,
                 }))}
               />
-
             </Space>
 
-            {/* <TimePicker style={{ width: "45%" }}
-              format="HH:mm"
-              minuteStep={30}
-              locale={locale}
-              disabledMinutes={disabledMinutes}
-              placeholder="เลือกเวลาคืนรถ"
-              onChange={(value, dateString) => {
-                setEndTime(value.format('HH:mm:00'));
-                console.log('Time Stared : ', value.format('HH:mm:00'));
-              }}
-            /> */}
           </div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
@@ -252,12 +211,13 @@ const SelectDate = () => {
           </div>
 
           <div className='mb-3'>
-            <Space wrap>
+            <Space wrap >
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
                 style={{
-                  width: 130,
+                  width: 130
                 }}
+                disabled={!startDate}
+                placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
                   label: hour,
@@ -265,35 +225,21 @@ const SelectDate = () => {
                 }))}
               />
             </Space>
-
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-
             <Space wrap>
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
+                placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: 130,
+                  width: 130
                 }}
+                disabled={!startTime}
                 onChange={handleEndTimeChange}
-                options={hourData.map((hour) => ({
+                options={endHourData.map((hour) => ({
                   label: hour,
                   value: hour,
                 }))}
               />
-
             </Space>
-
-            {/* <TimePicker style={{ width: "45%" }}
-              format="HH:mm"
-              minuteStep={30}
-              locale={locale}
-              disabledMinutes={disabledMinutes}
-              placeholder="เลือกเวลาคืนรถ"
-              onChange={(value, dateString) => {
-                setEndTime(value.format('HH:mm:00'));
-                console.log('Time Stared : ', value.format('HH:mm:00'));
-              }}
-            /> */}
           </div>
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext mt-3">Search</button>
         </Form>
@@ -343,10 +289,11 @@ const SelectDate = () => {
 
             <Space wrap >
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
                 style={{
                   width: 200
                 }}
+                disabled={!startDate}
+                placeholder='เลือกเวลาเริ่มต้น'
                 onChange={handleStartTimeChange}
                 options={hourData.map((hour) => ({
                   label: hour,
@@ -354,17 +301,16 @@ const SelectDate = () => {
                 }))}
               />
             </Space>
-
             <BsIcon5.BsArrowRightShort className='inline-flex mr-2 ml-2' />
-
             <Space wrap>
               <Select
-                placeholder='เลือกเวลาเริ่มต้น'
+                placeholder='เลือกเวลาคืนรถ'
                 style={{
-                  width: 200,
+                  width: 200
                 }}
+                disabled={!startTime}
                 onChange={handleEndTimeChange}
-                options={hourData.map((hour) => ({
+                options={endHourData.map((hour) => ({
                   label: hour,
                   value: hour,
                 }))}
@@ -374,7 +320,7 @@ const SelectDate = () => {
           <button type="button" onClick={() => handleSubmit()} class="btn buttonNext">Search</button>
         </Form>
       </div>
-      
+
       {/*--------------------------------------------------------------- Bigger --------------------------------------------------------------- */}
       <div className='shd' style={{ position: "relative" }} >
         <img className='d-none d-lg-block d-xl-none filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
@@ -479,8 +425,8 @@ const SelectDate = () => {
       </div>
 
 
-{/*--------------------------------------------------------------- Bigger --------------------------------------------------------------- */}
-<div className='shd' style={{ position: "relative" }} >
+      {/*--------------------------------------------------------------- Bigger --------------------------------------------------------------- */}
+      <div className='shd' style={{ position: "relative" }} >
         <img className='d-none d-lg-block d-xl-none filter-low ' src={wallpaper} style={{ width: "100%", height: "500px", objectFit: "cover", objectPosition: "0 40%" }} alt={"Background"} />
         <Form className='datapick d-none d-lg-block d-xl-none shd' style={{ position: "absolute", borderRadius: "15px", marginBottom: "15px", fontFamily: 'Noto Sans Thai' }}>
           <div className='mb-3'>

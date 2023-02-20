@@ -14,7 +14,7 @@ export const RouteAdmin = [
         element: <NotFound />,
     },
     {
-        path: "/",
+        path: "/home",
         element: <IndexAdmin />,
     },
     {

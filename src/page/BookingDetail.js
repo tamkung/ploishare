@@ -30,6 +30,7 @@ const options = {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
     hour12: false,
     hourCycle: "h23",  // 24-hour format
     locale: "en-EN"  // Thai language
@@ -110,11 +111,15 @@ export default function BookingDetail() {
     };
 
     const addBooking = async (values) => {
-        console.log(values); 
+        console.log(values);
         console.log(province === null ? "กรุงเทพฯ และ ปริมณฑล" : province);
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
-        console.log(new Date().toLocaleString('en-EN', options),);
+        const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
+        //const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+        const dateObj = new Date(newDataTime);
+        const timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
+        console.log('timeStamp', timeStamp);
 
         if (values.name === undefined || values.empoyeeNo === undefined || values.phone === undefined) {
             Swal.fire({
@@ -138,10 +143,11 @@ export default function BookingDetail() {
                         "note": values.note,
                         "startDateTime": startDateTime,
                         "endDateTime": endDateTime,
-                        //"bookingDate": new Date().toLocaleString('en-EN', options),
+                        "bookingDate": timeStamp,
                         "cLicense": getCar.license,
                         "cName": getCar.brand + " : " + getCar.model,
-                        image: image,
+                        "image": image,
+                        "status": 1,
                     }).then(response => {
                         if (response.data.status === "OK") {
                             const Toast = Swal.mixin({
@@ -221,7 +227,7 @@ export default function BookingDetail() {
                     className="ml-4 h-10 w-auto"
                     src={logoSolo}
                     alt="ปล่อย Share Logo"
-                    onClick={() => { window.location = "/" }}
+                    onClick={() => { navigate('/home') }}
 
                 />
             </div>
@@ -312,11 +318,11 @@ export default function BookingDetail() {
                                             if (!isJpgOrPng) {
                                                 message.error('You can only upload JPG/PNG file!');
                                             }
-                                            const isLt2M = file.size / 1024 / 1024 < 2;
-                                            if (!isLt2M) {
-                                                message.error('Image must smaller than 2MB!');
+                                            const isLt10M = file.size / 1024 / 1024 < 10;
+                                            if (!isLt10M) {
+                                                message.error('Image must smaller than 10MB!');
                                             }
-                                            return isJpgOrPng && isLt2M;
+                                            return isJpgOrPng && isLt10M;
                                         }} >
                                         <div>
                                             <CloudUploadOutlined />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from 'antd';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation,useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { API_URL } from "../Constant";
 import NO_Img from '../img/no_img.jpg';
@@ -20,6 +20,7 @@ function Booking() {
     const [getCar, setGetCar] = useState([]);
     const [Loading, setLoading] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const { value } = location.state;
     const { car } = location.state;
     const [image, setImage] = useState([]);
@@ -54,7 +55,7 @@ function Booking() {
                     className="ml-4 h-10 w-auto"
                     src={logoSolo}
                     alt="ปล่อย Share Logo"
-                    onClick={() => { window.location = "/" }}
+                    onClick={() => { navigate('/home') }}
 
                 />
             </div>

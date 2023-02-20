@@ -6,7 +6,7 @@ import  LOGO  from '../img/logo-solo.png'
 export default function MenuSideBar() {
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
-            <Link to={"/"} className="brand-link elevation-4">
+            <Link to={"/home"} className="brand-link elevation-4">
                 <img src={LOGO} alt="AdminLTE Logo" className="brand-image " style={{ opacity: '.8' }} />
                 <span className="brand-text font-weight-light" style={{marginLeft:'0.5rem'}}> Menu</span>
             </Link>
@@ -23,7 +23,7 @@ export default function MenuSideBar() {
                             <nav className="mt-2">
                                 <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                                     <li className="nav-item">
-                                        <NavLink className="nav-link " to={'/'} >
+                                        <NavLink className="nav-link " to={'/home'} >
                                             <BsIcon5.FaHome className='inline-flex mr-3 mb-1 ' size={25} />
                                             <p>Home</p>
                                         </NavLink>

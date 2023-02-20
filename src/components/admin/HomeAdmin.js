@@ -142,7 +142,7 @@ function HomeAdmin() {
                                     <span className="info-box-icon bg-success elevation-1"><GiCarKey /></span>
                                     <div className="info-box-content">
                                         <span className="info-box-text">กำลังใช้งาน</span>
-                                        <span className="info-box-number">{countActive}</span>
+                                        <span className="info-box-number">{countActive !== undefined ? countActive : 0}</span>
                                     </div>
                                     {/* /.info-box-content */}
                                 </div>

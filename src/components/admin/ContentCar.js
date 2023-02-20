@@ -248,6 +248,7 @@ function ContentCar() {
             dataIndex: 'status',
             width: '7%',
             align: 'center',
+            fixed: 'right',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
@@ -270,6 +271,7 @@ function ContentCar() {
             dataIndex: 'operation',
             width: '7%',
             align: 'center',
+            fixed: 'right',
             render: (_, record) => {
                 const editable = isEditing(record);
                 return editable ? (
