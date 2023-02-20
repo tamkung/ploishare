@@ -93,7 +93,7 @@ function BookingList() {
     const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
     //const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
     const dateObj = new Date(newDataTime);
-    var timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
+    const timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
     console.log('timeStamp', timeStamp);
     
     try {

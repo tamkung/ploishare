@@ -116,8 +116,10 @@ export default function BookingDetail() {
         const startDateTime = value.startDate + " " + value.startTime;
         const endDateTime = value.endDate + " " + value.endTime;
         const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
-        const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
-        console.log(timeStamp);
+        //const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+        const dateObj = new Date(newDataTime);
+        const timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
+        console.log('timeStamp', timeStamp);
 
         if (values.name === undefined || values.empoyeeNo === undefined || values.phone === undefined) {
             Swal.fire({
