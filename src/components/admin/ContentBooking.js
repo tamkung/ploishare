@@ -188,6 +188,12 @@ const ContentBooking = () => {
                     status: 1,
                 }).then((response) => {
                     console.log(response.data);
+                    axios.post(API_URL + 'api/sendnotify', {
+                        email: record.uEmail,
+                        license: record.cLicense,
+                    }).then((response) => {
+                        console.log(response.data);
+                    });
                 });
                 Swal.fire(
                     'Updated!',
