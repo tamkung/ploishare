@@ -171,7 +171,7 @@ const ContentBooking = () => {
         getuEmail();
     }, []);
 
-    const approveCar = (record) => {
+    const approveCar = (record, status) => {
         console.log(record);
         Swal.fire({
             title: 'Are you sure?',
@@ -185,15 +185,17 @@ const ContentBooking = () => {
             if (result.isConfirmed) {
                 axios.post(API_URL + 'api/updatebookingstatus', {
                     id: record.id,
-                    status: 1,
+                    status: status,
                 }).then((response) => {
                     console.log(response.data);
-                    axios.post(API_URL + 'api/sendnotify', {
-                        email: record.uEmail,
-                        license: record.cLicense,
-                    }).then((response) => {
-                        console.log(response.data);
-                    });
+                    if (status === 1){
+                        axios.post(API_URL + 'api/sendnotify', {
+                            email: record.uEmail,
+                            license: record.cLicense,
+                        }).then((response) => {
+                            console.log(response.data);
+                        });
+                    }
                 });
                 Swal.fire(
                     'Updated!',
@@ -455,12 +457,20 @@ const ContentBooking = () => {
                     </span>
                 ) : (
                     <div>
-                        {record.status === "0" ? <button
-                            className='btn btn-warning text-white'
-                            onClick={() => approveCar(record)}
-                        >
-                            รอยืนยัน
-                        </button> :
+                        {record.status === "0" ? <div>
+                            <button
+                                className='btn btn-warning text-white mb-2'
+                                onClick={() => approveCar(record, 1)}
+                            >
+                                รอยืนยัน
+                            </button>
+                            <button
+                                className='btn btn-danger text-white'
+                                onClick={() => approveCar(record, 4)}
+                            >
+                                ยกเลิก
+                            </button>
+                        </div> :
                             record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div> :
                                 record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
                                     record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
