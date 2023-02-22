@@ -12,7 +12,7 @@ export default function SignUp(value) {
     if (!scg_email.test(value.email)) {
         Swal.fire({
             icon: "error",
-            title: "Oops...",
+            title: "ลงทะเบียนไม่สำเร็จ",
             text: "กรุณาใช้อีเมล์ SCG เท่านั้น",
         });
         return;
