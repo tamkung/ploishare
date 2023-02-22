@@ -5,7 +5,7 @@ export const carBrands = [
   },
   {
     label: "Honda",
-    models: ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "Fit", "Brio", "Brio Amaze", "Jazz", "City", "City Hatchback", "Mobilio", "BR-V", "Civic", "HR-V", "Civic Hatchback", ""]
+    models: ["Civic", "Accord", "CR-V", "Pilot", "Odyssey", "Fit", "Brio", "Brio Amaze", "Jazz", "City", "City Hatchback", "Mobilio", "BR-V", "Civic", "HR-V", "Civic Hatchback"]
   },
   {
     label: "Tesla",
