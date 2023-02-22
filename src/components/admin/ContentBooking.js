@@ -190,8 +190,13 @@ const ContentBooking = () => {
                     }).then((response) => {
                         console.log(response.data);
                         axios.post(API_URL + 'api/sendnotify', {
+                            //name, email, license, brand, startDate, endDate
+                            name: record.uName,
                             email: record.uEmail,
                             license: record.cLicense,
+                            brand: record.cName,
+                            startDate: record.startDateTime,
+                            endDate: record.endDateTime,
                         }).then((response) => {
                             console.log(response.data);
                         });
@@ -333,37 +338,68 @@ const ContentBooking = () => {
             });
         }
     };
-    const updateStatus = (id) => {
-        console.log(id);
+    const updateStatusStop = (record) => {
+        console.log(record.id);
+        console.log('id', record.id);
+        console.log("license", record.cLicense);
+        console.log("startMile", record.startMile);
+        const newDataTime = new Date().toLocaleString('en-EN', options).slice(0, 20).replace(',', '')
+        //const timeStamp = newDataTime.split(" ")[0].split("/").reverse().join("-") + " " + newDataTime.split(" ")[1];
+        const dateObj = new Date(newDataTime);
+        const timeStamp = dateObj.getFullYear() + "-" + ('0' + (dateObj.getMonth() + 1)).slice(-2) + "-" + ('0' + dateObj.getDate()).slice(-2) + " " + ('0' + dateObj.getHours()).slice(-2) + ":" + ('0' + dateObj.getMinutes()).slice(-2) + ":" + ('0' + dateObj.getSeconds()).slice(-2);
+        console.log('timeStamp', timeStamp);
         Swal.fire({
-            title: 'ปิดการใช้งาน',
-            text: "คุณต้องการปิดการใช้งานการจองรถนี้หรือไม่ ?",
-            icon: 'warning',
+            title: 'กรอกเลขไมล์สิ้นสุด',
+            text: 'เลขไมล์เริ่มต้นของรถ : ' + record.cLicense + ' คือ ' + record.startMile + ' กิโลเมตร',
+            input: 'number',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'ยืนยัน',
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: (endMile) => {
+                if (endMile < record.startMile) {
+                    Swal.showValidationMessage(
+                        `เลขไมล์สิ้นสุดต้องมากกว่าเลขไมล์เริ่มต้น`
+                    )
+                } else {
+                    axios.post(API_URL + 'api/updatebookingendmile', {
+                        id: record.id,
+                        endDateTime: timeStamp,
+                        endMile: endMile,
+                    }).then((response) => {
+                        axios.post(API_URL + 'api/updatecarmile', {
+                            license: record.cLicense,
+                            currentMile: endMile,
+                        })
+                        console.log(response.data);
+                        axios.post(API_URL + 'api/updatebookingstatus', {
+                            id: record.id,
+                            status: 3,
+                        }).then((response) => {
+                            console.log(response.data);
+                            Swal.fire(
+                                'ปิดใช้งานสำเร็จ',
+                                'คุณได้ทำการปิดใช้งานเรียบร้อยแล้ว',
+                                'success'
+                            ).then((result) => {
+                                if (result.isConfirmed) {
+                                    if (startDate === '' || endDate === '') {
+                                        fetchData();
+                                    } else {
+                                        searchDate();
+                                    }
+                                }
+                            });
+                        });
+                    });
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatebookingstatus', {
-                    id: id,
-                    status: 3,
-                }).then((response) => {
-                    console.log(response.data);
-                });
-                Swal.fire(
-                    'ยกเลิกสำเร็จ',
-                    'คุณได้ทำการยกเลิกการจองรถเรียบร้อยแล้ว',
-                    'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        if (startDate === '' || endDate === '') {
-                            fetchData();
-                        } else {
-                            searchDate();
-                        }
-                    }
-                });
+
             }
         })
     };
@@ -463,7 +499,7 @@ const ContentBooking = () => {
             editable: true,
         },
         {
-            title: 'รูปขออนุมัติ',
+            title: 'รูปอนุญาต',
             dataIndex: 'image',
             align: 'center',
             render: (image) => <Image
@@ -494,7 +530,7 @@ const ContentBooking = () => {
                                 className='btn btn-warning text-white mb-2 w-full'
                                 onClick={() => approveCar(record, 1)}
                             >
-                                รอยืนยัน
+                                ยืนยัน
                             </button>
                             <button
                                 className='btn btn-danger text-white w-full'
@@ -504,7 +540,7 @@ const ContentBooking = () => {
                             </button>
                         </div> :
                             record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div> :
-                                record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700 cursor-pointer' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
+                                record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700 cursor-pointer' size={20} onClick={() => { updateStatusStop(record) }} /></div> :
                                     record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
                     </div>
                 );
@@ -559,12 +595,13 @@ const ContentBooking = () => {
                         }}
                     >
                         <Form form={form} component={false}>
-                            <div className='row' style={{ paddingBottom: "10px" }}>
+                            <div className='row ml-2 pb-3 space-x-2 items-center w-full' >
+                                <h2 className='text-base'>ค้นหาจาก :</h2>
                                 <Select
                                     className='w-40'
                                     showSearch
                                     onChange={handleChangeEmail}
-                                    value={email}
+                                    placeholder="email"
                                 >
                                     {emails.map((email, index) => {
                                         return (
@@ -576,7 +613,7 @@ const ContentBooking = () => {
                                 <Button onClick={searchDate} >
                                     ค้นหา
                                 </Button>
-                                <CSVLink style={{ marginRight: 10 }} data={originData} headers={headers}>
+                                <CSVLink data={originData} headers={headers}>
                                     <Button>
                                         Export
                                     </Button>
