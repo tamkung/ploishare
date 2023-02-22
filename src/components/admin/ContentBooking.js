@@ -173,45 +173,77 @@ const ContentBooking = () => {
 
     const approveCar = (record, status) => {
         console.log(record);
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, update it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.post(API_URL + 'api/updatebookingstatus', {
-                    id: record.id,
-                    status: status,
-                }).then((response) => {
-                    console.log(response.data);
-                    if (status === 1){
+        if (status === 1) {
+            Swal.fire({
+                title: 'ยืนยันการอนุมัติ',
+                text: "คุณต้องการอนุมัติการจองรถนี้หรือไม่ ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post(API_URL + 'api/updatebookingstatus', {
+                        id: record.id,
+                        status: status,
+                    }).then((response) => {
+                        console.log(response.data);
                         axios.post(API_URL + 'api/sendnotify', {
                             email: record.uEmail,
                             license: record.cLicense,
                         }).then((response) => {
                             console.log(response.data);
                         });
-                    }
-                });
-                Swal.fire(
-                    'Updated!',
-                    'Your file has been updated.',
-                    'success'
-                ).then((result) => {
-                    if (result.isConfirmed) {
-                        if (startDate === '' || endDate === '') {
-                            fetchData();
-                        } else {
-                            searchDate();
+                    });
+                    Swal.fire(
+                        'ยืนยันสำเร็จ',
+                        'คุณได้ทำการยืนยันการจองรถเรียบร้อยแล้ว',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            if (startDate === '' || endDate === '') {
+                                fetchData();
+                            } else {
+                                searchDate();
+                            }
                         }
-                    }
-                });
-            }
-        })
+                    });
+                }
+            })
+        } else {
+            Swal.fire({
+                title: 'ยกเลิกการจอง',
+                text: "คุณต้องการยกเลิกการจองรถนี้หรือไม่ ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'ยืนยัน'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post(API_URL + 'api/updatebookingstatus', {
+                        id: record.id,
+                        status: status,
+                    }).then((response) => {
+                        console.log(response.data);
+                    });
+                    Swal.fire(
+                        'ยืนยันสำเร็จ',
+                        'คุณได้ทำการยืนยันการจองรถเรียบร้อยแล้ว',
+                        'success'
+                    ).then((result) => {
+                        if (result.isConfirmed) {
+                            if (startDate === '' || endDate === '') {
+                                fetchData();
+                            } else {
+                                searchDate();
+                            }
+                        }
+                    });
+                }
+            })
+        }
     };
 
     const searchDate = () => {
@@ -304,13 +336,13 @@ const ContentBooking = () => {
     const updateStatus = (id) => {
         console.log(id);
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'ปิดการใช้งาน',
+            text: "คุณต้องการปิดการใช้งานการจองรถนี้หรือไม่ ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, update it!'
+            confirmButtonText: 'ยืนยัน',
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.post(API_URL + 'api/updatebookingstatus', {
@@ -320,8 +352,8 @@ const ContentBooking = () => {
                     console.log(response.data);
                 });
                 Swal.fire(
-                    'Updated!',
-                    'Your file has been updated.',
+                    'ยกเลิกสำเร็จ',
+                    'คุณได้ทำการยกเลิกการจองรถเรียบร้อยแล้ว',
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
@@ -459,20 +491,20 @@ const ContentBooking = () => {
                     <div>
                         {record.status === "0" ? <div>
                             <button
-                                className='btn btn-warning text-white mb-2'
+                                className='btn btn-warning text-white mb-2 w-full'
                                 onClick={() => approveCar(record, 1)}
                             >
                                 รอยืนยัน
                             </button>
                             <button
-                                className='btn btn-danger text-white'
+                                className='btn btn-danger text-white w-full'
                                 onClick={() => approveCar(record, 4)}
                             >
                                 ยกเลิก
                             </button>
                         </div> :
                             record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div> :
-                                record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
+                                record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700 cursor-pointer' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
                                     record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
                     </div>
                 );

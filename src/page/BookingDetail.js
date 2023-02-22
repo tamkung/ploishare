@@ -150,20 +150,11 @@ export default function BookingDetail() {
                         "status": 0,
                     }).then(response => {
                         if (response.data.status === "OK") {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
+                            Swal.fire({
+                                icon: "success",
+                                title: "จองรถสำเร็จ",
                                 showConfirmButton: false,
                                 timer: 1000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                                },
-                            });
-                            Toast.fire({
-                                icon: "success",
-                                title: "Booking added successfully",
                             }).then(() => {
                                 navigate("/booking-list");
                             });

@@ -16,7 +16,7 @@ export default function SignIn(value) {
             if (data.status === "OK") {
                 Swal.fire({
                     icon: "success",
-                    title: "SignIn in successfully",
+                    title: "เข้าสู่ระบบสำเร็จ",
                     showConfirmButton: false,
                     timer: 1000,
                 }).then(() => {

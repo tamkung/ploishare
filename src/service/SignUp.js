@@ -13,7 +13,7 @@ export default function SignUp(value) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Email must be SCG email",
+            text: "กรุณาใช้อีเมล์ SCG เท่านั้น",
         });
         return;
     } else {
@@ -29,8 +29,8 @@ export default function SignUp(value) {
                 if (data.status === "OK") {
                     Swal.fire({
                         icon: "success",
-                        title: "SignUp in successfully",
-                        text: "Please check your email to verify",
+                        title: "ลงทะเบียนสำเร็จ",
+                        text: "กรุณาเช็คอีเมล์ของท่าน",
                     }).then(() => {
                         window.location = "/";
                     });

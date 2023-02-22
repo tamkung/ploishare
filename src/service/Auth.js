@@ -15,8 +15,8 @@ export default function authCheck() {
         sessionStorage.clear();
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Invalid token',
+          title: 'การเข้าสู่ระบบหมดอายุ',
+          text: 'กรุณาเข้าสู่ระบบใหม่',
         }).then(() =>
           window.location.replace('/')
         );
@@ -26,8 +26,8 @@ export default function authCheck() {
     localStorage.removeItem("user");
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'Invalid token',
+      title: 'การเข้าสู่ระบบหมดอายุ',
+      text: 'กรุณาเข้าสู่ระบบใหม่',
     }).then(() =>
       window.location.replace('/')
     );

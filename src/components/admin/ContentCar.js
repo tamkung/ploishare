@@ -102,13 +102,13 @@ function ContentCar() {
     const deleteCar = (record) => {
         console.log(record);
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณต้องการลบรถหมายเลข ' + record.license + ' ใช่หรือไม่?',
+            text: "คุณสามารถเพิ่มรถใหม่ได้ในหน้าจัดการรถ",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'ใช่, ลบเลย!'
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.post(API_URL + 'api/deletecar/' + record.license).then((response) => {
@@ -119,8 +119,8 @@ function ContentCar() {
                     });
                 });
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'ลบรถสำเร็จ!',
+                    'รถหมายเลข ' + record.license + ' ถูกลบออกจากระบบแล้ว',
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {
@@ -134,8 +134,8 @@ function ContentCar() {
     const updateCarStatus = (record) => {
         console.log(record);
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'คุณต้องการเปลี่ยนสถานะรถหมายเลข ' + record.license + ' ใช่หรือไม่?',
+            //text: "คุณสามารถเปลี่ยนสถานะได้ในหน้าจัดการรถ",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -148,8 +148,8 @@ function ContentCar() {
                     console.log(response.data);
                 });
                 Swal.fire(
-                    'Updated!',
-                    'Your file has been updated.',
+                    'แก้ไขสถานะสำเร็จ!',
+                    'คุณได้ทำการเปลี่ยนสถานะรถหมายเลข ' + record.license + ' เป็น ' + (record.status === 1 ? 'ไม่ว่าง' : 'ว่าง') + ' แล้ว',
                     'success'
                 ).then((result) => {
                     if (result.isConfirmed) {

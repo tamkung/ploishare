@@ -162,7 +162,7 @@ const AddCar = () => {
 
                         Toast.fire({
                             icon: "success",
-                            title: "SignIn in successfully",
+                            title: "เพิ่มรถเรียบร้อย",
                         }).then(() => {
 
                             navigate("/listcar");
