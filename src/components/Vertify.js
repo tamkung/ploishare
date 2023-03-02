@@ -113,7 +113,7 @@ function Vertify() {
 
           <hr className='mt-3 mb-4' />
           <button className="btn bg-warning w-100" >
-            Vertify
+            ยืนยันตัวตน
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}
         </form>

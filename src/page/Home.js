@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import LandScapeLogo from '../img/landscape-logo.png'
 import Login from '../components/Login';
 import Vertify from '../components/Vertify';
+import ForgotPass from '../components/ForgotPass';
 import { Padding } from '@mui/icons-material';
 import { positions } from '@mui/system';
 
@@ -73,6 +74,7 @@ export default function BasicTabs() {
                     <TabPanel value={value} index={1}>
                         <Vertify />
                     </TabPanel>
+                  
                 </Box>
             </div>
         </div>

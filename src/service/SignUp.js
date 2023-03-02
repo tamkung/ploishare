@@ -30,7 +30,7 @@ export default function SignUp(value) {
                     Swal.fire({
                         icon: "success",
                         title: "ลงทะเบียนสำเร็จ",
-                        text: "กรุณาเช็คอีเมล์ของท่าน",
+                        text: "เราข้อข้อความยืนยันตัวตนไปที่อีเมล์ กรุณาตรวจสอบอีเมล์",
                     }).then(() => {
                         window.location = "/";
                     });
