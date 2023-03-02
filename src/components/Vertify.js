@@ -55,8 +55,8 @@ function Vertify() {
       });
     } else {
       try {
-      console.log(value);
-      SignUp(value);
+        console.log(value);
+        SignUp(value);
 
       } catch (error) {
         console.log(error);
@@ -69,6 +69,7 @@ function Vertify() {
 
       <div>
         <form onSubmit={handleSubmit}>
+          <p className='text-muted'>* กรอก Email SCG ของคุณ</p>
           <Input
             id="email-address"
             name="email"
@@ -80,6 +81,7 @@ function Vertify() {
             onChange={handleChange}
           />
 
+          <p className='mt-4 text-muted'>* สร้างรหัสผ่านของตนเอง</p>
           <Input.Password
             id="password"
             name="password"
@@ -108,8 +110,9 @@ function Vertify() {
             >ยืนยันตัวตน
             </button>
           </Form> */}
-          <hr className='mt-5 mb-4' />
-          <button className="buttonNext" >
+
+          <hr className='mt-3 mb-4' />
+          <button className="btn bg-warning w-100" >
             Vertify
           </button>
           {/* <button type="button" onClick={() => handleSubmit()} class="btn btn-outline-primary buttonNext">Vertify</button> */}

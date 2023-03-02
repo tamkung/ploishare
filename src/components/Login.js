@@ -61,9 +61,12 @@ console.log(value)
               />
             </div>
           </div>
-          <hr className='mt-5' />
-          <button type="submit" className="buttonNext">
-            Go
+          <div style={{textAlign:"right"}}>
+          <a type='button' className='fw-muted'>ลืมรหัสผ่าน</a>
+          </div>
+          <hr className='mt-3' />
+          <button type="submit" className="btn bg-warning w-100">
+            เข้าสู่ระบบ
           </button>
         </form>
       </div>
