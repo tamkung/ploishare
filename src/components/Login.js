@@ -3,6 +3,7 @@ import '../css/style.css';
 
 import React, { useState, useEffect } from "react";
 import SignIn from '../service/SignIn';
+import { Link } from 'react-router-dom';
 
 
 
@@ -62,7 +63,7 @@ console.log(value)
             </div>
           </div>
           <div style={{textAlign:"right"}}>
-          <a href="/forgotpass" type='button' className='text-muted'>ลืมรหัสผ่าน</a>
+          <Link to="/forgotpass" type='button' className='text-muted'>ลืมรหัสผ่าน</Link>
           </div>
           <hr className='mt-3' />
           <button type="submit" className="btn bg-warning w-100">

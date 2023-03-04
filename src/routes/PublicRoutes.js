@@ -3,6 +3,7 @@ import React from "react";
 import Home from "../page/Home";
 import NotFound from "../page/PageNotFound";
 import ForgotPass from "../components/ForgotPass";
+import ResetPass from "../components/ResetPass";
 import Vertify from "../components/Vertify";
 import ConfirmSuccess from "../page/ConfirmSuccess";
 
@@ -26,5 +27,9 @@ export const RoutePublic = [
     {
         path: "/forgotpass",
         element: <ForgotPass />,
+    },
+    {
+        path: "/resetpass/:email",
+        element: <ResetPass />,
     },
 ];

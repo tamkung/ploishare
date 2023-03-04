@@ -74,7 +74,7 @@ export default function BasicTabs() {
                     <TabPanel value={value} index={1}>
                         <Vertify />
                     </TabPanel>
-                  
+
                 </Box>
             </div>
         </div>
