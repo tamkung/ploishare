@@ -29,7 +29,7 @@ export const RoutePublic = [
         element: <ForgotPass />,
     },
     {
-        path: "/resetpass/:email",
+        path: "/:email",
         element: <ResetPass />,
     },
 ];
