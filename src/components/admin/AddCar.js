@@ -277,12 +277,29 @@ const AddCar = () => {
                                 <Form.Item
                                     name={['carName', 'carYear']}
                                     noStyle
-                                    rules={[{ required: true, message: 'กรุณาป้อนปีรถ' }]}
+                                    rules={[{ required: false, message: 'กรุณาป้อนปีรถ' }]}
                                 >
                                     <Select
                                         style={{ width: 150 }}
                                         showSearch
                                         placeholder="กรุณาป้อนปีรถ"
+                                        onChange={handleChangeCarYear}
+                                        value={selectedCarYear}
+                                    >
+                                        {carYear.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                    </Select>
+                                </Form.Item>
+                            </Form.Item>
+                            <Form.Item label="ปีที่เริ่มเช่า"  >
+                                <Form.Item
+                                    name={['rentYear']}
+                                    noStyle
+                                    rules={[{ required: false, message: 'กรุณาป้อนปีที่เริ่มเช่า' }]}
+                                >
+                                    <Select
+                                        style={{ width: 150 }}
+                                        showSearch
+                                        placeholder="กรุณาป้อนปีที่เริ่มเช่า"
                                         onChange={handleChangeCarYear}
                                         value={selectedCarYear}
                                     >
