@@ -450,7 +450,7 @@ const ContentBooking = () => {
                 ) : (
                     <div>
                         {record.status === "0" ? 'รอยืนยัน' :
-                            record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div>  :
+                            record.status === "1" ? <div className='text-blue-700 font-bold'>ยืนยันแล้ว</div> :
                                 record.status === "2" ? <div className='flex items-center'>เปิดใช้งาน<FaRegStopCircle className='ml-2 text-red-700' size={20} onClick={() => { updateStatus(record.id) }} /></div> :
                                     record.status === "3" ? <div className='text-green-700 font-bold'>เสร็จสิ้น</div> : <div className='text-red-700 font-bold'>ยกเลิก</div>}
                     </div>
@@ -506,12 +506,13 @@ const ContentBooking = () => {
                         }}
                     >
                         <Form form={form} component={false}>
-                            <div className='row' style={{ paddingBottom: "10px" }}>
+                            <div className='row ml-2 pb-3 space-x-2 items-center w-full' >
+                                <h2 className='text-base'>ค้นหาจาก :</h2>
                                 <Select
                                     className='w-40'
                                     showSearch
                                     onChange={handleChangeEmail}
-                                    value={email}
+                                    placeholder="email"
                                 >
                                     {emails.map((email, index) => {
                                         return (
@@ -523,7 +524,7 @@ const ContentBooking = () => {
                                 <Button onClick={searchDate} >
                                     ค้นหา
                                 </Button>
-                                <CSVLink style={{ marginRight: 10 }} data={originData} headers={headers}>
+                                <CSVLink data={originData} headers={headers}>
                                     <Button>
                                         Export
                                     </Button>

@@ -83,6 +83,7 @@ function ContentCar() {
                     province: item.province,
                     brand: item.brand,
                     model: item.model,
+                    rentDate:item.rentDate,
                     color: item.color,
                     seat: item.seat,
                     detail: item.detail,
@@ -195,6 +196,12 @@ function ContentCar() {
         {
             title: 'รุ่น',
             dataIndex: 'model',
+            width: '8%',
+            editable: true,
+        },
+        {
+            title: 'เริ่มเช่า',
+            dataIndex: 'rentDate',
             width: '8%',
             editable: true,
         },

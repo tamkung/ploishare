@@ -146,13 +146,15 @@ const AddCar = () => {
     const onFinish = (values) => {
         //console.log(image)
         console.log(imageList)
+        console.log(selectedRentMonth + '-' + selectedRentYear)
         try {
             axios.post(API_URL + "api/addcar",
                 {
                     "license": inputCarLicenseText + "-" + inputCarLicenseNum,
                     "province": selectedCarProvince,
                     "brand": selectedCarBrand,
-                    "model": selectedCarModel + " ปี " + selectedCarYear,
+                    "model": selectedCarYear !== '' ? selectedCarModel + " ปี " + selectedCarYear : selectedCarModel,
+                    "rentDate": selectedRentMonth + '-' + selectedRentYear,
                     "color": selectedCarColor,
                     "seat": inputCarSeat,
                     "detail": inputCarDetail,
@@ -303,7 +305,7 @@ const AddCar = () => {
                             </Form.Item>
                             <Form.Item label="เริ่มเช่า"  >
                                 <Form.Item
-                                    name={['rentYear , rentMonth']}
+                                    name={['rentDate' , 'rentYear']}
                                     noStyle
                                     rules={[{ required: true, message: 'กรุณาป้อนเดือนที่เริ่มเช่า' }]}
                                 >
@@ -320,7 +322,7 @@ const AddCar = () => {
                                 </Form.Item>
                                 <p className="inline-flex mr-2 ml-2"> - </p>
                                 <Form.Item
-                                    name={['rentYear , rentMonth']}
+                                    name={['rentDate' , 'rentMonth']}
                                     noStyle
                                     rules={[{ required: true, message: 'กรุณาป้อนปีที่เริ่มเช่า' }]}
                                 >
