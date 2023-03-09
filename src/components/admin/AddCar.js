@@ -15,7 +15,7 @@ import {
 } from 'antd';
 import { API_URL } from "../../Constant";
 import { Province } from './Province';
-import { carBrands, carYear, carColor } from './Car';
+import { carBrands, carYear, carColor, rentMonth, rentYear, } from './Car';
 import authCheck from '../../service/Auth';
 
 const { Content } = Layout;
@@ -55,6 +55,8 @@ const AddCar = () => {
     const [selectedCarBrand, setSelectedCarBrand] = useState("");
     const [selectedCarModel, setSelectedCarModel] = useState([]);
     const [selectedCarYear, setSelectedCarYear] = useState("");
+    const [selectedRentYear, setSelectedRentYear] = useState("");
+    const [selectedRentMonth, setSelectedRentMonth] = useState("");
     const [selectedCarColor, setSelectedCarColor] = useState("");
 
     const [image, setImage] = useState(null);
@@ -102,6 +104,15 @@ const AddCar = () => {
         console.log(selectedCarYear);
     };
 
+    const handleChangeRentYear = (value) => {
+        setSelectedRentYear(value);
+        console.log(selectedRentYear);
+    };
+
+    const handleChangeRentMonth = (value) => {
+        setSelectedRentMonth(value);
+        console.log(selectedRentMonth);
+    };
     const handleChangeCarColor = (value) => {
         setSelectedCarColor(value);
         console.log(value);
@@ -290,20 +301,37 @@ const AddCar = () => {
                                     </Select>
                                 </Form.Item>
                             </Form.Item>
-                            <Form.Item label="ปีที่เริ่มเช่า"  >
+                            <Form.Item label="เริ่มเช่า"  >
                                 <Form.Item
-                                    name={['rentYear']}
+                                    name={['rentYear , rentMonth']}
                                     noStyle
-                                    rules={[{ required: false, message: 'กรุณาป้อนปีที่เริ่มเช่า' }]}
+                                    rules={[{ required: true, message: 'กรุณาป้อนเดือนที่เริ่มเช่า' }]}
                                 >
                                     <Select
-                                        style={{ width: 150 }}
+                                        style={{ width: 180 }}
+                                        showSearch
+
+                                        placeholder="กรุณาป้อนเดือนที่เริ่มเช่า"
+                                        onChange={handleChangeRentMonth}
+                                        value={selectedRentMonth}
+                                    >
+                                        {rentMonth.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                    </Select>
+                                </Form.Item>
+                                <p className="inline-flex mr-2 ml-2"> - </p>
+                                <Form.Item
+                                    name={['rentYear , rentMonth']}
+                                    noStyle
+                                    rules={[{ required: true, message: 'กรุณาป้อนปีที่เริ่มเช่า' }]}
+                                >
+                                    <Select
+                                        style={{ width: 180 }}
                                         showSearch
                                         placeholder="กรุณาป้อนปีที่เริ่มเช่า"
-                                        onChange={handleChangeCarYear}
-                                        value={selectedCarYear}
+                                        onChange={handleChangeRentYear}
+                                        value={selectedRentYear}
                                     >
-                                        {carYear.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                        {rentYear.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                     </Select>
                                 </Form.Item>
                             </Form.Item>
