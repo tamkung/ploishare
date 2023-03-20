@@ -9,12 +9,14 @@ import {
     Button,
     Image,
     Select,
+    Typography,
 } from 'antd';
 
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { CSVLink } from "react-csv";
 import { FaRegStopCircle } from 'react-icons/fa';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import { API_URL } from '../../Constant';
 import NO_Img from '../../img/no_img.jpg';
@@ -328,6 +330,38 @@ const ContentBooking = () => {
         })
     };
 
+    const deleteBooking = (record) => {
+        console.log(record);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post(API_URL + 'api/deletebooking/' + record.id).then((response) => {
+                    console.log(response.data);
+                    axios.delete(API_URL + 'api/delete-files-url', { data: { url: record.image } }
+                    ).then((response) => {
+                        console.log(response.data);
+                    });
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                ).then((result) => {
+                    if (result.isConfirmed) {
+                        fetchData();
+                    }
+                });
+            }
+        })
+    };
+
     const handleChangeDate = (date, dateString) => {
         setStartDate(dateString[0]);
         setEndDate(dateString[1]);
@@ -476,6 +510,25 @@ const ContentBooking = () => {
             title: 'ระยะทาง',
             dataIndex: 'distance',
             editable: true,
+        },
+        {
+            title: 'ดำเนินการ',
+            dataIndex: 'operation',
+            width: '4%',
+            align: 'center',
+            fixed: 'right',
+            render: (_, record) => {
+                const editable = isEditing(record);
+                return editable ? (
+                    <span>
+
+                    </span>
+                ) : (
+                    <Typography.Link disabled={editingKey !== ''} onClick={() => deleteBooking(record)}>
+                        <DeleteOutlined />
+                    </Typography.Link>
+                );
+            },
         },
     ];
     const mergedColumns = columns.map((col) => {
