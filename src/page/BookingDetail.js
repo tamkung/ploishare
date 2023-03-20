@@ -76,6 +76,7 @@ export default function BookingDetail() {
     const [name, setName] = useState("");
     const [empoyeeNo, setEmpoyeeNo] = useState("");
     const [phone, setPhone] = useState("");
+    const [uSectNo, setSectNo] = useState("");
     const [note, setNote] = useState("");
 
     const handleChangeName = (e) => {
@@ -87,6 +88,10 @@ export default function BookingDetail() {
         console.log(empoyeeNo);
     };
     const handleChangePhone = (e) => {
+        setPhone(e.target.value);
+        console.log(phone);
+    };
+    const handleChangeSectNo = (e) => {
         setPhone(e.target.value);
         console.log(phone);
     };
@@ -138,7 +143,7 @@ export default function BookingDetail() {
                         "empoyeeNo": values.empoyeeNo,
                         "uEmail": email,
                         "uPhone": values.phone,
-                        "uSectNo": null,
+                        "uSectNo": values.uSectNo,
                         "uSectName": null,
                         "note": values.note,
                         "startDateTime": startDateTime,
@@ -275,7 +280,6 @@ export default function BookingDetail() {
                                     span: 12,
                                 }}
                                 layout="horizontal"
-
                             >
                                 <Form.Item label="จังหวัดที่คุณต้องการเดินทาง" hidden={radio === 'กรุงเทพฯ และ ปริมณฑล' ? true : false}>
                                     <Select
@@ -304,6 +308,9 @@ export default function BookingDetail() {
                                 </Form.Item>
                                 <Form.Item label="เบอร์โทรศัพท์" name={"phone"}>
                                     <Input value={phone} onChange={handleChangePhone} />
+                                </Form.Item>
+                                <Form.Item label="Cost Center" name={"uSectNo"}>
+                                    <Input value={uSectNo} onChange={handleChangeSectNo} />
                                 </Form.Item>
                                 <Form.Item label="เอกสารขออนุญาต" valuePropName="fileList">
                                     <Upload

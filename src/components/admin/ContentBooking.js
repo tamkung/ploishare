@@ -144,7 +144,7 @@ const ContentBooking = () => {
                     empoyeeNo: item.empoyeeNo,
                     uEmail: item.uEmail,
                     uPhone: item.uPhone,
-                    uSect: item.uSect,
+                    uSectNo: item.uSectNo,
                     uPart: item.uPart,
                     note: item.note,
                     startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
@@ -230,7 +230,7 @@ const ContentBooking = () => {
                         empoyeeNo: item.empoyeeNo,
                         uEmail: item.uEmail,
                         uPhone: item.uPhone,
-                        uSect: item.uSect,
+                        uSectNo: item.uSectNo,
                         uPart: item.uPart,
                         note: item.note,
                         startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
@@ -271,7 +271,7 @@ const ContentBooking = () => {
                         empoyeeNo: item.empoyeeNo,
                         uEmail: item.uEmail,
                         uPhone: item.uPhone,
-                        uSect: item.uSect,
+                        uSectNo: item.uSectNo,
                         uPart: item.uPart,
                         note: item.note,
                         startDateTime: new Date(item.startDateTime).toLocaleString('th', options),
@@ -349,6 +349,11 @@ const ContentBooking = () => {
         {
             title: '#',
             dataIndex: 'key',
+            editable: true,
+        },
+        {
+            title: 'Cost Center',
+            dataIndex: 'uSectNo',
             editable: true,
         },
         {
@@ -544,7 +549,7 @@ const ContentBooking = () => {
                                 pagination={{
                                     onChange: cancel,
                                 }}
-                                scroll={{ x: 2200 }}
+                                scroll={{ x: 2500 }}
                             />
                         </Form>
 
