@@ -21,7 +21,7 @@ export default function SignIn(value) {
                     timer: 1000,
                 }).then(() => {
                     localStorage.setItem("user", JSON.stringify(data));
-                    window.location = "/home";
+                    window.location = "/";
                 });
             } else {
                 Swal.fire({
