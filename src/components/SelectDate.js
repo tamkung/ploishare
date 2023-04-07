@@ -53,7 +53,7 @@ const SelectDate = () => {
 
   const disabledDate = (current) => {
     // Can not select days before today and today
-    return current && current < dayjs().endOf('day');
+    return current && current < dayjs().startOf('day');
   };
 
   const availableCar = () => {
