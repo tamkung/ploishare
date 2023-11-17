@@ -10,8 +10,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build React App
-        run: npm install && npm run build
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
         with:
