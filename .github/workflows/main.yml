@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install --force
       - name: NPM Audit
-        run: npm audit
+        run: npm audit fix --force
       - name: Build
         run: npm run build
       - name: Upload build artifact
